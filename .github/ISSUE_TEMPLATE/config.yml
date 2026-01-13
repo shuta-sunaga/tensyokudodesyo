@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Miyabi Agent Task
+    url: https://github.com/shuta-sunaga/tensyokudodesyo/issues/new?template=agent-task.md
+    about: Miyabi Agent が自動処理するタスクを作成
