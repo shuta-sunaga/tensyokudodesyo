@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initHeaderScroll();
     initFormValidation();
     initStatsCounter();
+    initJobSearch();
 });
 
 /**
@@ -326,4 +327,140 @@ function throttle(func, limit) {
             setTimeout(() => inThrottle = false, limit);
         }
     };
+}
+
+/**
+ * Job Search Functionality
+ */
+function initJobSearch() {
+    // Handle URL parameters on page load (jobs.html)
+    const urlParams = new URLSearchParams(window.location.search);
+    const jobTypeParam = urlParams.get('job_type');
+    const keywordParam = urlParams.get('keyword');
+    const conditionsParam = urlParams.getAll('conditions');
+
+    // Set form values from URL parameters
+    const searchKeyword = document.getElementById('searchKeyword');
+    const searchJobType = document.getElementById('searchJobType');
+
+    if (searchKeyword && keywordParam) {
+        searchKeyword.value = keywordParam;
+    }
+
+    if (searchJobType && jobTypeParam) {
+        searchJobType.value = jobTypeParam;
+    }
+
+    // Set checkbox values
+    if (conditionsParam.length > 0) {
+        conditionsParam.forEach(condition => {
+            const checkbox = document.querySelector(`input[name="conditions"][value="${condition}"]`);
+            if (checkbox) {
+                checkbox.checked = true;
+            }
+        });
+    }
+
+    // Initialize job search on jobs.html
+    const jobSearchForm = document.getElementById('jobSearchForm');
+    if (jobSearchForm) {
+        // Apply initial filter on page load
+        filterJobs();
+
+        // Handle form submission
+        jobSearchForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            filterJobs();
+            updateURL();
+        });
+
+        // Handle filter changes
+        const searchInputs = jobSearchForm.querySelectorAll('input, select');
+        searchInputs.forEach(input => {
+            input.addEventListener('change', function() {
+                filterJobs();
+                updateURL();
+            });
+        });
+    }
+}
+
+/**
+ * Filter jobs based on search criteria
+ */
+function filterJobs() {
+    const keyword = document.getElementById('searchKeyword')?.value.toLowerCase() || '';
+    const jobType = document.getElementById('searchJobType')?.value || '';
+    const checkedConditions = Array.from(document.querySelectorAll('input[name="conditions"]:checked')).map(cb => cb.value);
+
+    const jobCards = document.querySelectorAll('.job-listing-card');
+    const noResults = document.getElementById('noResults');
+    const resultsCount = document.getElementById('resultsCount');
+    let visibleCount = 0;
+
+    jobCards.forEach(card => {
+        const category = card.dataset.category || '';
+        const conditions = (card.dataset.conditions || '').split(',');
+        const title = card.querySelector('.job-listing-title')?.textContent.toLowerCase() || '';
+        const company = card.querySelector('.job-listing-company')?.textContent.toLowerCase() || '';
+
+        let isVisible = true;
+
+        // Filter by keyword
+        if (keyword && !title.includes(keyword) && !company.includes(keyword)) {
+            isVisible = false;
+        }
+
+        // Filter by job type
+        if (jobType && category !== jobType) {
+            isVisible = false;
+        }
+
+        // Filter by conditions (AND logic - all selected conditions must match)
+        if (checkedConditions.length > 0) {
+            const hasAllConditions = checkedConditions.every(cond => conditions.includes(cond));
+            if (!hasAllConditions) {
+                isVisible = false;
+            }
+        }
+
+        card.style.display = isVisible ? 'block' : 'none';
+        if (isVisible) visibleCount++;
+    });
+
+    // Update results count
+    if (resultsCount) {
+        resultsCount.textContent = visibleCount;
+    }
+
+    // Show/hide no results message
+    if (noResults) {
+        noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+    }
+}
+
+/**
+ * Update URL with search parameters
+ */
+function updateURL() {
+    const keyword = document.getElementById('searchKeyword')?.value || '';
+    const jobType = document.getElementById('searchJobType')?.value || '';
+    const checkedConditions = Array.from(document.querySelectorAll('input[name="conditions"]:checked')).map(cb => cb.value);
+
+    const params = new URLSearchParams();
+
+    if (keyword) {
+        params.set('keyword', keyword);
+    }
+
+    if (jobType) {
+        params.set('job_type', jobType);
+    }
+
+    checkedConditions.forEach(cond => {
+        params.append('conditions', cond);
+    });
+
+    const newURL = params.toString() ? `${window.location.pathname}?${params.toString()}` : window.location.pathname;
+    window.history.replaceState({}, '', newURL);
 }

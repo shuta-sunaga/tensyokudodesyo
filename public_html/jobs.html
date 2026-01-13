@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="職種別の転職・求人情報。営業、IT、事務、マーケティングなど多様な職種から探せます。">
-    <title>職種から探す | 転職どうでしょう</title>
+    <meta name="description" content="滋賀・静岡エリアの転職・求人情報。営業、IT、事務、マーケティングなど多様な職種から探せます。">
+    <title>求人一覧 | 転職どうでしょう</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,7 +27,13 @@
                     </ul>
                 </nav>
                 <div class="header-actions">
-                    <a href="contact.html" class="btn btn-primary">お問い合わせ</a>
+                    <a href="#" class="btn btn-line">
+                        <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
+                            <path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zM24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/>
+                        </svg>
+                        LINEで相談
+                    </a>
+                    <a href="contact.html" class="btn btn-outline-sm">企業様はこちら</a>
                 </div>
                 <button class="mobile-menu-btn" aria-label="メニューを開く">
                     <span></span><span></span><span></span>
@@ -36,221 +42,508 @@
         </div>
     </header>
 
-    <!-- Page Header -->
-    <section class="page-header">
+    <!-- Search Section -->
+    <section class="jobs-search">
         <div class="container">
-            <nav class="breadcrumb">
-                <a href="index.html">ホーム</a>
-                <span>求人一覧</span>
-            </nav>
-            <h1 class="page-title">求人一覧</h1>
-            <p class="page-description">あなたのスキルや経験を活かせる仕事を見つけよう</p>
+            <div class="jobs-search-content">
+                <h1 class="jobs-search-title">求人を探す</h1>
+                <form class="search-form" id="jobSearchForm">
+                    <div class="search-form-main">
+                        <div class="search-input-wrapper">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <path d="m21 21-4.35-4.35"></path>
+                            </svg>
+                            <input type="text" name="keyword" id="searchKeyword" placeholder="キーワードで検索（職種名、会社名など）" class="search-input">
+                        </div>
+                        <div class="search-select-wrapper">
+                            <select name="job_type" id="searchJobType" class="search-select">
+                                <option value="">職種を選択</option>
+                                <option value="sales">営業</option>
+                                <option value="it">IT・エンジニア</option>
+                                <option value="office">事務・管理</option>
+                                <option value="marketing">マーケティング</option>
+                                <option value="medical">医療・福祉</option>
+                                <option value="creative">クリエイティブ</option>
+                                <option value="consulting">コンサルティング</option>
+                                <option value="manufacturing">製造・技術</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-search">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <path d="m21 21-4.35-4.35"></path>
+                            </svg>
+                            検索
+                        </button>
+                    </div>
+                    <div class="search-tags">
+                        <span class="search-tags-label">こだわり条件：</span>
+                        <label class="search-tag">
+                            <input type="checkbox" name="conditions" value="remote">
+                            <span>リモートワーク可</span>
+                        </label>
+                        <label class="search-tag">
+                            <input type="checkbox" name="conditions" value="inexperienced">
+                            <span>未経験歓迎</span>
+                        </label>
+                        <label class="search-tag">
+                            <input type="checkbox" name="conditions" value="high_salary">
+                            <span>高年収</span>
+                        </label>
+                        <label class="search-tag">
+                            <input type="checkbox" name="conditions" value="holiday">
+                            <span>土日祝休み</span>
+                        </label>
+                        <label class="search-tag">
+                            <input type="checkbox" name="conditions" value="no_overtime">
+                            <span>残業少なめ</span>
+                        </label>
+                        <label class="search-tag">
+                            <input type="checkbox" name="conditions" value="training">
+                            <span>研修充実</span>
+                        </label>
+                    </div>
+                </form>
+            </div>
         </div>
     </section>
 
-    <!-- Jobs List -->
-    <section class="jobs-list">
+    <!-- Search Results Info -->
+    <section class="search-results-info">
         <div class="container">
-            <!-- 営業 -->
-            <div class="job-section" id="sales">
-                <div class="job-section-header">
-                    <div class="job-section-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
-                            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
-                        </svg>
-                    </div>
-                    <div>
-                        <h2>営業</h2>
-                        <span class="job-section-count">12,500件の求人</span>
-                    </div>
-                </div>
-                <p class="job-section-description">法人営業、個人営業、ルート営業など、様々な営業職の求人を掲載。未経験歓迎の求人も多数。</p>
-                <div class="job-tags">
-                    <a href="#" class="job-tag">法人営業（5,200件）</a>
-                    <a href="#" class="job-tag">個人営業（3,100件）</a>
-                    <a href="#" class="job-tag">ルート営業（2,400件）</a>
-                    <a href="#" class="job-tag">営業企画（1,200件）</a>
-                    <a href="#" class="job-tag">インサイドセールス（600件）</a>
-                </div>
-            </div>
-
-            <!-- IT・エンジニア -->
-            <div class="job-section" id="it">
-                <div class="job-section-header">
-                    <div class="job-section-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <polyline points="16 18 22 12 16 6"></polyline>
-                            <polyline points="8 6 2 12 8 18"></polyline>
-                        </svg>
-                    </div>
-                    <div>
-                        <h2>IT・エンジニア</h2>
-                        <span class="job-section-count">8,200件の求人</span>
-                    </div>
-                </div>
-                <p class="job-section-description">Webエンジニア、インフラエンジニア、データサイエンティストなど、IT業界の求人を幅広く掲載。</p>
-                <div class="job-tags">
-                    <a href="#" class="job-tag">Webエンジニア（2,800件）</a>
-                    <a href="#" class="job-tag">バックエンド（1,900件）</a>
-                    <a href="#" class="job-tag">フロントエンド（1,500件）</a>
-                    <a href="#" class="job-tag">インフラ（1,200件）</a>
-                    <a href="#" class="job-tag">PM/PL（800件）</a>
-                </div>
-            </div>
-
-            <!-- 事務・管理 -->
-            <div class="job-section" id="office">
-                <div class="job-section-header">
-                    <div class="job-section-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                            <circle cx="12" cy="7" r="4"></circle>
-                        </svg>
-                    </div>
-                    <div>
-                        <h2>事務・管理</h2>
-                        <span class="job-section-count">9,800件の求人</span>
-                    </div>
-                </div>
-                <p class="job-section-description">一般事務、経理、人事、総務など、バックオフィス系の求人を多数掲載。</p>
-                <div class="job-tags">
-                    <a href="#" class="job-tag">一般事務（3,500件）</a>
-                    <a href="#" class="job-tag">経理・財務（2,100件）</a>
-                    <a href="#" class="job-tag">人事・採用（1,800件）</a>
-                    <a href="#" class="job-tag">総務（1,500件）</a>
-                    <a href="#" class="job-tag">秘書（900件）</a>
-                </div>
-            </div>
-
-            <!-- マーケティング -->
-            <div class="job-section" id="marketing">
-                <div class="job-section-header">
-                    <div class="job-section-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
-                            <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
-                        </svg>
-                    </div>
-                    <div>
-                        <h2>マーケティング</h2>
-                        <span class="job-section-count">3,400件の求人</span>
-                    </div>
-                </div>
-                <p class="job-section-description">デジタルマーケティング、広報PR、商品企画など、マーケティング関連の求人。</p>
-                <div class="job-tags">
-                    <a href="#" class="job-tag">Webマーケ（1,200件）</a>
-                    <a href="#" class="job-tag">広報・PR（800件）</a>
-                    <a href="#" class="job-tag">商品企画（650件）</a>
-                    <a href="#" class="job-tag">ブランディング（450件）</a>
-                    <a href="#" class="job-tag">CRM（300件）</a>
-                </div>
-            </div>
-
-            <!-- 医療・福祉 -->
-            <div class="job-section" id="medical">
-                <div class="job-section-header">
-                    <div class="job-section-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
-                        </svg>
-                    </div>
-                    <div>
-                        <h2>医療・福祉</h2>
-                        <span class="job-section-count">6,100件の求人</span>
-                    </div>
-                </div>
-                <p class="job-section-description">看護師、介護士、薬剤師、医療事務など、医療・福祉業界の求人。</p>
-                <div class="job-tags">
-                    <a href="#" class="job-tag">看護師（2,500件）</a>
-                    <a href="#" class="job-tag">介護士（1,800件）</a>
-                    <a href="#" class="job-tag">薬剤師（800件）</a>
-                    <a href="#" class="job-tag">医療事務（600件）</a>
-                    <a href="#" class="job-tag">ケアマネ（400件）</a>
-                </div>
-            </div>
-
-            <!-- クリエイティブ -->
-            <div class="job-section" id="creative">
-                <div class="job-section-header">
-                    <div class="job-section-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
-                            <polyline points="2 17 12 22 22 17"></polyline>
-                            <polyline points="2 12 12 17 22 12"></polyline>
-                        </svg>
-                    </div>
-                    <div>
-                        <h2>クリエイティブ</h2>
-                        <span class="job-section-count">4,200件の求人</span>
-                    </div>
-                </div>
-                <p class="job-section-description">Webデザイナー、グラフィックデザイナー、UIデザイナー、動画制作など。</p>
-                <div class="job-tags">
-                    <a href="#" class="job-tag">Webデザイナー（1,500件）</a>
-                    <a href="#" class="job-tag">UI/UXデザイナー（900件）</a>
-                    <a href="#" class="job-tag">グラフィック（750件）</a>
-                    <a href="#" class="job-tag">動画制作（650件）</a>
-                    <a href="#" class="job-tag">ライター（400件）</a>
-                </div>
-            </div>
-
-            <!-- コンサルティング -->
-            <div class="job-section" id="consulting">
-                <div class="job-section-header">
-                    <div class="job-section-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
-                        </svg>
-                    </div>
-                    <div>
-                        <h2>コンサルティング</h2>
-                        <span class="job-section-count">2,800件の求人</span>
-                    </div>
-                </div>
-                <p class="job-section-description">経営コンサルタント、ITコンサルタント、戦略コンサルタントなど。</p>
-                <div class="job-tags">
-                    <a href="#" class="job-tag">経営コンサル（1,100件）</a>
-                    <a href="#" class="job-tag">ITコンサル（900件）</a>
-                    <a href="#" class="job-tag">戦略コンサル（500件）</a>
-                    <a href="#" class="job-tag">業務コンサル（300件）</a>
-                </div>
-            </div>
-
-            <!-- 製造・技術 -->
-            <div class="job-section" id="manufacturing">
-                <div class="job-section-header">
-                    <div class="job-section-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="12" cy="12" r="3"></circle>
-                            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
-                        </svg>
-                    </div>
-                    <div>
-                        <h2>製造・技術</h2>
-                        <span class="job-section-count">5,500件の求人</span>
-                    </div>
-                </div>
-                <p class="job-section-description">生産管理、品質管理、機械設計、電気設計など製造業の求人。</p>
-                <div class="job-tags">
-                    <a href="#" class="job-tag">生産管理（1,800件）</a>
-                    <a href="#" class="job-tag">品質管理（1,500件）</a>
-                    <a href="#" class="job-tag">機械設計（1,200件）</a>
-                    <a href="#" class="job-tag">電気設計（700件）</a>
-                    <a href="#" class="job-tag">研究開発（300件）</a>
+            <div class="results-header">
+                <p class="results-count"><span id="resultsCount">12</span>件の求人が見つかりました</p>
+                <div class="results-sort">
+                    <label for="sortSelect">並び替え：</label>
+                    <select id="sortSelect" class="sort-select">
+                        <option value="new">新着順</option>
+                        <option value="salary_high">年収が高い順</option>
+                        <option value="salary_low">年収が低い順</option>
+                    </select>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- CTA -->
-    <section class="cta">
+    <!-- Jobs List -->
+    <section class="jobs-results">
         <div class="container">
-            <div class="cta-content">
-                <h2 class="cta-title">希望の職種は見つかりましたか？</h2>
-                <p class="cta-description">キャリアアドバイザーがあなたに最適な求人をご提案します。</p>
-                <div class="cta-actions">
-                    <a href="contact.html" class="btn btn-white btn-lg">無料相談を申し込む</a>
+            <div class="job-listing-grid job-listing-grid-list">
+                <!-- Job Card 1 -->
+                <article class="job-listing-card" data-category="sales" data-conditions="inexperienced,holiday,training">
+                    <a href="#">
+                        <div class="job-listing-header">
+                            <span class="job-listing-new">NEW</span>
+                            <span class="job-listing-type">正社員</span>
+                        </div>
+                        <h3 class="job-listing-title">【営業職】法人営業/未経験歓迎</h3>
+                        <p class="job-listing-company">株式会社テクノソリューション</p>
+                        <div class="job-listing-info">
+                            <span class="job-listing-location">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                    <circle cx="12" cy="10" r="3"></circle>
+                                </svg>
+                                滋賀県大津市
+                            </span>
+                            <span class="job-listing-salary">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                                    <line x1="12" y1="1" x2="12" y2="23"></line>
+                                    <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                                </svg>
+                                年収350万〜500万円
+                            </span>
+                        </div>
+                        <div class="job-listing-tags">
+                            <span class="job-tag-sm">未経験歓迎</span>
+                            <span class="job-tag-sm">土日祝休み</span>
+                            <span class="job-tag-sm">研修充実</span>
+                        </div>
+                    </a>
+                </article>
+
+                <!-- Job Card 2 -->
+                <article class="job-listing-card" data-category="it" data-conditions="remote,holiday">
+                    <a href="#">
+                        <div class="job-listing-header">
+                            <span class="job-listing-new">NEW</span>
+                            <span class="job-listing-type">正社員</span>
+                        </div>
+                        <h3 class="job-listing-title">【Webエンジニア】自社サービス開発</h3>
+                        <p class="job-listing-company">株式会社デジタルクリエイト</p>
+                        <div class="job-listing-info">
+                            <span class="job-listing-location">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                    <circle cx="12" cy="10" r="3"></circle>
+                                </svg>
+                                静岡県静岡市
+                            </span>
+                            <span class="job-listing-salary">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                                    <line x1="12" y1="1" x2="12" y2="23"></line>
+                                    <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                                </svg>
+                                年収450万〜700万円
+                            </span>
+                        </div>
+                        <div class="job-listing-tags">
+                            <span class="job-tag-sm">リモート可</span>
+                            <span class="job-tag-sm">フレックス</span>
+                            <span class="job-tag-sm">副業OK</span>
+                        </div>
+                    </a>
+                </article>
+
+                <!-- Job Card 3 -->
+                <article class="job-listing-card" data-category="office" data-conditions="holiday,no_overtime">
+                    <a href="#">
+                        <div class="job-listing-header">
+                            <span class="job-listing-new">NEW</span>
+                            <span class="job-listing-type">正社員</span>
+                        </div>
+                        <h3 class="job-listing-title">【経理】管理部門スタッフ募集</h3>
+                        <p class="job-listing-company">未来製作所株式会社</p>
+                        <div class="job-listing-info">
+                            <span class="job-listing-location">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                    <circle cx="12" cy="10" r="3"></circle>
+                                </svg>
+                                滋賀県草津市
+                            </span>
+                            <span class="job-listing-salary">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                                    <line x1="12" y1="1" x2="12" y2="23"></line>
+                                    <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                                </svg>
+                                年収400万〜550万円
+                            </span>
+                        </div>
+                        <div class="job-listing-tags">
+                            <span class="job-tag-sm">土日祝休み</span>
+                            <span class="job-tag-sm">残業少</span>
+                            <span class="job-tag-sm">福利厚生充実</span>
+                        </div>
+                    </a>
+                </article>
+
+                <!-- Job Card 4 -->
+                <article class="job-listing-card" data-category="marketing" data-conditions="remote,holiday">
+                    <a href="#">
+                        <div class="job-listing-header">
+                            <span class="job-listing-type">正社員</span>
+                        </div>
+                        <h3 class="job-listing-title">【マーケティング】Webマーケター</h3>
+                        <p class="job-listing-company">株式会社グロースハック</p>
+                        <div class="job-listing-info">
+                            <span class="job-listing-location">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                    <circle cx="12" cy="10" r="3"></circle>
+                                </svg>
+                                静岡県浜松市
+                            </span>
+                            <span class="job-listing-salary">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                                    <line x1="12" y1="1" x2="12" y2="23"></line>
+                                    <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                                </svg>
+                                年収400万〜600万円
+                            </span>
+                        </div>
+                        <div class="job-listing-tags">
+                            <span class="job-tag-sm">リモート可</span>
+                            <span class="job-tag-sm">土日祝休み</span>
+                        </div>
+                    </a>
+                </article>
+
+                <!-- Job Card 5 -->
+                <article class="job-listing-card" data-category="medical" data-conditions="inexperienced,training">
+                    <a href="#">
+                        <div class="job-listing-header">
+                            <span class="job-listing-type">正社員</span>
+                        </div>
+                        <h3 class="job-listing-title">【介護職】介護スタッフ募集</h3>
+                        <p class="job-listing-company">社会福祉法人やすらぎ</p>
+                        <div class="job-listing-info">
+                            <span class="job-listing-location">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                    <circle cx="12" cy="10" r="3"></circle>
+                                </svg>
+                                滋賀県彦根市
+                            </span>
+                            <span class="job-listing-salary">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                                    <line x1="12" y1="1" x2="12" y2="23"></line>
+                                    <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                                </svg>
+                                年収300万〜400万円
+                            </span>
+                        </div>
+                        <div class="job-listing-tags">
+                            <span class="job-tag-sm">未経験歓迎</span>
+                            <span class="job-tag-sm">研修充実</span>
+                            <span class="job-tag-sm">資格取得支援</span>
+                        </div>
+                    </a>
+                </article>
+
+                <!-- Job Card 6 -->
+                <article class="job-listing-card" data-category="creative" data-conditions="remote,holiday">
+                    <a href="#">
+                        <div class="job-listing-header">
+                            <span class="job-listing-type">正社員</span>
+                        </div>
+                        <h3 class="job-listing-title">【デザイナー】UI/UXデザイナー</h3>
+                        <p class="job-listing-company">株式会社クリエイティブワークス</p>
+                        <div class="job-listing-info">
+                            <span class="job-listing-location">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                    <circle cx="12" cy="10" r="3"></circle>
+                                </svg>
+                                静岡県静岡市
+                            </span>
+                            <span class="job-listing-salary">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                                    <line x1="12" y1="1" x2="12" y2="23"></line>
+                                    <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                                </svg>
+                                年収400万〜650万円
+                            </span>
+                        </div>
+                        <div class="job-listing-tags">
+                            <span class="job-tag-sm">リモート可</span>
+                            <span class="job-tag-sm">土日祝休み</span>
+                            <span class="job-tag-sm">フレックス</span>
+                        </div>
+                    </a>
+                </article>
+
+                <!-- Job Card 7 -->
+                <article class="job-listing-card" data-category="consulting" data-conditions="high_salary,holiday">
+                    <a href="#">
+                        <div class="job-listing-header">
+                            <span class="job-listing-type">正社員</span>
+                        </div>
+                        <h3 class="job-listing-title">【コンサルタント】経営コンサルタント</h3>
+                        <p class="job-listing-company">グローバルコンサルティング株式会社</p>
+                        <div class="job-listing-info">
+                            <span class="job-listing-location">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                    <circle cx="12" cy="10" r="3"></circle>
+                                </svg>
+                                滋賀県大津市
+                            </span>
+                            <span class="job-listing-salary">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                                    <line x1="12" y1="1" x2="12" y2="23"></line>
+                                    <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                                </svg>
+                                年収600万〜1000万円
+                            </span>
+                        </div>
+                        <div class="job-listing-tags">
+                            <span class="job-tag-sm">高年収</span>
+                            <span class="job-tag-sm">土日祝休み</span>
+                        </div>
+                    </a>
+                </article>
+
+                <!-- Job Card 8 -->
+                <article class="job-listing-card" data-category="manufacturing" data-conditions="holiday,training">
+                    <a href="#">
+                        <div class="job-listing-header">
+                            <span class="job-listing-type">正社員</span>
+                        </div>
+                        <h3 class="job-listing-title">【製造】生産管理スタッフ</h3>
+                        <p class="job-listing-company">未来製作所株式会社</p>
+                        <div class="job-listing-info">
+                            <span class="job-listing-location">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                    <circle cx="12" cy="10" r="3"></circle>
+                                </svg>
+                                滋賀県草津市
+                            </span>
+                            <span class="job-listing-salary">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                                    <line x1="12" y1="1" x2="12" y2="23"></line>
+                                    <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                                </svg>
+                                年収380万〜500万円
+                            </span>
+                        </div>
+                        <div class="job-listing-tags">
+                            <span class="job-tag-sm">土日祝休み</span>
+                            <span class="job-tag-sm">研修充実</span>
+                            <span class="job-tag-sm">福利厚生充実</span>
+                        </div>
+                    </a>
+                </article>
+
+                <!-- Job Card 9 -->
+                <article class="job-listing-card" data-category="sales" data-conditions="high_salary">
+                    <a href="#">
+                        <div class="job-listing-header">
+                            <span class="job-listing-type">正社員</span>
+                        </div>
+                        <h3 class="job-listing-title">【営業】不動産営業マネージャー</h3>
+                        <p class="job-listing-company">株式会社ホームパートナー</p>
+                        <div class="job-listing-info">
+                            <span class="job-listing-location">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                    <circle cx="12" cy="10" r="3"></circle>
+                                </svg>
+                                静岡県浜松市
+                            </span>
+                            <span class="job-listing-salary">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                                    <line x1="12" y1="1" x2="12" y2="23"></line>
+                                    <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                                </svg>
+                                年収500万〜800万円
+                            </span>
+                        </div>
+                        <div class="job-listing-tags">
+                            <span class="job-tag-sm">高年収</span>
+                            <span class="job-tag-sm">インセンティブあり</span>
+                        </div>
+                    </a>
+                </article>
+
+                <!-- Job Card 10 -->
+                <article class="job-listing-card" data-category="it" data-conditions="remote,high_salary,holiday">
+                    <a href="#">
+                        <div class="job-listing-header">
+                            <span class="job-listing-type">正社員</span>
+                        </div>
+                        <h3 class="job-listing-title">【IT】インフラエンジニア</h3>
+                        <p class="job-listing-company">株式会社クラウドテック</p>
+                        <div class="job-listing-info">
+                            <span class="job-listing-location">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                    <circle cx="12" cy="10" r="3"></circle>
+                                </svg>
+                                滋賀県大津市
+                            </span>
+                            <span class="job-listing-salary">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                                    <line x1="12" y1="1" x2="12" y2="23"></line>
+                                    <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                                </svg>
+                                年収500万〜750万円
+                            </span>
+                        </div>
+                        <div class="job-listing-tags">
+                            <span class="job-tag-sm">リモート可</span>
+                            <span class="job-tag-sm">高年収</span>
+                            <span class="job-tag-sm">土日祝休み</span>
+                        </div>
+                    </a>
+                </article>
+
+                <!-- Job Card 11 -->
+                <article class="job-listing-card" data-category="office" data-conditions="inexperienced,holiday,no_overtime">
+                    <a href="#">
+                        <div class="job-listing-header">
+                            <span class="job-listing-type">正社員</span>
+                        </div>
+                        <h3 class="job-listing-title">【事務】一般事務スタッフ</h3>
+                        <p class="job-listing-company">株式会社オフィスサポート</p>
+                        <div class="job-listing-info">
+                            <span class="job-listing-location">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                    <circle cx="12" cy="10" r="3"></circle>
+                                </svg>
+                                静岡県沼津市
+                            </span>
+                            <span class="job-listing-salary">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                                    <line x1="12" y1="1" x2="12" y2="23"></line>
+                                    <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                                </svg>
+                                年収280万〜350万円
+                            </span>
+                        </div>
+                        <div class="job-listing-tags">
+                            <span class="job-tag-sm">未経験歓迎</span>
+                            <span class="job-tag-sm">土日祝休み</span>
+                            <span class="job-tag-sm">残業少</span>
+                        </div>
+                    </a>
+                </article>
+
+                <!-- Job Card 12 -->
+                <article class="job-listing-card" data-category="medical" data-conditions="holiday">
+                    <a href="#">
+                        <div class="job-listing-header">
+                            <span class="job-listing-type">正社員</span>
+                        </div>
+                        <h3 class="job-listing-title">【医療】看護師</h3>
+                        <p class="job-listing-company">医療法人社団やすらぎ会</p>
+                        <div class="job-listing-info">
+                            <span class="job-listing-location">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                    <circle cx="12" cy="10" r="3"></circle>
+                                </svg>
+                                滋賀県近江八幡市
+                            </span>
+                            <span class="job-listing-salary">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                                    <line x1="12" y1="1" x2="12" y2="23"></line>
+                                    <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                                </svg>
+                                年収400万〜550万円
+                            </span>
+                        </div>
+                        <div class="job-listing-tags">
+                            <span class="job-tag-sm">土日祝休み</span>
+                            <span class="job-tag-sm">福利厚生充実</span>
+                        </div>
+                    </a>
+                </article>
+            </div>
+
+            <!-- No Results Message -->
+            <div class="no-results" id="noResults" style="display: none;">
+                <p>条件に一致する求人が見つかりませんでした。</p>
+                <p>条件を変更して再度検索してください。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- LINE CTA -->
+    <section class="line-cta">
+        <div class="container">
+            <div class="line-cta-content">
+                <div class="line-cta-icon">
+                    <svg viewBox="0 0 24 24" fill="currentColor" width="48" height="48">
+                        <path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zM24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/>
+                    </svg>
+                </div>
+                <div class="line-cta-text">
+                    <h2 class="line-cta-title">LINEで気軽に転職相談</h2>
+                    <p class="line-cta-description">
+                        希望条件に合った求人を、アドバイザーが直接ご紹介します。
+                    </p>
+                </div>
+                <div class="line-cta-action">
+                    <a href="#" class="btn btn-line btn-lg">
+                        <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
+                            <path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zM24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/>
+                        </svg>
+                        友だち追加して相談する
+                    </a>
                 </div>
             </div>
         </div>
@@ -273,25 +566,27 @@
                     <h4>求人情報</h4>
                     <ul>
                         <li><a href="jobs.html">求人一覧</a></li>
-                        <li><a href="jobs.html#sales">営業の求人</a></li>
-                        <li><a href="jobs.html#it">IT・エンジニアの求人</a></li>
-                        <li><a href="jobs.html#office">事務・管理の求人</a></li>
+                        <li><a href="jobs.html?job_type=sales">営業の求人</a></li>
+                        <li><a href="jobs.html?job_type=it">IT・エンジニアの求人</a></li>
+                        <li><a href="jobs.html?job_type=office">事務・管理の求人</a></li>
                     </ul>
                 </div>
                 <div class="footer-links">
-                    <h4>インタビュー</h4>
+                    <h4>コンテンツ</h4>
                     <ul>
                         <li><a href="interviews.html">転職者インタビュー</a></li>
                         <li><a href="companies.html">企業インタビュー</a></li>
+                        <li><a href="knowhow.html">転職ノウハウ</a></li>
                     </ul>
                 </div>
                 <div class="footer-links">
-                    <h4>転職ノウハウ</h4>
+                    <h4>求職者の方</h4>
                     <ul>
-                        <li><a href="knowhow.html#interview">面接対策</a></li>
-                        <li><a href="knowhow.html#resume">履歴書の書き方</a></li>
-                        <li><a href="knowhow.html#analysis">自己分析</a></li>
-                        <li><a href="contact.html">お問い合わせ</a></li>
+                        <li><a href="#">LINEで相談</a></li>
+                    </ul>
+                    <h4 class="footer-links-sub">企業の方</h4>
+                    <ul>
+                        <li><a href="contact.html">求人掲載のお問い合わせ</a></li>
                     </ul>
                 </div>
             </div>
