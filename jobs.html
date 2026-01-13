@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="職種別の転職・求人情報。営業、IT、事務、マーケティングなど多様な職種から探せます。">
+    <title>職種から探す | 転職どうでしょう</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-inner">
+                <a href="index.html" class="logo">
+                    <img src="assets/logo.webp" alt="転職どうでしょう" class="logo-img">
+                </a>
+                <nav class="nav">
+                    <ul class="nav-list">
+                        <li><a href="services.html">サービス紹介</a></li>
+                        <li><a href="area.html">エリアから探す</a></li>
+                        <li><a href="jobs.html" class="active">職種から探す</a></li>
+                        <li><a href="stories.html">転職成功事例</a></li>
+                        <li><a href="column.html">コラム</a></li>
+                    </ul>
+                </nav>
+                <div class="header-actions">
+                    <a href="contact.html" class="btn btn-outline">無料相談</a>
+                    <a href="index.html#register" class="btn btn-primary">会員登録</a>
+                </div>
+                <button class="mobile-menu-btn" aria-label="メニューを開く">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <nav class="breadcrumb">
+                <a href="index.html">ホーム</a>
+                <span>職種から探す</span>
+            </nav>
+            <h1 class="page-title">職種から求人を探す</h1>
+            <p class="page-description">あなたのスキルや経験を活かせる仕事を見つけよう</p>
+        </div>
+    </section>
+
+    <!-- Jobs List -->
+    <section class="jobs-list">
+        <div class="container">
+            <!-- 営業 -->
+            <div class="job-section" id="sales">
+                <div class="job-section-header">
+                    <div class="job-section-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <h2>営業</h2>
+                        <span class="job-section-count">12,500件の求人</span>
+                    </div>
+                </div>
+                <p class="job-section-description">法人営業、個人営業、ルート営業など、様々な営業職の求人を掲載。未経験歓迎の求人も多数。</p>
+                <div class="job-tags">
+                    <a href="#" class="job-tag">法人営業（5,200件）</a>
+                    <a href="#" class="job-tag">個人営業（3,100件）</a>
+                    <a href="#" class="job-tag">ルート営業（2,400件）</a>
+                    <a href="#" class="job-tag">営業企画（1,200件）</a>
+                    <a href="#" class="job-tag">インサイドセールス（600件）</a>
+                </div>
+            </div>
+
+            <!-- IT・エンジニア -->
+            <div class="job-section" id="it">
+                <div class="job-section-header">
+                    <div class="job-section-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="16 18 22 12 16 6"></polyline>
+                            <polyline points="8 6 2 12 8 18"></polyline>
+                        </svg>
+                    </div>
+                    <div>
+                        <h2>IT・エンジニア</h2>
+                        <span class="job-section-count">8,200件の求人</span>
+                    </div>
+                </div>
+                <p class="job-section-description">Webエンジニア、インフラエンジニア、データサイエンティストなど、IT業界の求人を幅広く掲載。</p>
+                <div class="job-tags">
+                    <a href="#" class="job-tag">Webエンジニア（2,800件）</a>
+                    <a href="#" class="job-tag">バックエンド（1,900件）</a>
+                    <a href="#" class="job-tag">フロントエンド（1,500件）</a>
+                    <a href="#" class="job-tag">インフラ（1,200件）</a>
+                    <a href="#" class="job-tag">PM/PL（800件）</a>
+                </div>
+            </div>
+
+            <!-- 事務・管理 -->
+            <div class="job-section" id="office">
+                <div class="job-section-header">
+                    <div class="job-section-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                    </div>
+                    <div>
+                        <h2>事務・管理</h2>
+                        <span class="job-section-count">9,800件の求人</span>
+                    </div>
+                </div>
+                <p class="job-section-description">一般事務、経理、人事、総務など、バックオフィス系の求人を多数掲載。</p>
+                <div class="job-tags">
+                    <a href="#" class="job-tag">一般事務（3,500件）</a>
+                    <a href="#" class="job-tag">経理・財務（2,100件）</a>
+                    <a href="#" class="job-tag">人事・採用（1,800件）</a>
+                    <a href="#" class="job-tag">総務（1,500件）</a>
+                    <a href="#" class="job-tag">秘書（900件）</a>
+                </div>
+            </div>
+
+            <!-- マーケティング -->
+            <div class="job-section" id="marketing">
+                <div class="job-section-header">
+                    <div class="job-section-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                            <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <h2>マーケティング</h2>
+                        <span class="job-section-count">3,400件の求人</span>
+                    </div>
+                </div>
+                <p class="job-section-description">デジタルマーケティング、広報PR、商品企画など、マーケティング関連の求人。</p>
+                <div class="job-tags">
+                    <a href="#" class="job-tag">Webマーケ（1,200件）</a>
+                    <a href="#" class="job-tag">広報・PR（800件）</a>
+                    <a href="#" class="job-tag">商品企画（650件）</a>
+                    <a href="#" class="job-tag">ブランディング（450件）</a>
+                    <a href="#" class="job-tag">CRM（300件）</a>
+                </div>
+            </div>
+
+            <!-- 医療・福祉 -->
+            <div class="job-section" id="medical">
+                <div class="job-section-header">
+                    <div class="job-section-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <h2>医療・福祉</h2>
+                        <span class="job-section-count">6,100件の求人</span>
+                    </div>
+                </div>
+                <p class="job-section-description">看護師、介護士、薬剤師、医療事務など、医療・福祉業界の求人。</p>
+                <div class="job-tags">
+                    <a href="#" class="job-tag">看護師（2,500件）</a>
+                    <a href="#" class="job-tag">介護士（1,800件）</a>
+                    <a href="#" class="job-tag">薬剤師（800件）</a>
+                    <a href="#" class="job-tag">医療事務（600件）</a>
+                    <a href="#" class="job-tag">ケアマネ（400件）</a>
+                </div>
+            </div>
+
+            <!-- クリエイティブ -->
+            <div class="job-section" id="creative">
+                <div class="job-section-header">
+                    <div class="job-section-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                            <polyline points="2 17 12 22 22 17"></polyline>
+                            <polyline points="2 12 12 17 22 12"></polyline>
+                        </svg>
+                    </div>
+                    <div>
+                        <h2>クリエイティブ</h2>
+                        <span class="job-section-count">4,200件の求人</span>
+                    </div>
+                </div>
+                <p class="job-section-description">Webデザイナー、グラフィックデザイナー、UIデザイナー、動画制作など。</p>
+                <div class="job-tags">
+                    <a href="#" class="job-tag">Webデザイナー（1,500件）</a>
+                    <a href="#" class="job-tag">UI/UXデザイナー（900件）</a>
+                    <a href="#" class="job-tag">グラフィック（750件）</a>
+                    <a href="#" class="job-tag">動画制作（650件）</a>
+                    <a href="#" class="job-tag">ライター（400件）</a>
+                </div>
+            </div>
+
+            <!-- コンサルティング -->
+            <div class="job-section" id="consulting">
+                <div class="job-section-header">
+                    <div class="job-section-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <h2>コンサルティング</h2>
+                        <span class="job-section-count">2,800件の求人</span>
+                    </div>
+                </div>
+                <p class="job-section-description">経営コンサルタント、ITコンサルタント、戦略コンサルタントなど。</p>
+                <div class="job-tags">
+                    <a href="#" class="job-tag">経営コンサル（1,100件）</a>
+                    <a href="#" class="job-tag">ITコンサル（900件）</a>
+                    <a href="#" class="job-tag">戦略コンサル（500件）</a>
+                    <a href="#" class="job-tag">業務コンサル（300件）</a>
+                </div>
+            </div>
+
+            <!-- 製造・技術 -->
+            <div class="job-section" id="manufacturing">
+                <div class="job-section-header">
+                    <div class="job-section-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="3"></circle>
+                            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <h2>製造・技術</h2>
+                        <span class="job-section-count">5,500件の求人</span>
+                    </div>
+                </div>
+                <p class="job-section-description">生産管理、品質管理、機械設計、電気設計など製造業の求人。</p>
+                <div class="job-tags">
+                    <a href="#" class="job-tag">生産管理（1,800件）</a>
+                    <a href="#" class="job-tag">品質管理（1,500件）</a>
+                    <a href="#" class="job-tag">機械設計（1,200件）</a>
+                    <a href="#" class="job-tag">電気設計（700件）</a>
+                    <a href="#" class="job-tag">研究開発（300件）</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2 class="cta-title">希望の職種は見つかりましたか？</h2>
+                <p class="cta-description">キャリアアドバイザーがあなたに最適な求人をご提案します。</p>
+                <div class="cta-actions">
+                    <a href="contact.html" class="btn btn-white btn-lg">無料相談を申し込む</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <img src="assets/logo.webp" alt="転職どうでしょう" class="footer-logo">
+                    <p>あなたの新しいキャリアを、一緒に考えます。</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Twitter"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+                        <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+                        <a href="#" aria-label="LINE"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zM24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>サービス</h4>
+                    <ul>
+                        <li><a href="services.html">サービス紹介</a></li>
+                        <li><a href="area.html">エリアから探す</a></li>
+                        <li><a href="jobs.html">職種から探す</a></li>
+                        <li><a href="stories.html">転職成功事例</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>お役立ち情報</h4>
+                    <ul>
+                        <li><a href="column.html">転職コラム</a></li>
+                        <li><a href="column.html">履歴書の書き方</a></li>
+                        <li><a href="column.html">面接対策</a></li>
+                        <li><a href="column.html">年収査定</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>会社情報</h4>
+                    <ul>
+                        <li><a href="#">運営会社</a></li>
+                        <li><a href="#">プライバシーポリシー</a></li>
+                        <li><a href="#">利用規約</a></li>
+                        <li><a href="contact.html">お問い合わせ</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 転職どうでしょう All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
