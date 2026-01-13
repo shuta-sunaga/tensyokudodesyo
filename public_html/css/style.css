@@ -6,28 +6,29 @@
    CSS Variables
    -------------------------------------------------------------------------- */
 :root {
-    /* Colors */
-    --color-primary: #007cff;
-    --color-primary-dark: #0062cc;
-    --color-primary-light: #e6f2ff;
-    --color-secondary: #ff6b35;
-    --color-accent: #ffc107;
+    /* Colors - 温かみのある柔らかいカラーパレット */
+    --color-primary: #4b9cfb;
+    --color-primary-dark: #3a7fd4;
+    --color-primary-light: #eef6ff;
+    --color-secondary: #ff8c5a;
+    --color-accent: #ffb84d;
 
-    --color-text: #333333;
+    --color-text: #444444;
     --color-text-light: #666666;
-    --color-text-muted: #999999;
+    --color-text-muted: #888888;
 
     --color-bg: #ffffff;
-    --color-bg-gray: #f8f9fa;
-    --color-bg-dark: #1a1a2e;
+    --color-bg-gray: #fafbfc;
+    --color-bg-warm: #fffaf5;
+    --color-bg-dark: #3d4f5f;
 
-    --color-border: #e0e0e0;
-    --color-border-light: #f0f0f0;
+    --color-border: #e8e8e8;
+    --color-border-light: #f5f5f5;
 
-    /* Gradients */
-    --gradient-primary: linear-gradient(135deg, #007cff 0%, #00c6ff 100%);
-    --gradient-hero: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    --gradient-cta: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+    /* Gradients - より柔らかいグラデーション */
+    --gradient-primary: linear-gradient(135deg, #4b9cfb 0%, #7eb8ff 100%);
+    --gradient-hero: linear-gradient(135deg, #eef6ff 0%, #fff9f5 100%);
+    --gradient-cta: linear-gradient(135deg, #ff8c5a 0%, #ffb347 100%);
 
     /* Typography */
     --font-primary: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -42,18 +43,18 @@
     --spacing-2xl: 4rem;
     --spacing-3xl: 6rem;
 
-    /* Border Radius */
-    --radius-sm: 4px;
-    --radius-md: 8px;
-    --radius-lg: 12px;
-    --radius-xl: 16px;
+    /* Border Radius - より丸みのある角 */
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 24px;
     --radius-full: 9999px;
 
-    /* Shadows */
-    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
-    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07);
-    --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.1);
-    --shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.15);
+    /* Shadows - より柔らかい影 */
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.04);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.08);
+    --shadow-xl: 0 16px 32px rgba(0, 0, 0, 0.1);
 
     /* Transitions */
     --transition-fast: 0.15s ease;
@@ -1987,6 +1988,275 @@ section {
     }
 
     .featured-content h2 {
+        font-size: 1.25rem;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   Company Interview Page
+   -------------------------------------------------------------------------- */
+.company-list {
+    background: var(--color-bg-gray);
+    padding: var(--spacing-2xl) 0;
+}
+
+.company-card {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: var(--spacing-xl);
+    background: var(--color-bg);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    margin-bottom: var(--spacing-xl);
+    box-shadow: var(--shadow-md);
+}
+
+.company-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    min-height: 250px;
+}
+
+.company-card-content {
+    padding: var(--spacing-xl);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.company-industry {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    background: var(--color-primary-light);
+    padding: 0.25rem 0.75rem;
+    border-radius: var(--radius-full);
+    margin-bottom: var(--spacing-sm);
+    width: fit-content;
+}
+
+.company-card-content h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-sm);
+}
+
+.company-description {
+    font-size: 1rem;
+    color: var(--color-text-light);
+    line-height: 1.8;
+    margin-bottom: var(--spacing-md);
+}
+
+.company-highlights {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-lg);
+}
+
+.highlight-tag {
+    display: inline-block;
+    font-size: 0.8125rem;
+    color: var(--color-text);
+    background: var(--color-bg-warm);
+    padding: 0.375rem 0.75rem;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border-light);
+}
+
+/* --------------------------------------------------------------------------
+   Knowhow Page
+   -------------------------------------------------------------------------- */
+.knowhow-intro {
+    background: var(--color-bg);
+    padding: var(--spacing-2xl) 0;
+}
+
+.knowhow-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-lg);
+}
+
+.knowhow-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: var(--spacing-xl);
+    background: var(--color-bg-warm);
+    border-radius: var(--radius-xl);
+    border: 2px solid transparent;
+    transition: var(--transition-base);
+    color: var(--color-text);
+}
+
+.knowhow-card:hover {
+    border-color: var(--color-primary);
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.knowhow-card-icon {
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--gradient-primary);
+    border-radius: var(--radius-full);
+    margin-bottom: var(--spacing-md);
+}
+
+.knowhow-card-icon svg {
+    width: 36px;
+    height: 36px;
+    stroke: #fff;
+}
+
+.knowhow-card h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: var(--spacing-xs);
+}
+
+.knowhow-card p {
+    font-size: 0.9375rem;
+    color: var(--color-text-light);
+}
+
+.knowhow-section {
+    padding: var(--spacing-3xl) 0;
+    background: var(--color-bg);
+}
+
+.knowhow-section-alt {
+    background: var(--color-bg-warm);
+}
+
+.knowhow-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.knowhow-header {
+    text-align: center;
+    margin-bottom: var(--spacing-2xl);
+}
+
+.knowhow-header h2 {
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-sm);
+}
+
+.knowhow-header p {
+    font-size: 1.0625rem;
+    color: var(--color-text-light);
+}
+
+.knowhow-article {
+    margin-bottom: var(--spacing-2xl);
+}
+
+.knowhow-article h3 {
+    font-size: 1.375rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-lg);
+    padding-bottom: var(--spacing-sm);
+    border-bottom: 3px solid var(--color-primary);
+}
+
+.knowhow-point {
+    margin-bottom: var(--spacing-lg);
+    padding: var(--spacing-lg);
+    background: var(--color-bg);
+    border-radius: var(--radius-lg);
+    border-left: 4px solid var(--color-primary);
+}
+
+.knowhow-section-alt .knowhow-point {
+    background: #fff;
+}
+
+.knowhow-point h4 {
+    font-size: 1.0625rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+}
+
+.knowhow-point p {
+    font-size: 1rem;
+    color: var(--color-text-light);
+    line-height: 1.8;
+}
+
+.knowhow-checklist {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.knowhow-checklist li {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    font-size: 1rem;
+    color: var(--color-text);
+    padding: var(--spacing-sm) var(--spacing-md);
+    background: var(--color-bg);
+    border-radius: var(--radius-md);
+}
+
+.knowhow-section-alt .knowhow-checklist li {
+    background: #fff;
+}
+
+.knowhow-checklist li::before {
+    content: '✓';
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    background: var(--color-primary);
+    color: #fff;
+    border-radius: var(--radius-full);
+    font-size: 0.75rem;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+/* --------------------------------------------------------------------------
+   Responsive - Company & Knowhow
+   -------------------------------------------------------------------------- */
+@media (max-width: 1024px) {
+    .company-card {
+        grid-template-columns: 1fr;
+    }
+
+    .company-card-image img {
+        min-height: 200px;
+    }
+}
+
+@media (max-width: 768px) {
+    .knowhow-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .knowhow-header h2 {
+        font-size: 1.5rem;
+    }
+
+    .knowhow-article h3 {
         font-size: 1.25rem;
     }
 }
