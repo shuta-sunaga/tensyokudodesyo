@@ -48,162 +48,107 @@
         </div>
     </section>
 
-    <!-- Knowhow Cards -->
-    <section class="knowhow-intro">
+    <!-- Category Filter -->
+    <section class="column-filter">
         <div class="container">
-            <div class="knowhow-cards">
-                <a href="#interview" class="knowhow-card">
-                    <div class="knowhow-card-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                            <circle cx="9" cy="7" r="4"></circle>
-                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-                            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-                        </svg>
-                    </div>
-                    <h3>面接対策</h3>
-                    <p>面接で好印象を与えるコツ</p>
-                </a>
-                <a href="#resume" class="knowhow-card">
-                    <div class="knowhow-card-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                            <polyline points="14 2 14 8 20 8"></polyline>
-                            <line x1="16" y1="13" x2="8" y2="13"></line>
-                            <line x1="16" y1="17" x2="8" y2="17"></line>
-                        </svg>
-                    </div>
-                    <h3>履歴書の書き方</h3>
-                    <p>採用担当者に響く書類作成</p>
-                </a>
-                <a href="#analysis" class="knowhow-card">
-                    <div class="knowhow-card-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="12" cy="12" r="10"></circle>
-                            <path d="M12 16v-4"></path>
-                            <path d="M12 8h.01"></path>
-                        </svg>
-                    </div>
-                    <h3>自己分析</h3>
-                    <p>自分の強みを見つける方法</p>
-                </a>
+            <div class="filter-tabs">
+                <button class="filter-tab active">すべて</button>
+                <button class="filter-tab">面接対策</button>
+                <button class="filter-tab">履歴書・職務経歴書</button>
+                <button class="filter-tab">自己分析</button>
+                <button class="filter-tab">業界研究</button>
+                <button class="filter-tab">転職準備</button>
             </div>
         </div>
     </section>
 
-    <!-- Interview Section -->
-    <section id="interview" class="knowhow-section">
+    <!-- Article Card List -->
+    <section class="article-list">
         <div class="container">
-            <div class="knowhow-content">
-                <div class="knowhow-header">
-                    <h2>面接対策</h2>
-                    <p>面接は転職活動の最大の山場。しっかり準備して臨みましょう。</p>
-                </div>
+            <div class="article-grid">
+                <!-- Card 1 -->
+                <article class="article-card">
+                    <a href="#">
+                        <div class="article-card-image">
+                            <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=400&h=300&fit=crop" alt="面接対策">
+                        </div>
+                        <div class="article-card-content">
+                            <span class="article-card-category">面接対策</span>
+                            <h3 class="article-card-title">面接で聞かれる定番の質問と回答例</h3>
+                            <p class="article-card-excerpt">面接官がよく聞く質問とその意図、効果的な回答例を紹介します。</p>
+                        </div>
+                    </a>
+                </article>
 
-                <div class="knowhow-article">
-                    <h3>面接で聞かれる定番の質問と回答例</h3>
-                    <div class="knowhow-point">
-                        <h4>「自己紹介をお願いします」</h4>
-                        <p>1〜2分程度で、経歴のハイライトと応募動機を簡潔にまとめましょう。長すぎると印象が悪くなります。</p>
-                    </div>
-                    <div class="knowhow-point">
-                        <h4>「転職理由を教えてください」</h4>
-                        <p>ネガティブな理由（人間関係、給与への不満など）は避け、「キャリアアップのため」「新しい挑戦をしたい」などポジティブな表現を心がけましょう。</p>
-                    </div>
-                    <div class="knowhow-point">
-                        <h4>「当社を志望した理由は？」</h4>
-                        <p>企業研究をしっかり行い、その企業ならではの魅力と、自分のキャリアプランの一致点を具体的に説明しましょう。</p>
-                    </div>
-                </div>
+                <!-- Card 2 -->
+                <article class="article-card">
+                    <a href="#">
+                        <div class="article-card-image">
+                            <img src="https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=400&h=300&fit=crop" alt="履歴書">
+                        </div>
+                        <div class="article-card-content">
+                            <span class="article-card-category">履歴書・職務経歴書</span>
+                            <h3 class="article-card-title">採用担当者に響く履歴書の書き方</h3>
+                            <p class="article-card-excerpt">書類選考を通過するための履歴書作成のポイントを解説します。</p>
+                        </div>
+                    </a>
+                </article>
 
-                <div class="knowhow-article">
-                    <h3>面接当日のポイント</h3>
-                    <ul class="knowhow-checklist">
-                        <li>10分前には到着する</li>
-                        <li>清潔感のある服装を心がける</li>
-                        <li>相手の目を見て話す</li>
-                        <li>質問にはハキハキと答える</li>
-                        <li>最後に逆質問を用意しておく</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
+                <!-- Card 3 -->
+                <article class="article-card">
+                    <a href="#">
+                        <div class="article-card-image">
+                            <img src="https://images.unsplash.com/photo-1434626881859-194d67b2b86f?w=400&h=300&fit=crop" alt="自己分析">
+                        </div>
+                        <div class="article-card-content">
+                            <span class="article-card-category">自己分析</span>
+                            <h3 class="article-card-title">自己分析の3つのステップ</h3>
+                            <p class="article-card-excerpt">転職成功の鍵となる自己分析の方法を具体的に解説します。</p>
+                        </div>
+                    </a>
+                </article>
 
-    <!-- Resume Section -->
-    <section id="resume" class="knowhow-section knowhow-section-alt">
-        <div class="container">
-            <div class="knowhow-content">
-                <div class="knowhow-header">
-                    <h2>履歴書の書き方</h2>
-                    <p>履歴書・職務経歴書は、あなたを知ってもらう最初のツール。丁寧に作成しましょう。</p>
-                </div>
+                <!-- Card 4 -->
+                <article class="article-card">
+                    <a href="#">
+                        <div class="article-card-image">
+                            <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop" alt="面接マナー">
+                        </div>
+                        <div class="article-card-content">
+                            <span class="article-card-category">面接対策</span>
+                            <h3 class="article-card-title">面接当日のマナーと身だしなみ</h3>
+                            <p class="article-card-excerpt">面接で好印象を与えるための服装やマナーについて紹介します。</p>
+                        </div>
+                    </a>
+                </article>
 
-                <div class="knowhow-article">
-                    <h3>履歴書作成の基本</h3>
-                    <div class="knowhow-point">
-                        <h4>写真は清潔感が大切</h4>
-                        <p>3ヶ月以内に撮影した証明写真を使用。スーツ着用、明るい表情で撮影しましょう。スマホでの自撮りはNGです。</p>
-                    </div>
-                    <div class="knowhow-point">
-                        <h4>志望動機は具体的に</h4>
-                        <p>「御社の〇〇という事業に魅力を感じ」など、その企業ならではの理由を書きましょう。使い回しの文章は見抜かれます。</p>
-                    </div>
-                    <div class="knowhow-point">
-                        <h4>誤字脱字は絶対にチェック</h4>
-                        <p>提出前に必ず見直しを。できれば第三者にもチェックしてもらいましょう。</p>
-                    </div>
-                </div>
+                <!-- Card 5 -->
+                <article class="article-card">
+                    <a href="#">
+                        <div class="article-card-image">
+                            <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=400&h=300&fit=crop" alt="職務経歴書">
+                        </div>
+                        <div class="article-card-content">
+                            <span class="article-card-category">履歴書・職務経歴書</span>
+                            <h3 class="article-card-title">職務経歴書で実績をアピールする方法</h3>
+                            <p class="article-card-excerpt">数字で実績を示し、採用担当者に響く職務経歴書の書き方を解説。</p>
+                        </div>
+                    </a>
+                </article>
 
-                <div class="knowhow-article">
-                    <h3>職務経歴書のポイント</h3>
-                    <ul class="knowhow-checklist">
-                        <li>数字で実績を示す（売上○○%達成など）</li>
-                        <li>応募職種に関連するスキル・経験を強調</li>
-                        <li>読みやすいレイアウトを心がける</li>
-                        <li>A4で2〜3枚程度にまとめる</li>
-                        <li>専門用語は噛み砕いて説明</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Analysis Section -->
-    <section id="analysis" class="knowhow-section">
-        <div class="container">
-            <div class="knowhow-content">
-                <div class="knowhow-header">
-                    <h2>自己分析</h2>
-                    <p>転職成功の鍵は自己分析にあり。自分を知ることから始めましょう。</p>
-                </div>
-
-                <div class="knowhow-article">
-                    <h3>自己分析の3つのステップ</h3>
-                    <div class="knowhow-point">
-                        <h4>STEP1: キャリアの棚卸し</h4>
-                        <p>これまでの職歴、担当業務、身につけたスキルを時系列で書き出しましょう。成功体験だけでなく、失敗から学んだこともリストアップします。</p>
-                    </div>
-                    <div class="knowhow-point">
-                        <h4>STEP2: 強み・弱みの整理</h4>
-                        <p>自分の得意なこと、苦手なことを客観的に分析。周囲の人に聞いてみるのも効果的です。</p>
-                    </div>
-                    <div class="knowhow-point">
-                        <h4>STEP3: 価値観の明確化</h4>
-                        <p>「何のために働くのか」「どんな仕事にやりがいを感じるか」を深掘りしましょう。年収だけでなく、働き方や成長機会など、自分にとって大切なことを整理します。</p>
-                    </div>
-                </div>
-
-                <div class="knowhow-article">
-                    <h3>自己分析でよくある質問</h3>
-                    <ul class="knowhow-checklist">
-                        <li>これまでで一番やりがいを感じた仕事は？</li>
-                        <li>周囲からどんな人と言われることが多い？</li>
-                        <li>5年後、10年後にどうなっていたい？</li>
-                        <li>絶対に譲れない条件は何？</li>
-                        <li>仕事で大切にしている価値観は？</li>
-                    </ul>
-                </div>
+                <!-- Card 6 -->
+                <article class="article-card">
+                    <a href="#">
+                        <div class="article-card-image">
+                            <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=400&h=300&fit=crop" alt="業界研究">
+                        </div>
+                        <div class="article-card-content">
+                            <span class="article-card-category">業界研究</span>
+                            <h3 class="article-card-title">転職先の業界研究の進め方</h3>
+                            <p class="article-card-excerpt">志望業界の情報収集方法と、面接で活かすためのポイントを紹介。</p>
+                        </div>
+                    </a>
+                </article>
             </div>
         </div>
     </section>
