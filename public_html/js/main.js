@@ -9,7 +9,6 @@ document.addEventListener('DOMContentLoaded', function() {
     initFormValidation();
     initStatsCounter();
     initJobSearch();
-    initHomePage();
 
     // Wait for includes to load before initializing header-dependent modules
     document.addEventListener('includesReady', function() {
@@ -34,6 +33,7 @@ document.addEventListener('DOMContentLoaded', function() {
         initInterviewPage();
         initCompanyPage();
         initKnowhowPage();
+        initHomePage(); // Move here - needs categories for display names
     }
 
     // Initialize category-dependent modules after categories are loaded

@@ -216,7 +216,7 @@ function renderJobs() {
 
         return `
             <article class="job-listing-card" data-category="${escapeHTML(job.category)}" data-conditions="${escapeHTML(job.conditions || '')}">
-                <a href="./jobs/job-${job.id}.html">
+                <a href="./jobs/job-${String(job.id).padStart(6, '0')}.html">
                     <div class="job-listing-header">
                         ${isNew ? '<span class="job-listing-new">NEW</span>' : ''}
                         <span class="job-listing-type">正社員</span>

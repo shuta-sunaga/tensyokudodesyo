@@ -1,0 +1,15 @@
+<mt:Ignore>
+============================================================
+Google Analytics タグ モジュール
+使用方法: <mt:Include module="ga-tag">
+※ 各ページテンプレートの </head> 直前にインクルード
+============================================================
+</mt:Ignore>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXXXXX');
+</script>
