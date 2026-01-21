@@ -1,0 +1,69 @@
+{
+  "jobs": [
+    {
+      "id": 2,
+      "title": "【Webエンジニア】自社サービス開発",
+      "postDate": "2026-01-12",
+      "company": "株式会社デジタルクリエイト",
+      "prefecture": "静岡県",
+      "city": "静岡市",
+      "salary": "年収450万〜700万円",
+      "conditions": "リモートワーク可,土日祝休み,フレックス",
+      "category": "it",
+      "keywords": "エンジニア,Web開発,JavaScript,React",
+      "detailUrl": "shizuoka/jobs/job-000002.html"
+    },
+    {
+      "id": 4,
+      "title": "【マーケティング】Webマーケター",
+      "postDate": "2026-01-05",
+      "company": "株式会社グロースハック",
+      "prefecture": "静岡県",
+      "city": "浜松市",
+      "salary": "年収400万〜600万円",
+      "conditions": "リモートワーク可,土日祝休み",
+      "category": "marketing",
+      "keywords": "マーケティング,広告運用,SEO,SNS",
+      "detailUrl": "shizuoka/jobs/job-000004.html"
+    },
+    {
+      "id": 6,
+      "title": "【デザイナー】UI/UXデザイナー",
+      "postDate": "2026-01-11",
+      "company": "株式会社クリエイティブワークス",
+      "prefecture": "静岡県",
+      "city": "静岡市",
+      "salary": "年収400万〜650万円",
+      "conditions": "リモートワーク可,土日祝休み,フレックス",
+      "category": "creative",
+      "keywords": "デザイナー,UI,UX,Figma,Webデザイン",
+      "detailUrl": "shizuoka/jobs/job-000006.html"
+    },
+    {
+      "id": 9,
+      "title": "【営業】不動産営業マネージャー",
+      "postDate": "2025-12-20",
+      "company": "株式会社ホームパートナー",
+      "prefecture": "静岡県",
+      "city": "浜松市",
+      "salary": "年収500万〜800万円",
+      "conditions": "高年収,インセンティブあり",
+      "category": "sales",
+      "keywords": "不動産,営業,マネージャー,管理職",
+      "detailUrl": "shizuoka/jobs/job-000009.html"
+    },
+    {
+      "id": 11,
+      "title": "【事務】一般事務スタッフ",
+      "postDate": "2026-01-07",
+      "company": "株式会社オフィスサポート",
+      "prefecture": "静岡県",
+      "city": "沼津市",
+      "salary": "年収280万〜350万円",
+      "conditions": "未経験歓迎,土日祝休み,残業少なめ",
+      "category": "office",
+      "keywords": "事務,一般事務,データ入力,PC作業",
+      "detailUrl": "shizuoka/jobs/job-000011.html"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+<mt:Ignore>
+============================================================
+企業業界カテゴリJSON生成テンプレート（ID指定版）
+出力ファイル: data/categories/company-industries.json
+※カテゴリセットIDを指定する場合はこちらを使用
+============================================================
+</mt:Ignore>
+{
+  "categories": [
+<mt:Categories category_set_id="2">
+<mt:If name="__counter__" gt="1">,
+</mt:If>
+    { "id": "<mt:CategoryBasename>", "name": "<mt:CategoryLabel encode_json="1">" }</mt:Categories>
+
+  ]
+}

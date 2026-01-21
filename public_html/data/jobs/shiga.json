@@ -1,0 +1,95 @@
+{
+  "jobs": [
+    {
+      "id": 1,
+      "title": "【営業職】法人営業/未経験歓迎",
+      "postDate": "2026-01-10",
+      "company": "株式会社テクノソリューション",
+      "prefecture": "滋賀県",
+      "city": "大津市",
+      "salary": "年収350万〜500万円",
+      "conditions": "未経験歓迎,土日祝休み,研修充実",
+      "category": "sales",
+      "keywords": "営業,法人営業,BtoB,新規開拓",
+      "detailUrl": "shiga/jobs/job-000001.html"
+    },
+    {
+      "id": 3,
+      "title": "【経理】管理部門スタッフ募集",
+      "postDate": "2026-01-08",
+      "company": "未来製作所株式会社",
+      "prefecture": "滋賀県",
+      "city": "草津市",
+      "salary": "年収400万〜550万円",
+      "conditions": "土日祝休み,残業少なめ,福利厚生充実",
+      "category": "office",
+      "keywords": "経理,会計,管理部門,バックオフィス",
+      "detailUrl": "shiga/jobs/job-000003.html"
+    },
+    {
+      "id": 5,
+      "title": "【介護職】介護スタッフ募集",
+      "postDate": "2026-01-03",
+      "company": "社会福祉法人やすらぎ",
+      "prefecture": "滋賀県",
+      "city": "彦根市",
+      "salary": "年収300万〜400万円",
+      "conditions": "未経験歓迎,研修充実,資格取得支援",
+      "category": "medical",
+      "keywords": "介護,福祉,ヘルパー,介護福祉士",
+      "detailUrl": "shiga/jobs/job-000005.html"
+    },
+    {
+      "id": 7,
+      "title": "【コンサルタント】経営コンサルタント",
+      "postDate": "2025-12-28",
+      "company": "グローバルコンサルティング株式会社",
+      "prefecture": "滋賀県",
+      "city": "大津市",
+      "salary": "年収600万〜1000万円",
+      "conditions": "高年収,土日祝休み",
+      "category": "consulting",
+      "keywords": "コンサルタント,経営,戦略,企業支援",
+      "detailUrl": "shiga/jobs/job-000007.html"
+    },
+    {
+      "id": 8,
+      "title": "【製造】生産管理スタッフ",
+      "postDate": "2026-01-06",
+      "company": "未来製作所株式会社",
+      "prefecture": "滋賀県",
+      "city": "草津市",
+      "salary": "年収380万〜500万円",
+      "conditions": "土日祝休み,研修充実,福利厚生充実",
+      "category": "manufacturing",
+      "keywords": "製造,生産管理,工場,品質管理",
+      "detailUrl": "shiga/jobs/job-000008.html"
+    },
+    {
+      "id": 10,
+      "title": "【IT】インフラエンジニア",
+      "postDate": "2026-01-09",
+      "company": "株式会社クラウドテック",
+      "prefecture": "滋賀県",
+      "city": "大津市",
+      "salary": "年収500万〜750万円",
+      "conditions": "リモートワーク可,高年収,土日祝休み",
+      "category": "it",
+      "keywords": "インフラ,AWS,クラウド,サーバー",
+      "detailUrl": "shiga/jobs/job-000010.html"
+    },
+    {
+      "id": 12,
+      "title": "【医療】看護師",
+      "postDate": "2025-12-25",
+      "company": "医療法人社団やすらぎ会",
+      "prefecture": "滋賀県",
+      "city": "近江八幡市",
+      "salary": "年収400万〜550万円",
+      "conditions": "土日祝休み,福利厚生充実",
+      "category": "medical",
+      "keywords": "看護師,医療,病院,クリニック",
+      "detailUrl": "shiga/jobs/job-000012.html"
+    }
+  ]
+}

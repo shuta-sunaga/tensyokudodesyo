@@ -1,0 +1,66 @@
+<mt:Ignore>
+============================================================
+【非推奨】求人一覧JSON生成テンプレート（親サイト統合版）
+============================================================
+
+このテンプレートは非推奨です。
+
+現在の推奨構成:
+- 子サイトごとに jobs-child-json.mtml を使用
+- data/jobs/{prefecture_id}.json を出力
+- フロントエンドで複数JSONを並列取得・統合
+
+理由:
+- 子サイト更新時に親サイトの再構築が不要
+- パフォーマンスが向上
+- 運用がシンプル
+
+詳細は README.md を参照してください。
+============================================================
+
+子サイト設定:
+- ブログ名: 都道府県名（例: 静岡県）
+- サイトパス: 都道府県ID（例: shizuoka）
+
+コンテンツフィールド（子サイトで設定）:
+※フィールド名は実際のMT設定に合わせて調整してください
+
+============================================================
+</mt:Ignore>
+{
+  "jobs": [
+<mt:Contents content_type="求人" blog_ids="children" sort_by="authored_on" sort_order="descend">
+    {
+      "id": <mt:ContentID>,
+      "title": "<mt:ContentField content_field="タイトル"><mt:ContentFieldValue encode_json="1"></mt:ContentField>",
+      "postDate": "<mt:ContentDate format="%Y-%m-%d">",
+      "company": "<mt:ContentField content_field="会社名"><mt:ContentFieldValue encode_json="1"></mt:ContentField>",
+      "prefecture": "<mt:BlogName>",
+      "prefecture_id": "<mt:BlogBasename>",
+      "city": "<mt:ContentField content_field="市区町村"><mt:ContentFieldValue encode_json="1"></mt:ContentField>",
+      "salary": "<mt:ContentField content_field="給与"><mt:ContentFieldValue encode_json="1"></mt:ContentField>",
+      "conditions": "<mt:ContentField content_field="条件"><mt:ContentFieldValue encode_json="1"></mt:ContentField>",
+      "category": "<mt:ContentField content_field="職種"><mt:ContentFieldValue encode_json="1"></mt:ContentField>",
+      "keywords": "<mt:ContentField content_field="キーワード"><mt:ContentFieldValue encode_json="1"></mt:ContentField>",
+      "detail": {
+        "description": "<mt:ContentField content_field="仕事内容"><mt:ContentFieldValue encode_json="1"></mt:ContentField>",
+        "requirements": "<mt:ContentField content_field="求める人材"><mt:ContentFieldValue encode_json="1"></mt:ContentField>",
+        "location": "<mt:ContentField content_field="勤務地"><mt:ContentFieldValue encode_json="1"></mt:ContentField>",
+        "workHours": "<mt:ContentField content_field="勤務時間"><mt:ContentFieldValue encode_json="1"></mt:ContentField>",
+        "employmentType": "<mt:ContentField content_field="雇用形態"><mt:ContentFieldValue encode_json="1"></mt:ContentField>",
+        "salaryDetail": "<mt:ContentField content_field="給与詳細"><mt:ContentFieldValue encode_json="1"></mt:ContentField>",
+        "bonus": "<mt:ContentField content_field="賞与"><mt:ContentFieldValue encode_json="1"></mt:ContentField>",
+        "benefits": "<mt:ContentField content_field="待遇・福利厚生"><mt:ContentFieldValue encode_json="1"></mt:ContentField>",
+        "holidays": "<mt:ContentField content_field="休日・休暇"><mt:ContentFieldValue encode_json="1"></mt:ContentField>",
+        "companyAddress": "<mt:ContentField content_field="会社所在地"><mt:ContentFieldValue encode_json="1"></mt:ContentField>",
+        "established": "<mt:ContentField content_field="設立"><mt:ContentFieldValue encode_json="1"></mt:ContentField>",
+        "representative": "<mt:ContentField content_field="代表者"><mt:ContentFieldValue encode_json="1"></mt:ContentField>",
+        "employees": "<mt:ContentField content_field="従業員数"><mt:ContentFieldValue encode_json="1"></mt:ContentField>",
+        "businessContent": "<mt:ContentField content_field="事業内容"><mt:ContentFieldValue encode_json="1"></mt:ContentField>",
+        "selectionProcess": "<mt:ContentField content_field="選考フロー"><mt:ContentFieldValue encode_json="1"></mt:ContentField>",
+        "applicationMethod": "<mt:ContentField content_field="応募方法"><mt:ContentFieldValue encode_json="1"></mt:ContentField>"
+      }
+    }<mt:Unless name="__last__">,</mt:Unless>
+</mt:Contents>
+  ]
+}

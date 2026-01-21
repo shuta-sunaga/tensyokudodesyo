@@ -1,0 +1,14 @@
+<mt:Ignore>
+============================================================
+求人条件タグJSON生成テンプレート
+出力ファイル: data/categories/job-conditions.json
+カテゴリセット名: 求人条件
+============================================================
+</mt:Ignore>
+{
+  "categories": [
+<mt:CategorySets><mt:If tag="CategorySetName" eq="求人条件"><mt:Categories show_empty="1">
+    { "id": "<mt:CategoryBasename>", "name": "<mt:CategoryLabel encode_json="1">" }<mt:Unless name="__last__">,</mt:Unless></mt:Categories></mt:If></mt:CategorySets>
+
+  ]
+}

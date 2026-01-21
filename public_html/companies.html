@@ -11,36 +11,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Header -->
-    <header class="header">
-        <div class="container">
-            <div class="header-inner">
-                <a href="index.html" class="logo">
-                    <img src="assets/logo.webp" alt="転職どうでしょう" class="logo-img">
-                </a>
-                <nav class="nav">
-                    <ul class="nav-list">
-                        <li><a href="jobs.html">求人一覧</a></li>
-                        <li><a href="interviews.html">転職者インタビュー</a></li>
-                        <li><a href="companies.html" class="active">企業インタビュー</a></li>
-                        <li><a href="knowhow.html">転職ノウハウ</a></li>
-                    </ul>
-                </nav>
-                <div class="header-actions">
-                    <a href="#" class="btn btn-line">
-                        <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
-                            <path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zM24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/>
-                        </svg>
-                        LINEで相談
-                    </a>
-                    <a href="contact.html" class="btn btn-outline-sm">企業様はこちら</a>
-                </div>
-                <button class="mobile-menu-btn" aria-label="メニューを開く">
-                    <span></span><span></span><span></span>
-                </button>
-            </div>
-        </div>
-    </header>
+    <!-- Header (loaded via includes.js) -->
+    <div id="header-placeholder"></div>
 
     <!-- Page Header -->
     <section class="page-header">
@@ -54,160 +26,85 @@
         </div>
     </section>
 
-    <!-- Industry Filter -->
+    <!-- Filter Section -->
     <section class="column-filter">
         <div class="container">
-            <div class="filter-tabs">
-                <button class="filter-tab active">すべて</button>
-                <button class="filter-tab">金融・保険</button>
-                <button class="filter-tab">建設・不動産</button>
-                <button class="filter-tab">コンサルティング</button>
-                <button class="filter-tab">メーカー・商社</button>
-                <button class="filter-tab">流通・小売・サービス</button>
-                <button class="filter-tab">メディカル</button>
-                <button class="filter-tab">マスコミ・エンタメ</button>
-                <button class="filter-tab">運輸・物流</button>
+            <div class="filter-controls">
+                <div class="filter-select-wrapper">
+                    <label for="prefectureFilter">エリア</label>
+                    <select id="prefectureFilter" class="filter-select">
+                        <option value="">すべてのエリア</option>
+                        <option value="滋賀県">滋賀県</option>
+                        <option value="静岡県">静岡県</option>
+                    </select>
+                </div>
+                <div class="filter-tabs" id="industryTabs">
+                    <!-- 業界タブは categories.js により動的生成 -->
+                    <button class="filter-tab active" data-industry="">すべて</button>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Company List -->
-    <section class="company-list">
+    <section class="article-list">
         <div class="container">
-            <!-- Company 1 -->
-            <article class="company-card">
-                <div class="company-card-image">
-                    <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=400&h=300&fit=crop" alt="オフィスビル">
-                </div>
-                <div class="company-card-content">
-                    <span class="company-industry">IT・通信</span>
-                    <h2>株式会社テクノソリューション</h2>
-                    <p class="company-description">「テクノロジーで社会をもっと便利に」をミッションに、企業のDX推進をサポートしています。社員一人ひとりの成長を大切にする社風で、未経験からでも活躍できる環境を整えています。</p>
-                    <div class="company-highlights">
-                        <span class="highlight-tag">リモートワーク可</span>
-                        <span class="highlight-tag">研修制度充実</span>
-                        <span class="highlight-tag">年間休日125日</span>
-                    </div>
-                    <a href="#" class="btn btn-outline">詳しく見る</a>
-                </div>
-            </article>
-
-            <!-- Company 2 -->
-            <article class="company-card">
-                <div class="company-card-image">
-                    <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=400&h=300&fit=crop" alt="オフィス">
-                </div>
-                <div class="company-card-content">
-                    <span class="company-industry">コンサルティング</span>
-                    <h2>グローバルコンサルティング株式会社</h2>
-                    <p class="company-description">大手企業から中小企業まで、幅広いクライアントの経営課題を解決するコンサルティングファームです。多様なバックグラウンドを持つメンバーが活躍しています。</p>
-                    <div class="company-highlights">
-                        <span class="highlight-tag">異業種歓迎</span>
-                        <span class="highlight-tag">高い成長機会</span>
-                        <span class="highlight-tag">グローバル案件あり</span>
-                    </div>
-                    <a href="#" class="btn btn-outline">詳しく見る</a>
-                </div>
-            </article>
-
-            <!-- Company 3 -->
-            <article class="company-card">
-                <div class="company-card-image">
-                    <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=400&h=300&fit=crop" alt="オフィス">
-                </div>
-                <div class="company-card-content">
-                    <span class="company-industry">メーカー</span>
-                    <h2>未来製作所株式会社</h2>
-                    <p class="company-description">創業50年の老舗メーカーですが、常に新しいことに挑戦する社風です。ものづくりの技術を大切にしながら、IoTやAIを活用した次世代製品の開発にも力を入れています。</p>
-                    <div class="company-highlights">
-                        <span class="highlight-tag">技術力重視</span>
-                        <span class="highlight-tag">福利厚生充実</span>
-                        <span class="highlight-tag">安定経営</span>
-                    </div>
-                    <a href="#" class="btn btn-outline">詳しく見る</a>
-                </div>
-            </article>
-
-            <!-- Company 4 -->
-            <article class="company-card">
-                <div class="company-card-image">
-                    <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=400&h=300&fit=crop" alt="オフィス">
-                </div>
-                <div class="company-card-content">
-                    <span class="company-industry">金融・保険</span>
-                    <h2>ライフパートナー保険株式会社</h2>
-                    <p class="company-description">お客様の人生に寄り添う保険サービスを提供しています。営業だけでなく、商品開発やマーケティングなど様々な職種で活躍できるフィールドがあります。</p>
-                    <div class="company-highlights">
-                        <span class="highlight-tag">ワークライフバランス</span>
-                        <span class="highlight-tag">女性活躍推進</span>
-                        <span class="highlight-tag">資格取得支援</span>
-                    </div>
-                    <a href="#" class="btn btn-outline">詳しく見る</a>
-                </div>
-            </article>
-        </div>
-    </section>
-
-    <!-- CTA -->
-    <section class="cta">
-        <div class="container">
-            <div class="cta-content">
-                <h2 class="cta-title">気になる企業はありましたか？</h2>
-                <p class="cta-description">詳しい求人情報やエントリーについてはお気軽にお問い合わせください</p>
-                <div class="cta-actions">
-                    <a href="contact.html" class="btn btn-white btn-lg">無料相談する</a>
+            <div class="article-grid" id="companyGrid">
+                <div class="loading-placeholder" style="grid-column: 1 / -1; text-align: center; padding: 2rem; color: #666;">
+                    企業情報を読み込み中...
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="footer">
+    <!-- New Jobs Section -->
+    <section class="new-jobs">
         <div class="container">
-            <div class="footer-grid">
-                <div class="footer-brand">
-                    <img src="assets/logo.webp" alt="転職どうでしょう" class="footer-logo">
-                    <p>あなたの新しいキャリアを、一緒に考えます。</p>
-                    <div class="social-links">
-                        <a href="#" aria-label="Twitter"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
-                        <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
-                        <a href="#" aria-label="LINE"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zM24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg></a>
-                    </div>
-                </div>
-                <div class="footer-links">
-                    <h4>求人情報</h4>
-                    <ul>
-                        <li><a href="jobs.html">求人一覧</a></li>
-                        <li><a href="jobs.html?job_type=sales">営業の求人</a></li>
-                        <li><a href="jobs.html?job_type=it">IT・エンジニアの求人</a></li>
-                        <li><a href="jobs.html?job_type=office">事務・管理の求人</a></li>
-                    </ul>
-                </div>
-                <div class="footer-links">
-                    <h4>コンテンツ</h4>
-                    <ul>
-                        <li><a href="interviews.html">転職者インタビュー</a></li>
-                        <li><a href="companies.html">企業インタビュー</a></li>
-                        <li><a href="knowhow.html">転職ノウハウ</a></li>
-                    </ul>
-                </div>
-                <div class="footer-links">
-                    <h4>求職者の方</h4>
-                    <ul>
-                        <li><a href="#">LINEで相談</a></li>
-                    </ul>
-                    <h4 class="footer-links-sub">企業の方</h4>
-                    <ul>
-                        <li><a href="contact.html">求人掲載のお問い合わせ</a></li>
-                    </ul>
+            <div class="section-header">
+                <h2 class="section-title">新着求人</h2>
+                <p class="section-subtitle">最新の求人情報をチェック</p>
+            </div>
+            <div id="newJobsContainer" class="job-listing-grid">
+                <div class="loading-placeholder" style="grid-column: 1 / -1; text-align: center; padding: 2rem; color: #666;">
+                    求人情報を読み込み中...
                 </div>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 転職どうでしょう All Rights Reserved.</p>
+            <div class="section-more">
+                <a href="index.html" class="btn btn-outline">転職先を探す</a>
             </div>
         </div>
-    </footer>
+    </section>
 
+    <!-- LINE CTA -->
+    <section class="line-cta">
+        <div class="container">
+            <div class="line-cta-content">
+                <div class="line-cta-icon">
+                    <img src="assets/LINE_Brand_icon.png" alt="LINE" width="48" height="48">
+                </div>
+                <div class="line-cta-text">
+                    <h2 class="line-cta-title">LINEで気軽に転職相談</h2>
+                    <p class="line-cta-description">
+                        友だち追加するだけで、キャリアアドバイザーに無料相談できます。<br>
+                        非公開求人の紹介や、履歴書添削もLINEで対応！
+                    </p>
+                </div>
+                <div class="line-cta-action">
+                    <a href="#" class="btn btn-line btn-lg">
+                        <img src="assets/LINE_Brand_icon.png" alt="LINE" width="24" height="24">
+                        友だち追加して相談する
+                    </a>
+                    <p class="line-cta-note">※登録無料・すべてのサービスが無料でご利用いただけます</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer (loaded via includes.js) -->
+    <div id="footer-placeholder"></div>
+
+    <script src="js/includes.js"></script>
+    <script src="js/categories.js"></script>
     <script src="js/main.js"></script>
 </body>
 </html>
