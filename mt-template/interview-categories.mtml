@@ -1,0 +1,14 @@
+<mt:Ignore>
+============================================================
+転職者インタビューカテゴリJSON生成テンプレート
+出力ファイル: data/categories/interview-categories.json
+カテゴリセット名: インタビュー職種
+============================================================
+</mt:Ignore>
+{
+  "categories": [
+<mt:CategorySets><mt:If tag="CategorySetName" eq="インタビュー職種"><mt:Categories show_empty="1">
+    { "id": "<mt:CategoryBasename>", "name": "<mt:CategoryLabel encode_json="1">" }<mt:Unless name="__last__">,</mt:Unless></mt:Categories></mt:If></mt:CategorySets>
+
+  ]
+}
