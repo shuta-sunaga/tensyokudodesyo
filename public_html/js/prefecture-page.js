@@ -28,10 +28,10 @@ async function initPrefecturePage() {
     }
 
     try {
-        // Load prefecture-specific data in parallel
+        // Load data - jobs uses prefecture-specific JSON, interviews/companies use global JSON with filtering
         const jobsUrl = `/data/jobs/${config.id}.json`;
-        const interviewsUrl = `/data/interviews/${config.id}.json`;
-        const companiesUrl = `/data/companies/${config.id}.json`;
+        const interviewsUrl = `/data/interviews.json`;
+        const companiesUrl = `/data/companies.json`;
 
         console.log('Loading prefecture data:', { jobsUrl, interviewsUrl, companiesUrl });
 
@@ -56,10 +56,15 @@ async function initPrefecturePage() {
         const interviewsData = interviewsResponse.ok ? await interviewsResponse.json() : { interviews: [] };
         const companiesData = companiesResponse.ok ? await companiesResponse.json() : { companies: [] };
 
-        // Data is already filtered by prefecture in the JSON files
+        // Jobs: already filtered by prefecture in JSON file
         prefectureJobs = jobsData.jobs || [];
-        prefectureInterviews = interviewsData.interviews || [];
-        prefectureCompanies = companiesData.companies || [];
+
+        // Interviews & Companies: filter by prefecture name from global JSON
+        const allInterviews = interviewsData.interviews || [];
+        const allCompanies = companiesData.companies || [];
+
+        prefectureInterviews = allInterviews.filter(item => item.prefecture === config.name);
+        prefectureCompanies = allCompanies.filter(item => item.prefecture === config.name);
 
         // Initialize filtered jobs
         prefFilteredJobs = [...prefectureJobs];
@@ -314,6 +319,23 @@ function updateResultsCount() {
 }
 
 /**
+ * Fix image path for prefecture pages (add ../ prefix for relative paths)
+ */
+function fixImagePath(imagePath) {
+    if (!imagePath) return '';
+    // Already absolute URL (http/https) - no change needed
+    if (imagePath.startsWith('http://') || imagePath.startsWith('https://')) {
+        return imagePath;
+    }
+    // Already has ../ prefix - no change needed
+    if (imagePath.startsWith('../')) {
+        return imagePath;
+    }
+    // Relative path from root (e.g., "assets/...") - add ../ for prefecture subdirectory
+    return '../' + imagePath;
+}
+
+/**
  * Render Interviews
  */
 function renderInterviews() {
@@ -330,11 +352,13 @@ function renderInterviews() {
         const categoryDisplay = typeof CategoryManager !== 'undefined'
             ? CategoryManager.normalizeToName('interview', interview.category)
             : interview.category;
+        // Fix image path for prefecture subdirectory
+        const imageSrc = fixImagePath(interview.image);
         return `
         <article class="article-card" data-category="${escapeHTML(interview.category)}">
             <a href="${interview.detailUrl}">
                 <div class="article-card-image">
-                    <img src="${interview.image}" alt="${escapeHTML(interview.title)}" loading="lazy">
+                    <img src="${imageSrc}" alt="${escapeHTML(interview.title)}" loading="lazy">
                 </div>
                 <div class="article-card-content">
                     <span class="article-card-category">${escapeHTML(categoryDisplay)}</span>
@@ -364,11 +388,13 @@ function renderCompanies() {
         const industryDisplay = typeof CategoryManager !== 'undefined'
             ? CategoryManager.normalizeToName('company', company.industry)
             : company.industry;
+        // Fix image path for prefecture subdirectory
+        const imageSrc = fixImagePath(company.image);
         return `
         <article class="article-card" data-industry="${escapeHTML(company.industry)}">
             <a href="${company.detailUrl}">
                 <div class="article-card-image">
-                    <img src="${company.image}" alt="${escapeHTML(company.title)}" loading="lazy">
+                    <img src="${imageSrc}" alt="${escapeHTML(company.title)}" loading="lazy">
                 </div>
                 <div class="article-card-content">
                     <span class="article-card-category">${escapeHTML(industryDisplay)}</span>
