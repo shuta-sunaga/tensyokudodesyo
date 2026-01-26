@@ -2866,6 +2866,12 @@ body.menu-open {
     stroke: var(--color-text-muted);
 }
 
+.salary-icon {
+    font-weight: 700;
+    font-size: 0.9em;
+    color: var(--color-text-muted);
+}
+
 .job-listing-tags {
     display: flex;
     flex-wrap: wrap;
