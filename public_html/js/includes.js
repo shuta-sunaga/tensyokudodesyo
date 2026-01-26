@@ -104,9 +104,11 @@
                         li.style.cssText = 'display: block; width: 100%;';
                     });
 
-                    // Style nav links
+                    // Style nav links (no hover animation)
                     nav.querySelectorAll('.nav-list a').forEach(a => {
-                        a.style.cssText = 'display: block; padding: 1rem 0; font-size: 1.125rem; color: #333; border-bottom: 1px solid #eee; text-decoration: none;';
+                        a.style.cssText = 'display: block; padding: 1rem 0; font-size: 1.125rem; color: #333; border-bottom: 1px solid #eee; text-decoration: none; position: relative;';
+                        // Remove any ::after pseudo-element effect by setting the link to have no relative positioning issues
+                        a.classList.add('no-underline-effect');
                     });
 
                     // Style mobile-menu-actions (positioned right after nav-list)
@@ -149,7 +151,10 @@
                         const navList = nav.querySelector('.nav-list');
                         if (navList) navList.style.cssText = '';
                         nav.querySelectorAll('.nav-list li').forEach(li => li.style.cssText = '');
-                        nav.querySelectorAll('.nav-list a').forEach(a => a.style.cssText = '');
+                        nav.querySelectorAll('.nav-list a').forEach(a => {
+                            a.style.cssText = '';
+                            a.classList.remove('no-underline-effect');
+                        });
                         const menuActions = nav.querySelector('.mobile-menu-actions');
                         if (menuActions) {
                             menuActions.style.cssText = '';
