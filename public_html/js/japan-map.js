@@ -171,36 +171,42 @@ function setupMapInteraction() {
             shape.style.cursor = 'pointer';
         });
 
-        // Hover events - only update when different region
-        group.addEventListener('mouseenter', (e) => {
-            // Only update if different region
-            if (currentTooltipRegion !== regionId) {
-                // Reset all regions to normal color first
-                allGroups.forEach((items, rId) => {
-                    items.forEach(({ shapes, colors }) => {
-                        shapes.forEach(shape => {
-                            shape.style.fill = colors.fill;
-                            shape.style.strokeWidth = '0.5';
-                        });
+        // Handle region selection (click/touch only)
+        function selectRegion(e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            // Reset all regions to normal color first
+            allGroups.forEach((items, rId) => {
+                items.forEach(({ shapes, colors }) => {
+                    shapes.forEach(shape => {
+                        shape.style.fill = colors.fill;
+                        shape.style.strokeWidth = '0.5';
                     });
                 });
+            });
 
-                // Highlight all prefectures in this region
-                const regionItems = allGroups.get(regionId);
-                if (regionItems) {
-                    regionItems.forEach(({ shapes, colors }) => {
-                        shapes.forEach(shape => {
-                            shape.style.fill = colors.hoverFill;
-                            shape.style.strokeWidth = '1';
-                        });
+            // Highlight all prefectures in this region
+            const regionItems = allGroups.get(regionId);
+            if (regionItems) {
+                regionItems.forEach(({ shapes, colors }) => {
+                    shapes.forEach(shape => {
+                        shape.style.fill = colors.hoverFill;
+                        shape.style.strokeWidth = '1';
                     });
-                }
-
-                // Update tooltip
-                currentTooltipRegion = regionId;
-                showRegionTooltip(prefInfo.region, tooltip);
+                });
             }
-        });
+
+            // Update tooltip
+            currentTooltipRegion = regionId;
+            showRegionTooltip(prefInfo.region, tooltip);
+        }
+
+        // Click event for desktop
+        group.addEventListener('click', selectRegion);
+
+        // Touch events for mobile
+        group.addEventListener('touchend', selectRegion);
     });
 
     // Show initial tooltip message
@@ -213,7 +219,7 @@ function setupMapInteraction() {
 function showInitialTooltip(tooltip) {
     tooltip.innerHTML = `
         <div class="tooltip-region">地域を選択</div>
-        <div class="tooltip-message">地図上の都道府県にカーソルを合わせると、その地域の情報が表示されます</div>
+        <div class="tooltip-message">地図上の都道府県をクリック（タップ）すると、その地域の情報が表示されます</div>
     `;
     tooltip.classList.add('visible');
 }
