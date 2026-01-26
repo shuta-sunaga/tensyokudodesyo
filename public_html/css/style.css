@@ -284,6 +284,10 @@ ul, ol {
     border: none;
     cursor: pointer;
     padding: 8px;
+    position: relative;
+    z-index: 1001;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
 }
 
 .mobile-menu-btn span {
