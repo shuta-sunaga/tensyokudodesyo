@@ -869,7 +869,6 @@ function createJobCardHTML(job) {
                         ${escapeHTML(job.prefecture)}${escapeHTML(job.city)}
                     </span>
                     <span class="job-listing-salary">
-                        <span class="salary-icon">¥</span>
                         ${escapeHTML(job.salary)}
                     </span>
                 </div>
