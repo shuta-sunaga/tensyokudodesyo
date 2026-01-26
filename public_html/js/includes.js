@@ -122,6 +122,11 @@
                         const lineBtn = menuActions.querySelector('.btn-line');
                         if (lineBtn) {
                             lineBtn.style.cssText += 'background: #06C755; color: #fff; border: none;';
+                            // Ensure LINE icon is visible
+                            const lineImg = lineBtn.querySelector('img');
+                            if (lineImg) {
+                                lineImg.style.cssText = 'display: inline-block; width: 24px; height: 24px;';
+                            }
                         }
 
                         const outlineBtn = menuActions.querySelector('.btn-outline');
@@ -134,17 +139,24 @@
                     spans[1].style.opacity = '';
                     spans[2].style.transform = '';
 
-                    // Reset all styles
-                    nav.style.cssText = '';
-                    const navList = nav.querySelector('.nav-list');
-                    if (navList) navList.style.cssText = '';
-                    nav.querySelectorAll('.nav-list li').forEach(li => li.style.cssText = '');
-                    nav.querySelectorAll('.nav-list a').forEach(a => a.style.cssText = '');
-                    const menuActions = nav.querySelector('.mobile-menu-actions');
-                    if (menuActions) {
-                        menuActions.style.cssText = '';
-                        menuActions.querySelectorAll('.btn').forEach(btn => btn.style.cssText = '');
-                    }
+                    // Close animation
+                    nav.style.animation = 'slideOutMenu 0.25s ease-in forwards';
+
+                    // Reset all styles after animation completes
+                    setTimeout(() => {
+                        nav.style.cssText = '';
+                        const navList = nav.querySelector('.nav-list');
+                        if (navList) navList.style.cssText = '';
+                        nav.querySelectorAll('.nav-list li').forEach(li => li.style.cssText = '');
+                        nav.querySelectorAll('.nav-list a').forEach(a => a.style.cssText = '');
+                        const menuActions = nav.querySelector('.mobile-menu-actions');
+                        if (menuActions) {
+                            menuActions.style.cssText = '';
+                            menuActions.querySelectorAll('.btn').forEach(btn => btn.style.cssText = '');
+                            const lineImg = menuActions.querySelector('.btn-line img');
+                            if (lineImg) lineImg.style.cssText = '';
+                        }
+                    }, 250);
                 }
             }
 
