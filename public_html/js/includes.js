@@ -71,14 +71,25 @@
         const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
         const nav = document.querySelector('.nav');
 
+        console.log('initMobileMenuAfterLoad called');
+        console.log('mobileMenuBtn:', mobileMenuBtn);
+        console.log('nav:', nav);
+
         if (mobileMenuBtn && nav) {
-            mobileMenuBtn.addEventListener('click', function() {
-                this.classList.toggle('active');
+            console.log('Adding event listeners to mobile menu button');
+
+            // Toggle menu function
+            function toggleMenu(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                console.log('Mobile menu button triggered!', e.type);
+
+                mobileMenuBtn.classList.toggle('active');
                 nav.classList.toggle('active');
                 document.body.classList.toggle('menu-open');
 
                 // Hamburger to X animation
-                const spans = this.querySelectorAll('span');
+                const spans = mobileMenuBtn.querySelectorAll('span');
                 if (nav.classList.contains('active')) {
                     spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
                     spans[1].style.opacity = '0';
@@ -88,6 +99,26 @@
                     spans[1].style.opacity = '';
                     spans[2].style.transform = '';
                 }
+            }
+
+            // Prevent double-firing on touch devices
+            let touchHandled = false;
+
+            mobileMenuBtn.addEventListener('touchend', function(e) {
+                e.preventDefault();
+                touchHandled = true;
+                toggleMenu(e);
+                // Reset flag after a short delay
+                setTimeout(() => { touchHandled = false; }, 300);
+            });
+
+            mobileMenuBtn.addEventListener('click', function(e) {
+                // Skip if already handled by touch
+                if (touchHandled) {
+                    console.log('Click skipped (handled by touch)');
+                    return;
+                }
+                toggleMenu(e);
             });
 
             // Close menu when clicking on nav links
