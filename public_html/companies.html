@@ -48,7 +48,7 @@
     <!-- Filter Section -->
     <section class="column-filter">
         <div class="container">
-            <div class="filter-controls">
+            <div class="filter-controls filter-controls-row">
                 <div class="filter-select-wrapper">
                     <label for="prefectureFilter">エリア</label>
                     <select id="prefectureFilter" class="filter-select">
@@ -57,9 +57,12 @@
                         <option value="静岡県">静岡県</option>
                     </select>
                 </div>
-                <div class="filter-tabs" id="industryTabs">
-                    <!-- 業界タブは categories.js により動的生成 -->
-                    <button class="filter-tab active" data-industry="">すべて</button>
+                <div class="filter-select-wrapper">
+                    <label for="industryFilter">業界</label>
+                    <select id="industryFilter" class="filter-select">
+                        <!-- 業界は categories.js により動的生成 -->
+                        <option value="">すべて</option>
+                    </select>
                 </div>
             </div>
         </div>

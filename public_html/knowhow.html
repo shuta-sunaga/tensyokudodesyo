@@ -48,9 +48,14 @@
     <!-- Category Filter -->
     <section class="column-filter">
         <div class="container">
-            <div class="filter-tabs" id="knowhowTabs">
-                <!-- カテゴリタブは categories.js により動的生成 -->
-                <button class="filter-tab active" data-knowhow="">すべて</button>
+            <div class="filter-controls filter-controls-row">
+                <div class="filter-select-wrapper">
+                    <label for="knowhowFilter">カテゴリ</label>
+                    <select id="knowhowFilter" class="filter-select">
+                        <!-- カテゴリは categories.js により動的生成 -->
+                        <option value="">すべて</option>
+                    </select>
+                </div>
             </div>
         </div>
     </section>

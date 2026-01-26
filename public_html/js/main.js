@@ -1130,9 +1130,9 @@ async function initInterviewPage() {
     const interviewGrid = document.getElementById('interviewGrid');
     if (!interviewGrid) return;
 
-    // Generate category filter tabs dynamically
+    // Generate category filter dropdown dynamically
     if (typeof CategoryManager !== 'undefined') {
-        CategoryManager.renderFilterTabs('categoryTabs', 'interview', 'category', 'すべて');
+        CategoryManager.renderFilterSelect('categoryFilter', 'interview', 'すべて');
     }
 
     try {
@@ -1177,23 +1177,21 @@ function setupInterviewFilters() {
         });
     }
 
-    // Category filter tabs - use CategoryManager if available
+    // Category filter dropdown - use CategoryManager if available
     if (typeof CategoryManager !== 'undefined') {
-        CategoryManager.setupFilterHandlers('categoryTabs', function(categoryId) {
+        CategoryManager.setupFilterSelectHandler('categoryFilter', function(categoryId) {
             interviewFilters.category = categoryId;
             renderInterviews();
         });
     } else {
-        // Fallback for legacy hardcoded tabs
-        const categoryTabs = document.querySelectorAll('#categoryTabs .filter-tab');
-        categoryTabs.forEach(tab => {
-            tab.addEventListener('click', function() {
-                categoryTabs.forEach(t => t.classList.remove('active'));
-                this.classList.add('active');
-                interviewFilters.category = this.dataset.category || '';
+        // Fallback for legacy dropdown
+        const categorySelect = document.getElementById('categoryFilter');
+        if (categorySelect) {
+            categorySelect.addEventListener('change', function() {
+                interviewFilters.category = this.value;
                 renderInterviews();
             });
-        });
+        }
     }
 }
 
@@ -1266,9 +1264,9 @@ async function initCompanyPage() {
     const companyGrid = document.getElementById('companyGrid');
     if (!companyGrid) return;
 
-    // Generate industry filter tabs dynamically
+    // Generate industry filter dropdown dynamically
     if (typeof CategoryManager !== 'undefined') {
-        CategoryManager.renderFilterTabs('industryTabs', 'company', 'industry', 'すべて');
+        CategoryManager.renderFilterSelect('industryFilter', 'company', 'すべて');
     }
 
     try {
@@ -1312,23 +1310,21 @@ function setupCompanyFilters() {
         });
     }
 
-    // Industry filter tabs - use CategoryManager if available
+    // Industry filter dropdown - use CategoryManager if available
     if (typeof CategoryManager !== 'undefined') {
-        CategoryManager.setupFilterHandlers('industryTabs', function(industryId) {
+        CategoryManager.setupFilterSelectHandler('industryFilter', function(industryId) {
             companyFilters.industry = industryId;
             renderCompanies();
         });
     } else {
-        // Fallback for legacy hardcoded tabs
-        const industryTabs = document.querySelectorAll('#industryTabs .filter-tab');
-        industryTabs.forEach(tab => {
-            tab.addEventListener('click', function() {
-                industryTabs.forEach(t => t.classList.remove('active'));
-                this.classList.add('active');
-                companyFilters.industry = this.dataset.industry || '';
+        // Fallback for legacy dropdown
+        const industrySelect = document.getElementById('industryFilter');
+        if (industrySelect) {
+            industrySelect.addEventListener('change', function() {
+                companyFilters.industry = this.value;
                 renderCompanies();
             });
-        });
+        }
     }
 }
 
@@ -1530,18 +1526,22 @@ async function initKnowhowPage() {
     const articleGrid = document.getElementById('articleGrid');
     if (!articleGrid) return;
 
-    // Generate knowhow category filter tabs dynamically
-    const filterTabsContainer = document.querySelector('.column-filter .filter-tabs');
-    if (filterTabsContainer && typeof CategoryManager !== 'undefined') {
-        // Add an ID to the container for easier reference
-        filterTabsContainer.id = 'knowhowTabs';
-        CategoryManager.renderFilterTabs('knowhowTabs', 'knowhow', 'knowhow', 'すべて');
-
-        // Setup filter handlers
-        CategoryManager.setupFilterHandlers('knowhowTabs', function(categoryId) {
+    // Generate knowhow category filter dropdown dynamically
+    if (typeof CategoryManager !== 'undefined') {
+        CategoryManager.renderFilterSelect('knowhowFilter', 'knowhow', 'すべて');
+        CategoryManager.setupFilterSelectHandler('knowhowFilter', function(categoryId) {
             knowhowFilter = categoryId;
             renderKnowhowArticles();
         });
+    } else {
+        // Fallback for legacy dropdown
+        const knowhowSelect = document.getElementById('knowhowFilter');
+        if (knowhowSelect) {
+            knowhowSelect.addEventListener('change', function() {
+                knowhowFilter = this.value;
+                renderKnowhowArticles();
+            });
+        }
     }
 
     // Load knowhow articles from JSON
