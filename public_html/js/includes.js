@@ -94,10 +94,36 @@
                     spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
                     spans[1].style.opacity = '0';
                     spans[2].style.transform = 'rotate(-45deg) translate(7px, -6px)';
+
+                    // Force nav visibility with inline styles
+                    nav.style.display = 'flex';
+                    nav.style.position = 'fixed';
+                    nav.style.top = '70px';
+                    nav.style.left = '0';
+                    nav.style.right = '0';
+                    nav.style.bottom = '0';
+                    nav.style.background = '#ffffff';
+                    nav.style.flexDirection = 'column';
+                    nav.style.padding = '1rem';
+                    nav.style.zIndex = '9999';
+                    nav.style.overflowY = 'auto';
+                    console.log('Nav styles applied:', nav.style.cssText);
                 } else {
                     spans[0].style.transform = '';
                     spans[1].style.opacity = '';
                     spans[2].style.transform = '';
+
+                    // Reset nav styles
+                    nav.style.display = '';
+                    nav.style.position = '';
+                    nav.style.top = '';
+                    nav.style.left = '';
+                    nav.style.right = '';
+                    nav.style.bottom = '';
+                    nav.style.background = '';
+                    nav.style.flexDirection = '';
+                    nav.style.padding = '';
+                    nav.style.zIndex = '';
                 }
             }
 
