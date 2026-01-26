@@ -3701,6 +3701,11 @@ body.menu-open {
         padding: var(--spacing-lg) 0 var(--spacing-2xl);
     }
 
+    /* 求人詳細ページのパンくずを非表示 */
+    .page-header .breadcrumb {
+        display: none;
+    }
+
     .job-detail-title {
         font-size: 1.375rem;
     }
