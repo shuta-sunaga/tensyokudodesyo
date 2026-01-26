@@ -48,15 +48,8 @@ document.addEventListener('DOMContentLoaded', function() {
     } else if (CategoryManager.checkLoaded()) {
         // Categories already loaded (event already fired)
         initCategoryModules();
-    } else {
-        // Timeout fallback: initialize even if categories fail to load
-        setTimeout(function() {
-            if (!categoryModulesInitialized) {
-                console.warn('Categories loading timeout - initializing without categories');
-                initCategoryModules();
-            }
-        }, 3000);
     }
+    // Note: Removed 3s timeout fallback - always wait for categories to load
 });
 
 /**
