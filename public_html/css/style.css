@@ -1749,6 +1749,32 @@ body.menu-open {
     align-items: center;
 }
 
+/* PC: 横並び、SP: 縦並び */
+.filter-controls-row {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--spacing-lg);
+}
+
+@media (max-width: 768px) {
+    .filter-controls-row {
+        flex-direction: column;
+        align-items: stretch;
+        gap: var(--spacing-md);
+    }
+
+    .filter-controls-row .filter-select-wrapper {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.5rem;
+    }
+
+    .filter-controls-row .filter-select {
+        width: 100%;
+    }
+}
+
 .filter-select-wrapper {
     display: flex;
     align-items: center;
@@ -1758,6 +1784,7 @@ body.menu-open {
 .filter-select-wrapper label {
     font-weight: 500;
     color: var(--color-text);
+    white-space: nowrap;
 }
 
 .filter-select {
@@ -1771,6 +1798,7 @@ body.menu-open {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23666' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: right 0.75rem center;
+    min-width: 150px;
 }
 
 .filter-select:focus {

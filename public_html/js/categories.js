@@ -185,6 +185,53 @@ const CategoryManager = (function() {
     }
 
     /**
+     * Generate filter select (dropdown) HTML
+     * @param {string} type - Category type (interview, company, knowhow)
+     * @param {string} selectId - ID for the select element
+     * @param {string} allLabel - Label for "all" option
+     * @returns {string} HTML string
+     */
+    function generateFilterSelectHTML(type, selectId, allLabel = 'すべて') {
+        const cats = getAll(type);
+        let html = `<option value="">${allLabel}</option>`;
+
+        cats.forEach(cat => {
+            html += `<option value="${cat.id}">${cat.name}</option>`;
+        });
+
+        return html;
+    }
+
+    /**
+     * Render filter select (dropdown) into a container
+     * @param {string} selectId - ID of the select element
+     * @param {string} type - Category type
+     * @param {string} allLabel - Label for "all" option
+     */
+    function renderFilterSelect(selectId, type, allLabel = 'すべて') {
+        const select = document.getElementById(selectId);
+        if (!select) return;
+
+        select.innerHTML = generateFilterSelectHTML(type, selectId, allLabel);
+    }
+
+    /**
+     * Setup filter select change handler
+     * @param {string} selectId - ID of the select element
+     * @param {Function} onFilter - Callback when filter changes (receives category ID)
+     */
+    function setupFilterSelectHandler(selectId, onFilter) {
+        const select = document.getElementById(selectId);
+        if (!select) return;
+
+        select.addEventListener('change', function() {
+            if (typeof onFilter === 'function') {
+                onFilter(this.value);
+            }
+        });
+    }
+
+    /**
      * Map legacy category name to ID (for backward compatibility)
      * @param {string} type - Category type
      * @param {string} value - Category name or ID
@@ -224,6 +271,9 @@ const CategoryManager = (function() {
         generateFilterTabsHTML,
         renderFilterTabs,
         setupFilterHandlers,
+        generateFilterSelectHTML,
+        renderFilterSelect,
+        setupFilterSelectHandler,
         normalizeToId,
         normalizeToName
     };
