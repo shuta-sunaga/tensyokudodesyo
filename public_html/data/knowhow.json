@@ -1,0 +1,58 @@
+{
+  "articles": [
+    {
+      "id": 1,
+      "title": "面接で聞かれる定番の質問と回答例",
+      "category": "kh01",
+      "excerpt": "面接官がよく聞く質問とその意図、効果的な回答例を紹介します。",
+      "image": "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=400&h=300&fit=crop",
+      "postDate": "2026-01-20",
+      "detailUrl": "#"
+    },
+    {
+      "id": 2,
+      "title": "採用担当者に響く履歴書の書き方",
+      "category": "kh02",
+      "excerpt": "書類選考を通過するための履歴書作成のポイントを解説します。",
+      "image": "https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=400&h=300&fit=crop",
+      "postDate": "2026-01-18",
+      "detailUrl": "#"
+    },
+    {
+      "id": 3,
+      "title": "自己分析の3つのステップ",
+      "category": "kh03",
+      "excerpt": "転職成功の鍵となる自己分析の方法を具体的に解説します。",
+      "image": "https://images.unsplash.com/photo-1434626881859-194d67b2b86f?w=400&h=300&fit=crop",
+      "postDate": "2026-01-15",
+      "detailUrl": "#"
+    },
+    {
+      "id": 4,
+      "title": "面接当日のマナーと身だしなみ",
+      "category": "kh01",
+      "excerpt": "面接で好印象を与えるための服装やマナーについて紹介します。",
+      "image": "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
+      "postDate": "2026-01-12",
+      "detailUrl": "#"
+    },
+    {
+      "id": 5,
+      "title": "職務経歴書で実績をアピールする方法",
+      "category": "kh02",
+      "excerpt": "数字で実績を示し、採用担当者に響く職務経歴書の書き方を解説。",
+      "image": "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=400&h=300&fit=crop",
+      "postDate": "2026-01-10",
+      "detailUrl": "#"
+    },
+    {
+      "id": 6,
+      "title": "転職先の業界研究の進め方",
+      "category": "kh04",
+      "excerpt": "志望業界の情報収集方法と、面接で活かすためのポイントを紹介。",
+      "image": "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=400&h=300&fit=crop",
+      "postDate": "2026-01-08",
+      "detailUrl": "#"
+    }
+  ]
+}

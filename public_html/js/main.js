@@ -1487,9 +1487,10 @@ async function initHomePage() {
 /**
  * Knowhow Page Functionality
  */
+let allKnowhowArticles = [];
 let knowhowFilter = '';
 
-function initKnowhowPage() {
+async function initKnowhowPage() {
     const articleGrid = document.getElementById('articleGrid');
     if (!articleGrid) return;
 
@@ -1503,32 +1504,68 @@ function initKnowhowPage() {
         // Setup filter handlers
         CategoryManager.setupFilterHandlers('knowhowTabs', function(categoryId) {
             knowhowFilter = categoryId;
-            filterKnowhowArticles();
+            renderKnowhowArticles();
         });
-    } else {
-        // Fallback: use existing initFilterTabs for legacy hardcoded tabs
-        initFilterTabs();
+    }
+
+    // Load knowhow articles from JSON
+    try {
+        const response = await fetch('./data/knowhow.json');
+        if (!response.ok) throw new Error('HTTP ' + response.status);
+        const data = await response.json();
+        allKnowhowArticles = data.articles || [];
+
+        // Sort by date (newest first)
+        allKnowhowArticles.sort((a, b) => new Date(b.postDate) - new Date(a.postDate));
+
+        // Render articles
+        renderKnowhowArticles();
+    } catch (error) {
+        console.error('Error loading knowhow articles:', error);
+        articleGrid.innerHTML = '<p style="grid-column:1/-1;text-align:center;padding:2rem;color:#666;">記事を読み込めませんでした</p>';
     }
 }
 
-function filterKnowhowArticles() {
-    const articleCards = document.querySelectorAll('#articleGrid .article-card');
+function renderKnowhowArticles() {
+    const container = document.getElementById('articleGrid');
+    if (!container) return;
 
-    articleCards.forEach(card => {
-        if (!knowhowFilter) {
-            card.style.display = '';
-        } else {
-            const cardCategory = card.dataset.category;
-            // Support both ID and name matching
-            const cardCategoryId = typeof CategoryManager !== 'undefined'
-                ? CategoryManager.normalizeToId('knowhow', cardCategory)
-                : cardCategory;
+    let filtered = allKnowhowArticles;
 
-            if (cardCategoryId === knowhowFilter || cardCategory === knowhowFilter) {
-                card.style.display = '';
-            } else {
-                card.style.display = 'none';
-            }
-        }
-    });
+    // Filter by category
+    if (knowhowFilter) {
+        filtered = filtered.filter(article => {
+            const articleCategoryId = typeof CategoryManager !== 'undefined'
+                ? CategoryManager.normalizeToId('knowhow', article.category)
+                : article.category;
+            return articleCategoryId === knowhowFilter || article.category === knowhowFilter;
+        });
+    }
+
+    if (filtered.length === 0) {
+        container.innerHTML = '<p style="grid-column:1/-1;text-align:center;padding:2rem;color:#666;">条件に合う記事がありません</p>';
+        return;
+    }
+
+    container.innerHTML = filtered.map(article => {
+        // Get display name for category
+        const categoryDisplay = typeof CategoryManager !== 'undefined'
+            ? CategoryManager.normalizeToName('knowhow', article.category)
+            : article.category;
+
+        return `
+        <article class="article-card" data-category="${escapeHTML(article.category)}">
+            <a href="${article.detailUrl}">
+                <div class="article-card-image">
+                    <img src="${article.image}" alt="${escapeHTML(article.title)}" loading="lazy">
+                </div>
+                <div class="article-card-content">
+                    <span class="article-card-category">${escapeHTML(categoryDisplay)}</span>
+                    <h3 class="article-card-title">${escapeHTML(article.title)}</h3>
+                    <p class="article-card-excerpt">${escapeHTML(article.excerpt)}</p>
+                </div>
+            </a>
+        </article>
+    `;
+    }).join('');
 }
