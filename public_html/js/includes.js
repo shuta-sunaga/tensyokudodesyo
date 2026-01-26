@@ -76,6 +76,33 @@
                 this.classList.toggle('active');
                 nav.classList.toggle('active');
                 document.body.classList.toggle('menu-open');
+
+                // Hamburger to X animation
+                const spans = this.querySelectorAll('span');
+                if (nav.classList.contains('active')) {
+                    spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+                    spans[1].style.opacity = '0';
+                    spans[2].style.transform = 'rotate(-45deg) translate(7px, -6px)';
+                } else {
+                    spans[0].style.transform = '';
+                    spans[1].style.opacity = '';
+                    spans[2].style.transform = '';
+                }
+            });
+
+            // Close menu when clicking on nav links
+            const navLinks = nav.querySelectorAll('a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    nav.classList.remove('active');
+                    mobileMenuBtn.classList.remove('active');
+                    document.body.classList.remove('menu-open');
+
+                    const spans = mobileMenuBtn.querySelectorAll('span');
+                    spans[0].style.transform = '';
+                    spans[1].style.opacity = '';
+                    spans[2].style.transform = '';
+                });
             });
         }
     }
