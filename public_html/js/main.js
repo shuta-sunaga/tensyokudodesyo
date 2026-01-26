@@ -1396,14 +1396,15 @@ function updateCompanyURL() {
 }
 
 /**
- * Home Page - Load latest interviews and companies
+ * Home Page - Load latest interviews, companies, and knowhow
  */
 async function initHomePage() {
     const homeInterviewsContainer = document.getElementById('homeInterviewsContainer');
     const homeCompaniesContainer = document.getElementById('homeCompaniesContainer');
+    const homeKnowhowContainer = document.getElementById('homeKnowhowContainer');
 
     // Skip if not on home page
-    if (!homeInterviewsContainer && !homeCompaniesContainer) return;
+    if (!homeInterviewsContainer && !homeCompaniesContainer && !homeKnowhowContainer) return;
 
     // Load interviews for home page
     if (homeInterviewsContainer) {
@@ -1480,6 +1481,45 @@ async function initHomePage() {
         } catch (error) {
             console.error('Error loading home companies:', error);
             homeCompaniesContainer.innerHTML = '<p style="grid-column:1/-1;text-align:center;padding:2rem;color:#666;">読み込みに失敗しました</p>';
+        }
+    }
+
+    // Load knowhow for home page
+    if (homeKnowhowContainer) {
+        try {
+            const response = await fetch('./data/knowhow.json');
+            if (!response.ok) throw new Error('HTTP ' + response.status);
+            const data = await response.json();
+            const articles = data.articles || [];
+
+            // Sort by date and get latest 3
+            const latestArticles = [...articles]
+                .sort((a, b) => new Date(b.postDate) - new Date(a.postDate))
+                .slice(0, 3);
+
+            homeKnowhowContainer.innerHTML = latestArticles.map(article => {
+                // Get display name for category
+                const categoryDisplay = typeof CategoryManager !== 'undefined'
+                    ? CategoryManager.normalizeToName('knowhow', article.category)
+                    : article.category;
+                return `
+                <article class="article-card">
+                    <a href="${article.detailUrl}">
+                        <div class="article-card-image">
+                            <img src="${article.image}" alt="${escapeHTML(article.title)}" loading="lazy">
+                        </div>
+                        <div class="article-card-content">
+                            <span class="article-card-category">${escapeHTML(categoryDisplay)}</span>
+                            <h3 class="article-card-title">${escapeHTML(article.title)}</h3>
+                            <p class="article-card-excerpt">${escapeHTML(article.excerpt)}</p>
+                        </div>
+                    </a>
+                </article>
+            `;
+            }).join('');
+        } catch (error) {
+            console.error('Error loading home knowhow:', error);
+            homeKnowhowContainer.innerHTML = '<p style="grid-column:1/-1;text-align:center;padding:2rem;color:#666;">読み込みに失敗しました</p>';
         }
     }
 }
