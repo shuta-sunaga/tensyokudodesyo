@@ -90,8 +90,8 @@
                     spans[1].style.opacity = '0';
                     spans[2].style.transform = 'rotate(-45deg) translate(7px, -6px)';
 
-                    // Apply nav styles
-                    nav.style.cssText = 'display: flex; position: fixed; top: 70px; left: 0; right: 0; height: calc(100dvh - 70px); background: #ffffff; flex-direction: column; padding: 1.5rem; z-index: 9999; overflow-y: auto; box-shadow: 0 4px 20px rgba(0,0,0,0.15);';
+                    // Apply nav styles with animation and semi-transparent background
+                    nav.style.cssText = 'display: flex; position: fixed; top: 70px; left: 0; right: 0; height: calc(100dvh - 70px); background: rgba(255, 255, 255, 0.97); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); flex-direction: column; padding: 1.5rem; z-index: 9999; overflow-y: auto; box-shadow: 0 4px 20px rgba(0,0,0,0.15); animation: slideInMenu 0.3s ease-out;';
 
                     // Style nav-list
                     const navList = nav.querySelector('.nav-list');
@@ -109,14 +109,14 @@
                         a.style.cssText = 'display: block; padding: 1rem 0; font-size: 1.125rem; color: #333; border-bottom: 1px solid #eee; text-decoration: none;';
                     });
 
-                    // Style mobile-menu-actions
+                    // Style mobile-menu-actions (positioned right after nav-list)
                     const menuActions = nav.querySelector('.mobile-menu-actions');
                     if (menuActions) {
-                        menuActions.style.cssText = 'display: flex; flex-direction: column; gap: 0.75rem; margin-top: auto; padding-top: 1.5rem;';
+                        menuActions.style.cssText = 'display: flex; flex-direction: column; gap: 0.75rem; margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid #eee;';
 
                         // Style buttons
                         menuActions.querySelectorAll('.btn').forEach(btn => {
-                            btn.style.cssText = 'display: flex; align-items: center; justify-content: center; padding: 1rem; font-size: 1rem; text-decoration: none; border-radius: 8px; width: 100%;';
+                            btn.style.cssText = 'display: flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 1rem; font-size: 1rem; text-decoration: none; border-radius: 8px; width: 100%;';
                         });
 
                         const lineBtn = menuActions.querySelector('.btn-line');
