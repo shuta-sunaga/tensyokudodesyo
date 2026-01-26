@@ -71,18 +71,11 @@
         const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
         const nav = document.querySelector('.nav');
 
-        console.log('initMobileMenuAfterLoad called');
-        console.log('mobileMenuBtn:', mobileMenuBtn);
-        console.log('nav:', nav);
-
         if (mobileMenuBtn && nav) {
-            console.log('Adding event listeners to mobile menu button');
-
             // Toggle menu function
             function toggleMenu(e) {
                 e.preventDefault();
                 e.stopPropagation();
-                console.log('Mobile menu button triggered!', e.type);
 
                 mobileMenuBtn.classList.toggle('active');
                 nav.classList.toggle('active');
@@ -90,40 +83,52 @@
 
                 // Hamburger to X animation
                 const spans = mobileMenuBtn.querySelectorAll('span');
-                if (nav.classList.contains('active')) {
+                const isOpen = nav.classList.contains('active');
+
+                if (isOpen) {
                     spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
                     spans[1].style.opacity = '0';
                     spans[2].style.transform = 'rotate(-45deg) translate(7px, -6px)';
 
-                    // Force nav visibility with inline styles
-                    nav.style.cssText = 'display: flex !important; position: fixed !important; top: 70px !important; left: 0 !important; right: 0 !important; height: calc(100vh - 70px) !important; height: calc(100dvh - 70px) !important; background: #ffffff !important; flex-direction: column !important; padding: 1rem !important; z-index: 9999 !important; overflow-y: auto !important; box-shadow: 0 4px 20px rgba(0,0,0,0.15) !important;';
+                    // Apply nav styles
+                    nav.style.cssText = 'display: flex; position: fixed; top: 70px; left: 0; right: 0; height: calc(100dvh - 70px); background: #ffffff; flex-direction: column; padding: 1.5rem; z-index: 9999; overflow-y: auto; box-shadow: 0 4px 20px rgba(0,0,0,0.15);';
 
-                    // Force nav-list visibility
+                    // Style nav-list
                     const navList = nav.querySelector('.nav-list');
                     if (navList) {
-                        navList.style.cssText = 'display: flex !important; flex-direction: column !important; width: 100% !important;';
-                        console.log('Nav-list styles applied:', navList.style.cssText);
+                        navList.style.cssText = 'display: flex; flex-direction: column; width: 100%; gap: 0;';
                     }
 
-                    // Force all li and a elements visible
-                    const navItems = nav.querySelectorAll('.nav-list li');
-                    navItems.forEach(li => {
-                        li.style.cssText = 'display: block !important; width: 100% !important;';
-                    });
-                    const navLinks = nav.querySelectorAll('.nav-list a');
-                    navLinks.forEach(a => {
-                        a.style.cssText = 'display: block !important; padding: 1rem 0 !important; font-size: 1.125rem !important; color: #333 !important;';
+                    // Style nav items
+                    nav.querySelectorAll('.nav-list li').forEach(li => {
+                        li.style.cssText = 'display: block; width: 100%;';
                     });
 
-                    // Force mobile-menu-actions visible
+                    // Style nav links
+                    nav.querySelectorAll('.nav-list a').forEach(a => {
+                        a.style.cssText = 'display: block; padding: 1rem 0; font-size: 1.125rem; color: #333; border-bottom: 1px solid #eee; text-decoration: none;';
+                    });
+
+                    // Style mobile-menu-actions
                     const menuActions = nav.querySelector('.mobile-menu-actions');
                     if (menuActions) {
-                        menuActions.style.cssText = 'display: flex !important; flex-direction: column !important; gap: 1rem !important; margin-top: auto !important; padding-top: 2rem !important;';
-                    }
+                        menuActions.style.cssText = 'display: flex; flex-direction: column; gap: 0.75rem; margin-top: auto; padding-top: 1.5rem;';
 
-                    console.log('Nav styles applied:', nav.style.cssText);
-                    console.log('Nav computed display:', window.getComputedStyle(nav).display);
-                    console.log('Nav bounding rect:', nav.getBoundingClientRect());
+                        // Style buttons
+                        menuActions.querySelectorAll('.btn').forEach(btn => {
+                            btn.style.cssText = 'display: flex; align-items: center; justify-content: center; padding: 1rem; font-size: 1rem; text-decoration: none; border-radius: 8px; width: 100%;';
+                        });
+
+                        const lineBtn = menuActions.querySelector('.btn-line');
+                        if (lineBtn) {
+                            lineBtn.style.cssText += 'background: #06C755; color: #fff; border: none;';
+                        }
+
+                        const outlineBtn = menuActions.querySelector('.btn-outline');
+                        if (outlineBtn) {
+                            outlineBtn.style.cssText += 'background: transparent; color: #2d8a39; border: 2px solid #2d8a39;';
+                        }
+                    }
                 } else {
                     spans[0].style.transform = '';
                     spans[1].style.opacity = '';
@@ -136,7 +141,10 @@
                     nav.querySelectorAll('.nav-list li').forEach(li => li.style.cssText = '');
                     nav.querySelectorAll('.nav-list a').forEach(a => a.style.cssText = '');
                     const menuActions = nav.querySelector('.mobile-menu-actions');
-                    if (menuActions) menuActions.style.cssText = '';
+                    if (menuActions) {
+                        menuActions.style.cssText = '';
+                        menuActions.querySelectorAll('.btn').forEach(btn => btn.style.cssText = '');
+                    }
                 }
             }
 
@@ -147,16 +155,11 @@
                 e.preventDefault();
                 touchHandled = true;
                 toggleMenu(e);
-                // Reset flag after a short delay
                 setTimeout(() => { touchHandled = false; }, 300);
             });
 
             mobileMenuBtn.addEventListener('click', function(e) {
-                // Skip if already handled by touch
-                if (touchHandled) {
-                    console.log('Click skipped (handled by touch)');
-                    return;
-                }
+                if (touchHandled) return;
                 toggleMenu(e);
             });
 
