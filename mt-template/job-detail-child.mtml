@@ -77,6 +77,35 @@
                     <p class="job-detail-salary"><$mt:EntryDatasalary encode_html="1"$></p>
                 </div>
 
+                <$mt:EntryDatarecommendPoint1 setvar="point1"$>
+                <$mt:EntryDatarecommendPoint2 setvar="point2"$>
+                <$mt:EntryDatarecommendPoint3 setvar="point3"$>
+                <mt:If name="point1">
+                <div class="job-detail-section job-recommend-section">
+                    <h2 class="job-detail-section-title">おすすめポイント</h2>
+                    <div class="recommend-points">
+                        <mt:If name="point1">
+                        <div class="recommend-point">
+                            <span class="recommend-point-number">1</span>
+                            <p class="recommend-point-text"><mt:Var name="point1" encode_html="1"></p>
+                        </div>
+                        </mt:If>
+                        <mt:If name="point2">
+                        <div class="recommend-point">
+                            <span class="recommend-point-number">2</span>
+                            <p class="recommend-point-text"><mt:Var name="point2" encode_html="1"></p>
+                        </div>
+                        </mt:If>
+                        <mt:If name="point3">
+                        <div class="recommend-point">
+                            <span class="recommend-point-number">3</span>
+                            <p class="recommend-point-text"><mt:Var name="point3" encode_html="1"></p>
+                        </div>
+                        </mt:If>
+                    </div>
+                </div>
+                </mt:If>
+
                 <div class="job-detail-section">
                     <h2 class="job-detail-section-title">募集要項</h2>
                     <table class="job-detail-table">
@@ -149,6 +178,13 @@
                                 <th>事業内容</th>
                                 <td><$mt:EntryDatabusinessContent nl2br="1"$></td>
                             </tr>
+                            <$mt:EntryDatacompanyUrl setvar="company_url"$>
+                            <mt:If name="company_url">
+                            <tr>
+                                <th>会社HP</th>
+                                <td><a href="<mt:Var name="company_url">" target="_blank" rel="noopener noreferrer"><mt:Var name="company_url"></a></td>
+                            </tr>
+                            </mt:If>
                         </tbody>
                     </table>
                 </div>
