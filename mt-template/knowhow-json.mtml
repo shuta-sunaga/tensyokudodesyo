@@ -20,11 +20,10 @@
     {
       "id": <mt:ContentID>,
       "title": "<mt:ContentField content_field="タイトル"><mt:ContentFieldValue encode_json="1"></mt:ContentField>",
-      "category": "<mt:ContentField content_field="カテゴリ"><mt:CategoryBasename></mt:ContentField>",
-      "excerpt": "<mt:ContentField content_field="概要"><mt:ContentFieldValue encode_json="1"></mt:ContentField>",
+      "category": "<mt:ContentField content_field="ノウハウカテゴリ"><mt:CategoryBasename></mt:ContentField>",
       "image": "<mt:ContentField content_field="サムネイル画像"><mt:AssetURL regex_replace="/^https?:\/\/[^\/]+\//",""></mt:ContentField>",
       "postDate": "<mt:ContentDate format="%Y-%m-%d">",
-      "detailUrl": "<mt:ContentField content_field="詳細ページURL"><mt:ContentFieldValue encode_json="1"></mt:ContentField>"
+      "detailUrl": "<mt:ContentField content_field="note リンク"><mt:ContentFieldValue encode_json="1"></mt:ContentField>"
     }<mt:Unless name="__last__">,</mt:Unless>
 </mt:Contents>
   ]
