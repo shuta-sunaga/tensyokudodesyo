@@ -76,6 +76,35 @@
                     <p class="job-detail-salary"><mt:ContentField content_field="salary" encode_html="1"></p>
                 </div>
 
+                <mt:SetVar name="point1"><mt:ContentField content_field="おすすめポイント1"></mt:SetVar>
+                <mt:SetVar name="point2"><mt:ContentField content_field="おすすめポイント2"></mt:SetVar>
+                <mt:SetVar name="point3"><mt:ContentField content_field="おすすめポイント3"></mt:SetVar>
+                <mt:If name="point1">
+                <div class="job-detail-section job-recommend-section">
+                    <h2 class="job-detail-section-title">おすすめポイント</h2>
+                    <div class="recommend-points">
+                        <mt:If name="point1">
+                        <div class="recommend-point">
+                            <span class="recommend-point-number">1</span>
+                            <p class="recommend-point-text"><mt:Var name="point1" encode_html="1"></p>
+                        </div>
+                        </mt:If>
+                        <mt:If name="point2">
+                        <div class="recommend-point">
+                            <span class="recommend-point-number">2</span>
+                            <p class="recommend-point-text"><mt:Var name="point2" encode_html="1"></p>
+                        </div>
+                        </mt:If>
+                        <mt:If name="point3">
+                        <div class="recommend-point">
+                            <span class="recommend-point-number">3</span>
+                            <p class="recommend-point-text"><mt:Var name="point3" encode_html="1"></p>
+                        </div>
+                        </mt:If>
+                    </div>
+                </div>
+                </mt:If>
+
                 <div class="job-detail-section">
                     <h2 class="job-detail-section-title">募集要項</h2>
                     <table class="job-detail-table">
@@ -148,6 +177,12 @@
                                 <th>事業内容</th>
                                 <td><mt:ContentField content_field="businessContent" encode_html="1"></td>
                             </tr>
+                            <mt:ContentField content_field="会社HP"><mt:If name="__value__">
+                            <tr>
+                                <th>会社HP</th>
+                                <td><a href="<mt:ContentFieldValue>" target="_blank" rel="noopener noreferrer"><mt:ContentFieldValue></a></td>
+                            </tr>
+                            </mt:If></mt:ContentField>
                         </tbody>
                     </table>
                 </div>

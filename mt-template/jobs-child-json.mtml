@@ -34,8 +34,12 @@
 | 代表者 | representative | テキスト |
 | 従業員数 | employees | テキスト |
 | 事業内容 | businessContent | テキストエリア |
+| 会社HP | companyUrl | URL |
 | 選考フロー | selectionProcess | 埋め込みオブジェクト |
 | 応募方法 | AppMethod | 埋め込みオブジェクト |
+| おすすめポイント1 | recommendPoint1 | テキスト |
+| おすすめポイント2 | recommendPoint2 | テキスト |
+| おすすめポイント3 | recommendPoint3 | テキスト |
 
 職種(category)のドロップダウン選択肢:
 sales,it,office,marketing,medical,creative,consulting,manufacturing
@@ -78,8 +82,12 @@ sales,it,office,marketing,medical,creative,consulting,manufacturing
         "representative": "<$mt:EntryDatarepresentative encode_json="1"$>",
         "employees": "<$mt:EntryDataemployees encode_json="1"$>",
         "businessContent": "<$mt:EntryDatabusinessContent encode_json="1"$>",
+        "companyUrl": "<$mt:EntryDatacompanyUrl encode_json="1"$>",
         "selectionProcess": "<$mt:EntryDataselectionProcess encode_json="1"$>",
-        "AppMethod": "<$mt:EntryDataAppMethod encode_json="1"$>"
+        "AppMethod": "<$mt:EntryDataAppMethod encode_json="1"$>",
+        "recommendPoint1": "<$mt:EntryDatarecommendPoint1 encode_json="1"$>",
+        "recommendPoint2": "<$mt:EntryDatarecommendPoint2 encode_json="1"$>",
+        "recommendPoint3": "<$mt:EntryDatarecommendPoint3 encode_json="1"$>"
       }
     }<mt:Unless name="__last__">,</mt:Unless>
 </mt:Entries>
