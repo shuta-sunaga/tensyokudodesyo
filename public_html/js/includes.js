@@ -96,34 +96,47 @@
                     spans[2].style.transform = 'rotate(-45deg) translate(7px, -6px)';
 
                     // Force nav visibility with inline styles
-                    nav.style.display = 'flex';
-                    nav.style.position = 'fixed';
-                    nav.style.top = '70px';
-                    nav.style.left = '0';
-                    nav.style.right = '0';
-                    nav.style.bottom = '0';
-                    nav.style.background = '#ffffff';
-                    nav.style.flexDirection = 'column';
-                    nav.style.padding = '1rem';
-                    nav.style.zIndex = '9999';
-                    nav.style.overflowY = 'auto';
+                    nav.style.cssText = 'display: flex !important; position: fixed !important; top: 70px !important; left: 0 !important; right: 0 !important; bottom: 0 !important; background: #ffffff !important; flex-direction: column !important; padding: 1rem !important; z-index: 9999 !important; overflow-y: auto !important;';
+
+                    // Force nav-list visibility
+                    const navList = nav.querySelector('.nav-list');
+                    if (navList) {
+                        navList.style.cssText = 'display: flex !important; flex-direction: column !important; width: 100% !important;';
+                        console.log('Nav-list styles applied:', navList.style.cssText);
+                    }
+
+                    // Force all li and a elements visible
+                    const navItems = nav.querySelectorAll('.nav-list li');
+                    navItems.forEach(li => {
+                        li.style.cssText = 'display: block !important; width: 100% !important;';
+                    });
+                    const navLinks = nav.querySelectorAll('.nav-list a');
+                    navLinks.forEach(a => {
+                        a.style.cssText = 'display: block !important; padding: 1rem 0 !important; font-size: 1.125rem !important; color: #333 !important;';
+                    });
+
+                    // Force mobile-menu-actions visible
+                    const menuActions = nav.querySelector('.mobile-menu-actions');
+                    if (menuActions) {
+                        menuActions.style.cssText = 'display: flex !important; flex-direction: column !important; gap: 1rem !important; margin-top: auto !important; padding-top: 2rem !important;';
+                    }
+
                     console.log('Nav styles applied:', nav.style.cssText);
+                    console.log('Nav computed display:', window.getComputedStyle(nav).display);
+                    console.log('Nav bounding rect:', nav.getBoundingClientRect());
                 } else {
                     spans[0].style.transform = '';
                     spans[1].style.opacity = '';
                     spans[2].style.transform = '';
 
-                    // Reset nav styles
-                    nav.style.display = '';
-                    nav.style.position = '';
-                    nav.style.top = '';
-                    nav.style.left = '';
-                    nav.style.right = '';
-                    nav.style.bottom = '';
-                    nav.style.background = '';
-                    nav.style.flexDirection = '';
-                    nav.style.padding = '';
-                    nav.style.zIndex = '';
+                    // Reset all styles
+                    nav.style.cssText = '';
+                    const navList = nav.querySelector('.nav-list');
+                    if (navList) navList.style.cssText = '';
+                    nav.querySelectorAll('.nav-list li').forEach(li => li.style.cssText = '');
+                    nav.querySelectorAll('.nav-list a').forEach(a => a.style.cssText = '');
+                    const menuActions = nav.querySelector('.mobile-menu-actions');
+                    if (menuActions) menuActions.style.cssText = '';
                 }
             }
 
