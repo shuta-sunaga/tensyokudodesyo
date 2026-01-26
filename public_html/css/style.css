@@ -1134,8 +1134,16 @@ section {
     color: var(--color-text);
 }
 
-.nav.active .nav-list a::after {
-    display: none;
+.nav.active .nav-list a::after,
+.nav-list a.no-underline-effect::after {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+}
+
+.nav-list a.no-underline-effect:hover::after {
+    display: none !important;
+    width: 0 !important;
 }
 
 /* Mobile menu action buttons */
