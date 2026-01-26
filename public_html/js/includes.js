@@ -96,7 +96,7 @@
                     spans[2].style.transform = 'rotate(-45deg) translate(7px, -6px)';
 
                     // Force nav visibility with inline styles
-                    nav.style.cssText = 'display: flex !important; position: fixed !important; top: 70px !important; left: 0 !important; right: 0 !important; bottom: 0 !important; background: #ffffff !important; flex-direction: column !important; padding: 1rem !important; z-index: 9999 !important; overflow-y: auto !important;';
+                    nav.style.cssText = 'display: flex !important; position: fixed !important; top: 70px !important; left: 0 !important; right: 0 !important; height: calc(100vh - 70px) !important; height: calc(100dvh - 70px) !important; background: #ffffff !important; flex-direction: column !important; padding: 1rem !important; z-index: 9999 !important; overflow-y: auto !important; box-shadow: 0 4px 20px rgba(0,0,0,0.15) !important;';
 
                     // Force nav-list visibility
                     const navList = nav.querySelector('.nav-list');
