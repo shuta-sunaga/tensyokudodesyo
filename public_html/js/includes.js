@@ -121,11 +121,12 @@
 
                         const lineBtn = menuActions.querySelector('.btn-line');
                         if (lineBtn) {
-                            lineBtn.style.cssText += 'background: #06C755; color: #fff; border: none;';
-                            // Ensure LINE icon is visible
+                            // PC版と同じデザイン: 白背景+緑ボーダー
+                            lineBtn.style.cssText += 'background: #fff; color: #06C755; border: 2px solid #06C755;';
+                            // LINE icon with white background
                             const lineImg = lineBtn.querySelector('img');
                             if (lineImg) {
-                                lineImg.style.cssText = 'display: inline-block; width: 24px; height: 24px;';
+                                lineImg.style.cssText = 'display: inline-block; width: 24px; height: 24px; background: #fff; border-radius: 4px; padding: 2px;';
                             }
                         }
 
