@@ -1159,13 +1159,15 @@ section {
 }
 
 .nav.active .mobile-menu-actions .btn-line {
-    background: #06C755;
-    color: #fff;
-    border-color: #06C755;
+    background: #fff;
+    color: #06C755;
+    border: 2px solid #06C755;
 }
 
 .nav.active .mobile-menu-actions .btn-line img {
-    background: transparent;
+    background: #fff;
+    border-radius: 4px;
+    padding: 2px;
 }
 
 .nav.active .mobile-menu-actions .btn-outline {
