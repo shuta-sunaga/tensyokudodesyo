@@ -21,18 +21,19 @@
 | No | フィールド名 | フィールドID | フィールドタイプ | 必須 | 説明 |
 |----|------------|-------------|----------------|------|------|
 | 1 | タイトル | title | 単行テキスト | ○ | 記事タイトル（H1） |
-| 2 | スラッグ | slug | 単行テキスト | ○ | URLに使用（英数字・ハイフン） |
-| 3 | サムネイル画像 | thumbnail | アセット（画像） | ○ | アイキャッチ画像 |
-| 4 | カテゴリ | category | 選択 | ○ | 職種カテゴリ |
-| 5 | エリア | area | 選択 | ○ | 都道府県 |
-| 6 | 企業名 | company_name | 単行テキスト | ○ | 転職先企業名 |
-| 7 | 職種（前） | job_before | 単行テキスト | - | 転職前の職種 |
-| 8 | 職種（後） | job_after | 単行テキスト | - | 転職後の職種 |
-| 9 | 公開日 | publish_date | 日付 | ○ | 記事公開日 |
-| 10 | H2見出し | h2_title | 単行テキスト | ○ | メインセクション見出し |
-| 11 | H2サムネイル画像 | h2_thumbnail | アセット（画像） | - | H2見出し上の画像 |
-| 12 | 本文 | body | ブロックエディタ | ○ | 記事本文 |
-| 13 | メタディスクリプション | meta_description | 複数行テキスト | - | SEO用説明文（160文字以内） |
+| 2 | サムネイル画像 | thumbnail | アセット（画像） | ○ | アイキャッチ画像・H2セクション画像兼用 |
+| 3 | カテゴリ | category | 選択 | ○ | 職種カテゴリ |
+| 4 | エリア | area | 選択 | ○ | 都道府県 |
+| 5 | 企業名 | company_name | 単行テキスト | ○ | 転職先企業名 |
+| 6 | 職種（前） | job_before | 単行テキスト | - | 転職前の職種 |
+| 7 | 職種（後） | job_after | 単行テキスト | - | 転職後の職種 |
+| 8 | H2見出し | h2_title | 単行テキスト | ○ | メインセクション見出し |
+| 9 | 本文 | body | ブロックエディタ | ○ | 記事本文 |
+| 10 | メタディスクリプション | meta_description | 埋め込みテキスト | - | SEO用説明文（160文字以内） |
+
+※ URLにはコンテンツID（`<mt:ContentID>`）を自動使用するため、スラッグフィールドは不要
+※ 公開日はコンテンツデータの公開日（`<mt:ContentDate>`）を使用
+※ サムネイル画像はアイキャッチとH2セクションの両方で使用
 
 ---
 
@@ -49,17 +50,18 @@
 | No | フィールド名 | フィールドID | フィールドタイプ | 必須 | 説明 |
 |----|------------|-------------|----------------|------|------|
 | 1 | タイトル | title | 単行テキスト | ○ | 記事タイトル（H1） |
-| 2 | スラッグ | slug | 単行テキスト | ○ | URLに使用（英数字・ハイフン） |
-| 3 | サムネイル画像 | thumbnail | アセット（画像） | ○ | アイキャッチ画像 |
-| 4 | 業界 | industry | 選択 | ○ | 業界カテゴリ |
-| 5 | エリア | area | 選択 | ○ | 都道府県 |
-| 6 | 企業名 | company_name | 単行テキスト | ○ | 企業名 |
-| 7 | 従業員数 | employees | 単行テキスト | - | 会社規模 |
-| 8 | 公開日 | publish_date | 日付 | ○ | 記事公開日 |
-| 9 | H2見出し | h2_title | 単行テキスト | ○ | メインセクション見出し |
-| 10 | H2サムネイル画像 | h2_thumbnail | アセット（画像） | - | H2見出し上の画像 |
-| 11 | 本文 | body | ブロックエディタ | ○ | 記事本文 |
-| 12 | メタディスクリプション | meta_description | 複数行テキスト | - | SEO用説明文（160文字以内） |
+| 2 | サムネイル画像 | thumbnail | アセット（画像） | ○ | アイキャッチ画像・H2セクション画像兼用 |
+| 3 | 業界 | industry | 選択 | ○ | 業界カテゴリ |
+| 4 | エリア | area | 選択 | ○ | 都道府県 |
+| 5 | 企業名 | company_name | 単行テキスト | ○ | 企業名 |
+| 6 | 従業員数 | employees | 単行テキスト | - | 会社規模 |
+| 7 | H2見出し | h2_title | 単行テキスト | ○ | メインセクション見出し |
+| 8 | 本文 | body | ブロックエディタ | ○ | 記事本文 |
+| 9 | メタディスクリプション | meta_description | 埋め込みテキスト | - | SEO用説明文（160文字以内） |
+
+※ URLにはコンテンツID（`<mt:ContentID>`）を自動使用するため、スラッグフィールドは不要
+※ 公開日はコンテンツデータの公開日（`<mt:ContentDate>`）を使用
+※ サムネイル画像はアイキャッチとH2セクションの両方で使用
 
 ---
 
@@ -76,14 +78,15 @@
 | No | フィールド名 | フィールドID | フィールドタイプ | 必須 | 説明 |
 |----|------------|-------------|----------------|------|------|
 | 1 | タイトル | title | 単行テキスト | ○ | 記事タイトル（H1） |
-| 2 | スラッグ | slug | 単行テキスト | ○ | URLに使用（英数字・ハイフン） |
-| 3 | サムネイル画像 | thumbnail | アセット（画像） | ○ | アイキャッチ画像 |
-| 4 | カテゴリ | category | 選択 | ○ | ノウハウカテゴリ |
-| 5 | 公開日 | publish_date | 日付 | ○ | 記事公開日 |
-| 6 | H2見出し | h2_title | 単行テキスト | ○ | メインセクション見出し |
-| 7 | H2サムネイル画像 | h2_thumbnail | アセット（画像） | - | H2見出し上の画像 |
-| 8 | 本文 | body | ブロックエディタ | ○ | 記事本文 |
-| 9 | メタディスクリプション | meta_description | 複数行テキスト | - | SEO用説明文（160文字以内） |
+| 2 | サムネイル画像 | thumbnail | アセット（画像） | ○ | アイキャッチ画像 |
+| 3 | カテゴリ | category | 選択 | ○ | ノウハウカテゴリ |
+| 4 | 前書き | introduction | 埋め込みテキスト（複数行） | - | 目次の上に表示する記事の概要 |
+| 5 | 本文 | body | ブロックエディタ | ○ | 記事本文（H2/H3/H4/リスト/画像） |
+| 6 | メタディスクリプション | meta_description | 埋め込みテキスト | - | SEO用説明文（160文字以内） |
+
+※ URLにはコンテンツID（`<mt:ContentID>`）を自動使用するため、スラッグフィールドは不要
+※ 公開日はコンテンツデータの公開日（`<mt:ContentDate>`）を使用
+※ H2見出しはブロックエディタ内で使用（インタビュー・企業とは異なる構成）
 
 ---
 
@@ -143,17 +146,26 @@
 
 ### 3.2 使用するブロックタイプ
 
+#### 転職インタビュー・企業インタビュー
 | ブロック名 | ブロックID | 用途 | 有効化 |
 |-----------|-----------|------|-------|
-| 見出し | heading | セクション見出し（H3） | ○ |
+| 見出し | heading | セクション見出し（H3のみ） | ○ |
 | 段落 | paragraph | 本文テキスト | ○ |
+
+#### 転職ノウハウ（より複雑な記事構成に対応）
+| ブロック名 | ブロックID | 用途 | 有効化 |
+|-----------|-----------|------|-------|
+| 見出し | heading | H2/H3/H4見出し | ○ |
+| 段落 | paragraph | 本文テキスト | ○ |
+| リスト | list | 箇条書き・番号付きリスト | ○ |
+| 画像 | image | 画像（altがキャプションとして表示） | ○ |
 
 ### 3.3 見出しブロックの設定
 
-| 項目 | 設定値 |
-|-----|-------|
-| 見出しレベル | H3のみ（H2, H4, H5, H6は無効化） |
-| プレースホルダー | セクション見出しを入力 |
+| コンテンツタイプ | 設定値 |
+|---------------|-------|
+| インタビュー・企業 | H3のみ有効 |
+| 転職ノウハウ | H2/H3/H4有効 |
 
 ### 3.4 段落ブロックの設定
 
@@ -162,15 +174,18 @@
 | プレースホルダー | 本文を入力 |
 | リッチテキスト機能 | 太字、リンクのみ有効 |
 
-### 3.5 その他のブロック
+### 3.5 転職ノウハウの目次生成ルール
 
-以下のブロックは**無効化**する：
-- 画像
-- リスト
-- 引用
-- コード
-- テーブル
-- 埋め込み
+目次はH2とH3を対象に階層構造で自動生成される：
+```
+1. H2見出し1
+   1.1 H3見出し1-1
+   1.2 H3見出し1-2
+2. H2見出し2
+   2.1 H3見出し2-1
+```
+
+H4は目次の対象外（本文内の小見出しとして使用）
 
 ---
 
@@ -180,9 +195,17 @@
 
 | テンプレート名 | ファイル名 | 出力パス |
 |--------------|-----------|---------|
-| 転職インタビュー詳細 | interview-detail.mtml | /interviews/{slug}.html |
-| 企業インタビュー詳細 | company-detail.mtml | /companies/{slug}.html |
-| 転職ノウハウ詳細 | knowhow-detail.mtml | /knowhow/{slug}.html |
+| 転職インタビュー詳細 | interview-detail.mtml | /interviews/detail/{ContentID}.html |
+| 企業インタビュー詳細 | company-detail.mtml | /companies/detail/{ContentID}.html |
+| 転職ノウハウ詳細 | knowhow-detail.mtml | /knowhow/detail/{ContentID}.html |
+
+### 4.1.1 一覧ページ配置
+
+| ページ | URL |
+|-------|-----|
+| 転職インタビュー一覧 | /interviews/ (index.html) |
+| 企業インタビュー一覧 | /companies/ (index.html) |
+| 転職ノウハウ一覧 | /knowhow/ (index.html) |
 
 ### 4.2 アーカイブマッピング設定
 
@@ -191,21 +214,21 @@
 |-----|-------|
 | アーカイブタイプ | コンテンツタイプ |
 | テンプレート | 転職インタビュー詳細 |
-| 出力ファイル名 | interviews/<mt:ContentFieldValue field="slug">.html |
+| 出力ファイル名 | interviews/detail/<mt:ContentID>.html |
 
 #### 企業インタビュー
 | 項目 | 設定値 |
 |-----|-------|
 | アーカイブタイプ | コンテンツタイプ |
 | テンプレート | 企業インタビュー詳細 |
-| 出力ファイル名 | companies/<mt:ContentFieldValue field="slug">.html |
+| 出力ファイル名 | companies/detail/<mt:ContentID>.html |
 
 #### 転職ノウハウ
 | 項目 | 設定値 |
 |-----|-------|
 | アーカイブタイプ | コンテンツタイプ |
 | テンプレート | 転職ノウハウ詳細 |
-| 出力ファイル名 | knowhow/<mt:ContentFieldValue field="slug">.html |
+| 出力ファイル名 | knowhow/detail/<mt:ContentID>.html |
 
 ---
 
@@ -272,7 +295,11 @@
 
             <!-- 本文（ブロックエディタ出力） -->
             <div class="article-body" id="articleBody">
-                {ブロックエディタ出力}
+                <mt:ContentField content_field="body">
+                    <mt:BlockEditorBlocks tag="ContentFieldValue">
+                        <mt:Var name="__value__">
+                    </mt:BlockEditorBlocks>
+                </mt:ContentField>
             </div>
 
             <!-- CTA -->
@@ -309,66 +336,74 @@
 
 ### 6.1 目次生成スクリプト（article-toc.js）
 
+H2/H3の階層構造に対応した目次を自動生成する。
+
+**対応パターン:**
+- インタビュー・企業: H3のみをフラットリストで表示
+- 転職ノウハウ: H2をメイン項目、H3をサブ項目として階層表示
+
 ```javascript
 /**
  * 記事詳細ページ - 目次生成 & スムーススクロール
+ * H2/H3階層構造対応
  */
-document.addEventListener('DOMContentLoaded', function() {
+function initArticleToc() {
     const articleBody = document.getElementById('articleBody');
     const tocList = document.getElementById('tocList');
-    const tocContainer = document.querySelector('.article-toc');
 
     if (!articleBody || !tocList) return;
 
-    // H3タグを取得
-    const h3Tags = articleBody.querySelectorAll('h3');
+    const headings = articleBody.querySelectorAll('h2, h3');
+    if (headings.length === 0) return;
 
-    // H3がない場合は目次を非表示
-    if (h3Tags.length === 0) {
-        if (tocContainer) {
-            tocContainer.style.display = 'none';
-        }
-        return;
-    }
+    let h2Counter = 0;
+    let h3Counter = 0;
+    let currentH2Item = null;
+    let currentSubList = null;
 
-    // 各H3にidを付与 & 目次を生成
-    h3Tags.forEach((h3, index) => {
-        const sectionId = 'section-' + (index + 1);
-        h3.id = sectionId;
+    headings.forEach((heading) => {
+        const tagName = heading.tagName.toLowerCase();
 
-        // 目次項目を追加
-        const li = document.createElement('li');
-        const a = document.createElement('a');
-        a.href = '#' + sectionId;
-        a.textContent = h3.textContent;
-        a.classList.add('toc-link');
-        li.appendChild(a);
-        tocList.appendChild(li);
-    });
+        if (tagName === 'h2') {
+            h2Counter++;
+            h3Counter = 0;
+            heading.id = 'section-' + h2Counter;
 
-    // スムーススクロール
-    document.querySelectorAll('.toc-link').forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            const targetId = this.getAttribute('href').substring(1);
-            const target = document.getElementById(targetId);
+            // メイン項目を作成
+            const li = document.createElement('li');
+            const a = document.createElement('a');
+            a.href = '#section-' + h2Counter;
+            a.textContent = heading.textContent;
+            a.classList.add('toc-link');
+            a.dataset.number = h2Counter + '.';
 
-            if (target) {
-                const header = document.querySelector('.header');
-                const headerHeight = header ? header.offsetHeight : 80;
-                const targetPosition = target.getBoundingClientRect().top
-                    + window.pageYOffset
-                    - headerHeight
-                    - 20;
+            li.appendChild(a);
+            tocList.appendChild(li);
+            currentH2Item = li;
+            currentSubList = null;
+        } else if (tagName === 'h3' && currentH2Item) {
+            h3Counter++;
+            heading.id = 'section-' + h2Counter + '-' + h3Counter;
 
-                window.scrollTo({
-                    top: targetPosition,
-                    behavior: 'smooth'
-                });
+            // サブリストを作成
+            if (!currentSubList) {
+                currentSubList = document.createElement('ol');
+                currentSubList.classList.add('toc-sublist');
+                currentH2Item.appendChild(currentSubList);
             }
-        });
+
+            const li = document.createElement('li');
+            const a = document.createElement('a');
+            a.href = '#' + heading.id;
+            a.textContent = heading.textContent;
+            a.classList.add('toc-link', 'toc-link-sub');
+            a.dataset.number = h2Counter + '.' + h3Counter;
+
+            li.appendChild(a);
+            currentSubList.appendChild(li);
+        }
     });
-});
+}
 ```
 
 ---
@@ -434,7 +469,7 @@ document.addEventListener('DOMContentLoaded', function() {
 #### 変更後
 ```json
 {
-  "detailUrl": "interviews/{slug}.html"
+  "detailUrl": "/interviews/detail/{ContentID}.html"
 }
 ```
 
@@ -451,8 +486,8 @@ document.addEventListener('DOMContentLoaded', function() {
   "prefecture": "<mt:ContentFieldValue field="area" escape="json">",
   "category": "<mt:ContentFieldValue field="category" escape="json">",
   "image": "<mt:ContentFieldValue field="thumbnail"><mt:AssetURL></mt:ContentFieldValue>",
-  "postDate": "<mt:ContentFieldValue field="publish_date" format="%Y-%m-%d">",
-  "detailUrl": "interviews/<mt:ContentFieldValue field="slug">.html"
+  "postDate": "<mt:ContentDate format="%Y-%m-%d">",
+  "detailUrl": "/interviews/detail/<mt:ContentID>.html"
 }
 </mt:Contents>
 ```
@@ -492,14 +527,46 @@ document.addEventListener('DOMContentLoaded', function() {
 
 ---
 
-## 10. 備考
+## 10. ブロックエディタ出力方法
+
+### 10.1 MTBlockEditorBlocksタグの使用
+
+ブロックエディタのコンテンツを出力するには、`MTBlockEditorBlocks`タグを使用する必要がある。
+単純な`<mt:ContentFieldValue field="body">`では正しく出力されない。
+
+```html
+<mt:ContentField content_field="body">
+    <mt:BlockEditorBlocks tag="ContentFieldValue">
+        <mt:Var name="__value__">
+    </mt:BlockEditorBlocks>
+</mt:ContentField>
+```
+
+### 10.2 参考ドキュメント
+
+- [MTBlockEditorBlocks - Movable Type ドキュメント](https://www.movabletype.jp/documentation/appendices/tags/mtblockeditorblocks.html)
+
+---
+
+## 11. 備考
 
 - MovableType バージョン: 9.0.5
 - ブロックエディタは見出し（H3）と段落のみ使用
 - 目次はJavaScriptで動的生成（H3タグから抽出）
 - 既存の一覧ページ機能（フィルタ等）は変更なし
+- パスはルート相対パス（`/css/style.css`形式）を使用
 
 ---
 
 作成日: 2026-01-27
 更新日: 2026-01-27
+
+---
+
+## 更新履歴
+
+| 日付 | 内容 |
+|-----|------|
+| 2026-01-27 | 初版作成 |
+| 2026-01-27 | 転職ノウハウ: 前書きフィールド追加、H2/H3/H4/リスト/画像対応 |
+| 2026-01-27 | 目次生成: H2/H3階層構造に対応 |

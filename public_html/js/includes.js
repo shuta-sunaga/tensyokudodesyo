@@ -7,28 +7,6 @@
     'use strict';
 
     /**
-     * Calculate base path based on current page depth
-     * @returns {string} Base path (e.g., '', '../', '../../')
-     */
-    function getBasePath() {
-        const path = window.location.pathname;
-        const depth = (path.match(/\//g) || []).length - 1;
-
-        // Handle root level
-        if (depth <= 0 || path === '/' || path.endsWith('/index.html') && depth === 1) {
-            return '';
-        }
-
-        // Handle subdirectories
-        let basePath = '';
-        for (let i = 0; i < depth; i++) {
-            basePath += '../';
-        }
-
-        return basePath;
-    }
-
-    /**
      * Load and insert an include file
      * @param {string} includeFile - Filename (e.g., 'header.html')
      * @param {string} placeholderId - ID of placeholder element
@@ -37,8 +15,8 @@
         const placeholder = document.getElementById(placeholderId);
         if (!placeholder) return;
 
-        const basePath = getBasePath();
-        const includesPath = basePath + 'includes/';
+        // Use absolute path for includes - works from any page depth
+        const includesPath = '/includes/';
 
         try {
             const response = await fetch(includesPath + includeFile);
@@ -46,10 +24,7 @@
                 throw new Error(`Failed to load ${includeFile}`);
             }
 
-            let html = await response.text();
-
-            // Replace {{BASE_PATH}} placeholder with actual base path
-            html = html.replace(/\{\{BASE_PATH\}\}/g, basePath);
+            const html = await response.text();
 
             // Insert HTML
             placeholder.outerHTML = html;
@@ -207,8 +182,15 @@
 
         navLinks.forEach(link => {
             const href = link.getAttribute('href');
-            if (currentPath.endsWith(href) ||
-                (href === 'index.html' && (currentPath === '/' || currentPath.endsWith('/')))) {
+
+            // Root path: only match exact root
+            if (href === '/') {
+                if (currentPath === '/' || currentPath === '/index.html') {
+                    link.classList.add('active');
+                }
+            }
+            // Subpaths: match if current path starts with href
+            else if (href.startsWith('/') && currentPath.startsWith(href)) {
                 link.classList.add('active');
             }
         });

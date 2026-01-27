@@ -7,10 +7,9 @@
 
 コンテンツフィールド:
 - タイトル (テキスト): インタビュータイトル
-- 会社名 (テキスト): 会社名
-- 事業 (カテゴリ): 企業業界カテゴリセット
-- 都道府県 (カテゴリ): 都道府県カテゴリセット
-- note リンク (URL): 詳細ページURL（note記事）
+- 企業名 (テキスト): 会社名
+- 業界 (カテゴリ): 企業業界カテゴリセット
+- エリア (カテゴリ): 都道府県カテゴリセット
 - サムネイル画像 (アセット): サムネイル画像
 
 ============================================================
@@ -21,12 +20,12 @@
     {
       "id": <mt:ContentID>,
       "title": "<mt:ContentField content_field="タイトル"><mt:ContentFieldValue encode_json="1"></mt:ContentField>",
-      "company": "<mt:ContentField content_field="会社名"><mt:ContentFieldValue encode_json="1"></mt:ContentField>",
-      "prefecture": "<mt:ContentField content_field="都道府県"><mt:CategoryLabel></mt:ContentField>",
-      "industry": "<mt:ContentField content_field="事業"><mt:CategoryBasename></mt:ContentField>",
-      "image": "<mt:ContentField content_field="サムネイル画像"><mt:AssetURL regex_replace="/^https?:\/\/[^\/]+\//",""></mt:ContentField>",
+      "company": "<mt:ContentField content_field="企業名"><mt:ContentFieldValue encode_json="1"></mt:ContentField>",
+      "prefecture": "<mt:ContentField content_field="エリア"><mt:CategoryLabel></mt:ContentField>",
+      "industry": "<mt:ContentField content_field="業界"><mt:CategoryBasename></mt:ContentField>",
+      "image": "/<mt:ContentField content_field="サムネイル画像"><mt:AssetURL regex_replace="/^https?:\/\/[^\/]+\//",""></mt:ContentField>",
       "postDate": "<mt:ContentDate format="%Y-%m-%d">",
-      "detailUrl": "<mt:ContentField content_field="note リンク"><mt:ContentFieldValue encode_json="1"></mt:ContentField>"
+      "detailUrl": "/companies/detail/<mt:ContentID>.html"
     }<mt:Unless name="__last__">,</mt:Unless>
 </mt:Contents>
   ]

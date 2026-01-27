@@ -36,24 +36,11 @@ const CategoryManager = (function() {
     };
 
     /**
-     * Get base path for data files
-     */
-    function getBasePath() {
-        const path = window.location.pathname;
-        if (path.includes('/jobs/')) {
-            return '../../';
-        } else if (path.match(/\/[a-z]+\/index\.html$/) || path.match(/\/[a-z]+\/$/)) {
-            return '../';
-        }
-        return './';
-    }
-
-    /**
      * Load a single category file
      */
     async function loadCategoryFile(filename, type) {
-        const basePath = getBasePath();
-        const url = `${basePath}data/categories/${filename}`;
+        // Use absolute path for consistent behavior across all pages
+        const url = `/data/categories/${filename}`;
 
         try {
             const response = await fetch(url);
@@ -84,8 +71,8 @@ const CategoryManager = (function() {
      * Load prefectures file
      */
     async function loadPrefectures() {
-        const basePath = getBasePath();
-        const url = `${basePath}data/prefectures.json`;
+        // Use absolute path for consistent behavior across all pages
+        const url = `/data/prefectures.json`;
 
         try {
             const response = await fetch(url);

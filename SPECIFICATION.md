@@ -170,23 +170,48 @@ public_html/
 
 ### 4. 転職ノウハウ一覧 (`knowhow.html`)
 
-**URL**: `/knowhow.html`
+**URL**: `/knowhow/` または `/knowhow/index.html`
 
 **機能**:
 - ノウハウ記事のカード一覧表示
-- カテゴリフィルター（タブ切り替え）
+- カテゴリフィルター（セレクト）
 - 新着求人セクション
 
 **データソース**:
-| データ | ソース |
-|-------|-------|
-| ノウハウ記事 | **HTMLに静的記述**（JSONではない） |
-| 新着求人 | `data/jobs.json` |
+| データ | JSONファイル | 読み込み関数 |
+|-------|-------------|-------------|
+| ノウハウ記事 | `data/knowhow.json` | `initKnowhowPage()` |
+| 新着求人 | `data/jobs/{prefecture}.json` | `renderNewJobs()` |
 
 **カテゴリ**:
 - すべて / 面接対策 / 履歴書・職務経歴書 / 自己分析 / 業界研究 / 転職準備
 
-**備考**: ノウハウ記事は現在HTMLに直接記述。将来的にJSON化の検討余地あり。
+**ノウハウJSONスキーマ**:
+```json
+{
+  "id": number,
+  "title": string,           // 記事タイトル
+  "category": string,        // カテゴリベースネーム（kh01など）
+  "excerpt": string,         // 前書き（記事の概要）
+  "image": string,           // サムネイル画像URL
+  "postDate": string,        // 投稿日（YYYY-MM-DD）
+  "detailUrl": string        // 詳細ページURL
+}
+```
+
+---
+
+### 4.1 転職ノウハウ詳細ページ (`knowhow/detail/{id}.html`)
+
+**URL**: `/knowhow/detail/1.html` など
+
+**機能**:
+- 記事の全文表示
+- 目次（H2/H3の階層構造）
+- 前書き（記事の概要）
+- LINE相談CTA
+
+**データソース**: Movable Type Content Types で管理
 
 ---
 
@@ -578,6 +603,14 @@ footer.footer-grid
 
 ---
 
+## Movable Type 詳細ページ仕様
+
+MTコンテンツタイプ・ブロックエディタ・テンプレートの詳細仕様は以下を参照：
+
+**[docs/detail-page-specification.md](docs/detail-page-specification.md)**
+
+---
+
 ## 更新履歴
 
 | 日付 | 内容 |
@@ -589,3 +622,4 @@ footer.footer-grid
 | 2026-01-20 | ヘッダー/フッターインクルードシステム追加（includes.js） |
 | 2026-01-20 | カテゴリ動的管理システム実装（categories.js）- JSONマスターによる一元管理 |
 | 2026-01-20 | カテゴリベースネーム統一（oc01/in01/kh01/pu01形式） |
+| 2026-01-27 | MT詳細ページ仕様を docs/detail-page-specification.md に統合 |
