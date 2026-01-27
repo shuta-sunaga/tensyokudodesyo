@@ -7,10 +7,9 @@
 
 コンテンツフィールド:
 - タイトル (テキスト): 記事タイトル
-- カテゴリ (カテゴリ): ノウハウカテゴリセット（kh01:面接対策, kh02:履歴書・職務経歴書, kh03:自己分析, kh04:業界研究, kh05:転職準備）
-- 概要 (テキスト): 記事の概要・抜粋
+- カテゴリ (カテゴリ): ノウハウカテゴリセット
 - サムネイル画像 (アセット): サムネイル画像
-- 詳細ページURL (URL): 詳細ページへのリンク（note記事等）
+- 前書き (テキスト複数行): 記事の概要
 
 ============================================================
 </mt:Ignore>
@@ -20,10 +19,11 @@
     {
       "id": <mt:ContentID>,
       "title": "<mt:ContentField content_field="タイトル"><mt:ContentFieldValue encode_json="1"></mt:ContentField>",
-      "category": "<mt:ContentField content_field="ノウハウカテゴリ"><mt:CategoryBasename></mt:ContentField>",
-      "image": "<mt:ContentField content_field="サムネイル画像"><mt:AssetURL regex_replace="/^https?:\/\/[^\/]+\//",""></mt:ContentField>",
+      "category": "<mt:ContentField content_field="カテゴリ"><mt:CategoryBasename></mt:ContentField>",
+      "excerpt": "<mt:ContentField content_field="前書き"><mt:ContentFieldValue encode_json="1" regex_replace="/\n/"," "></mt:ContentField>",
+      "image": "/<mt:ContentField content_field="サムネイル画像"><mt:AssetURL regex_replace="/^https?:\/\/[^\/]+\//",""></mt:ContentField>",
       "postDate": "<mt:ContentDate format="%Y-%m-%d">",
-      "detailUrl": "<mt:ContentField content_field="note リンク"><mt:ContentFieldValue encode_json="1"></mt:ContentField>"
+      "detailUrl": "/knowhow/detail/<mt:ContentID>.html"
     }<mt:Unless name="__last__">,</mt:Unless>
 </mt:Contents>
   ]

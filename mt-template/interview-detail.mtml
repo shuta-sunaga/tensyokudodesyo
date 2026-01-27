@@ -1,8 +1,8 @@
 <mt:Ignore>
 ============================================================
 転職インタビュー詳細ページ
-コンテンツタイプ: interview
-出力ファイル: interviews/{slug}.html
+コンテンツタイプ: 転職インタビュー
+出力ファイル: interviews/detail/{ContentID}.html
 ============================================================
 </mt:Ignore>
 <!DOCTYPE html>
@@ -10,41 +10,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <mt:ContentFieldValue field="meta_description" setvar="meta_desc">
+    <mt:ContentField content_field="メタディスクリプション"><mt:ContentFieldValue setvar="meta_desc"></mt:ContentField>
     <mt:If name="meta_desc">
     <meta name="description" content="<mt:Var name="meta_desc" escape="html">">
     <mt:Else>
-    <meta name="description" content="<mt:ContentFieldValue field="title" escape="html">｜転職どうでしょうの転職インタビュー。転職成功者のリアルな体験談をご紹介。">
+    <meta name="description" content="<mt:ContentField content_field="タイトル"><mt:ContentFieldValue escape="html"></mt:ContentField>｜転職どうでしょうの転職インタビュー。転職成功者のリアルな体験談をご紹介。">
     </mt:If>
-    <title><mt:ContentFieldValue field="title" escape="html"> | 転職インタビュー | 転職どうでしょう</title>
+    <title><mt:ContentField content_field="タイトル"><mt:ContentFieldValue escape="html"></mt:ContentField> | 転職インタビュー | 転職どうでしょう</title>
 
     <!-- Canonical -->
-    <link rel="canonical" href="<mt:BlogURL>interviews/<mt:ContentFieldValue field="slug">.html">
+    <link rel="canonical" href="<mt:BlogURL>interviews/detail/<mt:ContentID>.html">
 
     <!-- OGP -->
-    <meta property="og:title" content="<mt:ContentFieldValue field="title" escape="html">">
+    <meta property="og:title" content="<mt:ContentField content_field="タイトル"><mt:ContentFieldValue escape="html"></mt:ContentField>">
     <mt:If name="meta_desc">
     <meta property="og:description" content="<mt:Var name="meta_desc" escape="html">">
     <mt:Else>
     <meta property="og:description" content="転職成功者のリアルな体験談をご紹介。">
     </mt:If>
     <meta property="og:type" content="article">
-    <meta property="og:url" content="<mt:BlogURL>interviews/<mt:ContentFieldValue field="slug">.html">
-    <mt:ContentFieldValue field="thumbnail">
+    <meta property="og:url" content="<mt:BlogURL>interviews/detail/<mt:ContentID>.html">
+    <mt:ContentField content_field="サムネイル画像">
     <meta property="og:image" content="<mt:AssetURL>">
-    </mt:ContentFieldValue>
+    </mt:ContentField>
     <meta property="og:site_name" content="転職どうでしょう">
     <meta property="og:locale" content="ja_JP">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="<mt:ContentFieldValue field="title" escape="html">">
+    <meta name="twitter:title" content="<mt:ContentField content_field="タイトル"><mt:ContentFieldValue escape="html"></mt:ContentField>">
     <mt:If name="meta_desc">
     <meta name="twitter:description" content="<mt:Var name="meta_desc" escape="html">">
     </mt:If>
-    <mt:ContentFieldValue field="thumbnail">
+    <mt:ContentField content_field="サムネイル画像">
     <meta name="twitter:image" content="<mt:AssetURL>">
-    </mt:ContentFieldValue>
+    </mt:ContentField>
 
     <link rel="stylesheet" href="<mt:BlogURL>css/style.css">
     <link rel="stylesheet" href="<mt:BlogURL>css/article-detail.css">
@@ -63,23 +63,23 @@
             <!-- Breadcrumb -->
             <nav class="breadcrumb">
                 <a href="<mt:BlogURL>">ホーム</a>
-                <a href="<mt:BlogURL>interviews.html">転職インタビュー</a>
-                <span><mt:ContentFieldValue field="title" escape="html"></span>
+                <a href="<mt:BlogURL>interviews/">転職インタビュー</a>
+                <span><mt:ContentField content_field="タイトル"><mt:ContentFieldValue escape="html"></mt:ContentField></span>
             </nav>
 
             <!-- Article Header -->
             <header class="article-header">
-                <mt:ContentFieldValue field="thumbnail">
-                <img src="<mt:AssetURL>" alt="<mt:ContentFieldValue field="title" escape="html">" class="article-thumbnail" loading="lazy">
-                </mt:ContentFieldValue>
+                <mt:ContentField content_field="サムネイル画像">
+                <img src="<mt:AssetURL>" alt="<mt:ContentField content_field="タイトル"><mt:ContentFieldValue escape="html"></mt:ContentField>" class="article-thumbnail" loading="lazy">
+                </mt:ContentField>
 
-                <h1 class="article-title"><mt:ContentFieldValue field="title" escape="html"></h1>
+                <h1 class="article-title"><mt:ContentField content_field="タイトル"><mt:ContentFieldValue escape="html"></mt:ContentField></h1>
 
                 <div class="article-meta">
-                    <span class="article-category"><mt:ContentFieldValue field="category"></span>
-                    <span class="article-area"><mt:ContentFieldValue field="area"></span>
-                    <time class="article-date" datetime="<mt:ContentFieldValue field="publish_date" format="%Y-%m-%d">">
-                        <mt:ContentFieldValue field="publish_date" format="%Y年%m月%d日">
+                    <span class="article-category"><mt:ContentField content_field="カテゴリ"><mt:CategoryLabel></mt:ContentField></span>
+                    <span class="article-area"><mt:ContentField content_field="エリア"><mt:CategoryLabel></mt:ContentField></span>
+                    <time class="article-date" datetime="<mt:ContentDate format="%Y-%m-%d">">
+                        <mt:ContentDate format="%Y年%m月%d日">
                     </time>
                 </div>
 
@@ -87,10 +87,10 @@
                 <div class="article-company-info">
                     <div class="company-info-item">
                         <span class="company-info-label">企業名:</span>
-                        <span class="company-info-value"><mt:ContentFieldValue field="company_name" escape="html"></span>
+                        <span class="company-info-value"><mt:ContentField content_field="企業名"><mt:ContentFieldValue escape="html"></mt:ContentField></span>
                     </div>
-                    <mt:ContentFieldValue field="job_before" setvar="job_before">
-                    <mt:ContentFieldValue field="job_after" setvar="job_after">
+                    <mt:ContentField content_field="職種（前）"><mt:ContentFieldValue setvar="job_before"></mt:ContentField>
+                    <mt:ContentField content_field="職種（後）"><mt:ContentFieldValue setvar="job_after"></mt:ContentField>
                     <mt:If name="job_before">
                     <div class="company-info-item">
                         <span class="company-info-label">転職前:</span>
@@ -116,18 +116,16 @@
 
             <!-- Main Section (H2) -->
             <section class="article-main-section">
-                <mt:ContentFieldValue field="h2_thumbnail" setvar="h2_thumb">
-                <mt:If name="h2_thumb">
-                <mt:ContentFieldValue field="h2_thumbnail">
-                <img src="<mt:AssetURL>" alt="" class="section-thumbnail" loading="lazy">
-                </mt:ContentFieldValue>
-                </mt:If>
-                <h2 class="section-title"><mt:ContentFieldValue field="h2_title" escape="html"></h2>
+                <h2 class="section-title"><mt:ContentField content_field="H2見出し"><mt:ContentFieldValue escape="html"></mt:ContentField></h2>
             </section>
 
             <!-- Article Body (Block Editor Output) -->
             <div class="article-body" id="articleBody">
-                <mt:ContentFieldValue field="body">
+                <mt:ContentField content_field="本文">
+                    <mt:BlockEditorBlocks tag="ContentFieldValue">
+                        <mt:Var name="__value__">
+                    </mt:BlockEditorBlocks>
+                </mt:ContentField>
             </div>
 
             <!-- CTA -->
@@ -142,7 +140,7 @@
 
             <!-- Back Link -->
             <div class="article-back">
-                <a href="<mt:BlogURL>interviews.html">
+                <a href="<mt:BlogURL>interviews/">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M19 12H5"></path>
                         <path d="M12 19l-7-7 7-7"></path>

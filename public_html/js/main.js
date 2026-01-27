@@ -500,12 +500,8 @@ async function loadJobs() {
     const jobDetailContent = document.getElementById('jobDetailContent');
 
     try {
-        // Determine base path based on current location
-        const isInSubdirectory = window.location.pathname.includes('/jobs/');
-        const basePath = isInSubdirectory ? '../' : './';
-
         // First, load prefectures.json to get active prefectures
-        const prefResponse = await fetch(basePath + 'data/prefectures.json');
+        const prefResponse = await fetch('/data/prefectures.json');
         if (!prefResponse.ok) {
             throw new Error('Failed to load prefectures: HTTP ' + prefResponse.status);
         }
@@ -515,7 +511,7 @@ async function loadJobs() {
         // Load all active prefecture job JSONs in parallel
         const jobPromises = activePrefectures.map(async (pref) => {
             try {
-                const response = await fetch(basePath + `data/jobs/${pref.id}.json`);
+                const response = await fetch(`/data/jobs/${pref.id}.json`);
                 if (!response.ok) {
                     console.warn(`Jobs not found for ${pref.name}: HTTP ${response.status}`);
                     return [];
@@ -1174,7 +1170,7 @@ async function initInterviewPage() {
     }
 
     try {
-        const response = await fetch('./data/interviews.json');
+        const response = await fetch('/data/interviews.json');
         if (!response.ok) throw new Error('HTTP ' + response.status);
         const data = await response.json();
         allInterviews = data.interviews || [];
@@ -1308,7 +1304,7 @@ async function initCompanyPage() {
     }
 
     try {
-        const response = await fetch('./data/companies.json');
+        const response = await fetch('/data/companies.json');
         if (!response.ok) throw new Error('HTTP ' + response.status);
         const data = await response.json();
         allCompanies = data.companies || [];
@@ -1439,7 +1435,7 @@ async function initHomePage() {
     // Load interviews for home page
     if (homeInterviewsContainer) {
         try {
-            const response = await fetch('./data/interviews.json');
+            const response = await fetch('/data/interviews.json');
             if (!response.ok) throw new Error('HTTP ' + response.status);
             const data = await response.json();
             const interviews = data.interviews || [];
@@ -1478,7 +1474,7 @@ async function initHomePage() {
     // Load companies for home page
     if (homeCompaniesContainer) {
         try {
-            const response = await fetch('./data/companies.json');
+            const response = await fetch('/data/companies.json');
             if (!response.ok) throw new Error('HTTP ' + response.status);
             const data = await response.json();
             const companies = data.companies || [];
@@ -1517,7 +1513,7 @@ async function initHomePage() {
     // Load knowhow for home page
     if (homeKnowhowContainer) {
         try {
-            const response = await fetch('./data/knowhow.json');
+            const response = await fetch('/data/knowhow.json');
             if (!response.ok) throw new Error('HTTP ' + response.status);
             const data = await response.json();
             const articles = data.articles || [];
@@ -1584,7 +1580,7 @@ async function initKnowhowPage() {
 
     // Load knowhow articles from JSON
     try {
-        const response = await fetch('./data/knowhow.json');
+        const response = await fetch('/data/knowhow.json');
         if (!response.ok) throw new Error('HTTP ' + response.status);
         const data = await response.json();
         allKnowhowArticles = data.articles || [];
