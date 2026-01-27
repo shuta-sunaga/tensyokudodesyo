@@ -17,6 +17,9 @@ const CategoryManager = (function() {
         jobCondition: []    // pu01-pu11
     };
 
+    // Prefectures data storage
+    let prefectures = [];
+
     // Lookup maps for fast access
     const lookupById = {
         interview: {},
@@ -78,6 +81,41 @@ const CategoryManager = (function() {
     }
 
     /**
+     * Load prefectures file
+     */
+    async function loadPrefectures() {
+        const basePath = getBasePath();
+        const url = `${basePath}data/prefectures.json`;
+
+        try {
+            const response = await fetch(url);
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}`);
+            }
+            const data = await response.json();
+            prefectures = data.prefectures || [];
+            return true;
+        } catch (error) {
+            console.error('Error loading prefectures:', error);
+            return false;
+        }
+    }
+
+    /**
+     * Get active prefectures only
+     */
+    function getActivePrefectures() {
+        return prefectures.filter(p => p.active);
+    }
+
+    /**
+     * Get all prefectures
+     */
+    function getAllPrefectures() {
+        return prefectures;
+    }
+
+    /**
      * Load all category files
      */
     async function loadAll() {
@@ -88,7 +126,11 @@ const CategoryManager = (function() {
             { filename: 'job-conditions.json', type: 'jobCondition' }
         ];
 
-        await Promise.all(files.map(f => loadCategoryFile(f.filename, f.type)));
+        // Load categories and prefectures in parallel
+        await Promise.all([
+            ...files.map(f => loadCategoryFile(f.filename, f.type)),
+            loadPrefectures()
+        ]);
 
         // Set loaded flag
         isLoaded = true;
@@ -232,6 +274,25 @@ const CategoryManager = (function() {
     }
 
     /**
+     * Render prefecture filter select (active prefectures only)
+     * @param {string} selectId - ID of the select element
+     * @param {string} allLabel - Label for "all" option
+     */
+    function renderPrefectureSelect(selectId, allLabel = 'すべてのエリア') {
+        const select = document.getElementById(selectId);
+        if (!select) return;
+
+        const activePrefectures = getActivePrefectures();
+        let html = `<option value="">${allLabel}</option>`;
+
+        activePrefectures.forEach(pref => {
+            html += `<option value="${pref.name}">${pref.name}</option>`;
+        });
+
+        select.innerHTML = html;
+    }
+
+    /**
      * Map legacy category name to ID (for backward compatibility)
      * @param {string} type - Category type
      * @param {string} value - Category name or ID
@@ -275,7 +336,10 @@ const CategoryManager = (function() {
         renderFilterSelect,
         setupFilterSelectHandler,
         normalizeToId,
-        normalizeToName
+        normalizeToName,
+        getActivePrefectures,
+        getAllPrefectures,
+        renderPrefectureSelect
     };
 })();
 

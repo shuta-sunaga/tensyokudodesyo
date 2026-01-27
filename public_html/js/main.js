@@ -38,7 +38,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Initialize category-dependent modules after categories are loaded
     document.addEventListener('categoriesLoaded', function() {
+        console.log('categoriesLoaded event fired');
         initCategoryModules();
+        // Re-render filter selects after categories are loaded
+        refreshFilterSelects();
     });
 
     // Fallback: if CategoryManager not available, initialize immediately
@@ -47,10 +50,52 @@ document.addEventListener('DOMContentLoaded', function() {
         initFilterTabs();
     } else if (CategoryManager.checkLoaded()) {
         // Categories already loaded (event already fired)
+        console.log('Categories already loaded');
         initCategoryModules();
+    } else {
+        // Timeout fallback: initialize even if categories fail to load
+        console.log('Waiting for categories...');
+        setTimeout(function() {
+            if (!categoryModulesInitialized) {
+                console.warn('Categories loading timeout - initializing without categories');
+                initCategoryModules();
+            }
+        }, 5000);
     }
-    // Note: Removed 3s timeout fallback - always wait for categories to load
 });
+
+/**
+ * Refresh filter selects after categories are loaded
+ */
+function refreshFilterSelects() {
+    if (typeof CategoryManager === 'undefined') return;
+
+    // Prefecture filter (shared across multiple pages)
+    const prefectureFilter = document.getElementById('prefectureFilter');
+    if (prefectureFilter) {
+        CategoryManager.renderPrefectureSelect('prefectureFilter', 'すべてのエリア');
+    }
+
+    // Interview page
+    const categoryFilter = document.getElementById('categoryFilter');
+    if (categoryFilter) {
+        CategoryManager.renderFilterSelect('categoryFilter', 'interview', 'すべて');
+    }
+
+    // Company page
+    const industryFilter = document.getElementById('industryFilter');
+    if (industryFilter) {
+        CategoryManager.renderFilterSelect('industryFilter', 'company', 'すべて');
+    }
+
+    // Knowhow page
+    const knowhowFilter = document.getElementById('knowhowFilter');
+    if (knowhowFilter) {
+        CategoryManager.renderFilterSelect('knowhowFilter', 'knowhow', 'すべて');
+    }
+
+    console.log('Filter selects refreshed');
+}
 
 /**
  * Mobile Menu Toggle
