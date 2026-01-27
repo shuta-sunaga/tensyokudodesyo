@@ -197,7 +197,12 @@ function setupMapInteraction() {
                 });
             }
 
-            // Update tooltip
+            // Mobile: Show bottom sheet instead of tooltip
+            if (typeof handleMobileRegionSelect === 'function' && handleMobileRegionSelect(prefInfo.region)) {
+                return; // Bottom sheet handled it
+            }
+
+            // Desktop: Update tooltip
             currentTooltipRegion = regionId;
             showRegionTooltip(prefInfo.region, tooltip);
         }
@@ -214,9 +219,14 @@ function setupMapInteraction() {
 }
 
 /**
- * Show initial tooltip message
+ * Show initial tooltip message (desktop only)
  */
 function showInitialTooltip(tooltip) {
+    // Skip on mobile - bottom sheet will be used
+    if (typeof isMobile === 'function' && isMobile()) {
+        return;
+    }
+
     tooltip.innerHTML = `
         <div class="tooltip-region">地域を選択</div>
         <div class="tooltip-message">地図上の都道府県をクリック（タップ）すると、その地域の情報が表示されます</div>
@@ -277,5 +287,229 @@ function populatePrefectureGrid() {
     }).join('');
 }
 
+/* ==========================================================================
+   Mobile Bottom Sheet Functions (スマホ用ボトムシート)
+   ※元に戻す場合はこのセクション全体を削除
+   ========================================================================== */
+
+/**
+ * Check if device is mobile
+ */
+function isMobile() {
+    return window.innerWidth <= 768;
+}
+
+// Store scroll position for restoration
+let scrollPositionBeforeSheet = 0;
+
+/**
+ * Create Bottom Sheet HTML elements
+ */
+function createBottomSheet() {
+    // Only create on mobile
+    if (!isMobile()) return;
+
+    // Check if already exists
+    if (document.getElementById('bottomSheetOverlay')) return;
+
+    // Create overlay
+    const overlay = document.createElement('div');
+    overlay.id = 'bottomSheetOverlay';
+    overlay.className = 'bottom-sheet-overlay';
+    overlay.addEventListener('click', closeBottomSheet);
+
+    // Prevent touch events from propagating through overlay
+    overlay.addEventListener('touchmove', (e) => e.preventDefault(), { passive: false });
+
+    // Create bottom sheet
+    const sheet = document.createElement('div');
+    sheet.id = 'bottomSheet';
+    sheet.className = 'bottom-sheet';
+    sheet.innerHTML = `
+        <div class="bottom-sheet-handle"></div>
+        <div class="bottom-sheet-header">
+            <div class="bottom-sheet-region" id="bottomSheetRegion">地域を選択</div>
+            <button class="bottom-sheet-close" id="bottomSheetClose" aria-label="閉じる">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+        <div class="bottom-sheet-content">
+            <div class="bottom-sheet-prefectures" id="bottomSheetPrefectures"></div>
+        </div>
+    `;
+
+    // Add to body
+    document.body.appendChild(overlay);
+    document.body.appendChild(sheet);
+
+    // Setup close button
+    const closeBtn = document.getElementById('bottomSheetClose');
+    if (closeBtn) {
+        closeBtn.addEventListener('click', closeBottomSheet);
+    }
+
+    // Prevent touch events from scrolling background
+    sheet.addEventListener('touchmove', (e) => {
+        // Allow scrolling within the content area
+        const content = sheet.querySelector('.bottom-sheet-content');
+        if (content && content.contains(e.target)) {
+            // Allow if content is scrollable and not at boundaries
+            const isScrollable = content.scrollHeight > content.clientHeight;
+            if (isScrollable) {
+                return; // Allow scroll within content
+            }
+        }
+        e.preventDefault();
+    }, { passive: false });
+
+    // Handle swipe down to close
+    setupBottomSheetGestures(sheet);
+}
+
+/**
+ * Setup swipe gestures for bottom sheet
+ */
+function setupBottomSheetGestures(sheet) {
+    let startY = 0;
+    let currentY = 0;
+    let isDragging = false;
+
+    const handle = sheet.querySelector('.bottom-sheet-handle');
+
+    handle.addEventListener('touchstart', (e) => {
+        startY = e.touches[0].clientY;
+        isDragging = true;
+        sheet.style.transition = 'none';
+    });
+
+    handle.addEventListener('touchmove', (e) => {
+        if (!isDragging) return;
+        currentY = e.touches[0].clientY;
+        const diff = currentY - startY;
+        if (diff > 0) {
+            sheet.style.transform = `translateY(${diff}px)`;
+        }
+    });
+
+    handle.addEventListener('touchend', () => {
+        isDragging = false;
+        sheet.style.transition = '';
+        const diff = currentY - startY;
+        if (diff > 100) {
+            closeBottomSheet();
+        } else {
+            sheet.style.transform = '';
+        }
+        startY = 0;
+        currentY = 0;
+    });
+}
+
+/**
+ * Show Bottom Sheet with region info
+ */
+function showBottomSheet(regionName) {
+    const overlay = document.getElementById('bottomSheetOverlay');
+    const sheet = document.getElementById('bottomSheet');
+    const regionTitle = document.getElementById('bottomSheetRegion');
+    const prefContainer = document.getElementById('bottomSheetPrefectures');
+
+    if (!overlay || !sheet) return;
+
+    const regionId = regionIdMap[regionName];
+    const regionData = prefecturesByRegion[regionId];
+
+    if (!regionData) return;
+
+    // Update region name
+    regionTitle.textContent = regionName;
+
+    // Build prefecture links
+    let html = '';
+    regionData.prefectures.forEach(pref => {
+        const jobCount = jobCountByPrefecture[pref.name] || 0;
+        if (pref.active) {
+            html += `
+                <a href="${pref.id}/" class="bottom-sheet-pref-link">
+                    <span class="pref-name">${pref.name}</span>
+                    <span class="job-count">${jobCount}件</span>
+                </a>
+            `;
+        } else {
+            html += `
+                <span class="bottom-sheet-pref-link inactive">
+                    <span class="pref-name">${pref.name}</span>
+                    <span class="job-count">準備中</span>
+                </span>
+            `;
+        }
+    });
+
+    prefContainer.innerHTML = html;
+
+    // Show overlay and sheet
+    overlay.style.display = 'block';
+    sheet.style.display = 'block';
+
+    // Trigger animation after display is set
+    requestAnimationFrame(() => {
+        overlay.classList.add('visible');
+        sheet.classList.add('visible');
+    });
+
+    // Prevent body scroll - save scroll position first
+    scrollPositionBeforeSheet = window.pageYOffset;
+    document.body.classList.add('bottom-sheet-open');
+    document.body.style.top = `-${scrollPositionBeforeSheet}px`;
+}
+
+/**
+ * Close Bottom Sheet
+ */
+function closeBottomSheet() {
+    const overlay = document.getElementById('bottomSheetOverlay');
+    const sheet = document.getElementById('bottomSheet');
+
+    if (!overlay || !sheet) return;
+
+    overlay.classList.remove('visible');
+    sheet.classList.remove('visible');
+    sheet.style.transform = '';
+
+    // Re-enable body scroll and restore position
+    document.body.classList.remove('bottom-sheet-open');
+    document.body.style.top = '';
+    window.scrollTo(0, scrollPositionBeforeSheet);
+
+    // Hide after animation
+    setTimeout(() => {
+        overlay.style.display = 'none';
+        sheet.style.display = 'none';
+    }, 300);
+}
+
+/**
+ * Modified region selection for mobile
+ */
+function handleMobileRegionSelect(regionName) {
+    if (isMobile()) {
+        showBottomSheet(regionName);
+        return true; // Handled by bottom sheet
+    }
+    return false; // Use default tooltip
+}
+
 // Initialize on DOM ready
-document.addEventListener('DOMContentLoaded', initJapanMap);
+document.addEventListener('DOMContentLoaded', () => {
+    initJapanMap();
+    createBottomSheet();
+});
+
+// Recreate bottom sheet on resize (if switching from desktop to mobile)
+window.addEventListener('resize', () => {
+    if (isMobile()) {
+        createBottomSheet();
+    }
+});
