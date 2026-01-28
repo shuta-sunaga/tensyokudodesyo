@@ -2,6 +2,12 @@
  * 転職どうでしょう - Main JavaScript
  */
 
+// Guard against double execution
+if (window._mainJsLoaded) {
+    console.warn('main.js already loaded, skipping');
+} else {
+    window._mainJsLoaded = true;
+
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize basic modules immediately
     initMobileMenu();
@@ -1639,3 +1645,5 @@ function renderKnowhowArticles() {
     `;
     }).join('');
 }
+
+} // End of double-execution guard

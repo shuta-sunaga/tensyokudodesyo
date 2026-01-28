@@ -3,7 +3,12 @@
  * カテゴリマスターJSONを読み込み、フィルタタブを動的生成
  */
 
-const CategoryManager = (function() {
+// Guard against double execution
+if (typeof CategoryManager !== 'undefined') {
+    console.warn('categories.js already loaded, skipping');
+} else {
+
+var CategoryManager = (function() {
     'use strict';
 
     // Loading state flag
@@ -336,3 +341,5 @@ if (document.readyState === 'loading') {
 } else {
     CategoryManager.loadAll();
 }
+
+} // End of double-execution guard
