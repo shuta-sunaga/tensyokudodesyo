@@ -1,0 +1,14 @@
+<mt:Ignore>
+============================================================
+企業業界カテゴリJSON生成テンプレート
+出力ファイル: data/categories/company-industries.json
+カテゴリセット名: 企業業界
+============================================================
+</mt:Ignore>
+{
+  "categories": [
+<mt:CategorySets><mt:If tag="CategorySetName" eq="企業業界"><mt:Categories show_empty="1">
+    { "id": "<mt:CategoryBasename>", "name": "<mt:CategoryLabel encode_json="1">" }<mt:Unless name="__last__">,</mt:Unless></mt:Categories></mt:If></mt:CategorySets>
+
+  ]
+}

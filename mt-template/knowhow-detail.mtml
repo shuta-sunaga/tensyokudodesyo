@@ -1,0 +1,150 @@
+<mt:Ignore>
+============================================================
+転職ノウハウ詳細ページ
+コンテンツタイプ: 転職ノウハウ
+出力ファイル: knowhow/detail/{ContentID}.html
+============================================================
+
+コンテンツフィールド:
+- タイトル (テキスト): 記事タイトル
+- サムネイル画像 (アセット): OGP・一覧用画像
+- カテゴリ (カテゴリ): ノウハウカテゴリセット
+- メタディスクリプション (テキスト複数行): SEO用説明文
+- 前書き (テキスト複数行): 目次の上に表示する記事の概要
+- 本文 (ブロックエディタ): 記事本文（H2/H3/H4/リスト/画像）
+
+============================================================
+</mt:Ignore>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <mt:ContentField content_field="メタディスクリプション"><mt:ContentFieldValue setvar="meta_desc"></mt:ContentField>
+    <mt:If name="meta_desc">
+    <meta name="description" content="<mt:Var name="meta_desc" escape="html">">
+    <mt:Else>
+    <meta name="description" content="<mt:ContentField content_field="タイトル"><mt:ContentFieldValue escape="html"></mt:ContentField>｜転職どうでしょうの転職ノウハウ。転職活動を成功させるためのコツをご紹介。">
+    </mt:If>
+    <title><mt:ContentField content_field="タイトル"><mt:ContentFieldValue escape="html"></mt:ContentField> | 転職ノウハウ | 転職どうでしょう</title>
+
+    <!-- Canonical -->
+    <link rel="canonical" href="<mt:BlogURL>knowhow/detail/<mt:ContentID>.html">
+
+    <!-- OGP -->
+    <meta property="og:title" content="<mt:ContentField content_field="タイトル"><mt:ContentFieldValue escape="html"></mt:ContentField>">
+    <mt:If name="meta_desc">
+    <meta property="og:description" content="<mt:Var name="meta_desc" escape="html">">
+    <mt:Else>
+    <meta property="og:description" content="転職活動を成功させるためのコツをご紹介。">
+    </mt:If>
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="<mt:BlogURL>knowhow/detail/<mt:ContentID>.html">
+    <mt:ContentField content_field="サムネイル画像">
+    <meta property="og:image" content="<mt:AssetURL>">
+    </mt:ContentField>
+    <meta property="og:site_name" content="転職どうでしょう">
+    <meta property="og:locale" content="ja_JP">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="<mt:ContentField content_field="タイトル"><mt:ContentFieldValue escape="html"></mt:ContentField>">
+    <mt:If name="meta_desc">
+    <meta name="twitter:description" content="<mt:Var name="meta_desc" escape="html">">
+    </mt:If>
+    <mt:ContentField content_field="サムネイル画像">
+    <meta name="twitter:image" content="<mt:AssetURL>">
+    </mt:ContentField>
+
+    <link rel="stylesheet" href="<mt:BlogURL>css/style.css">
+    <link rel="stylesheet" href="<mt:BlogURL>css/article-detail.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+    <mt:Include module="ga-tag" global="1">
+</head>
+<body>
+    <!-- Header -->
+    <div id="header-placeholder"></div>
+
+    <main class="article-detail">
+        <div class="container">
+            <!-- Breadcrumb -->
+            <nav class="breadcrumb">
+                <a href="<mt:BlogURL>">ホーム</a>
+                <a href="<mt:BlogURL>knowhow/">転職ノウハウ</a>
+                <span><mt:ContentField content_field="タイトル"><mt:ContentFieldValue escape="html"></mt:ContentField></span>
+            </nav>
+
+            <!-- Article Header -->
+            <header class="article-header">
+                <mt:ContentField content_field="サムネイル画像">
+                <img src="<mt:AssetURL>" alt="<mt:ContentField content_field="タイトル"><mt:ContentFieldValue escape="html"></mt:ContentField>" class="article-thumbnail" loading="lazy">
+                </mt:ContentField>
+
+                <h1 class="article-title"><mt:ContentField content_field="タイトル"><mt:ContentFieldValue escape="html"></mt:ContentField></h1>
+
+                <div class="article-meta">
+                    <span class="article-category"><mt:ContentField content_field="カテゴリ"><mt:CategoryLabel></mt:ContentField></span>
+                    <time class="article-date" datetime="<mt:ContentDate format="%Y-%m-%d">">
+                        <mt:ContentDate format="%Y年%m月%d日">
+                    </time>
+                </div>
+            </header>
+
+            <!-- Introduction (前書き) -->
+            <mt:ContentField content_field="前書き"><mt:ContentFieldValue setvar="introduction"></mt:ContentField>
+            <mt:If name="introduction">
+            <div class="article-introduction">
+                <mt:Var name="introduction" escape="html" regex_replace="/\n/","<br>" nl2br="1">
+            </div>
+            </mt:If>
+
+            <!-- Table of Contents -->
+            <nav class="article-toc">
+                <h2 class="toc-title">目次</h2>
+                <ol class="toc-list" id="tocList">
+                    <!-- JavaScriptで動的生成 -->
+                </ol>
+            </nav>
+
+            <!-- Article Body (Block Editor Output) -->
+            <div class="article-body" id="articleBody">
+                <mt:ContentField content_field="本文">
+                    <mt:BlockEditorBlocks tag="ContentFieldValue">
+                        <mt:Var name="__value__">
+                    </mt:BlockEditorBlocks>
+                </mt:ContentField>
+            </div>
+
+            <!-- CTA -->
+            <section class="article-cta">
+                <h3>転職について相談したい方へ</h3>
+                <p>LINEで気軽にご相談ください。キャリアアドバイザーが詳しくご説明します。</p>
+                <a href="https://lin.ee/xZ1Tksm" class="btn btn-line btn-lg" target="_blank" rel="noopener">
+                    <img src="<mt:BlogURL>assets/LINE_Brand_icon.png" alt="LINE" width="24" height="24" loading="lazy">
+                    友だち追加して相談する
+                </a>
+            </section>
+
+            <!-- Back Link -->
+            <div class="article-back">
+                <a href="<mt:BlogURL>knowhow/">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M19 12H5"></path>
+                        <path d="M12 19l-7-7 7-7"></path>
+                    </svg>
+                    転職ノウハウ一覧に戻る
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <div id="footer-placeholder"></div>
+
+    <script src="<mt:BlogURL>js/includes.js"></script>
+    <script src="<mt:BlogURL>js/article-toc.js"></script>
+</body>
+</html>

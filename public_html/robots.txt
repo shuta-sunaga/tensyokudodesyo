@@ -1,0 +1,14 @@
+# robots.txt for tensyokudodesyo.com
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://tensyokudodesyo.com/sitemap.xml
+
+# Disallow unnecessary paths
+Disallow: /includes/
+Disallow: /data/
+
+# Crawl-delay (optional)
+Crawl-delay: 1

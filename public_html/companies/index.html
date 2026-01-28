@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="転職どうでしょう掲載企業のインタビュー。IT・メーカー・金融など様々な業界の企業の魅力や社風、求める人材像をご紹介。転職先選びの参考にぜひご覧ください。">
+    <title>企業インタビュー | 採用企業の魅力・社風・求める人材 | 転職どうでしょう</title>
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://tensyokudodesyo.com/companies/">
+
+    <!-- OGP -->
+    <meta property="og:title" content="企業インタビュー | 採用企業の魅力・社風">
+    <meta property="og:description" content="転職どうでしょう掲載企業のインタビュー。様々な業界の企業の魅力や社風、求める人材像をご紹介。">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://tensyokudodesyo.com/companies/">
+    <meta property="og:image" content="https://tensyokudodesyo.com/assets/ogp.png">
+    <meta property="og:site_name" content="転職どうでしょう">
+    <meta property="og:locale" content="ja_JP">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="企業インタビュー | 採用企業の魅力・社風">
+    <meta name="twitter:description" content="転職どうでしょう掲載企業のインタビュー。企業の魅力や社風をご紹介。">
+    <meta name="twitter:image" content="https://tensyokudodesyo.com/assets/ogp.png">
+
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header (loaded via includes.js) -->
+    <div id="header-placeholder"></div>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <nav class="breadcrumb">
+                <a href="/">ホーム</a>
+                <span>企業インタビュー</span>
+            </nav>
+            <h1 class="page-title">企業インタビュー</h1>
+            <p class="page-description">魅力的な企業の社風や求める人材像をご紹介します</p>
+        </div>
+    </section>
+
+    <!-- Filter Section -->
+    <section class="column-filter">
+        <div class="container">
+            <div class="filter-controls filter-controls-row">
+                <div class="filter-select-wrapper">
+                    <label for="prefectureFilter">エリア</label>
+                    <select id="prefectureFilter" class="filter-select">
+                        <!-- エリアは categories.js により動的生成 -->
+                        <option value="">すべてのエリア</option>
+                    </select>
+                </div>
+                <div class="filter-select-wrapper">
+                    <label for="industryFilter">業界</label>
+                    <select id="industryFilter" class="filter-select">
+                        <!-- 業界は categories.js により動的生成 -->
+                        <option value="">すべて</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Company List -->
+    <section class="article-list">
+        <div class="container">
+            <div class="article-grid" id="companyGrid">
+                <div class="loading-placeholder" style="grid-column: 1 / -1; text-align: center; padding: 2rem; color: #666;">
+                    企業情報を読み込み中...
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- New Jobs Section -->
+    <section class="new-jobs">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">新着求人</h2>
+                <p class="section-subtitle">最新の求人情報をチェック</p>
+            </div>
+            <div id="newJobsContainer" class="job-listing-grid">
+                <div class="loading-placeholder" style="grid-column: 1 / -1; text-align: center; padding: 2rem; color: #666;">
+                    求人情報を読み込み中...
+                </div>
+            </div>
+            <div class="section-more">
+                <a href="/" class="btn btn-outline">転職先を探す</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- LINE CTA -->
+    <section class="line-cta">
+        <div class="container">
+            <div class="line-cta-content">
+                <div class="line-cta-icon">
+                    <img src="/assets/LINE_Brand_icon.png" alt="LINE" width="48" height="48" loading="lazy">
+                </div>
+                <div class="line-cta-text">
+                    <h2 class="line-cta-title">LINEで気軽に転職相談</h2>
+                    <p class="line-cta-description">
+                        友だち追加するだけで、キャリアアドバイザーに無料相談できます。<br>
+                        非公開求人の紹介や、履歴書添削もLINEで対応！
+                    </p>
+                </div>
+                <div class="line-cta-action">
+                    <a href="https://lin.ee/xZ1Tksm" class="btn btn-line btn-lg" target="_blank" rel="noopener">
+                        <img src="/assets/LINE_Brand_icon.png" alt="LINE" width="24" height="24" loading="lazy">
+                        友だち追加して相談する
+                    </a>
+                    <p class="line-cta-note">※登録無料・すべてのサービスが無料でご利用いただけます</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer (loaded via includes.js) -->
+    <div id="footer-placeholder"></div>
+
+    <script src="/js/includes.js"></script>
+    <script src="/js/categories.js"></script>
+    <script src="/js/main.js"></script>
+</body>
+</html>

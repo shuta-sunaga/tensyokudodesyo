@@ -1,0 +1,640 @@
+/* ==========================================================================
+   Japan SVG Map Styles
+   ========================================================================== */
+
+/* Map Hero Section */
+.map-hero {
+    padding-top: 80px;
+    padding-bottom: 0;
+    background: linear-gradient(135deg, #f9f7f2 0%, #e8f5ec 100%);
+    height: 100vh;
+    min-height: 600px;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+/* Remove margin when new-jobs follows map-hero (home page) */
+.map-hero + .new-jobs {
+    margin-top: 0;
+}
+
+.map-hero-content {
+    text-align: center;
+    margin-bottom: clamp(0.5rem, 2vh, 2rem);
+}
+
+.map-hero h1 {
+    font-size: 2.75rem;
+    font-weight: 900;
+    color: #3d3d3d;
+    margin-bottom: 0.75rem;
+}
+
+.map-hero p {
+    font-size: 1.25rem;
+    color: #5a5a5a;
+    line-height: 1.8;
+}
+
+/* Map Container */
+.japan-map-container {
+    position: relative;
+    width: 100%;
+    max-width: min(600px, 50vh);
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+.japan-map-container object,
+.japan-map-container svg,
+#japanMap {
+    width: 100%;
+    height: auto;
+    max-height: calc(100vh - 300px);
+    object-fit: contain;
+    display: block;
+}
+
+/* Note: Region colors are applied via JavaScript for external SVG compatibility */
+
+/* Map and Tooltip wrapper - side by side on desktop */
+.map-hero .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.map-wrapper {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 2rem;
+    width: 100%;
+    max-width: 900px;
+}
+
+/* Tooltip - fixed position beside map */
+.map-tooltip {
+    background: rgba(45, 55, 48, 0.97);
+    color: #fff;
+    padding: 1.25rem 1.5rem;
+    border-radius: 16px;
+    font-size: 0.875rem;
+    pointer-events: auto;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+    z-index: 100;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    width: 280px;
+    min-height: 200px;
+    flex-shrink: 0;
+}
+
+.map-tooltip.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Region name header */
+.map-tooltip .tooltip-region {
+    font-weight: 700;
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid rgba(90, 158, 111, 0.5);
+    color: #7db88d;
+}
+
+/* Initial message */
+.map-tooltip .tooltip-message {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.875rem;
+    line-height: 1.6;
+}
+
+/* Prefecture links container */
+.map-tooltip .tooltip-prefectures {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+/* Prefecture link */
+.map-tooltip .tooltip-pref-link {
+    display: inline-block;
+    padding: 0.5rem 0.875rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.map-tooltip .tooltip-pref-link:hover {
+    background: rgba(90, 158, 111, 0.5);
+    transform: translateY(-2px);
+    border-color: rgba(90, 158, 111, 0.3);
+    box-shadow: 0 4px 12px rgba(90, 158, 111, 0.3);
+}
+
+/* Inactive prefecture link */
+.map-tooltip .tooltip-pref-link.inactive {
+    background: rgba(60, 60, 60, 0.4);
+    color: rgba(255, 255, 255, 0.35);
+    pointer-events: none;
+    cursor: default;
+    border-color: transparent;
+    font-size: 0.8125rem;
+}
+
+/* Prefecture Grid (Mobile Fallback & Desktop Secondary) */
+.prefecture-list {
+    padding: 3rem 0;
+    background: #fff;
+}
+
+.prefecture-list h2 {
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: #3d3d3d;
+}
+
+.prefecture-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 1rem;
+}
+
+.prefecture-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.25rem;
+    background: #fff;
+    border: 2px solid #e5e2d8;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.prefecture-card.active {
+    border-color: #5a9e6f;
+    background: #f0faf3;
+}
+
+.prefecture-card.active:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(90, 158, 111, 0.2);
+    border-color: #4a8a5f;
+}
+
+.prefecture-card .prefecture-name {
+    font-weight: 600;
+    color: #3d3d3d;
+    font-size: 1rem;
+}
+
+.prefecture-card .job-count {
+    font-size: 0.875rem;
+    color: #5a9e6f;
+    font-weight: 700;
+}
+
+.prefecture-card.inactive {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.prefecture-card.inactive .prefecture-name {
+    color: #7a7a7a;
+}
+
+/* Site Introduction Section */
+.site-intro {
+    padding: 4rem 0;
+    background: #faf8f0;
+    text-align: center;
+}
+
+.site-intro h2 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #3d3d3d;
+    margin-bottom: 1rem;
+}
+
+.site-intro p {
+    font-size: 1.0625rem;
+    color: #5a5a5a;
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.8;
+}
+
+/* Features Section */
+.features-section {
+    padding: 4rem 0;
+    background: #fff;
+}
+
+.features-section h2 {
+    text-align: center;
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #3d3d3d;
+    margin-bottom: 2rem;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+}
+
+.feature-card {
+    text-align: center;
+    padding: 2rem;
+    background: #faf8f0;
+    border-radius: 16px;
+}
+
+.feature-icon {
+    width: 64px;
+    height: 64px;
+    background: linear-gradient(135deg, #5a9e6f, #7db88d);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+}
+
+.feature-icon svg {
+    width: 32px;
+    height: 32px;
+    fill: #fff;
+}
+
+.feature-card h3 {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: #3d3d3d;
+    margin-bottom: 0.5rem;
+}
+
+.feature-card p {
+    font-size: 0.9375rem;
+    color: #5a5a5a;
+    line-height: 1.6;
+}
+
+/* Responsive */
+
+/* PC: Viewport-responsive scaling */
+@media (min-width: 769px) {
+    .map-hero {
+        height: 100vh;
+        min-height: 550px;
+    }
+
+    .map-hero h1 {
+        font-size: clamp(1.75rem, 3.5vh, 2.75rem);
+        margin-bottom: clamp(0.25rem, 1vh, 0.75rem);
+    }
+
+    .map-hero p {
+        font-size: clamp(1rem, 1.75vh, 1.25rem);
+    }
+
+    .japan-map-container {
+        max-width: min(600px, 55vh);
+        padding: clamp(0.5rem, 1vh, 1rem);
+    }
+
+    .japan-map-container object,
+    .japan-map-container svg,
+    #japanMap {
+        max-height: calc(100vh - 280px);
+    }
+
+    .map-tooltip {
+        min-height: clamp(150px, 25vh, 200px);
+        width: clamp(220px, 25vw, 280px);
+    }
+
+    .map-wrapper {
+        gap: clamp(1rem, 2vw, 2rem);
+    }
+}
+
+/* Small height desktops (laptops) */
+@media (max-height: 700px) and (min-width: 769px) {
+    .japan-map-container {
+        max-width: min(400px, 50vh);
+    }
+
+    .japan-map-container object,
+    .japan-map-container svg,
+    #japanMap {
+        max-height: calc(100vh - 220px);
+    }
+
+    .map-tooltip {
+        min-height: 120px;
+        padding: 1rem;
+    }
+
+    .map-tooltip .tooltip-region {
+        font-size: 1.1rem;
+        margin-bottom: 0.75rem;
+        padding-bottom: 0.5rem;
+    }
+}
+
+@media (max-width: 1024px) {
+    .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 900px) {
+    .map-wrapper {
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+    }
+
+    .map-tooltip {
+        width: 100%;
+        max-width: 500px;
+        min-height: auto;
+        order: 2;
+    }
+
+    .japan-map-container {
+        order: 1;
+    }
+}
+
+@media (max-width: 768px) {
+    .map-hero {
+        padding-top: calc(70px + 1rem);
+        height: auto;
+        min-height: auto;
+        padding-bottom: 2rem;
+    }
+
+    .map-hero h1 {
+        font-size: 2rem;
+    }
+
+    .map-hero p {
+        font-size: 1.125rem;
+    }
+
+    .map-hero-content {
+        margin-bottom: 1rem;
+    }
+
+    .japan-map-container {
+        max-width: 100%;
+        padding: 0.5rem;
+    }
+
+    .japan-map-container object,
+    .japan-map-container svg,
+    #japanMap {
+        max-height: none;
+    }
+
+    .map-tooltip {
+        padding: 1rem;
+    }
+
+    .map-tooltip .tooltip-region {
+        font-size: 1.125rem;
+    }
+
+    .prefecture-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .features-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .feature-card {
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .map-hero h1 {
+        font-size: 1.75rem;
+    }
+
+    .prefecture-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ==========================================================================
+   Mobile Bottom Sheet (スマホ用ボトムシート)
+   ※元に戻す場合はこのセクション全体を削除
+   ========================================================================== */
+
+/* Prevent background scroll when bottom sheet is open */
+body.bottom-sheet-open {
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    touch-action: none;
+}
+
+/* Bottom Sheet Overlay */
+.bottom-sheet-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 9998;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    touch-action: none;
+    -webkit-overflow-scrolling: none;
+}
+
+.bottom-sheet-overlay.visible {
+    opacity: 1;
+}
+
+/* Bottom Sheet Container */
+.bottom-sheet {
+    display: none;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #fff;
+    border-radius: 20px 20px 0 0;
+    z-index: 9999;
+    transform: translateY(100%);
+    transition: transform 0.3s cubic-bezier(0.32, 0.72, 0, 1);
+    max-height: 60vh;
+    overflow: hidden;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.bottom-sheet.visible {
+    transform: translateY(0);
+}
+
+/* Bottom Sheet Handle */
+.bottom-sheet-handle {
+    width: 100%;
+    padding: 12px 0 8px;
+    display: flex;
+    justify-content: center;
+    cursor: grab;
+}
+
+.bottom-sheet-handle::before {
+    content: '';
+    width: 40px;
+    height: 4px;
+    background: #ddd;
+    border-radius: 2px;
+}
+
+/* Bottom Sheet Header */
+.bottom-sheet-header {
+    padding: 0 1.5rem 1rem;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.bottom-sheet-region {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #3d3d3d;
+}
+
+/* Close Button */
+.bottom-sheet-close {
+    width: 32px;
+    height: 32px;
+    border: none;
+    background: #f5f5f5;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s;
+    flex-shrink: 0;
+}
+
+.bottom-sheet-close:active {
+    background: #e0e0e0;
+}
+
+.bottom-sheet-close svg {
+    width: 18px;
+    height: 18px;
+    stroke: #666;
+    stroke-width: 2;
+}
+
+/* Bottom Sheet Content */
+.bottom-sheet-content {
+    padding: 1rem 1.5rem 2rem;
+    overflow-y: auto;
+    max-height: calc(60vh - 100px);
+}
+
+/* Bottom Sheet Prefecture Links */
+.bottom-sheet-prefectures {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+}
+
+.bottom-sheet-pref-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.25rem;
+    background: #f0faf3;
+    border: 2px solid #5a9e6f;
+    border-radius: 12px;
+    color: #3d3d3d;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.bottom-sheet-pref-link:active {
+    transform: scale(0.98);
+    background: #e0f5e8;
+}
+
+.bottom-sheet-pref-link .pref-name {
+    font-size: 1rem;
+}
+
+.bottom-sheet-pref-link .job-count {
+    font-size: 0.875rem;
+    color: #5a9e6f;
+    font-weight: 700;
+}
+
+.bottom-sheet-pref-link.inactive {
+    background: #f5f5f5;
+    border-color: #ddd;
+    color: #999;
+    pointer-events: none;
+}
+
+.bottom-sheet-pref-link.inactive .job-count {
+    color: #bbb;
+}
+
+/* Mobile-only: Show bottom sheet elements */
+@media (max-width: 768px) {
+    .bottom-sheet-overlay,
+    .bottom-sheet {
+        display: block;
+    }
+
+    /* Hide desktop tooltip on mobile when using bottom sheet */
+    .map-hero .map-tooltip {
+        display: none !important;
+    }
+
+    /* Adjust map wrapper for mobile */
+    .map-hero .map-wrapper {
+        justify-content: center;
+    }
+
+    /* Make map larger on mobile since tooltip is removed */
+    .map-hero .japan-map-container {
+        max-width: 100%;
+        padding: 0.5rem;
+    }
+}
