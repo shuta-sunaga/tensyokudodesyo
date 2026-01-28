@@ -3,6 +3,12 @@
  * Loads header.html and footer.html and inserts them into placeholder elements
  */
 
+// Guard against double execution
+if (window._includesJsLoaded) {
+    console.warn('includes.js already loaded, skipping');
+} else {
+    window._includesJsLoaded = true;
+
 (function() {
     'use strict';
 
@@ -15,6 +21,12 @@
         const placeholder = document.getElementById(placeholderId);
         if (!placeholder) return;
 
+        // Guard: Check if element still has a parent (not already replaced)
+        if (!placeholder.parentNode) {
+            console.warn(`Placeholder ${placeholderId} has no parent, skipping`);
+            return;
+        }
+
         // Use absolute path for includes - works from any page depth
         const includesPath = '/includes/';
 
@@ -26,8 +38,10 @@
 
             const html = await response.text();
 
-            // Insert HTML
-            placeholder.outerHTML = html;
+            // Double-check element still has parent before replacing
+            if (placeholder.parentNode) {
+                placeholder.outerHTML = html;
+            }
 
             // Dispatch event for other scripts to know include is loaded
             document.dispatchEvent(new CustomEvent('includeLoaded', {
@@ -221,3 +235,5 @@
         init();
     }
 })();
+
+} // End of double-execution guard

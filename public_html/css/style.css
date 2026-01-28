@@ -3176,7 +3176,7 @@ body.menu-open {
 
 /* Jobs Results */
 .jobs-results {
-    background: var(--color-bg-gray);
+    background: var(--color-bg-cream);
     padding: var(--spacing-xl) 0;
 }
 
