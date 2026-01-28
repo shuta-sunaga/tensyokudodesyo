@@ -1,0 +1,95 @@
+<mt:Ignore>
+============================================================
+求人JSON生成テンプレート（子サイト用）
+出力ファイル: data/jobs/{prefecture_id}.json
+テンプレート種類: インデックステンプレート
+設置場所: 各子サイト（静岡県、滋賀県など）
+
+【重要】下記の変数を子サイトに合わせて設定してください:
+- prefecture_id: shizuoka, shiga など
+============================================================
+
+カスタムフィールド設定:
+※MTの「設定 > カスタムフィールド」で以下を作成
+
+| フィールド名 | ベースネーム | タイプ |
+|------------|-------------|-------|
+| 会社名 | company | テキスト |
+| 市区町村 | city | テキスト |
+| 給与 | salary | テキスト |
+| 条件タグ | conditions | テキスト |
+| 職種 | category | ドロップダウン |
+| キーワード | keywords | テキスト |
+| 仕事内容 | description | テキストエリア |
+| 求める人材 | requirements | テキストエリア |
+| 勤務地 | location | 埋め込みオブジェクト |
+| 勤務時間 | workHours | 埋め込みオブジェクト |
+| 雇用形態 | employmentType | ドロップダウン |
+| 給与詳細 | salaryDetail | 埋め込みオブジェクト |
+| 賞与 | bonus | 埋め込みオブジェクト |
+| 待遇・福利厚生 | benefits | テキストエリア |
+| 休日・休暇 | holidays | 埋め込みオブジェクト |
+| 会社所在地 | companyAddress | テキスト |
+| 設立 | established | テキスト |
+| 代表者 | representative | テキスト |
+| 従業員数 | employees | テキスト |
+| 事業内容 | businessContent | テキストエリア |
+| 会社HP | companyUrl | URL |
+| 選考フロー | selectionProcess | 埋め込みオブジェクト |
+| 応募方法 | AppMethod | 埋め込みオブジェクト |
+| おすすめポイント1 | recommendPoint1 | テキスト |
+| おすすめポイント2 | recommendPoint2 | テキスト |
+| おすすめポイント3 | recommendPoint3 | テキスト |
+
+職種(category)のドロップダウン選択肢:
+sales,it,office,marketing,medical,creative,consulting,manufacturing
+
+雇用形態(employmentType)のドロップダウン選択肢:
+正社員,契約社員,派遣社員,パート・アルバイト,業務委託
+
+============================================================
+</mt:Ignore>
+<mt:SetVar name="prefecture_id" value="shizuoka">
+{
+  "prefecture": "<mt:BlogName>",
+  "prefecture_id": "<mt:Var name="prefecture_id">",
+  "lastUpdated": "<mt:Date format="%Y-%m-%dT%H:%M:%S">",
+  "jobs": [
+<mt:Entries sort_by="authored_on" sort_order="descend">
+    {
+      "id": <mt:EntryID>,
+      "title": "<mt:EntryTitle encode_json="1">",
+      "postDate": "<mt:EntryDate format="%Y-%m-%d">",
+      "company": "<$mt:EntryDatacompany encode_json="1"$>",
+      "city": "<$mt:EntryDatacity encode_json="1"$>",
+      "salary": "<$mt:EntryDatasalary encode_json="1"$>",
+      "conditions": "<$mt:EntryDataconditions encode_json="1"$>",
+      "category": "<$mt:EntryDatacategory$>",
+      "keywords": "<$mt:EntryDatakeywords encode_json="1"$>",
+      "detailUrl": "<mt:Var name="prefecture_id">/jobs/job-<mt:EntryID sprintf="%06d">.html",
+      "detail": {
+        "description": "<$mt:EntryDatadescription encode_json="1"$>",
+        "requirements": "<$mt:EntryDatarequirements encode_json="1"$>",
+        "location": "<$mt:EntryDatalocation encode_json="1"$>",
+        "workHours": "<$mt:EntryDataworkHours encode_json="1"$>",
+        "employmentType": "<$mt:EntryDataemploymentType encode_json="1"$>",
+        "salaryDetail": "<$mt:EntryDatasalaryDetail encode_json="1"$>",
+        "bonus": "<$mt:EntryDatabonus encode_json="1"$>",
+        "benefits": "<$mt:EntryDatabenefits encode_json="1"$>",
+        "holidays": "<$mt:EntryDataholidays encode_json="1"$>",
+        "companyAddress": "<$mt:EntryDatacompanyAddress encode_json="1"$>",
+        "established": "<$mt:EntryDataestablished encode_json="1"$>",
+        "representative": "<$mt:EntryDatarepresentative encode_json="1"$>",
+        "employees": "<$mt:EntryDataemployees encode_json="1"$>",
+        "businessContent": "<$mt:EntryDatabusinessContent encode_json="1"$>",
+        "companyUrl": "<$mt:EntryDatacompanyUrl encode_json="1"$>",
+        "selectionProcess": "<$mt:EntryDataselectionProcess encode_json="1"$>",
+        "AppMethod": "<$mt:EntryDataAppMethod encode_json="1"$>",
+        "recommendPoint1": "<$mt:EntryDatarecommendPoint1 encode_json="1"$>",
+        "recommendPoint2": "<$mt:EntryDatarecommendPoint2 encode_json="1"$>",
+        "recommendPoint3": "<$mt:EntryDatarecommendPoint3 encode_json="1"$>"
+      }
+    }<mt:Unless name="__last__">,</mt:Unless>
+</mt:Entries>
+  ]
+}

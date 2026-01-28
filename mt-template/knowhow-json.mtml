@@ -1,0 +1,30 @@
+<mt:Ignore>
+============================================================
+転職ノウハウJSON生成テンプレート
+出力ファイル: data/knowhow.json
+コンテンツタイプ名: 転職ノウハウ
+============================================================
+
+コンテンツフィールド:
+- タイトル (テキスト): 記事タイトル
+- カテゴリ (カテゴリ): ノウハウカテゴリセット
+- サムネイル画像 (アセット): サムネイル画像
+- 前書き (テキスト複数行): 記事の概要
+
+============================================================
+</mt:Ignore>
+{
+  "articles": [
+<mt:Contents content_type="転職ノウハウ" sort_by="authored_on" sort_order="descend">
+    {
+      "id": <mt:ContentID>,
+      "title": "<mt:ContentField content_field="タイトル"><mt:ContentFieldValue encode_json="1"></mt:ContentField>",
+      "category": "<mt:ContentField content_field="カテゴリ"><mt:CategoryBasename></mt:ContentField>",
+      "excerpt": "<mt:ContentField content_field="前書き"><mt:ContentFieldValue encode_json="1" regex_replace="/\n/"," "></mt:ContentField>",
+      "image": "/<mt:ContentField content_field="サムネイル画像"><mt:AssetURL regex_replace="/^https?:\/\/[^\/]+\//",""></mt:ContentField>",
+      "postDate": "<mt:ContentDate format="%Y-%m-%d">",
+      "detailUrl": "/knowhow/detail/<mt:ContentID>.html"
+    }<mt:Unless name="__last__">,</mt:Unless>
+</mt:Contents>
+  ]
+}

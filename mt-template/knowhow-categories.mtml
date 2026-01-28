@@ -1,0 +1,14 @@
+<mt:Ignore>
+============================================================
+転職ノウハウカテゴリJSON生成テンプレート
+出力ファイル: data/categories/knowhow-categories.json
+カテゴリセット名: ノウハウカテゴリ
+============================================================
+</mt:Ignore>
+{
+  "categories": [
+<mt:CategorySets><mt:If tag="CategorySetName" eq="ノウハウカテゴリ"><mt:Categories show_empty="1">
+    { "id": "<mt:CategoryBasename>", "name": "<mt:CategoryLabel encode_json="1">" }<mt:Unless name="__last__">,</mt:Unless></mt:Categories></mt:If></mt:CategorySets>
+
+  ]
+}

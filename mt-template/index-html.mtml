@@ -1,0 +1,202 @@
+<mt:Ignore>
+============================================================
+トップページ
+出力ファイル: index.html
+============================================================
+</mt:Ignore>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="転職どうでしょうは地域密着型の転職支援サービスです。日本全国47都道府県から、あなたに最適な求人情報を探せます。転職者インタビューや企業情報も充実。LINEで気軽に転職相談も可能です。">
+    <title>転職どうでしょう | 地域密着型の転職支援サービス - 都道府県から求人を探す</title>
+
+    <!-- Canonical -->
+    <link rel="canonical" href="<mt:BlogURL>">
+
+    <!-- OGP -->
+    <meta property="og:title" content="転職どうでしょう | 地域密着型の転職支援サービス">
+    <meta property="og:description" content="日本全国47都道府県から、あなたに最適な求人情報を探せます。転職者インタビューや企業情報も充実。LINEで気軽に転職相談も可能です。">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="<mt:BlogURL>">
+    <meta property="og:image" content="<mt:BlogURL>assets/ogp.png">
+    <meta property="og:site_name" content="転職どうでしょう">
+    <meta property="og:locale" content="ja_JP">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="転職どうでしょう | 地域密着型の転職支援サービス">
+    <meta name="twitter:description" content="日本全国47都道府県から、あなたに最適な求人情報を探せます。転職者インタビューや企業情報も充実。">
+    <meta name="twitter:image" content="<mt:BlogURL>assets/ogp.png">
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/japan-map.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+    <mt:Include module="ga-tag" global="1">
+</head>
+<body>
+    <!-- Header (loaded via includes.js) -->
+    <div id="header-placeholder"></div>
+
+    <!-- Japan Map Hero Section -->
+    <section class="map-hero">
+        <div class="container">
+            <div class="map-hero-content">
+                <h1>地域から転職先を探す</h1>
+                <p>気になる都道府県をクリックして<br>地域の求人情報をチェック</p>
+            </div>
+            <div class="map-wrapper">
+                <div class="japan-map-container">
+                    <!-- Japan SVG Map - loaded from external file -->
+                    <object type="image/svg+xml" data="assets/japan-map.svg" id="japanMapObject" style="width: 100%; height: auto;">
+                        日本地図を読み込めませんでした
+                    </object>
+                </div>
+                <!-- Region Tooltip (fixed position beside map) -->
+                <div class="map-tooltip" id="mapTooltip"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 新着求人 Section -->
+    <section class="new-jobs">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">新着求人</h2>
+                <p class="section-subtitle">最新の求人情報をチェック</p>
+            </div>
+            <div id="newJobsContainer" class="job-listing-grid">
+                <div class="loading-placeholder" style="grid-column: 1 / -1; text-align: center; padding: 2rem; color: #666;">
+                    求人情報を読み込み中...
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 転職者インタビュー Section -->
+    <section class="interview-section-home">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">転職者インタビュー</h2>
+                <p class="section-subtitle">転職成功者のリアルな声をお届けします</p>
+            </div>
+            <div id="homeInterviewsContainer" class="article-grid article-grid-home">
+                <div class="loading-placeholder" style="grid-column: 1 / -1; text-align: center; padding: 2rem; color: #666;">
+                    読み込み中...
+                </div>
+            </div>
+            <div class="section-more">
+                <a href="interviews.html" class="btn btn-outline">転職者インタビューをもっと見る</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 企業インタビュー Section -->
+    <section class="company-section-home">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">企業インタビュー</h2>
+                <p class="section-subtitle">魅力的な企業の社風や求める人材像をご紹介</p>
+            </div>
+            <div id="homeCompaniesContainer" class="article-grid article-grid-home">
+                <div class="loading-placeholder" style="grid-column: 1 / -1; text-align: center; padding: 2rem; color: #666;">
+                    読み込み中...
+                </div>
+            </div>
+            <div class="section-more">
+                <a href="companies.html" class="btn btn-outline">企業インタビューをもっと見る</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 転職ノウハウ Section -->
+    <section class="knowhow-section-home">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">転職ノウハウ</h2>
+                <p class="section-subtitle">転職活動に役立つ情報をお届けします</p>
+            </div>
+            <div id="homeKnowhowContainer" class="article-grid article-grid-home">
+                <div class="loading-placeholder" style="grid-column: 1 / -1; text-align: center; padding: 2rem; color: #666;">
+                    読み込み中...
+                </div>
+            </div>
+            <div class="section-more">
+                <a href="knowhow.html" class="btn btn-outline">ノウハウをもっと見る</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- LINE CTA -->
+    <section class="line-cta">
+        <div class="container">
+            <div class="line-cta-content">
+                <div class="line-cta-icon">
+                    <img src="assets/LINE_Brand_icon.png" alt="LINE" width="48" height="48" loading="lazy">
+                </div>
+                <div class="line-cta-text">
+                    <h2 class="line-cta-title">LINEで気軽に転職相談</h2>
+                    <p class="line-cta-description">
+                        友だち追加するだけで、キャリアアドバイザーに無料相談できます。<br>
+                        非公開求人の紹介や、履歴書添削もLINEで対応！
+                    </p>
+                </div>
+                <div class="line-cta-action">
+                    <a href="https://lin.ee/xZ1Tksm" class="btn btn-line btn-lg" target="_blank" rel="noopener">
+                        <img src="assets/LINE_Brand_icon.png" alt="LINE" width="24" height="24" loading="lazy">
+                        友だち追加して相談する
+                    </a>
+                    <p class="line-cta-note">※登録無料・すべてのサービスが無料でご利用いただけます</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer (loaded via includes.js) -->
+    <div id="footer-placeholder"></div>
+
+    <script src="js/includes.js"></script>
+    <script src="js/categories.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/japan-map.js"></script>
+
+    <!-- 構造化データ (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "転職どうでしょう",
+        "url": "<mt:BlogURL>",
+        "description": "地域密着型の転職支援サービス。日本全国47都道府県から求人を探せます。",
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": "<mt:BlogURL>?search={search_term_string}",
+            "query-input": "required name=search_term_string"
+        }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "転職どうでしょう",
+        "url": "<mt:BlogURL>",
+        "logo": "<mt:BlogURL>assets/logo.webp",
+        "sameAs": [
+            "https://www.linkedin.com/company/tensyokudodesyo",
+            "https://www.instagram.com/tensyokudodesyo",
+            "https://twitter.com/tensyokudodesyo"
+        ],
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "contactType": "customer service",
+            "availableLanguage": "Japanese"
+        }
+    }
+    </script>
+</body>
+</html>

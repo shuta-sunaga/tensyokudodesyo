@@ -1,0 +1,32 @@
+<mt:Ignore>
+============================================================
+転職者インタビューJSON生成テンプレート
+出力ファイル: data/interviews.json
+コンテンツタイプ名: 転職者インタビュー
+============================================================
+
+コンテンツフィールド:
+- タイトル (テキスト): インタビュータイトル
+- 企業名 (テキスト): 会社名
+- カテゴリ (カテゴリ): 職種カテゴリセット
+- エリア (カテゴリ): 都道府県カテゴリセット
+- サムネイル画像 (アセット): サムネイル画像
+
+============================================================
+</mt:Ignore>
+{
+  "interviews": [
+<mt:Contents content_type="転職者インタビュー" sort_by="authored_on" sort_order="descend">
+    {
+      "id": <mt:ContentID>,
+      "title": "<mt:ContentField content_field="タイトル"><mt:ContentFieldValue encode_json="1"></mt:ContentField>",
+      "company": "<mt:ContentField content_field="企業名"><mt:ContentFieldValue encode_json="1"></mt:ContentField>",
+      "prefecture": "<mt:ContentField content_field="エリア"><mt:CategoryLabel></mt:ContentField>",
+      "category": "<mt:ContentField content_field="カテゴリ"><mt:CategoryBasename></mt:ContentField>",
+      "image": "/<mt:ContentField content_field="サムネイル画像"><mt:AssetURL regex_replace="/^https?:\/\/[^\/]+\//",""></mt:ContentField>",
+      "postDate": "<mt:ContentDate format="%Y-%m-%d">",
+      "detailUrl": "/interviews/detail/<mt:ContentID>.html"
+    }<mt:Unless name="__last__">,</mt:Unless>
+</mt:Contents>
+  ]
+}

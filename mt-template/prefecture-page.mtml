@@ -1,0 +1,213 @@
+<mt:Ignore>
+============================================================
+都道府県別ページテンプレート
+出力ファイル: {prefecture_id}/index.html
+テンプレート種類: アーカイブテンプレート または インデックステンプレート
+
+アーカイブテンプレートとして使用する場合:
+- カテゴリセット「都道府県」を作成
+- カテゴリアーカイブとして設定
+
+インデックステンプレートとして使用する場合:
+- 各都道府県ごとにテンプレートを複製
+- <mt:SetVar> で prefecture_id, prefecture_name を設定
+
+============================================================
+</mt:Ignore>
+<mt:Ignore>
+使用例（インデックステンプレートの場合）:
+<mt:SetVar name="prefecture_id" value="shiga">
+<mt:SetVar name="prefecture_name" value="滋賀県">
+
+使用例（アーカイブテンプレートの場合）:
+<mt:SetVar name="prefecture_id" value="<mt:CategoryBasename>">
+<mt:SetVar name="prefecture_name" value="<mt:CategoryLabel>">
+</mt:Ignore>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="<mt:Var name="prefecture_name">の転職・求人情報を多数掲載。<mt:Var name="prefecture_name">内の正社員求人を検索。転職者インタビューや企業情報も充実。地域密着の転職支援サービスです。">
+    <title><mt:Var name="prefecture_name">の転職・求人情報 | お仕事探し | 転職どうでしょう</title>
+
+    <!-- Canonical -->
+    <link rel="canonical" href="<mt:BlogURL><mt:Var name="prefecture_id">/">
+
+    <!-- OGP -->
+    <meta property="og:title" content="<mt:Var name="prefecture_name">の転職・求人情報 | 転職どうでしょう">
+    <meta property="og:description" content="<mt:Var name="prefecture_name">の転職・求人情報を多数掲載。<mt:Var name="prefecture_name">内の正社員求人を検索。">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="<mt:BlogURL><mt:Var name="prefecture_id">/">
+    <meta property="og:image" content="<mt:BlogURL>assets/ogp.png">
+    <meta property="og:site_name" content="転職どうでしょう">
+    <meta property="og:locale" content="ja_JP">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="<mt:Var name="prefecture_name">の転職・求人情報 | 転職どうでしょう">
+    <meta name="twitter:description" content="<mt:Var name="prefecture_name">の転職・求人情報を多数掲載。正社員求人を検索。">
+    <meta name="twitter:image" content="<mt:BlogURL>assets/ogp.png">
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <script>
+        // Prefecture configuration for this page
+        window.PREFECTURE_CONFIG = {
+            id: '<mt:Var name="prefecture_id">',
+            name: '<mt:Var name="prefecture_name">'
+        };
+    </script>
+
+    <mt:Include module="ga-tag" global="1">
+</head>
+<body>
+    <!-- Header (loaded via includes.js) -->
+    <div id="header-placeholder"></div>
+
+    <!-- Search Section -->
+    <section class="jobs-search" id="jobs">
+        <div class="container">
+            <nav class="breadcrumb">
+                <a href="../index.html">ホーム</a>
+                <span><mt:Var name="prefecture_name"></span>
+            </nav>
+            <div class="section-header">
+                <h1 class="section-title"><mt:Var name="prefecture_name">の求人</h1>
+                <p class="section-subtitle"><span id="resultsCount">0</span>件の求人があります</p>
+            </div>
+            <form class="search-form" id="jobSearchForm">
+                <input type="hidden" name="prefecture" id="prefectureFilter" value="<mt:Var name="prefecture_name">">
+                <div class="search-form-main">
+                    <div class="search-input-wrapper">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <path d="m21 21-4.35-4.35"></path>
+                        </svg>
+                        <input type="text" name="keyword" id="searchKeyword" placeholder="キーワードで検索（職種名、会社名など）" class="search-input">
+                    </div>
+                    <div class="search-select-wrapper">
+                        <select name="job_type" id="searchJobType" class="search-select">
+                            <option value="">職種を選択</option>
+                            <option value="sales">営業</option>
+                            <option value="it">IT・エンジニア</option>
+                            <option value="office">事務・管理</option>
+                            <option value="marketing">マーケティング</option>
+                            <option value="medical">医療・福祉</option>
+                            <option value="creative">クリエイティブ</option>
+                            <option value="consulting">コンサルティング</option>
+                            <option value="manufacturing">製造・技術</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-search">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <path d="m21 21-4.35-4.35"></path>
+                        </svg>
+                        検索
+                    </button>
+                </div>
+                <div class="search-tags">
+                    <label class="search-tag">
+                        <input type="checkbox" name="conditions" value="remote">
+                        <span>リモートワーク可</span>
+                    </label>
+                    <label class="search-tag">
+                        <input type="checkbox" name="conditions" value="inexperienced">
+                        <span>未経験歓迎</span>
+                    </label>
+                    <label class="search-tag">
+                        <input type="checkbox" name="conditions" value="high_salary">
+                        <span>高年収</span>
+                    </label>
+                    <label class="search-tag">
+                        <input type="checkbox" name="conditions" value="holiday">
+                        <span>土日祝休み</span>
+                    </label>
+                    <label class="search-tag">
+                        <input type="checkbox" name="conditions" value="training">
+                        <span>研修充実</span>
+                    </label>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Job Results -->
+    <section class="jobs-results">
+        <div class="container">
+            <div id="jobListContainer" class="job-listing-grid job-listing-grid-list">
+                <div class="loading-placeholder" style="grid-column: 1 / -1; text-align: center; padding: 2rem; color: #666;">
+                    求人情報を読み込み中...
+                </div>
+            </div>
+            <div id="paginationContainer" class="pagination"></div>
+        </div>
+    </section>
+
+    <!-- Interviews Section -->
+    <section class="interview-section" id="interviews">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">転職者インタビュー</h2>
+                <p class="section-subtitle"><mt:Var name="prefecture_name">で転職に成功した方々の声</p>
+            </div>
+            <div id="interviewsContainer" class="article-grid">
+                <div class="loading-placeholder" style="grid-column: 1 / -1; text-align: center; padding: 2rem; color: #666;">
+                    インタビュー記事を読み込み中...
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Companies Section -->
+    <section class="company-section" id="companies">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">企業インタビュー</h2>
+                <p class="section-subtitle"><mt:Var name="prefecture_name">の魅力的な企業をご紹介</p>
+            </div>
+            <div id="companiesContainer" class="article-grid">
+                <div class="loading-placeholder" style="grid-column: 1 / -1; text-align: center; padding: 2rem; color: #666;">
+                    企業情報を読み込み中...
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LINE CTA -->
+    <section class="line-cta">
+        <div class="container">
+            <div class="line-cta-content">
+                <div class="line-cta-icon">
+                    <img src="../assets/LINE_Brand_icon.png" alt="LINE" width="48" height="48" loading="lazy">
+                </div>
+                <div class="line-cta-text">
+                    <h2 class="line-cta-title">LINEで気軽に転職相談</h2>
+                    <p class="line-cta-description">
+                        友だち追加するだけで、キャリアアドバイザーに無料相談できます。<br>
+                        非公開求人の紹介や、履歴書添削もLINEで対応！
+                    </p>
+                </div>
+                <div class="line-cta-action">
+                    <a href="https://lin.ee/xZ1Tksm" class="btn btn-line btn-lg" target="_blank" rel="noopener">
+                        <img src="../assets/LINE_Brand_icon.png" alt="LINE" width="24" height="24" loading="lazy">
+                        友だち追加して相談する
+                    </a>
+                    <p class="line-cta-note">※登録無料・すべてのサービスが無料でご利用いただけます</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer (loaded via includes.js) -->
+    <div id="footer-placeholder"></div>
+
+    <script src="../js/includes.js"></script>
+    <script src="../js/categories.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/prefecture-page.js"></script>
+</body>
+</html>

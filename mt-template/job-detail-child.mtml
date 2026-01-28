@@ -1,0 +1,251 @@
+<mt:Ignore>
+============================================================
+求人詳細ページテンプレート（子サイト用）
+出力ファイル: jobs/job-000001.html（6桁ゼロパディング）
+テンプレート種類: 記事アーカイブテンプレート
+設置場所: 各子サイト（静岡県、滋賀県など）
+
+出力パス設定: jobs/job-%E.html
+※ %E は6桁ゼロパディングのエントリーID
+============================================================
+</mt:Ignore>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="<mt:EntryTitle encode_html="1">の求人情報。<$mt:EntryDatacompany encode_html="1"$>が<mt:BlogName>で募集中。給与・待遇・仕事内容など詳細をご確認ください。転職どうでしょう">
+    <title><mt:EntryTitle encode_html="1"> | <$mt:EntryDatacompany encode_html="1"$>の求人 | 転職どうでしょう</title>
+
+    <!-- Canonical -->
+    <link rel="canonical" href="<mt:BlogURL>jobs/job-<mt:EntryID pad="6">.html">
+
+    <!-- OGP -->
+    <meta property="og:title" content="<mt:EntryTitle encode_html="1"> | <$mt:EntryDatacompany encode_html="1"$>">
+    <meta property="og:description" content="<mt:EntryTitle encode_html="1">の求人情報。<mt:BlogName>で募集中。">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="<mt:BlogURL>jobs/job-<mt:EntryID pad="6">.html">
+    <meta property="og:image" content="https://tensyokudodesyo.com/assets/ogp.png">
+    <meta property="og:site_name" content="転職どうでしょう">
+    <meta property="og:locale" content="ja_JP">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="<mt:EntryTitle encode_html="1"> | <$mt:EntryDatacompany encode_html="1"$>">
+    <meta name="twitter:description" content="<mt:EntryTitle encode_html="1">の求人情報。<mt:BlogName>で募集中。">
+    <meta name="twitter:image" content="https://tensyokudodesyo.com/assets/ogp.png">
+
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+    <mt:Include module="ga-tag" global="1">
+</head>
+<body>
+    <!-- Header (loaded via includes.js) -->
+    <div id="header-placeholder"></div>
+
+    <section class="page-header">
+        <div class="container">
+            <nav class="breadcrumb">
+                <a href="../../index.html">ホーム</a>
+                <a href="../index.html"><mt:BlogName>の求人</a>
+                <span><mt:EntryTitle encode_html="1"></span>
+            </nav>
+        </div>
+    </section>
+
+    <section class="job-detail">
+        <div class="container">
+            <div class="job-detail-content">
+                <div class="job-detail-header">
+                    <mt:If tag="EntryDate" format="%Y%m%d" gt="<mt:Date format='%Y%m%d' days='-7'>">
+                    <span class="job-detail-new">NEW</span>
+                    </mt:If>
+                    <h1 class="job-detail-title"><mt:EntryTitle encode_html="1"></h1>
+                    <p class="job-detail-company"><$mt:EntryDatacompany encode_html="1"$></p>
+                    <div class="job-detail-tags">
+                        <$mt:EntryDataconditions setvar="conditions_str"$>
+                        <mt:If name="conditions_str">
+                        <mt:Var name="conditions_str" regex_replace="/\s*,\s*/g","," setvar="conditions_clean">
+                        <mt:Loop name="conditions_clean" delimiter=",">
+                        <span class="tag"><mt:Var name="__value__"></span>
+                        </mt:Loop>
+                        </mt:If>
+                    </div>
+                    <p class="job-detail-salary"><$mt:EntryDatasalary encode_html="1"$></p>
+                </div>
+
+                <$mt:EntryDatarecommendPoint1 setvar="point1"$>
+                <$mt:EntryDatarecommendPoint2 setvar="point2"$>
+                <$mt:EntryDatarecommendPoint3 setvar="point3"$>
+                <mt:If name="point1">
+                <div class="job-detail-section job-recommend-section">
+                    <h2 class="job-detail-section-title">おすすめポイント</h2>
+                    <div class="recommend-points">
+                        <mt:If name="point1">
+                        <div class="recommend-point">
+                            <span class="recommend-point-number">1</span>
+                            <p class="recommend-point-text"><mt:Var name="point1" encode_html="1"></p>
+                        </div>
+                        </mt:If>
+                        <mt:If name="point2">
+                        <div class="recommend-point">
+                            <span class="recommend-point-number">2</span>
+                            <p class="recommend-point-text"><mt:Var name="point2" encode_html="1"></p>
+                        </div>
+                        </mt:If>
+                        <mt:If name="point3">
+                        <div class="recommend-point">
+                            <span class="recommend-point-number">3</span>
+                            <p class="recommend-point-text"><mt:Var name="point3" encode_html="1"></p>
+                        </div>
+                        </mt:If>
+                    </div>
+                </div>
+                </mt:If>
+
+                <div class="job-detail-section">
+                    <h2 class="job-detail-section-title">募集要項</h2>
+                    <table class="job-detail-table">
+                        <tbody>
+                            <tr>
+                                <th>仕事内容</th>
+                                <td><$mt:EntryDatadescription nl2br="1"$></td>
+                            </tr>
+                            <tr>
+                                <th>求める人材</th>
+                                <td><$mt:EntryDatarequirements nl2br="1"$></td>
+                            </tr>
+                            <tr>
+                                <th>勤務地</th>
+                                <td><$mt:EntryDatalocation nl2br="1"$></td>
+                            </tr>
+                            <tr>
+                                <th>勤務時間</th>
+                                <td><$mt:EntryDataworkHours nl2br="1"$></td>
+                            </tr>
+                            <tr>
+                                <th>雇用形態</th>
+                                <td><$mt:EntryDataemploymentType encode_html="1"$></td>
+                            </tr>
+                            <tr>
+                                <th>給与</th>
+                                <td><$mt:EntryDatasalaryDetail nl2br="1"$></td>
+                            </tr>
+                            <tr>
+                                <th>賞与</th>
+                                <td><$mt:EntryDatabonus nl2br="1"$></td>
+                            </tr>
+                            <tr>
+                                <th>待遇・福利厚生</th>
+                                <td><$mt:EntryDatabenefits nl2br="1"$></td>
+                            </tr>
+                            <tr>
+                                <th>休日・休暇</th>
+                                <td><$mt:EntryDataholidays nl2br="1"$></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="job-detail-section">
+                    <h2 class="job-detail-section-title">会社概要</h2>
+                    <table class="job-detail-table">
+                        <tbody>
+                            <tr>
+                                <th>会社名</th>
+                                <td><$mt:EntryDatacompany encode_html="1"$></td>
+                            </tr>
+                            <tr>
+                                <th>所在地</th>
+                                <td><$mt:EntryDatacompanyAddress encode_html="1"$></td>
+                            </tr>
+                            <tr>
+                                <th>設立</th>
+                                <td><$mt:EntryDataestablished encode_html="1"$></td>
+                            </tr>
+                            <tr>
+                                <th>代表</th>
+                                <td><$mt:EntryDatarepresentative encode_html="1"$></td>
+                            </tr>
+                            <tr>
+                                <th>従業員数</th>
+                                <td><$mt:EntryDataemployees encode_html="1"$></td>
+                            </tr>
+                            <tr>
+                                <th>事業内容</th>
+                                <td><$mt:EntryDatabusinessContent nl2br="1"$></td>
+                            </tr>
+                            <$mt:EntryDatacompanyUrl setvar="company_url"$>
+                            <mt:If name="company_url">
+                            <tr>
+                                <th>会社HP</th>
+                                <td><a href="<mt:Var name="company_url">" target="_blank" rel="noopener noreferrer"><mt:Var name="company_url"></a></td>
+                            </tr>
+                            </mt:If>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="job-detail-section">
+                    <h2 class="job-detail-section-title">応募・選考について</h2>
+                    <table class="job-detail-table">
+                        <tbody>
+                            <tr>
+                                <th>選考フロー</th>
+                                <td><$mt:EntryDataselectionProcess nl2br="1"$></td>
+                            </tr>
+                            <tr>
+                                <th>応募受付方法</th>
+                                <td><$mt:EntryDataAppMethod nl2br="1"$></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="job-detail-apply">
+                    <a href="https://lin.ee/xZ1Tksm" class="btn btn-line btn-lg" target="_blank" rel="noopener">
+                        <img src="../../assets/LINE_Brand_icon.png" alt="LINE" width="24" height="24">
+                        この求人に応募する
+                    </a>
+                </div>
+                <div class="job-detail-back">
+                    <a href="../index.html" class="btn btn-outline"><mt:BlogName>の求人一覧に戻る</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="line-cta">
+        <div class="container">
+            <div class="line-cta-content">
+                <div class="line-cta-icon">
+                    <img src="../../assets/LINE_Brand_icon.png" alt="LINE" width="48" height="48">
+                </div>
+                <div class="line-cta-text">
+                    <h2 class="line-cta-title">LINEで気軽に転職相談</h2>
+                    <p class="line-cta-description">
+                        友だち追加するだけで、キャリアアドバイザーに無料相談できます。<br>
+                        非公開求人の紹介や、履歴書添削もLINEで対応！
+                    </p>
+                </div>
+                <div class="line-cta-action">
+                    <a href="https://lin.ee/xZ1Tksm" class="btn btn-line btn-lg" target="_blank" rel="noopener">
+                        <img src="../../assets/LINE_Brand_icon.png" alt="LINE" width="24" height="24">
+                        友だち追加して相談する
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer (loaded via includes.js) -->
+    <div id="footer-placeholder"></div>
+
+    <script src="../../js/includes.js"></script>
+    <script src="../../js/categories.js"></script>
+    <script src="../../js/main.js"></script>
+</body>
+</html>
