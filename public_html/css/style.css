@@ -3820,12 +3820,11 @@ body.menu-open {
     .job-detail-table th {
         border-right: none;
         border-bottom: none;
-        padding-bottom: 0.5rem;
+        padding: var(--spacing-md) var(--spacing-md) 0.5rem;
     }
 
     .job-detail-table td {
-        padding-top: 0;
-        padding-bottom: var(--spacing-md);
+        padding: 0.5rem var(--spacing-md) var(--spacing-lg);
         border-bottom: 1px solid var(--color-border);
     }
 
