@@ -258,7 +258,7 @@
 #### 職種(category)のドロップダウン選択肢
 
 ```
-sales,it,office,marketing,medical,creative,consulting,manufacturing
+営業,企画・管理,事務・アシスタント,販売・サービス,クリエイティブ,技術系（IT・通信）,技術系（建築・土木）,技術系（メディカル・科学・食品）,技術系（電気・電子・機械）,金融系専門職,専門職（コンサルタント他）
 ```
 
 #### 雇用形態(employmentType)のドロップダウン選択肢
