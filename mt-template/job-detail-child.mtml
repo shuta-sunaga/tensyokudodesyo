@@ -74,7 +74,7 @@
                         </mt:Loop>
                         </mt:If>
                     </div>
-                    <p class="job-detail-salary"><$mt:EntryDatasalary encode_html="1"$></p>
+                    <p class="job-detail-salary">年収: <$mt:EntryDatasalary encode_html="1"$>円</p>
                 </div>
 
                 <$mt:EntryDatarecommendPoint1 setvar="point1"$>
@@ -110,42 +110,69 @@
                     <h2 class="job-detail-section-title">募集要項</h2>
                     <table class="job-detail-table">
                         <tbody>
+                            <$mt:EntryDatadescription setvar="cf_description"$>
+                            <mt:If name="cf_description">
                             <tr>
                                 <th>仕事内容</th>
-                                <td><$mt:EntryDatadescription nl2br="1"$></td>
+                                <td><mt:Var name="cf_description" nl2br="1"></td>
                             </tr>
+                            </mt:If>
+                            <$mt:EntryDatarequirements setvar="cf_requirements"$>
+                            <mt:If name="cf_requirements">
                             <tr>
                                 <th>求める人材</th>
-                                <td><$mt:EntryDatarequirements nl2br="1"$></td>
+                                <td><mt:Var name="cf_requirements" nl2br="1"></td>
                             </tr>
+                            </mt:If>
+                            <$mt:EntryDatalocation setvar="cf_location"$>
+                            <mt:If name="cf_location">
                             <tr>
                                 <th>勤務地</th>
-                                <td><$mt:EntryDatalocation nl2br="1"$></td>
+                                <td><mt:Var name="cf_location" nl2br="1"></td>
                             </tr>
+                            </mt:If>
+                            <$mt:EntryDataworkHours setvar="cf_workHours"$>
+                            <mt:If name="cf_workHours">
                             <tr>
                                 <th>勤務時間</th>
-                                <td><$mt:EntryDataworkHours nl2br="1"$></td>
+                                <td><mt:Var name="cf_workHours" nl2br="1"></td>
                             </tr>
+                            </mt:If>
+                            <$mt:EntryDataemploymentType setvar="cf_employmentType"$>
+                            <mt:If name="cf_employmentType">
                             <tr>
                                 <th>雇用形態</th>
-                                <td><$mt:EntryDataemploymentType encode_html="1"$></td>
+                                <td><mt:Var name="cf_employmentType" encode_html="1"></td>
                             </tr>
+                            </mt:If>
+                            <$mt:EntryDatasalaryDetail setvar="cf_salaryDetail"$>
+                            <mt:If name="cf_salaryDetail">
                             <tr>
                                 <th>給与</th>
-                                <td><$mt:EntryDatasalaryDetail nl2br="1"$></td>
+                                <td><mt:Var name="cf_salaryDetail" nl2br="1"></td>
                             </tr>
+                            </mt:If>
+                            <$mt:EntryDatabonus setvar="cf_bonus"$>
+                            <mt:If name="cf_bonus">
                             <tr>
                                 <th>賞与</th>
-                                <td><$mt:EntryDatabonus nl2br="1"$></td>
+                                <td><mt:Var name="cf_bonus" nl2br="1"></td>
                             </tr>
+                            </mt:If>
+                            <$mt:EntryDatabenefits setvar="cf_benefits"$>
+                            <mt:If name="cf_benefits">
                             <tr>
                                 <th>待遇・福利厚生</th>
-                                <td><$mt:EntryDatabenefits nl2br="1"$></td>
+                                <td><mt:Var name="cf_benefits" nl2br="1"></td>
                             </tr>
+                            </mt:If>
+                            <$mt:EntryDataholidays setvar="cf_holidays"$>
+                            <mt:If name="cf_holidays">
                             <tr>
                                 <th>休日・休暇</th>
-                                <td><$mt:EntryDataholidays nl2br="1"$></td>
+                                <td><mt:Var name="cf_holidays" nl2br="1"></td>
                             </tr>
+                            </mt:If>
                         </tbody>
                     </table>
                 </div>
@@ -154,30 +181,48 @@
                     <h2 class="job-detail-section-title">会社概要</h2>
                     <table class="job-detail-table">
                         <tbody>
+                            <$mt:EntryDatacompany setvar="cf_company"$>
+                            <mt:If name="cf_company">
                             <tr>
                                 <th>会社名</th>
-                                <td><$mt:EntryDatacompany encode_html="1"$></td>
+                                <td><mt:Var name="cf_company" encode_html="1"></td>
                             </tr>
+                            </mt:If>
+                            <$mt:EntryDatacompanyAddress setvar="cf_companyAddress"$>
+                            <mt:If name="cf_companyAddress">
                             <tr>
                                 <th>所在地</th>
-                                <td><$mt:EntryDatacompanyAddress encode_html="1"$></td>
+                                <td><mt:Var name="cf_companyAddress" encode_html="1"></td>
                             </tr>
+                            </mt:If>
+                            <$mt:EntryDataestablished setvar="cf_established"$>
+                            <mt:If name="cf_established">
                             <tr>
                                 <th>設立</th>
-                                <td><$mt:EntryDataestablished encode_html="1"$></td>
+                                <td><mt:Var name="cf_established" encode_html="1"></td>
                             </tr>
+                            </mt:If>
+                            <$mt:EntryDatarepresentative setvar="cf_representative"$>
+                            <mt:If name="cf_representative">
                             <tr>
                                 <th>代表</th>
-                                <td><$mt:EntryDatarepresentative encode_html="1"$></td>
+                                <td><mt:Var name="cf_representative" encode_html="1"></td>
                             </tr>
+                            </mt:If>
+                            <$mt:EntryDataemployees setvar="cf_employees"$>
+                            <mt:If name="cf_employees">
                             <tr>
                                 <th>従業員数</th>
-                                <td><$mt:EntryDataemployees encode_html="1"$></td>
+                                <td><mt:Var name="cf_employees" encode_html="1"></td>
                             </tr>
+                            </mt:If>
+                            <$mt:EntryDatabusinessContent setvar="cf_businessContent"$>
+                            <mt:If name="cf_businessContent">
                             <tr>
                                 <th>事業内容</th>
-                                <td><$mt:EntryDatabusinessContent nl2br="1"$></td>
+                                <td><mt:Var name="cf_businessContent" nl2br="1"></td>
                             </tr>
+                            </mt:If>
                             <$mt:EntryDatacompanyUrl setvar="company_url"$>
                             <mt:If name="company_url">
                             <tr>
@@ -189,21 +234,31 @@
                     </table>
                 </div>
 
+                <$mt:EntryDataselectionProcess setvar="cf_selectionProcess"$>
+                <$mt:EntryDataAppMethod setvar="cf_appMethod"$>
+                <mt:If name="cf_selectionProcess"><mt:SetVar name="show_selection_section" value="1"></mt:If>
+                <mt:If name="cf_appMethod"><mt:SetVar name="show_selection_section" value="1"></mt:If>
+                <mt:If name="show_selection_section">
                 <div class="job-detail-section">
                     <h2 class="job-detail-section-title">応募・選考について</h2>
                     <table class="job-detail-table">
                         <tbody>
+                            <mt:If name="cf_selectionProcess">
                             <tr>
                                 <th>選考フロー</th>
-                                <td><$mt:EntryDataselectionProcess nl2br="1"$></td>
+                                <td><mt:Var name="cf_selectionProcess" nl2br="1"></td>
                             </tr>
+                            </mt:If>
+                            <mt:If name="cf_appMethod">
                             <tr>
                                 <th>応募受付方法</th>
-                                <td><$mt:EntryDataAppMethod nl2br="1"$></td>
+                                <td><mt:Var name="cf_appMethod" nl2br="1"></td>
                             </tr>
+                            </mt:If>
                         </tbody>
                     </table>
                 </div>
+                </mt:If>
 
                 <div class="job-detail-apply">
                     <a href="https://lin.ee/xZ1Tksm" class="btn btn-line btn-lg" target="_blank" rel="noopener">

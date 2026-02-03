@@ -55,7 +55,7 @@ sales,it,office,marketing,medical,creative,consulting,manufacturing
   "prefecture_id": "<mt:Var name="prefecture_id">",
   "lastUpdated": "<mt:Date format="%Y-%m-%dT%H:%M:%S">",
   "jobs": [
-<mt:Entries sort_by="authored_on" sort_order="descend">
+<mt:Entries lastn="0" sort_by="authored_on" sort_order="descend">
     {
       "id": <mt:EntryID>,
       "title": "<mt:EntryTitle encode_json="1">",
@@ -65,6 +65,7 @@ sales,it,office,marketing,medical,creative,consulting,manufacturing
       "salary": "<$mt:EntryDatasalary encode_json="1"$>",
       "conditions": "<$mt:EntryDataconditions encode_json="1"$>",
       "category": "<$mt:EntryDatacategory$>",
+      "employmentType": "<$mt:EntryDataemploymentType encode_json="1"$>",
       "keywords": "<$mt:EntryDatakeywords encode_json="1"$>",
       "detailUrl": "<mt:Var name="prefecture_id">/jobs/job-<mt:EntryID sprintf="%06d">.html",
       "detail": {
