@@ -909,7 +909,7 @@ function createJobCardHTML(job) {
                         ${escapeHTML(job.prefecture)}${escapeHTML(job.city)}
                     </span>
                     <span class="job-listing-salary">
-                        ${escapeHTML(job.salary)}
+                        年収: ${escapeHTML(job.salary)}円
                     </span>
                 </div>
                 <div class="job-listing-tags">
@@ -1030,7 +1030,7 @@ function renderJobDetail() {
                         <line x1="12" y1="1" x2="12" y2="23"></line>
                         <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
                     </svg>
-                    ${escapeHTML(job.salary)}
+                    年収: ${escapeHTML(job.salary)}円
                 </div>
             </div>
             <div class="job-detail-conditions-header">
