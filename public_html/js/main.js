@@ -885,10 +885,13 @@ function createJobCardHTML(job) {
     const conditionValues = conditions.map(c => mapConditionValue(c));
 
     // Build detailUrl from prefecture_id and job id
-    // If detailUrl doesn't include prefecture_id, prepend it
+    // Always use absolute path (starting with /) to avoid relative path issues
     let detailUrl = job.detailUrl;
-    if (job.prefecture_id && !detailUrl.startsWith(job.prefecture_id)) {
-        detailUrl = `${job.prefecture_id}/${job.detailUrl}`;
+    if (job.prefecture_id && !detailUrl.startsWith('/') && !detailUrl.startsWith(job.prefecture_id)) {
+        detailUrl = `/${job.prefecture_id}/${job.detailUrl}`;
+    } else if (!detailUrl.startsWith('/') && !detailUrl.startsWith('http')) {
+        // Ensure absolute path for all URLs
+        detailUrl = '/' + detailUrl;
     }
 
     return `
