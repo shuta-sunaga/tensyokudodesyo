@@ -34,6 +34,16 @@ const regionColors = {
     'okinawa':  { fill: '#a8e8f5', stroke: '#5cb8d4', hoverFill: '#88d8e8' }
 };
 
+// Inactive region colors (gray)
+const inactiveRegionColors = {
+    fill: '#d0d0d0',
+    stroke: '#a0a0a0',
+    hoverFill: '#c0c0c0'
+};
+
+// Track which regions have at least one active prefecture
+let activeRegions = new Set();
+
 // Current tooltip state
 let currentTooltipRegion = null;
 let isTooltipVisible = false;
@@ -90,6 +100,15 @@ async function initJapanMap() {
                 };
             }
             prefecturesByRegion[regionId].prefectures.push(pref);
+        });
+
+        // Calculate which regions have at least one active prefecture
+        activeRegions = new Set();
+        Object.entries(prefecturesByRegion).forEach(([regionId, regionData]) => {
+            const hasActivePrefecture = regionData.prefectures.some(p => p.active);
+            if (hasActivePrefecture) {
+                activeRegions.add(regionId);
+            }
         });
 
         // Populate prefecture grid first (doesn't depend on SVG)
@@ -150,16 +169,18 @@ function setupMapInteraction() {
 
         // Get region info
         const regionId = regionIdMap[prefInfo.region];
-        const colors = regionColors[regionId];
+        const isRegionActive = activeRegions.has(regionId);
+        const colors = isRegionActive ? regionColors[regionId] : inactiveRegionColors;
 
         // Store region on group
         group.setAttribute('data-region', regionId);
+        group.setAttribute('data-region-active', isRegionActive ? 'true' : 'false');
 
         // Store group reference
         if (!allGroups.has(regionId)) {
             allGroups.set(regionId, []);
         }
-        allGroups.get(regionId).push({ group, shapes: group.querySelectorAll('path, polygon'), colors });
+        allGroups.get(regionId).push({ group, shapes: group.querySelectorAll('path, polygon'), colors, isActive: isRegionActive });
 
         // Apply initial colors to all paths and polygons
         const shapes = group.querySelectorAll('path, polygon');
@@ -189,9 +210,11 @@ function setupMapInteraction() {
             // Highlight all prefectures in this region
             const regionItems = allGroups.get(regionId);
             if (regionItems) {
-                regionItems.forEach(({ shapes, colors }) => {
+                // Get hover fill color (use regionColors for active, inactiveRegionColors for inactive)
+                const hoverColors = isRegionActive ? regionColors[regionId] : inactiveRegionColors;
+                regionItems.forEach(({ shapes }) => {
                     shapes.forEach(shape => {
-                        shape.style.fill = colors.hoverFill;
+                        shape.style.fill = hoverColors.hoverFill;
                         shape.style.strokeWidth = '1';
                     });
                 });
