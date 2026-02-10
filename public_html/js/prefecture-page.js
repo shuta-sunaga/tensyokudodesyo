@@ -12,7 +12,7 @@ let prefectureInterviews = [];
 let prefectureCompanies = [];
 let prefFilteredJobs = [];
 let prefCurrentPage = 1;
-const jobsPerPage = 10;
+const jobsPerPage = 20;
 
 /**
  * Initialize Prefecture Page
@@ -224,7 +224,7 @@ function renderJobs() {
                 <a href="./jobs/job-${String(job.id).padStart(6, '0')}.html">
                     <div class="job-listing-header">
                         ${isNew ? '<span class="job-listing-new">NEW</span>' : ''}
-                        <span class="job-listing-type">正社員</span>
+                        <span class="job-listing-type">${escapeHTML(job.employmentType || '正社員')}</span>
                     </div>
                     <h3 class="job-listing-title">${escapeHTML(job.title)}</h3>
                     <p class="job-listing-company">${escapeHTML(job.company)}</p>
@@ -236,7 +236,7 @@ function renderJobs() {
                             ${escapeHTML(job.prefecture)}${job.city ? escapeHTML(job.city) : ''}
                         </span>
                         <span class="job-listing-salary">
-                            ${escapeHTML(job.salary)}
+                            年収: ${escapeHTML(job.salary)}円
                         </span>
                     </div>
                     <div class="job-listing-tags">
