@@ -69,6 +69,23 @@
 - **effort:** 1h, 4h, 1d, 3d, 1w, 2w
 - **blocked:** waiting-review, waiting-deployment, waiting-feedback
 
+## 重要なルール
+
+### Issueのクローズについて
+- **Issueは勝手にクローズしない**
+- コミット・プッシュ後、必ずユーザーの動作確認を待つ
+- ユーザーから明示的に「クローズして」と指示があった場合のみクローズする
+
+### 動作確認依頼時のルール
+- **更新ファイル一覧を必ず提示する**
+- テーブル形式で「ファイルパス」と「変更内容」を明記
+- 例：
+  ```
+  | ファイル | 変更内容 |
+  |---------|---------|
+  | `public_html/js/japan-map.js` | 非活性エリアのグレー表示ロジック追加 |
+  ```
+
 ## 開発ガイドライン
 
 ### TypeScript設定
@@ -137,11 +154,51 @@ tensyokudodesyo/
 │   └── settings.json     # Claude設定
 ├── .github/
 │   └── workflows/        # 26+ GitHub Actions
+├── public_html/          # Webサイト公開ディレクトリ
+│   ├── assets/           # 画像・SVG等
+│   │   └── japan-map.svg # 日本地図SVG（Geolonia製）
+│   ├── css/              # スタイルシート
+│   │   └── japan-map.css # 日本地図用CSS
+│   ├── js/               # JavaScript
+│   │   └── japan-map.js  # 日本地図インタラクション
+│   ├── data/             # JSONデータ
+│   │   ├── prefectures.json  # 都道府県マスター（active管理）
+│   │   └── jobs/         # 求人データ（都道府県別）
+│   └── index.html        # トップページ
 ├── src/                  # ソースコード
 ├── tests/                # テストコード
 ├── CLAUDE.md             # このファイル
 └── package.json
 ```
+
+## 日本地図（Japan Map）実装詳細
+
+### ファイル構成
+| ファイル | 説明 |
+|---------|------|
+| `public_html/assets/japan-map.svg` | Geolonia製SVG地図。各都道府県は`<g data-prefecture="tokyo">`形式 |
+| `public_html/js/japan-map.js` | インタラクションロジック（516行） |
+| `public_html/css/japan-map.css` | スタイル定義（641行） |
+| `public_html/data/prefectures.json` | 都道府県マスター。`active`フラグで公開状態制御 |
+
+### エリア（9地域）
+```javascript
+regionIdMap = {
+    '北海道': 'hokkaido', '東北': 'tohoku', '関東': 'kanto',
+    '中部': 'chubu', '近畿': 'kinki', '中国': 'chugoku',
+    '四国': 'shikoku', '九州': 'kyushu', '沖縄': 'okinawa'
+}
+```
+
+### 状態管理
+- `prefectures.json`の`active: true/false`で都道府県の公開状態を管理
+- `activeRegions` (Set) でエリア単位の活性状態を追跡
+- **活性エリア**: 1つでも`active: true`の都道府県があるエリア → カラー表示
+- **非活性エリア**: 全都道府県が`active: false` → グレー表示（`#d0d0d0`）
+
+### レスポンシブ対応
+- **デスクトップ (769px+)**: 地図クリック → ツールチップ表示
+- **モバイル (768px以下)**: 地図タップ → ボトムシート表示
 
 ## カスタムスラッシュコマンド
 

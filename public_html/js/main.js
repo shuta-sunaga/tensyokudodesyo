@@ -885,10 +885,13 @@ function createJobCardHTML(job) {
     const conditionValues = conditions.map(c => mapConditionValue(c));
 
     // Build detailUrl from prefecture_id and job id
-    // If detailUrl doesn't include prefecture_id, prepend it
+    // Always use absolute path (starting with /) to avoid relative path issues
     let detailUrl = job.detailUrl;
-    if (job.prefecture_id && !detailUrl.startsWith(job.prefecture_id)) {
-        detailUrl = `${job.prefecture_id}/${job.detailUrl}`;
+    if (job.prefecture_id && !detailUrl.startsWith('/') && !detailUrl.startsWith(job.prefecture_id)) {
+        detailUrl = `/${job.prefecture_id}/${job.detailUrl}`;
+    } else if (!detailUrl.startsWith('/') && !detailUrl.startsWith('http')) {
+        // Ensure absolute path for all URLs
+        detailUrl = '/' + detailUrl;
     }
 
     return `
@@ -909,7 +912,7 @@ function createJobCardHTML(job) {
                         ${escapeHTML(job.prefecture)}${escapeHTML(job.city)}
                     </span>
                     <span class="job-listing-salary">
-                        ${escapeHTML(job.salary)}
+                        年収: ${escapeHTML(job.salary)}円
                     </span>
                 </div>
                 <div class="job-listing-tags">
@@ -1030,7 +1033,7 @@ function renderJobDetail() {
                         <line x1="12" y1="1" x2="12" y2="23"></line>
                         <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
                     </svg>
-                    ${escapeHTML(job.salary)}
+                    年収: ${escapeHTML(job.salary)}円
                 </div>
             </div>
             <div class="job-detail-conditions-header">
