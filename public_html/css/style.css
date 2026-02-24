@@ -2757,6 +2757,7 @@ body.menu-open {
     padding: 1rem 2.5rem 1rem 1rem;
     font-size: 1rem;
     font-family: inherit;
+    color: var(--color-text);
     border: none;
     background: var(--color-bg-gray);
     cursor: pointer;
@@ -3867,7 +3868,8 @@ body.menu-open {
     }
 
     .recommend-point {
-        gap: var(--spacing-sm);
+        flex-direction: column;
+        gap: 0.5rem;
         padding: var(--spacing-sm);
     }
 
