@@ -245,12 +245,30 @@ regionIdMap = {
 
 | テンプレート | 出力先 |
 |------------|-------|
+| `job-detail-child.mtml` | `/jobs/{basename}.html`（例: `/jobs/SJ250065.html`） |
+| `jobs-child-json.mtml` | 都道府県別求人JSON出力 |
 | `interview-detail.mtml` | `/interviews/detail/{ContentID}.html` |
 | `company-detail.mtml` | `/companies/detail/{ContentID}.html` |
 | `knowhow-detail.mtml` | `/knowhow/detail/{ContentID}.html` |
 | `jobs-json.mtml` | 求人JSON出力 |
 | `prefectures-json.mtml` | 都道府県JSON出力 |
 | `header-html.mtml` / `footer-html.mtml` | 共通パーツ |
+
+### 求人詳細の出力パス
+
+- **出力パス設定**: `jobs/%b.html`（`%b` = エントリーのbasename = CSVの求人票ID）
+- 例: 求人票ID `SJ250065` → URL `/oita/jobs/SJ250065.html`
+- 同じ求人票IDで再インポートすれば同じURLが維持されるため、削除→再登録でも404が発生しない
+
+### MTカスタムフィールドの注意事項
+
+- `recommendpoint1`〜`3` の種類は **「テキスト（複数行）」** にすること
+  - 「テキスト」（単行）だとVARCHAR(255)制限で長文インポート時にDBエラーになる
+
+### 求人リンク生成の仕様
+
+- `main.js`: JSONの `detailUrl` をそのまま使用
+- `prefecture-page.js` / `prefecture-pages.js`: `detailUrl` からファイル名を抽出（`detailUrl.split('/').pop()`）
 
 詳細仕様は `docs/detail-page-specification.md` を参照。
 
@@ -287,7 +305,11 @@ regionIdMap = {
 
 ### MT側で別途入力するカラム
 
-`conditions`, `keywords`, `recommendpoint1`〜`3`, `application_method` 等
+`conditions`, `keywords`, `application_method` 等
+
+### 注意事項
+
+- `recommendpoint1`〜`3` のMTカスタムフィールドは **「テキスト（複数行）」** に設定すること（「テキスト」だとVARCHAR(255)制限でインポートエラーになる）
 
 ---
 
