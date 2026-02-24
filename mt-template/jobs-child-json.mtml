@@ -67,7 +67,7 @@ sales,it,office,marketing,medical,creative,consulting,manufacturing
       "category": "<$mt:EntryDatacategory$>",
       "employmentType": "<$mt:EntryDataemploymentType encode_json="1"$>",
       "keywords": "<$mt:EntryDatakeywords encode_json="1"$>",
-      "detailUrl": "<mt:Var name="prefecture_id">/jobs/job-<mt:EntryID sprintf="%06d">.html",
+      "detailUrl": "<mt:Var name="prefecture_id">/jobs/<mt:EntryBasename>.html",
       "detail": {
         "description": "<$mt:EntryDatadescription encode_json="1"$>",
         "requirements": "<$mt:EntryDatarequirements encode_json="1"$>",

@@ -1,12 +1,12 @@
 <mt:Ignore>
 ============================================================
 求人詳細ページテンプレート（子サイト用）
-出力ファイル: jobs/job-000001.html（6桁ゼロパディング）
+出力ファイル: jobs/SJ250065.html（求人票ID = basename）
 テンプレート種類: 記事アーカイブテンプレート
 設置場所: 各子サイト（静岡県、滋賀県など）
 
-出力パス設定: jobs/job-%E.html
-※ %E は6桁ゼロパディングのエントリーID
+出力パス設定: jobs/%b.html
+※ %b はエントリーのbasename（CSVの求人票ID）
 ============================================================
 </mt:Ignore>
 <!DOCTYPE html>
@@ -14,18 +14,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="robots" content="noindex">
     <meta name="description" content="<mt:EntryTitle encode_html="1">の求人情報。<$mt:EntryDatacompany encode_html="1"$>が<mt:BlogName>で募集中。給与・待遇・仕事内容など詳細をご確認ください。転職どうでしょう">
     <title><mt:EntryTitle encode_html="1"> | <$mt:EntryDatacompany encode_html="1"$>の求人 | 転職どうでしょう</title>
 
     <!-- Canonical -->
-    <link rel="canonical" href="<mt:BlogURL>jobs/job-<mt:EntryID pad="6">.html">
+    <link rel="canonical" href="<mt:BlogURL>jobs/<mt:EntryBasename>.html">
 
     <!-- OGP -->
     <meta property="og:title" content="<mt:EntryTitle encode_html="1"> | <$mt:EntryDatacompany encode_html="1"$>">
     <meta property="og:description" content="<mt:EntryTitle encode_html="1">の求人情報。<mt:BlogName>で募集中。">
     <meta property="og:type" content="article">
-    <meta property="og:url" content="<mt:BlogURL>jobs/job-<mt:EntryID pad="6">.html">
+    <meta property="og:url" content="<mt:BlogURL>jobs/<mt:EntryBasename>.html">
     <meta property="og:image" content="https://tensyokudodesyo.com/assets/ogp.png">
     <meta property="og:site_name" content="転職どうでしょう">
     <meta property="og:locale" content="ja_JP">
