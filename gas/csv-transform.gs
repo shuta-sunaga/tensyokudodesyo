@@ -92,6 +92,9 @@ function transformData() {
     従業員数:       col('従業員数'),
     設立年月:       col('設立年月'),
     会社概要:       col('会社概要'),
+    ポイント1:      col('ポジションのポイント1'),
+    ポイント2:      col('ポジションのポイント2'),
+    ポイント3:      col('ポジションのポイント3'),
     会社HP_URL:     col('会社HP_URL'),
   };
 
@@ -362,6 +365,9 @@ function transformData() {
     set('employees',          addCommas(v('従業員数')));
     set('established',        d('設立年月'));
     set('business_content',   v('会社概要'));
+    set('recommendpoint1',    v('ポイント1'));
+    set('recommendpoint2',    v('ポイント2'));
+    set('recommendpoint3',    v('ポイント3'));
     set('companyurl',         v('会社HP_URL'));
 
     // 全セルの全角チルダ「～」を半角「~」に置換
