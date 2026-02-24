@@ -2888,9 +2888,11 @@ body.menu-open {
 }
 
 .job-listing-card a {
-    display: block;
+    display: flex;
+    flex-direction: column;
     padding: var(--spacing-lg);
     color: inherit;
+    height: 100%;
 }
 
 .job-listing-header {
@@ -2925,18 +2927,26 @@ body.menu-open {
     color: var(--color-text);
     line-height: 1.5;
     margin-bottom: var(--spacing-xs);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 .job-listing-company {
     font-size: 0.875rem;
     color: var(--color-text-muted);
     margin-bottom: var(--spacing-sm);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .job-listing-info {
     display: flex;
     flex-wrap: wrap;
     gap: var(--spacing-md);
+    margin-top: auto;
     margin-bottom: var(--spacing-sm);
 }
 
@@ -3845,6 +3855,25 @@ body.menu-open {
 
     .job-detail-salary {
         font-size: 1.125rem;
+    }
+
+    /* おすすめポイント SP対応 */
+    .job-recommend-section {
+        padding: var(--spacing-sm);
+    }
+
+    .recommend-points {
+        gap: var(--spacing-sm);
+    }
+
+    .recommend-point {
+        gap: var(--spacing-sm);
+        padding: var(--spacing-sm);
+    }
+
+    .recommend-point-text {
+        font-size: 0.9375rem;
+        line-height: 1.6;
     }
 }
 
