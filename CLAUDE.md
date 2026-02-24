@@ -76,6 +76,8 @@ tensyokudodesyo/
 │   ├── robots.txt
 │   ├── sitemap.xml
 │   └── serve.json
+├── gas/
+│   └── csv-transform.gs            # 求人CSV整形GASスクリプト
 ├── mt-template/                    # Movable Type テンプレート群（約25ファイル）
 ├── docs/
 │   └── detail-page-specification.md # MT詳細ページ仕様書
@@ -251,6 +253,41 @@ regionIdMap = {
 | `header-html.mtml` / `footer-html.mtml` | 共通パーツ |
 
 詳細仕様は `docs/detail-page-specification.md` を参照。
+
+---
+
+## GAS CSV整形スクリプト (`gas/csv-transform.gs`)
+
+自社求人管理システムからエクスポートしたデータを、Movable Type インポート用CSV（Shift_JIS）に変換するGoogle Apps Scriptスクリプト。
+
+### 運用フロー
+
+1. 自社求人管理システムから求人データをエクスポート
+2. Googleスプレッドシートの「整形前」シートに貼り付け
+3. メニュー「CSV整形」→「データを整形する」を実行
+4. 「整形後」シートに変換結果が出力 + Shift_JIS CSVがマイドライブに保存
+5. ダウンロードしたCSVをMT管理画面から手動インポート
+
+### 主な変換処理
+
+- **カラムマッピング**: 整形前26項目 → 整形後44項目（MT記事フォーマット）
+- **都市名自動抽出**: 勤務地詳細から「都道府県+市区町村」を正規表現で抽出（`extractCity`）
+- **数値フォーマット**: 年収・給与・従業員数にカンマ付与
+- **括弧統一**: 半角括弧→全角括弧（職種大分類）
+- **環境依存文字変換**: 丸囲み数字、ローマ数字、㈱、異体字（髙→高等）を安全な文字に置換
+- **Shift_JIS安全性チェック**: 変換不能文字は`?`に置換し、ログに記録
+
+### 整形後CSVの固定値カラム
+
+| カラム | 値 |
+|-------|-----|
+| `class` | `entry` |
+| `author` | `admin` |
+| `authored_on` / `modified_on` | 実行時刻 |
+
+### MT側で別途入力するカラム
+
+`conditions`, `keywords`, `recommendpoint1`〜`3`, `application_method` 等
 
 ---
 
