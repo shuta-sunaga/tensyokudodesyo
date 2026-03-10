@@ -2097,6 +2097,53 @@ body.menu-open {
 }
 
 /* --------------------------------------------------------------------------
+   Privacy Policy Page
+   -------------------------------------------------------------------------- */
+.privacy-page {
+    padding: var(--spacing-3xl) 0;
+}
+
+.privacy-content {
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.9;
+    color: var(--color-text);
+}
+
+.privacy-section {
+    margin-top: var(--spacing-2xl);
+}
+
+.privacy-section h2 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: var(--spacing-md);
+    padding-bottom: var(--spacing-xs);
+    border-bottom: 2px solid var(--color-primary);
+}
+
+.privacy-section ul {
+    padding-left: 1.5em;
+    margin-top: var(--spacing-sm);
+}
+
+.privacy-section ul li {
+    margin-bottom: var(--spacing-xs);
+}
+
+.privacy-contact {
+    margin-top: var(--spacing-md);
+    padding: var(--spacing-lg);
+    background: var(--color-bg-warm);
+    border-radius: 8px;
+}
+
+.privacy-contact a {
+    color: var(--color-primary);
+    text-decoration: underline;
+}
+
+/* --------------------------------------------------------------------------
    Section More Link
    -------------------------------------------------------------------------- */
 .section-more {
