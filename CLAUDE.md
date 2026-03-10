@@ -25,7 +25,7 @@
 tensyokudodesyo/
 ├── public_html/                    # Webサイト公開ディレクトリ
 │   ├── index.html                  # トップページ（日本地図MV）
-│   ├── contact.html                # お問い合わせページ
+│   ├── privacy.html                # 個人情報の取り扱いページ
 │   ├── assets/                     # 静的アセット
 │   │   ├── japan-map.svg           # 日本地図SVG（Geolonia製）
 │   │   ├── logo.webp               # サービスロゴ
@@ -108,7 +108,7 @@ tensyokudodesyo/
 | `/companies/detail/{id}.html` | 企業詳細 | MT生成 |
 | `/knowhow/` | 転職ノウハウ一覧 | `knowhow.json` |
 | `/knowhow/detail/{id}.html` | ノウハウ詳細 | MT生成 |
-| `/contact.html` | お問い合わせ | 静的 |
+| `/privacy.html` | 個人情報の取り扱い | 静的 |
 | `/{prefecture}/` | 都道府県求人一覧 | `data/jobs/{prefecture}.json` |
 | `/{prefecture}/jobs/job-{id}.html` | 求人詳細 | 静的HTML |
 
