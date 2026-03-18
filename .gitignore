@@ -1,3 +1,4 @@
 .env
+site.config.yaml
 node_modules/
 nul

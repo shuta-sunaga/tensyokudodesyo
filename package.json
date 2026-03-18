@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/shuta-sunaga/tensyokudodesyo#readme",
   "devDependencies": {
-    "puppeteer": "^24.35.0"
+    "puppeteer": "^24.35.0",
+    "sharp": "^0.34.5"
   }
 }

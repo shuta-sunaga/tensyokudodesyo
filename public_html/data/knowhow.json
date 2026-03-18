@@ -1,58 +1,31 @@
 {
   "articles": [
     {
-      "id": 1,
-      "title": "面接で聞かれる定番の質問と回答例",
-      "category": "kh01",
-      "excerpt": "面接官がよく聞く質問とその意図、効果的な回答例を紹介します。",
-      "image": "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=400&h=300&fit=crop",
-      "postDate": "2026-01-20",
-      "detailUrl": "#"
-    },
-    {
-      "id": 2,
-      "title": "採用担当者に響く履歴書の書き方",
-      "category": "kh02",
-      "excerpt": "書類選考を通過するための履歴書作成のポイントを解説します。",
-      "image": "https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=400&h=300&fit=crop",
-      "postDate": "2026-01-18",
-      "detailUrl": "#"
-    },
-    {
-      "id": 3,
-      "title": "自己分析の3つのステップ",
-      "category": "kh03",
-      "excerpt": "転職成功の鍵となる自己分析の方法を具体的に解説します。",
-      "image": "https://images.unsplash.com/photo-1434626881859-194d67b2b86f?w=400&h=300&fit=crop",
-      "postDate": "2026-01-15",
-      "detailUrl": "#"
-    },
-    {
-      "id": 4,
-      "title": "面接当日のマナーと身だしなみ",
-      "category": "kh01",
-      "excerpt": "面接で好印象を与えるための服装やマナーについて紹介します。",
-      "image": "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
-      "postDate": "2026-01-12",
-      "detailUrl": "#"
+      "id": 6,
+      "title": "転職活動の始め方ガイド〜準備から内定までの流れ",
+      "category": "kh05",
+      "excerpt": "「転職したいけれど、何から始めればいいか分からない」——そんな悩みを抱えている方は少なくありません。この記事では、転職活動の全体像を「準備」「求人探し」「応募・選考」「内定・退職」の4つのフェーズに分けて、それぞれのステップで何をすべきかを具体的に解説します。",
+      "image": "/assets/knowhow-006.webp",
+      "postDate": "2026-03-18",
+      "detailUrl": "/knowhow/detail/6.html"
     },
     {
       "id": 5,
-      "title": "職務経歴書で実績をアピールする方法",
+      "title": "職務経歴書で採用担当者の心を掴む！書き方と例文で徹底解説",
       "category": "kh02",
-      "excerpt": "数字で実績を示し、採用担当者に響く職務経歴書の書き方を解説。",
-      "image": "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=400&h=300&fit=crop",
-      "postDate": "2026-01-10",
-      "detailUrl": "#"
+      "excerpt": "転職活動において職務経歴書はあなた自身を効果的にアピールしてくれる重要な書類です。理想の企業へ入社するためには、採用担当者の目に留まり、興味をもってもらう職務経歴書を作成する必要があります。\r\n\r\nしかし、初めて職務経歴書を作成する方や、なかなか書類選考を通過できない方はどのように書けば良いのか悩んでしまうのではないでしょうか。\r\n\r\nこの記事では職務経歴書の基本的な書き方から、職種別の例文、よくあるNG例と改善策まで、採用担当者の心を掴む作成方法を網羅的に解説します。\r\n\r\nぜひ、最後までご一読ください。",
+      "image": "/assets/rectangle_large_type_2_d5ce45e9a80bf90b0c566af0f734a6b6.webp",
+      "postDate": "2026-01-27",
+      "detailUrl": "/knowhow/detail/5.html"
     },
     {
-      "id": 6,
-      "title": "転職先の業界研究の進め方",
-      "category": "kh04",
-      "excerpt": "志望業界の情報収集方法と、面接で活かすためのポイントを紹介。",
-      "image": "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=400&h=300&fit=crop",
-      "postDate": "2026-01-08",
-      "detailUrl": "#"
+      "id": 4,
+      "title": "履歴書の書き方｜受かるためのコツと採用担当が見ているポイント",
+      "category": "kh02",
+      "excerpt": "履歴書はあなた自身をアピールする重要なツールです。採用担当者は履歴書から応募者の学歴や職歴、取得資格、志望動機のほか、希望する勤務形態や就業場所といった基本情報を確認して、面接に進めるかどうかを判断します。\r\n\r\nしかし、「どのように書けば印象が良くなるか分からない」、「書く際に注意しなければならないポイントが分からない」といった悩みを持たれている方も多いのが現状です。\r\n\r\nこの記事では、採用担当者が履歴書で見ているポイントや、効果的な書き方のコツ、そして具体的な例文集を記載しています。本記事を参考に履歴書を作成することで、書類選考の通過率を上げましょう。",
+      "image": "/assets/rectangle_large_type_2_a4a633b1ac59ef1aa0ebd66187b7becf.webp",
+      "postDate": "2026-01-20",
+      "detailUrl": "/knowhow/detail/4.html"
     }
   ]
 }
