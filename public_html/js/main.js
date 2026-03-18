@@ -909,7 +909,7 @@ function createJobCardHTML(job) {
                             <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
                             <circle cx="12" cy="10" r="3"></circle>
                         </svg>
-                        ${escapeHTML(job.prefecture)}${escapeHTML(job.city)}
+                        ${formatLocation(job.prefecture, job.city)}
                     </span>
                     <span class="job-listing-salary">
                         年収: ${escapeHTML(job.salary)}円
@@ -921,6 +921,19 @@ function createJobCardHTML(job) {
             </a>
         </article>
     `;
+}
+
+/**
+ * Format job location avoiding duplicate prefecture name
+ * e.g. prefecture="香川県", city="香川県さぬき市" → "香川県さぬき市"
+ */
+function formatLocation(prefecture, city) {
+    const pref = prefecture || '';
+    const c = city || '';
+    if (pref && c.startsWith(pref)) {
+        return escapeHTML(c);
+    }
+    return escapeHTML(pref) + escapeHTML(c);
 }
 
 /**
@@ -1026,7 +1039,7 @@ function renderJobDetail() {
                         <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
                         <circle cx="12" cy="10" r="3"></circle>
                     </svg>
-                    ${escapeHTML(job.prefecture)}${escapeHTML(job.city)}
+                    ${formatLocation(job.prefecture, job.city)}
                 </div>
                 <div class="job-detail-meta-item">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -1056,7 +1069,7 @@ function renderJobDetail() {
                     </tr>
                     <tr>
                         <th>勤務地</th>
-                        <td>${escapeHTML(detail.location || job.prefecture + job.city)}</td>
+                        <td>${detail.location ? escapeHTML(detail.location) : formatLocation(job.prefecture, job.city)}</td>
                     </tr>
                     <tr>
                         <th>勤務時間</th>

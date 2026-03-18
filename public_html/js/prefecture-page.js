@@ -233,7 +233,7 @@ function renderJobs() {
                             <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
                                 <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
                             </svg>
-                            ${escapeHTML(job.prefecture)}${job.city ? escapeHTML(job.city) : ''}
+                            ${formatLocation(job.prefecture, job.city)}
                         </span>
                         <span class="job-listing-salary">
                             年収: ${escapeHTML(job.salary)}円
@@ -412,6 +412,18 @@ function escapeHTML(str) {
     const div = document.createElement('div');
     div.textContent = str;
     return div.innerHTML;
+}
+
+/**
+ * Format job location avoiding duplicate prefecture name
+ */
+function formatLocation(prefecture, city) {
+    const pref = prefecture || '';
+    const c = city || '';
+    if (pref && c.startsWith(pref)) {
+        return escapeHTML(c);
+    }
+    return escapeHTML(pref) + escapeHTML(c);
 }
 
 /**
