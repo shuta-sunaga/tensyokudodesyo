@@ -40,7 +40,74 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
 
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+
     <mt:Include module="ga-tag" global="1">
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "ホーム",
+                "item": "<mt:BlogURL>"
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "<mt:BlogName>の求人",
+                "item": "<mt:BlogURL>"
+            },
+            {
+                "@type": "ListItem",
+                "position": 3,
+                "name": "<mt:EntryTitle encode_html="1">"
+            }
+        ]
+    }
+    </script>
+
+    <!-- JSON-LD: JobPosting -->
+    <$mt:EntryDatadescription setvar="ld_description"$>
+    <$mt:EntryDatalocation setvar="ld_location"$>
+    <$mt:EntryDataemploymentType setvar="ld_employmentType"$>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "JobPosting",
+        "title": "<mt:EntryTitle encode_html="1">",
+        "description": "<mt:Var name="ld_description" escape="html">",
+        "datePosted": "<mt:EntryDate format="%Y-%m-%d">",
+        "hiringOrganization": {
+            "@type": "Organization",
+            "name": "<$mt:EntryDatacompany encode_html="1"$>"
+        },
+        "jobLocation": {
+            "@type": "Place",
+            "address": {
+                "@type": "PostalAddress",
+                "addressRegion": "<mt:BlogName>",
+                "addressLocality": "<mt:Var name="ld_location" escape="html">"
+            }
+        }<mt:If name="ld_employmentType">,
+        "employmentType": "<mt:Var name="ld_employmentType" escape="html">"</mt:If>,
+        "baseSalary": {
+            "@type": "MonetaryAmount",
+            "currency": "JPY",
+            "value": {
+                "@type": "QuantitativeValue",
+                "value": "<$mt:EntryDatasalary encode_html="1"$>"
+            }
+        }
+    }
+    </script>
 </head>
 <body>
     <!-- Header (loaded via includes.js) -->

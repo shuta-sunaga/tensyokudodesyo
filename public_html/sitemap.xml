@@ -2,128 +2,156 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <!-- Main Pages -->
     <url>
-        <loc>https://tensyokudodesyo.com/</loc>
-        <lastmod>2026-01-21</lastmod>
+        <loc>https://www.tensyokudodesyo.com/</loc>
+        <lastmod>2026-03-19</lastmod>
         <changefreq>daily</changefreq>
         <priority>1.0</priority>
     </url>
     <url>
-        <loc>https://tensyokudodesyo.com/interviews.html</loc>
-        <lastmod>2026-01-21</lastmod>
+        <loc>https://www.tensyokudodesyo.com/privacy.html</loc>
+        <lastmod>2026-03-19</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.3</priority>
+    </url>
+
+    <!-- Interviews -->
+    <url>
+        <loc>https://www.tensyokudodesyo.com/interviews/</loc>
+        <lastmod>2026-03-19</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://tensyokudodesyo.com/companies.html</loc>
-        <lastmod>2026-01-21</lastmod>
+        <loc>https://www.tensyokudodesyo.com/interviews/detail/1.html</loc>
+        <lastmod>2026-03-19</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://www.tensyokudodesyo.com/interviews/detail/3.html</loc>
+        <lastmod>2026-03-19</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <!-- Companies -->
+    <url>
+        <loc>https://www.tensyokudodesyo.com/companies/</loc>
+        <lastmod>2026-03-19</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://tensyokudodesyo.com/knowhow.html</loc>
-        <lastmod>2026-01-21</lastmod>
+        <loc>https://www.tensyokudodesyo.com/companies/detail/1.html</loc>
+        <lastmod>2026-03-19</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <!-- Knowhow -->
+    <url>
+        <loc>https://www.tensyokudodesyo.com/knowhow/</loc>
+        <lastmod>2026-03-19</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://tensyokudodesyo.com/contact.html</loc>
-        <lastmod>2026-01-21</lastmod>
+        <loc>https://www.tensyokudodesyo.com/knowhow/detail/1.html</loc>
+        <lastmod>2026-03-19</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.6</priority>
     </url>
-
-    <!-- Knowhow Detail Pages -->
     <url>
-        <loc>https://tensyokudodesyo.com/knowhow/detail/6.html</loc>
-        <lastmod>2026-03-18</lastmod>
+        <loc>https://www.tensyokudodesyo.com/knowhow/detail/6.html</loc>
+        <lastmod>2026-03-19</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.6</priority>
     </url>
 
     <!-- Prefecture Pages - Shiga -->
     <url>
-        <loc>https://tensyokudodesyo.com/shiga/</loc>
-        <lastmod>2026-01-21</lastmod>
+        <loc>https://www.tensyokudodesyo.com/shiga/</loc>
+        <lastmod>2026-03-19</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
-        <loc>https://tensyokudodesyo.com/shiga/jobs/job-1.html</loc>
-        <lastmod>2026-01-21</lastmod>
+        <loc>https://www.tensyokudodesyo.com/shiga/jobs/job-1.html</loc>
+        <lastmod>2026-03-19</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://tensyokudodesyo.com/shiga/jobs/job-3.html</loc>
-        <lastmod>2026-01-21</lastmod>
+        <loc>https://www.tensyokudodesyo.com/shiga/jobs/job-3.html</loc>
+        <lastmod>2026-03-19</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://tensyokudodesyo.com/shiga/jobs/job-5.html</loc>
-        <lastmod>2026-01-21</lastmod>
+        <loc>https://www.tensyokudodesyo.com/shiga/jobs/job-5.html</loc>
+        <lastmod>2026-03-19</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://tensyokudodesyo.com/shiga/jobs/job-7.html</loc>
-        <lastmod>2026-01-21</lastmod>
+        <loc>https://www.tensyokudodesyo.com/shiga/jobs/job-7.html</loc>
+        <lastmod>2026-03-19</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://tensyokudodesyo.com/shiga/jobs/job-8.html</loc>
-        <lastmod>2026-01-21</lastmod>
+        <loc>https://www.tensyokudodesyo.com/shiga/jobs/job-8.html</loc>
+        <lastmod>2026-03-19</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://tensyokudodesyo.com/shiga/jobs/job-10.html</loc>
-        <lastmod>2026-01-21</lastmod>
+        <loc>https://www.tensyokudodesyo.com/shiga/jobs/job-10.html</loc>
+        <lastmod>2026-03-19</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://tensyokudodesyo.com/shiga/jobs/job-12.html</loc>
-        <lastmod>2026-01-21</lastmod>
+        <loc>https://www.tensyokudodesyo.com/shiga/jobs/job-12.html</loc>
+        <lastmod>2026-03-19</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
     </url>
 
     <!-- Prefecture Pages - Shizuoka -->
     <url>
-        <loc>https://tensyokudodesyo.com/shizuoka/</loc>
-        <lastmod>2026-01-21</lastmod>
+        <loc>https://www.tensyokudodesyo.com/shizuoka/</loc>
+        <lastmod>2026-03-19</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
-        <loc>https://tensyokudodesyo.com/shizuoka/jobs/job-2.html</loc>
-        <lastmod>2026-01-21</lastmod>
+        <loc>https://www.tensyokudodesyo.com/shizuoka/jobs/job-2.html</loc>
+        <lastmod>2026-03-19</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://tensyokudodesyo.com/shizuoka/jobs/job-4.html</loc>
-        <lastmod>2026-01-21</lastmod>
+        <loc>https://www.tensyokudodesyo.com/shizuoka/jobs/job-4.html</loc>
+        <lastmod>2026-03-19</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://tensyokudodesyo.com/shizuoka/jobs/job-6.html</loc>
-        <lastmod>2026-01-21</lastmod>
+        <loc>https://www.tensyokudodesyo.com/shizuoka/jobs/job-6.html</loc>
+        <lastmod>2026-03-19</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://tensyokudodesyo.com/shizuoka/jobs/job-9.html</loc>
-        <lastmod>2026-01-21</lastmod>
+        <loc>https://www.tensyokudodesyo.com/shizuoka/jobs/job-9.html</loc>
+        <lastmod>2026-03-19</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://tensyokudodesyo.com/shizuoka/jobs/job-11.html</loc>
-        <lastmod>2026-01-21</lastmod>
+        <loc>https://www.tensyokudodesyo.com/shizuoka/jobs/job-11.html</loc>
+        <lastmod>2026-03-19</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
     </url>
