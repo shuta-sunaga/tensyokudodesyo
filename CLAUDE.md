@@ -5,7 +5,7 @@
 **転職どうでしょう** (`tensyokudodesyo.com`) - 地域密着型の転職支援サービスサイト
 
 - **運営形態**: 法人運営
-- **公開URL**: https://tensyokudodesyo.com
+- **公開URL**: https://www.tensyokudodesyo.com（canonical URLは `www` 付きに統一）
 - **ホスティング**: AWS
 - **CMS**: Movable Type 9.0.5（詳細ページ・JSONデータの自動生成に使用）
 - **フロントエンド**: バニラHTML/CSS/JS（フレームワーク不使用の静的サイト）
@@ -41,7 +41,8 @@ tensyokudodesyo/
 │   │   ├── prefecture-page.js      # 都道府県ページ制御（検索・フィルタ・ページネーション）
 │   │   ├── categories.js           # カテゴリ管理（CategoryManagerシングルトン）
 │   │   ├── includes.js             # ヘッダー/フッター動的読込
-│   │   └── article-toc.js          # 記事目次生成（H2/H3階層対応）
+│   │   ├── article-toc.js          # 記事目次生成（H2/H3階層対応）
+│   │   └── related-articles.js     # 関連記事動的表示（コンテンツ横断リンク）
 │   ├── data/
 │   │   ├── prefectures.json        # 都道府県マスター（47都道府県、active管理）
 │   │   ├── jobs.json               # 全求人データ（詳細情報付き・12件）
@@ -217,6 +218,19 @@ regionIdMap = {
 | `categories.js` | `CategoryManager`シングルトン - 4種のカテゴリJSON並行ロード、ID⇔表示名変換、フィルタ用selectの動的生成 |
 | `includes.js` | ヘッダー/フッターの動的フェッチ・挿入、ベースパス計算（ページ階層に応じた相対パス）、アクティブナビリンク判定 |
 | `article-toc.js` | 記事詳細ページの目次自動生成（H2/H3階層構造対応、スムーススクロール） |
+| `related-articles.js` | 詳細ページに関連記事を動的表示。ページ種別を自動判定し、コンテンツ横断リンクを生成。CategoryManagerがない場合はカテゴリJSONを直接読み込む |
+
+### 関連記事の表示ロジック（`related-articles.js`）
+
+| ページ種別 | 表示内容 |
+|-----------|---------|
+| ノウハウ詳細 | インタビュー2件 + 他ノウハウ2件 |
+| インタビュー詳細 | ノウハウ2件 + 他インタビュー2件 |
+| 企業詳細 | ノウハウ2件 + 他企業2件 |
+| 求人詳細 | ノウハウ3件 |
+
+- `.article-back` または `.job-detail-back` の直前に挿入
+- CSSスタイルは `style.css`（全ページ共通）と `article-detail.css`（記事ページ用）の両方に定義
 
 ### JS読み込み順序（標準パターン）
 ```html
@@ -388,10 +402,29 @@ Blog Generation Pipeline仕様書 v1.0（`seisansei-website/docs/blog-pipeline-s
 
 ノウハウ記事はMTテンプレートでも、パイプラインでも生成可能。**分離管理＋表示時マージ方式**を採用：
 
-- **MT生成分**: MT側のJSON出力で管理（ファイル名未定、例: `knowhow-mt.json`）
+- **MT生成分**: `knowhow-mt.json`（MT側のJSON出力テンプレートで生成）
 - **パイプライン生成分**: `knowhow.json` で管理
-- **表示時**: JS側で両データをマージし、日付降順で一覧・トップページに表示
-- これにより互いのデータを上書きするリスクがなくなる
+- **表示時**: `main.js` の `loadAllKnowhowArticles()` で両JSONを `Promise.allSettled` でマージし、日付降順で一覧・トップページに表示
+- どちらかのJSONが404でもサイトが壊れない設計
+
+### `/generate-knowhow` コマンド
+
+ノウハウ記事の生成〜デプロイを自動化するスラッシュコマンド（`.claude/commands/generate-knowhow.md`）。
+
+```
+Stage 1: テーマ分析・提案 ⏸ ユーザー承認で停止
+Stage 2: 記事HTML生成（テンプレート: detail/6.html）
+Stage 3: 画像生成（Gemini API → sharp WebP変換、画像内テキスト禁止）
+Stage 4: サイト統合（knowhow.json + sitemap.xml 更新）
+Stage 5: 品質検証（JSON-LD、画像、カテゴリ、文字数、禁止ワード）
+Stage 6: バージョン管理（git commit/push）
+Stage 7: デプロイ（SCP → AWS EC2）
+```
+
+- **Stage 1 のみユーザー承認で停止**、それ以降は全自動
+- ID採番: knowhow.json + knowhow-mt.json の最大ID + 1
+- 画像命名: `knowhow-{NNN}.webp`（3桁ゼロ埋め）
+- 画像生成プロンプトに「テキストを一切含めない」指示をハードコード（Geminiの文字化け対策）
 
 ### 技術スタック
 
@@ -448,6 +481,34 @@ Blog Generation Pipeline仕様書 v1.0（`seisansei-website/docs/blog-pipeline-s
 
 ---
 
+## SEO対応状況（2026-03-19時点）
+
+### 全ページ対応済み
+- **favicon**: 全ページに apple-touch-icon, favicon-32x32, favicon-16x16, site.webmanifest
+- **GA4**: 全ページに `G-GJSD6BRJ0T`（MT側は `ga-tag.mtml` で一括管理）
+- **canonical URL**: `https://www.tensyokudodesyo.com` に統一（www付き）
+- **OGP / Twitter Card**: 全ページ対応
+- **JSON-LD 構造化データ**:
+  - トップページ: WebSite + Organization
+  - 一覧ページ: BreadcrumbList
+  - ノウハウ詳細: BlogPosting + BreadcrumbList
+  - インタビュー/企業詳細: Article + BreadcrumbList
+  - 求人詳細: JobPosting + BreadcrumbList
+- **sitemap.xml**: 全24ページ網羅（削除済みページ除去済み）
+- **内部リンク**: `related-articles.js` による関連記事の動的表示（全詳細ページ）
+
+### ノウハウカテゴリマスター（MT側と統一済み）
+
+| ID | ラベル |
+|----|-------|
+| kh01 | 面接対策 |
+| kh02 | 履歴書の書き方 |
+| kh03 | 自己分析 |
+| kh04 | 業界研究 |
+| kh05 | 転職準備 |
+
+---
+
 ## セキュリティ
 
 - **機密情報は環境変数で管理**: `GITHUB_TOKEN`, `ANTHROPIC_API_KEY`
@@ -459,6 +520,7 @@ Blog Generation Pipeline仕様書 v1.0（`seisansei-website/docs/blog-pipeline-s
 ```bash
 GITHUB_TOKEN=ghp_xxxxx           # GitHub Personal Access Token（必須）
 ANTHROPIC_API_KEY=sk-ant-xxxxx   # Anthropic API Key（Agent実行時必須）
+GEMINI_API_KEY=xxxxx             # Gemini API Key（画像生成時必須）
 ```
 
 ---
