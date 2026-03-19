@@ -131,6 +131,38 @@ if (window._relatedArticlesJsLoaded) {
     }
 
     /**
+     * Local category lookup map (loaded from JSON if CategoryManager unavailable).
+     */
+    var categoryMap = {};
+
+    /**
+     * Load category master JSON files for local lookup.
+     */
+    async function loadCategoryMasters() {
+        var files = {
+            'knowhow': '/data/categories/knowhow-categories.json',
+            'interview': '/data/categories/interview-categories.json',
+            'company': '/data/categories/company-industries.json'
+        };
+        var results = await Promise.allSettled(
+            Object.keys(files).map(function(type) {
+                return fetchJSON(files[type]).then(function(data) {
+                    return { type: type, data: data };
+                });
+            })
+        );
+        results.forEach(function(r) {
+            if (r.status !== 'fulfilled' || !r.value.data) return;
+            var type = r.value.type;
+            var items = r.value.data.categories || r.value.data.industries || [];
+            categoryMap[type] = {};
+            items.forEach(function(item) {
+                categoryMap[type][item.id] = item.name;
+            });
+        });
+    }
+
+    /**
      * Get category display name for an article.
      * @param {string} categoryType - 'knowhow', 'interview', or 'company'
      * @param {string} categoryValue - Category ID or name
@@ -139,6 +171,9 @@ if (window._relatedArticlesJsLoaded) {
     function getCategoryDisplayName(categoryType, categoryValue) {
         if (typeof CategoryManager !== 'undefined' && CategoryManager.normalizeToName) {
             return CategoryManager.normalizeToName(categoryType, categoryValue);
+        }
+        if (categoryMap[categoryType] && categoryMap[categoryType][categoryValue]) {
+            return categoryMap[categoryType][categoryValue];
         }
         return categoryValue || '';
     }
@@ -297,6 +332,10 @@ if (window._relatedArticlesJsLoaded) {
         if (!pageInfo) return;
 
         try {
+            // Load category masters if CategoryManager is not available
+            if (typeof CategoryManager === 'undefined') {
+                await loadCategoryMasters();
+            }
             var items = await gatherRelatedArticles(pageInfo.type, pageInfo.currentUrl);
             renderRelatedSection(items);
         } catch (error) {
