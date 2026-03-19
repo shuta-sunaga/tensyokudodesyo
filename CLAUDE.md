@@ -47,7 +47,8 @@ tensyokudodesyo/
 │   │   ├── jobs.json               # 全求人データ（詳細情報付き・12件）
 │   │   ├── interviews.json         # 転職者インタビュー（6件）
 │   │   ├── companies.json          # 企業インタビュー（4件）
-│   │   ├── knowhow.json            # 転職ノウハウ記事（6件）
+│   │   ├── knowhow.json            # 転職ノウハウ記事・パイプライン生成分
+│   │   ├── knowhow-mt.json         # 転職ノウハウ記事・MT生成分
 │   │   ├── categories/             # カテゴリマスター
 │   │   │   ├── interview-categories.json  # 職種カテゴリ (oc01-oc11)
 │   │   │   ├── company-industries.json    # 業界カテゴリ (in01-in09)
@@ -83,7 +84,7 @@ tensyokudodesyo/
 │   └── detail-page-specification.md # MT詳細ページ仕様書
 ├── .claude/                        # Claude Code設定
 │   ├── agents/                     # 6エージェント定義
-│   ├── commands/                   # 12カスタムスラッシュコマンド
+│   ├── commands/                   # 13カスタムスラッシュコマンド
 │   ├── hooks/                      # フック設定
 │   └── mcp-servers/                # 4 MCPサーバー実装
 ├── .github/
@@ -92,7 +93,7 @@ tensyokudodesyo/
 │   └── convert-ogp.mjs             # OGP画像変換（puppeteer使用）
 ├── CLAUDE.md                       # このファイル
 ├── SPECIFICATION.md                # サイト仕様書（詳細）
-└── package.json                    # devDependencies: puppeteer のみ
+└── package.json                    # devDependencies: puppeteer, sharp, @google/generative-ai
 ```
 
 ---
@@ -320,6 +321,25 @@ regionIdMap = {
 - コミット・プッシュ後、必ずユーザーの動作確認を待つ
 - ユーザーから明示的に「クローズして」と指示があった場合のみクローズする
 
+### デプロイ時のルール（MT管理ページの保護）
+- **MT（Movable Type）が管理・生成するページは SCP デプロイで上書きしないこと**
+- MT管理対象:
+  - 求人詳細ページ: `{prefecture}/jobs/*.html`
+  - インタビュー詳細: `interviews/detail/*.html`
+  - 企業詳細: `companies/detail/*.html`
+  - ノウハウ詳細（MT生成分）: `knowhow/detail/*.html`（パイプライン生成分を除く）
+  - 一覧ページ: `index.html`, `interviews/index.html`, `companies/index.html`, `knowhow/index.html`
+  - 都道府県ページ: `{prefecture}/index.html`
+  - JSONデータ: `knowhow-mt.json`（MT出力先）
+- **デプロイ可能なファイル（パイプライン・手動管理）**:
+  - `js/`, `css/`, `assets/` 配下の静的アセット
+  - `data/knowhow.json`（パイプライン記事）
+  - `data/categories/` 配下のカテゴリJSON
+  - `sitemap.xml`, `robots.txt`
+  - パイプラインで生成したノウハウ記事HTML
+  - `privacy.html`
+- MT管理ページの変更は `mt-template/*.mtml` を修正 → MT管理画面にコピー → 再構築で反映
+
 ### 動作確認依頼時のルール
 - **更新ファイル一覧を必ず提示する**
 - テーブル形式で「ファイルパス」と「変更内容」を明記
@@ -332,6 +352,58 @@ regionIdMap = {
 
 ### プロジェクト概要・仕様・ルールの管理
 - **CLAUDE.mdに追記する** - プロジェクト概要、仕様、ルールの変更は必ずこのファイルに反映する
+
+---
+
+## ノウハウ記事自動生成パイプライン（Epic #18）
+
+### 概要
+
+Blog Generation Pipeline仕様書 v1.0（`seisansei-website/docs/blog-pipeline-spec.md`）に基づき、転職ノウハウ記事の生成から公開までを自動化するパイプライン。
+
+### パイプラインの流れ
+
+```
+[Stage 1: テーマ分析・提案] → [Stage 2: 記事HTML生成] → [Stage 3: 画像生成]
+  → [Stage 4: サイト統合] → [Stage 5: 品質検証] → [Stage 6: バージョン管理]
+  → [Stage 7: デプロイ]
+```
+
+※ Stage 8（検索エンジン通知）は保留
+
+### Issue一覧
+
+| Issue | ステージ | 状態 |
+|-------|---------|------|
+| #18 | Epic（親Issue） | Open |
+| #19 | Stage 1: テーマ分析・提案 | Open |
+| #20 | Stage 2: 記事HTML生成 | Open |
+| #21 | Stage 3: サムネイル画像生成 | Open |
+| #22 | Stage 4: サイト統合 | Open |
+| #23 | Stage 5: 品質検証 | Open |
+| #24 | Stage 6: バージョン管理 | Open |
+| #25 | Stage 7: デプロイ | Open |
+
+### MT との2重管理方針
+
+ノウハウ記事はMTテンプレートでも、パイプラインでも生成可能。**分離管理＋表示時マージ方式**を採用：
+
+- **MT生成分**: MT側のJSON出力で管理（ファイル名未定、例: `knowhow-mt.json`）
+- **パイプライン生成分**: `knowhow.json` で管理
+- **表示時**: JS側で両データをマージし、日付降順で一覧・トップページに表示
+- これにより互いのデータを上書きするリスクがなくなる
+
+### 技術スタック
+
+- **画像生成**: Gemini API（Imagen）、`GEMINI_API_KEY` で認証
+- **画像変換**: sharp（devDependencies に追加済み）
+- **設定ファイル**: `site.config.yaml`（`.gitignore` に追加済み）
+- **デプロイ**: SCP（AWS EC2）
+- **テンプレート**: 既存記事（例: `detail/6.html`）から構造を踏襲
+
+### 試行結果
+
+記事6「転職活動の始め方ガイド」を手動で生成済み（commit 17526af）。このフローを自動化するのがパイプラインの目的。
 
 ---
 
@@ -372,6 +444,7 @@ regionIdMap = {
 - `/verify` - 環境・コンパイル・テスト全チェック
 - `/security-scan` - セキュリティスキャン
 - `/agent-run` - Issue自動処理パイプライン
+- `/generate-knowhow` - ノウハウ記事自動生成パイプライン（Stage 1-7）
 
 ---
 

@@ -2,6 +2,22 @@
  * 転職どうでしょう - Main JavaScript
  */
 
+/**
+ * Load knowhow articles from both pipeline and MT JSON files, merged by date.
+ * Uses Promise.allSettled so the site works even if one file is missing.
+ */
+async function loadAllKnowhowArticles() {
+    const urls = ['/data/knowhow.json', '/data/knowhow-mt.json'];
+    const results = await Promise.allSettled(
+        urls.map(url => fetch(url).then(r => r.ok ? r.json() : { articles: [] }))
+    );
+    const allArticles = results
+        .filter(r => r.status === 'fulfilled')
+        .flatMap(r => r.value.articles || []);
+    allArticles.sort((a, b) => new Date(b.postDate) - new Date(a.postDate));
+    return allArticles;
+}
+
 // Guard against double execution
 if (window._mainJsLoaded) {
     console.warn('main.js already loaded, skipping');
@@ -1532,18 +1548,13 @@ async function initHomePage() {
         }
     }
 
-    // Load knowhow for home page
+    // Load knowhow for home page (merged from pipeline + MT)
     if (homeKnowhowContainer) {
         try {
-            const response = await fetch('/data/knowhow.json');
-            if (!response.ok) throw new Error('HTTP ' + response.status);
-            const data = await response.json();
-            const articles = data.articles || [];
+            const articles = await loadAllKnowhowArticles();
 
-            // Sort by date and get latest 3
-            const latestArticles = [...articles]
-                .sort((a, b) => new Date(b.postDate) - new Date(a.postDate))
-                .slice(0, 3);
+            // Get latest 3 (already sorted by date)
+            const latestArticles = articles.slice(0, 3);
 
             homeKnowhowContainer.innerHTML = latestArticles.map(article => {
                 // Get display name for category
@@ -1600,15 +1611,9 @@ async function initKnowhowPage() {
         }
     }
 
-    // Load knowhow articles from JSON
+    // Load knowhow articles from both pipeline and MT JSON (merged)
     try {
-        const response = await fetch('/data/knowhow.json');
-        if (!response.ok) throw new Error('HTTP ' + response.status);
-        const data = await response.json();
-        allKnowhowArticles = data.articles || [];
-
-        // Sort by date (newest first)
-        allKnowhowArticles.sort((a, b) => new Date(b.postDate) - new Date(a.postDate));
+        allKnowhowArticles = await loadAllKnowhowArticles();
 
         // Render articles
         renderKnowhowArticles();
