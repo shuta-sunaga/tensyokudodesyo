@@ -326,13 +326,13 @@ if (window._relatedArticlesJsLoaded) {
 
         document.addEventListener('categoriesLoaded', onCategoriesLoaded);
 
-        // Fallback: proceed without CategoryManager after 3 seconds
+        // Fallback: proceed without CategoryManager after 500ms
         setTimeout(function() {
             if (initialized) return;
             initialized = true;
             document.removeEventListener('categoriesLoaded', onCategoriesLoaded);
             init();
-        }, 3000);
+        }, 500);
     }
 
     // Run when DOM is ready
