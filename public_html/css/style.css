@@ -4025,3 +4025,33 @@ body.menu-open {
         font-size: 0.875rem;
     }
 }
+
+/* ==========================================================================
+   Related Articles (shared across all page types)
+   ========================================================================== */
+
+.related-articles {
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--color-border);
+}
+
+.related-articles h2 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: 2rem;
+}
+
+.related-articles .article-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+}
+
+@media (max-width: 768px) {
+    .related-articles .article-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+}

@@ -177,7 +177,7 @@ if (window._relatedArticlesJsLoaded) {
     function renderRelatedSection(items) {
         if (!items || items.length === 0) return;
 
-        var backEl = document.querySelector('.article-back');
+        var backEl = document.querySelector('.article-back') || document.querySelector('.job-detail-back');
         if (!backEl) return;
 
         var cardsHTML = items.map(function(item) {
