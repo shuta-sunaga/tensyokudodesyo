@@ -402,8 +402,9 @@ Blog Generation Pipeline仕様書 v1.0（`seisansei-website/docs/blog-pipeline-s
 
 ノウハウ記事はMTテンプレートでも、パイプラインでも生成可能。**分離管理＋表示時マージ方式**を採用：
 
-- **MT生成分**: `knowhow-mt.json`（MT側のJSON出力テンプレートで生成）
-- **パイプライン生成分**: `knowhow.json` で管理
+- **MT生成分**: `knowhow-mt.json`（MT側のJSON出力テンプレートで生成）、HTMLファイル名は `{id}.html`（例: `1.html`）
+- **パイプライン生成分**: `knowhow.json` で管理、HTMLファイル名は `knowhow-{NNN}.html`（例: `knowhow-007.html`）
+- **ファイル命名規則**: パイプライン生成分は `knowhow-{NNN}.html` / `knowhow-{NNN}.webp`（3桁ゼロ埋め）。MTとのファイル名衝突を防止するため `{id}.html` は使わない
 - **表示時**: `main.js` の `loadAllKnowhowArticles()` で両JSONを `Promise.allSettled` でマージし、日付降順で一覧・トップページに表示
 - どちらかのJSONが404でもサイトが壊れない設計
 
@@ -412,8 +413,8 @@ Blog Generation Pipeline仕様書 v1.0（`seisansei-website/docs/blog-pipeline-s
 ノウハウ記事の生成〜デプロイを自動化するスラッシュコマンド（`.claude/commands/generate-knowhow.md`）。
 
 ```
-Stage 1: テーマ分析・提案 ⏸ ユーザー承認で停止
-Stage 2: 記事HTML生成（テンプレート: detail/6.html）
+Stage 1: テーマ分析・提案（カニバリチェック付き） ⏸ ユーザー承認で停止
+Stage 2: 記事HTML生成（テンプレート: detail/knowhow-006.html）
 Stage 3: 画像生成（Gemini API → sharp WebP変換、画像内テキスト禁止）
 Stage 4: サイト統合（knowhow.json + sitemap.xml 更新）
 Stage 5: 品質検証（JSON-LD、画像、カテゴリ、文字数、禁止ワード）
@@ -511,8 +512,12 @@ Stage 7: デプロイ（SCP → AWS EC2）
 
 ## セキュリティ
 
-- **機密情報は環境変数で管理**: `GITHUB_TOKEN`, `ANTHROPIC_API_KEY`
+- **機密情報は環境変数で管理**: `GITHUB_TOKEN`, `ANTHROPIC_API_KEY`, `GEMINI_API_KEY`
 - **.env を .gitignore に含める**
+- **APIキー・シークレットをコード・設定ファイル・コマンド許可リストに絶対にハードコードしない**
+  - `settings.local.json` の permissions にAPIキーを含むコマンドを追加しない
+  - curl等のコマンドにAPIキーを直接埋め込まない（必ず `$GEMINI_API_KEY` 等の環境変数参照を使う）
+  - `.claude/settings.local.json` は `.gitignore` に含め、gitで追跡しない
 - `robots.txt`で `/includes/` と `/data/` はクローラーをブロック
 
 ## 環境変数

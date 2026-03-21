@@ -2,3 +2,4 @@
 site.config.yaml
 node_modules/
 nul
+.claude/settings.local.json

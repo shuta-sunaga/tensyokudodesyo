@@ -20,14 +20,14 @@
 
 1. `knowhow.json` と `knowhow-mt.json` の全記事を読み込み、タイトル・カテゴリを把握
 2. カテゴリバランスを分析し、手薄なカテゴリを特定
-3. テーマ3件を提案:
+3. テーマ3件を提案（カニバリチェック付き）:
 
 ```
-| # | カテゴリ | タイトル案 | 想定読者 | 既存記事との差別化ポイント |
-|---|---------|-----------|---------|------------------------|
-| 1 | ...     | ...       | ...     | ...                    |
-| 2 | ...     | ...       | ...     | ...                    |
-| 3 | ...     | ...       | ...     | ...                    |
+| # | カテゴリ | タイトル案 | 想定検索KW | 既存記事とのカニバリ | リスク |
+|---|---------|-----------|-----------|-------------------|--------|
+| 1 | ...     | ...       | ...       | ...               | ...    |
+| 2 | ...     | ...       | ...       | ...               | ...    |
+| 3 | ...     | ...       | ...       | ...               | ...    |
 ```
 
 4. 「上記から1つ選択するか、修正案を教えてください」と聞いて**ここで停止**
@@ -37,7 +37,7 @@
 ## Stage 2: 記事HTML生成（承認後、自動実行）
 
 1. **ID採番**: `knowhow.json` と `knowhow-mt.json` の最大ID + 1
-2. **HTML生成**: `public_html/knowhow/detail/6.html` をテンプレートとして新規作成:
+2. **HTML生成**: `public_html/knowhow/detail/knowhow-006.html` をテンプレートとして新規作成:
    - `<meta>` タグ（description, OGP, Twitter Card）
    - JSON-LD（BreadcrumbList + BlogPosting）
    - パンくずリスト、サムネイル画像
@@ -46,7 +46,8 @@
    - LINE CTA（関連性のある箇所のみ、`site.config.yaml` の `lineUrl` を使用）
    - 関連記事セクション
    - 禁止ワード: `site.config.yaml` の `content.forbidden` を遵守
-3. **出力先**: `public_html/knowhow/detail/{id}.html`
+3. **ファイル命名規則**: `knowhow-{NNN}.html`（3桁ゼロ埋め、例: `knowhow-007.html`）。MTとのファイル名衝突を防止するため、`{id}.html` は使わない
+4. **出力先**: `public_html/knowhow/detail/knowhow-{NNN}.html`
 
 ---
 
@@ -74,7 +75,7 @@ const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 async function generateImage(prompt, outputPath) {
     const fullPrompt = prompt + "\n\nIMPORTANT: Do NOT include any text, letters, numbers, words, logos, watermarks, or written characters anywhere in the image. The image must be purely visual with no textual elements whatsoever.";
 
-    const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash-exp" });
+    const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash-image" });
     const result = await model.generateContent({
         contents: [{ role: "user", parts: [{ text: fullPrompt }] }],
         generationConfig: { responseModalities: ["image", "text"] }
@@ -106,13 +107,13 @@ async function generateImage(prompt, outputPath) {
      "excerpt": "{概要文}",
      "image": "/assets/knowhow-{NNN}.webp",
      "postDate": "{今日の日付 YYYY-MM-DD}",
-     "detailUrl": "/knowhow/detail/{新ID}.html"
+     "detailUrl": "/knowhow/detail/knowhow-{NNN}.html"
    }
    ```
 2. **sitemap.xml 更新**: 新記事のURLエントリを追加
    ```xml
    <url>
-       <loc>https://www.tensyokudodesyo.com/knowhow/detail/{新ID}.html</loc>
+       <loc>https://www.tensyokudodesyo.com/knowhow/detail/knowhow-{NNN}.html</loc>
        <lastmod>{今日の日付}</lastmod>
        <changefreq>monthly</changefreq>
        <priority>0.6</priority>

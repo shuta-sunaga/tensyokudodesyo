@@ -1,13 +1,22 @@
 {
   "articles": [
     {
+      "id": 7,
+      "title": "転職前に知っておきたい業界研究のやり方〜情報収集から企業選びまで",
+      "category": "kh04",
+      "excerpt": "「転職を考えているけれど、どの業界を選べばいいか分からない」という方へ。業界研究の具体的なやり方を5つのステップで解説。情報収集の方法から企業の比較ポイントまで、地方転職にも役立つ実践ガイドです。",
+      "image": "/assets/knowhow-007.webp",
+      "postDate": "2026-03-21",
+      "detailUrl": "/knowhow/detail/knowhow-007.html"
+    },
+    {
       "id": 6,
       "title": "転職活動の始め方ガイド〜準備から内定までの流れ",
       "category": "kh05",
       "excerpt": "「転職したいけれど、何から始めればいいか分からない」——そんな悩みを抱えている方は少なくありません。この記事では、転職活動の全体像を「準備」「求人探し」「応募・選考」「内定・退職」の4つのフェーズに分けて、それぞれのステップで何をすべきかを具体的に解説します。",
       "image": "/assets/knowhow-006.webp",
       "postDate": "2026-03-18",
-      "detailUrl": "/knowhow/detail/6.html"
+      "detailUrl": "/knowhow/detail/knowhow-006.html"
     }
   ]
 }
