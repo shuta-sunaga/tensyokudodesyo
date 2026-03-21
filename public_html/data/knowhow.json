@@ -1,6 +1,60 @@
 {
   "articles": [
     {
+      "id": 13,
+      "title": "AI面接・Web面接の完全対策ガイド〜録画面接からAI選考まで突破するコツ",
+      "category": "kh01",
+      "excerpt": "AI面接やWeb面接の対策方法を徹底解説。録画型面接の攻略法、AI選考で評価されるポイント、オンライン面接の環境準備、よくある失敗と対策まで、最新の選考形式に対応するためのガイドです。",
+      "image": "/assets/knowhow-013.webp",
+      "postDate": "2026-03-21",
+      "detailUrl": "/knowhow/detail/knowhow-013.html"
+    },
+    {
+      "id": 12,
+      "title": "AIで差がつく職務経歴書の作り方〜ChatGPTを使った自己PR・志望動機の磨き方",
+      "category": "kh02",
+      "excerpt": "ChatGPTなどの生成AIを使って職務経歴書の自己PRや志望動機をブラッシュアップする方法を解説。効果的なプロンプトの書き方から、AI活用時の注意点まで、実践的なテクニックを紹介します。",
+      "image": "/assets/knowhow-012.webp",
+      "postDate": "2026-03-21",
+      "detailUrl": "/knowhow/detail/knowhow-012.html"
+    },
+    {
+      "id": 11,
+      "title": "AI時代の転職戦略〜生成AIを活用した効率的な転職活動の進め方",
+      "category": "kh05",
+      "excerpt": "ChatGPTやGeminiなどの生成AIを転職活動に活用する方法を徹底解説。求人検索の効率化、自己分析のサポート、応募書類のブラッシュアップ、面接練習まで、AI時代の転職戦略を紹介します。",
+      "image": "/assets/knowhow-011.webp",
+      "postDate": "2026-03-21",
+      "detailUrl": "/knowhow/detail/knowhow-011.html"
+    },
+    {
+      "id": 10,
+      "title": "転職面接の服装・マナー完全ガイド〜第一印象で差をつけるポイント",
+      "category": "kh01",
+      "excerpt": "転職面接での服装選びとビジネスマナーを徹底解説。スーツの選び方、身だしなみチェックリスト、入退室の作法、オンライン面接の注意点まで、第一印象で好感を持たれるためのポイントを網羅します。",
+      "image": "/assets/knowhow-010.webp",
+      "postDate": "2026-03-21",
+      "detailUrl": "/knowhow/detail/knowhow-010.html"
+    },
+    {
+      "id": 9,
+      "title": "自己分析のやり方完全ガイド〜強み・価値観を見つける5つのフレームワーク",
+      "category": "kh03",
+      "excerpt": "転職活動の第一歩は自己分析から。Will/Can/Must、ジョハリの窓など5つのフレームワークを使った自己分析の具体的なやり方を解説。自分の強み・価値観を見つけて転職の軸を定めましょう。",
+      "image": "/assets/knowhow-009.webp",
+      "postDate": "2026-03-21",
+      "detailUrl": "/knowhow/detail/knowhow-009.html"
+    },
+    {
+      "id": 8,
+      "title": "転職面接でよく聞かれる質問30選と回答例〜面接官の意図を知れば怖くない",
+      "category": "kh01",
+      "excerpt": "転職面接で頻出の質問30選を、面接官の意図とともに解説。自己紹介・転職理由・志望動機・逆質問まで、具体的な回答例付きで面接対策を徹底サポートします。",
+      "image": "/assets/knowhow-008.webp",
+      "postDate": "2026-03-21",
+      "detailUrl": "/knowhow/detail/knowhow-008.html"
+    },
+    {
       "id": 7,
       "title": "転職前に知っておきたい業界研究のやり方〜情報収集から企業選びまで",
       "category": "kh04",
