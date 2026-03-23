@@ -1,6 +1,33 @@
 {
   "articles": [
     {
+      "id": 18,
+      "title": "AI人材の需要と転職市場〜未経験からAI業界に転職するためのロードマップ",
+      "category": "kh04",
+      "excerpt": "AI人材の需要動向と未経験からAI業界に転職するためのロードマップを解説。必要なスキル・資格、学習ステップ、未経験歓迎のAI関連職種、転職成功のためのポートフォリオ作りまで実践的にガイドします。",
+      "image": "/assets/knowhow-018.webp",
+      "postDate": "2026-03-23",
+      "detailUrl": "/knowhow/detail/knowhow-018.html"
+    },
+    {
+      "id": 17,
+      "title": "AIに仕事を奪われない業界・職種とは〜将来性のある転職先の選び方",
+      "category": "kh04",
+      "excerpt": "AIに代替されにくい業界・職種を徹底分析。AI時代でも需要が高まる仕事の特徴、将来性のある転職先の見極め方、AIと共存してキャリアを伸ばすための戦略を具体例とともに解説します。",
+      "image": "/assets/knowhow-017.webp",
+      "postDate": "2026-03-23",
+      "detailUrl": "/knowhow/detail/knowhow-017.html"
+    },
+    {
+      "id": 16,
+      "title": "AI・DXで求人が急増している業界5選〜2026年に転職するなら知っておきたい成長分野",
+      "category": "kh04",
+      "excerpt": "AI・DXの推進で求人が急増している成長業界を5つ厳選して紹介。各業界の市場規模・求人動向・求められるスキル・年収相場まで、2026年の転職市場を踏まえた実践的な業界研究ガイドです。",
+      "image": "/assets/knowhow-016.webp",
+      "postDate": "2026-03-23",
+      "detailUrl": "/knowhow/detail/knowhow-016.html"
+    },
+    {
       "id": 15,
       "title": "転職の軸の決め方〜後悔しない企業選びのための判断基準の作り方",
       "category": "kh03",
