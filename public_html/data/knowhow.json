@@ -1,6 +1,33 @@
 {
   "articles": [
     {
+      "id": 21,
+      "title": "志望動機の書き方完全ガイド〜業界・職種別の例文と採用担当が見るポイント",
+      "category": "kh02",
+      "excerpt": "転職の志望動機の書き方を業界・職種別の例文付きで徹底解説。採用担当者が志望動機で見ているポイント、説得力のある構成テンプレート、NG例と改善例まで、選考通過率を上げるためのコツを紹介します。",
+      "image": "/assets/knowhow-021.webp",
+      "postDate": "2026-03-24",
+      "detailUrl": "/knowhow/detail/knowhow-021.html"
+    },
+    {
+      "id": 20,
+      "title": "転職面接の逆質問で好印象を残す方法〜場面別おすすめ質問30例",
+      "category": "kh01",
+      "excerpt": "転職面接の逆質問に特化した完全ガイド。一次面接・二次面接・最終面接・オンライン面接の場面別におすすめの逆質問30例を紹介。NG質問の回避法や質問の組み合わせ方まで解説します。",
+      "image": "/assets/knowhow-020.webp",
+      "postDate": "2026-03-24",
+      "detailUrl": "/knowhow/detail/knowhow-020.html"
+    },
+    {
+      "id": 19,
+      "title": "転職理由の整理と伝え方〜ネガティブな退職理由をポジティブに変換する方法",
+      "category": "kh03",
+      "excerpt": "転職理由の整理方法とポジティブな伝え方を徹底解説。「人間関係が悪い」「給料が低い」などネガティブな退職理由を面接で好印象に変換するテクニックを、具体的な言い換え例とともに紹介します。",
+      "image": "/assets/knowhow-019.webp",
+      "postDate": "2026-03-24",
+      "detailUrl": "/knowhow/detail/knowhow-019.html"
+    },
+    {
       "id": 18,
       "title": "AI人材の需要と転職市場〜未経験からAI業界に転職するためのロードマップ",
       "category": "kh04",
