@@ -157,6 +157,24 @@
         <changefreq>monthly</changefreq>
         <priority>0.6</priority>
     </url>
+    <url>
+        <loc>https://www.tensyokudodesyo.com/knowhow/detail/knowhow-022.html</loc>
+        <lastmod>2026-03-25</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://www.tensyokudodesyo.com/knowhow/detail/knowhow-023.html</loc>
+        <lastmod>2026-03-25</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://www.tensyokudodesyo.com/knowhow/detail/knowhow-024.html</loc>
+        <lastmod>2026-03-25</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
 
     <!-- Prefecture Pages - Shiga -->
     <url>
