@@ -45,6 +45,7 @@
    - 見出し（H2）は4〜6個、各セクションに具体例や数字
    - LINE CTA（関連性のある箇所のみ、`site.config.yaml` の `lineUrl` を使用）
    - 関連記事セクション
+   - `</body>` 前に `<script src="/js/blog-ad.min.js" defer></script>` を含める
    - 禁止ワード: `site.config.yaml` の `content.forbidden` を遵守
 3. **ファイル命名規則**: `knowhow-{NNN}.html`（3桁ゼロ埋め、例: `knowhow-007.html`）。MTとのファイル名衝突を防止するため、`{id}.html` は使わない
 4. **出力先**: `public_html/knowhow/detail/knowhow-{NNN}.html`
@@ -156,6 +157,36 @@ async function generateImage(prompt, outputPath) {
    - デプロイ先: `ec2-user@13.230.204.170:/var/www/html/`
    - SSH鍵: `site.config.yaml` の `deploy.keyFile`
 2. デプロイ完了後、本番URLを表示
+
+---
+
+## Stage 8: GSC sitemap送信（自動実行）
+
+1. `.env` を読み込み、`site.config.yaml` の `seo.gsc` 設定を使用
+2. Google Search Console API で sitemap.xml を送信
+
+### 送信コード
+
+```javascript
+const { google } = require('googleapis');
+
+async function submitSitemap() {
+    const auth = new google.auth.GoogleAuth({
+        keyFile: 'docs/tensyokudodesyo-1dcb1b08e015.json',
+        scopes: ['https://www.googleapis.com/auth/webmasters']
+    });
+
+    const searchconsole = google.searchconsole({ version: 'v1', auth });
+
+    await searchconsole.sitemaps.submit({
+        siteUrl: 'sc-domain:tensyokudodesyo.com',
+        feedpath: 'https://www.tensyokudodesyo.com/sitemap.xml'
+    });
+}
+```
+
+3. 送信成功を確認し、結果を表示
+4. **フォールバック**: API エラー時はエラー内容を表示し、GSC管理画面での手動送信を案内
 
 ---
 
