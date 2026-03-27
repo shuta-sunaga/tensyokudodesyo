@@ -1,6 +1,33 @@
 {
   "articles": [
     {
+      "id": 30,
+      "title": "未経験転職で通る職務経歴書〜異業種アピールのコツ",
+      "category": "kh02",
+      "excerpt": "未経験職種・異業種への転職で書類選考を通過する職務経歴書の書き方を徹底解説。ポータブルスキルの見つけ方、異業種経験の効果的なアピール方法、職種別の書き方のコツを具体例付きで紹介します。",
+      "image": "/assets/knowhow-030.webp",
+      "postDate": "2026-03-27",
+      "detailUrl": "/knowhow/detail/knowhow-030.html"
+    },
+    {
+      "id": 29,
+      "title": "転職面接の退職理由の答え方〜好印象な回答パターン",
+      "category": "kh01",
+      "excerpt": "転職面接で必ず聞かれる退職理由の答え方を徹底解説。人間関係・給料・残業など理由別の好印象な回答パターン、面接官の評価ポイント、避けるべきNG回答まで具体的な例文付きで紹介します。",
+      "image": "/assets/knowhow-029.webp",
+      "postDate": "2026-03-27",
+      "detailUrl": "/knowhow/detail/knowhow-029.html"
+    },
+    {
+      "id": 28,
+      "title": "30代転職の自己分析〜後悔しないキャリアの決め方",
+      "category": "kh03",
+      "excerpt": "30代の転職で後悔しないための自己分析方法を徹底解説。20代とは異なる30代ならではのキャリア判断基準、家庭やライフステージを踏まえた優先順位の整理、年収とやりがいのバランスの取り方を紹介します。",
+      "image": "/assets/knowhow-028.webp",
+      "postDate": "2026-03-27",
+      "detailUrl": "/knowhow/detail/knowhow-028.html"
+    },
+    {
       "id": 27,
       "title": "地方転職で狙い目の業界・職種〜UIターン転職を成功させるための業界研究",
       "category": "kh04",
