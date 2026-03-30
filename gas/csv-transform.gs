@@ -448,28 +448,46 @@ function transformData() {
   }
   dstSheet.getRange(1, 1, outputRows.length, dstHeaders.length).setValues(outputRows);
 
-  // ── Shift_JIS の CSV ファイルを Google Drive に保存 ──
-  let csvContent = outputRows.map(row =>
-    row.map(cell => {
-      const s = String(cell);
-      // カンマ・改行・ダブルクォートを含むセルはクォートで囲む
-      if (s.includes(',') || s.includes('\n') || s.includes('"')) {
-        return '"' + s.replace(/"/g, '""') + '"';
-      }
-      return s;
-    }).join(',')
-  ).join('\r\n');
+  // ── Shift_JIS の CSV ファイルを Google Drive に保存（100件ごとに分割） ──
+  const CHUNK_SIZE = 100;
+  const headerRow = outputRows[0];
+  const dataRows = outputRows.slice(1);
+  const totalRows = dataRows.length;
+  const totalChunks = Math.ceil(totalRows / CHUNK_SIZE);
+  const timestamp = Utilities.formatDate(now, Session.getScriptTimeZone(), 'yyyyMMdd_HHmmss');
 
-  // CSV文字列全体に最終サニタイズ（万が一残っている環境依存文字を確実に置換）
-  csvContent = replaceUnsafeChars(csvContent);
+  /** 行配列をShift_JIS CSVに変換してDriveに保存、ダウンロードURLを返す */
+  const saveCsvChunk = (rows, fileName) => {
+    let csvContent = rows.map(row =>
+      row.map(cell => {
+        const s = String(cell);
+        if (s.includes(',') || s.includes('\n') || s.includes('"')) {
+          return '"' + s.replace(/"/g, '""') + '"';
+        }
+        return s;
+      }).join(',')
+    ).join('\r\n');
 
-  const blob = Utilities.newBlob('', 'text/csv');
-  blob.setDataFromString(csvContent, 'Shift_JIS');
-  const fileName = 'export_' + Utilities.formatDate(now, Session.getScriptTimeZone(), 'yyyyMMdd_HHmmss') + '.csv';
-  blob.setName(fileName);
+    csvContent = replaceUnsafeChars(csvContent);
 
-  const file = DriveApp.createFile(blob);
-  const fileUrl = file.getDownloadUrl();
+    const blob = Utilities.newBlob('', 'text/csv');
+    blob.setDataFromString(csvContent, 'Shift_JIS');
+    blob.setName(fileName);
+    const file = DriveApp.createFile(blob);
+    return file.getDownloadUrl();
+  };
+
+  // チャンクごとにCSVファイルを生成
+  const files = [];
+  for (let c = 0; c < totalChunks; c++) {
+    const start = c * CHUNK_SIZE;
+    const end = Math.min(start + CHUNK_SIZE, totalRows);
+    const chunkRows = [headerRow].concat(dataRows.slice(start, end));
+    const suffix = totalChunks > 1 ? '_' + (c + 1) + 'of' + totalChunks : '';
+    const fileName = 'export_' + timestamp + suffix + '.csv';
+    const url = saveCsvChunk(chunkRows, fileName);
+    files.push({ name: fileName, url: url, from: start + 1, to: end });
+  }
 
   // ── ダウンロードリンクをダイアログで表示 ──
   const warningHtml = unmappedChars.size > 0
@@ -479,25 +497,38 @@ function transformData() {
       </p>`
     : '';
 
+  const fileLinksHtml = files.map((f, i) => {
+    const label = totalChunks > 1
+      ? `CSV ${i + 1}/${totalChunks} をダウンロード（${f.from}〜${f.to}件目）`
+      : 'CSV をダウンロード';
+    return `
+      <p style="margin-top: 8px;">
+        <a href="${f.url}" target="_blank"
+           style="display: inline-block; background: #4285f4; color: #fff; padding: 10px 20px;
+                  text-decoration: none; border-radius: 4px; font-size: 13px;">
+          ${label}
+        </a>
+        <span style="font-size: 11px; color: #888; margin-left: 8px;">${f.name}</span>
+      </p>`;
+  }).join('');
+
+  const splitNote = totalChunks > 1
+    ? `<p style="font-size: 12px; color: #666;">100件ごとに ${totalChunks} ファイルに分割しました。</p>`
+    : '';
+
   const htmlContent = `
     <div style="font-family: sans-serif; padding: 10px;">
-      <p>整形完了：<strong>${outputRows.length - 1} 件</strong>のデータを変換しました。</p>
-      <p>Shift_JIS の CSV ファイルを Google Drive に保存しました。</p>
-      <p style="margin-top: 16px;">
-        <a href="${fileUrl}" target="_blank"
-           style="background: #4285f4; color: #fff; padding: 10px 20px;
-                  text-decoration: none; border-radius: 4px; font-size: 14px;">
-          CSV をダウンロード
-        </a>
-      </p>
+      <p>整形完了：<strong>${totalRows} 件</strong>のデータを変換しました。</p>
+      ${splitNote}
+      ${fileLinksHtml}
       <p style="margin-top: 16px; font-size: 12px; color: #666;">
-        ファイル名: ${fileName}<br>
         保存先: マイドライブ直下
       </p>
       ${warningHtml}
     </div>`;
+  const dialogHeight = Math.min(260 + (totalChunks - 1) * 50, 500);
   const htmlOutput = HtmlService.createHtmlOutput(htmlContent)
-    .setWidth(400)
-    .setHeight(260);
+    .setWidth(450)
+    .setHeight(dialogHeight);
   SpreadsheetApp.getUi().showModalDialog(htmlOutput, 'CSV エクスポート完了');
 }
