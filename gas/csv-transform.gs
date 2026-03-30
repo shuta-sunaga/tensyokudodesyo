@@ -201,11 +201,66 @@ function transformData() {
     s = s.replace(/[\u201C\u201D\u301D\u301E\u2033]/g, '"');  // " " 〝 〞 ″
     s = s.replace(/[\u2018\u2019]/g, "'");                     // ' '
 
+    // ── 商標・知的財産記号 ──
+    s = s.replace(/\u2122/g, '(TM)');   // ™
+    s = s.replace(/\u2120/g, '(SM)');   // ℠
+
+    // ── トランプ・装飾記号 → Shift_JIS安全な記号に変換 ──
+    s = s.replace(/\u2666/g, '\u25C6'); // ♦ → ◆
+    s = s.replace(/\u2667/g, '\u25C7'); // ♧ → ◇
+    s = s.replace(/\u2660/g, '\u25A0'); // ♠ → ■
+    s = s.replace(/\u2663/g, '\u25A0'); // ♣ → ■
+    s = s.replace(/\u2665/g, '\u25CF'); // ♥ → ●
+    s = s.replace(/\u2664/g, '\u25CB'); // ♤ → ○
+    s = s.replace(/\u2661/g, '\u25CB'); // ♡ → ○
+    s = s.replace(/\u2662/g, '\u25C7'); // ♢ → ◇
+
+    // ── 数学・幾何記号 ──
+    s = s.replace(/\u221F/g, 'L');      // ∟ (直角記号)
+    s = s.replace(/\u221A/g, 'v/');     // √
+    s = s.replace(/\u2248/g, '≒');      // ≈ → ≒ (Shift_JIS安全)
+    s = s.replace(/\u2261/g, '≡');      // ≡ (Shift_JIS安全、念のため)
+
+    // ── 特殊スラッシュ → 半角スラッシュ ──
+    s = s.replace(/\u2044/g, '/');      // ⁄ (fraction slash)
+    s = s.replace(/\u2215/g, '/');      // ∕ (division slash)
+    s = s.replace(/\u29F8/g, '/');      // ⧸ (big solidus)
+
+    // ── 特殊スペース → 半角スペース ──
+    s = s.replace(/[\u00A0\u2002\u2003\u2004\u2005\u2006\u2007\u2008\u2009\u200A\u202F\u205F]/g, ' ');
+    //             NBSP  en-sp em-sp 3/em  4/em  6/em  fig   punc  thin  hair  NNBS  MMSP
+
+    // ── ゼロ幅文字 → 除去 ──
+    s = s.replace(/[\u200B\u200C\u200D\uFEFF]/g, '');
+    //             ZWSP   ZWNJ   ZWJ    BOM
+
+    // ── 矢印・ポインタ ──
+    s = s.replace(/\u279C/g, '→');      // ➜
+    s = s.replace(/\u27A1/g, '→');      // ➡
+    s = s.replace(/\u2794/g, '→');      // ➔
+    s = s.replace(/\u2192/g, '→');      // → (多くのShift_JISで安全だが念のため)
+
+    // ── 箇条書き・弾丸記号 ──
+    s = s.replace(/\u2022/g, '\u30FB'); // • → ・
+    s = s.replace(/\u2023/g, '>');      // ‣
+    s = s.replace(/\u25E6/g, '\u25CB'); // ◦ → ○
+    s = s.replace(/\u2043/g, '-');      // ⁃ (hyphen bullet)
+
+    // ── 星・評価記号 ──
+    s = s.replace(/\u2605/g, '\u2605'); // ★ (Shift_JIS安全、そのまま)
+    s = s.replace(/\u2606/g, '\u2606'); // ☆ (Shift_JIS安全、そのまま)
+    s = s.replace(/\u272A/g, '\u2605'); // ✪ → ★
+    s = s.replace(/[\u2B50\u2B51\u2B52]/g, '\u2605'); // ⭐⭑⭒ → ★
+    s = s.replace(/\u2728/g, '');       // ✨ (除去)
+
     // ── その他記号 ──
     s = s.replace(/\u2026/g, '...');    // …
     s = s.replace(/\u2025/g, '..');     // ‥
     s = s.replace(/[\u2713\u2714]/g, 'v');  // ✓ ✔
     s = s.replace(/[\u2715\u2716\u2717\u2718]/g, 'x');  // ✕ ✖ ✗ ✘
+    s = s.replace(/\u00B7/g, '\u30FB'); // · (middle dot) → ・
+    s = s.replace(/\u2219/g, '\u30FB'); // ∙ → ・
+    s = s.replace(/\u2023/g, '>');      // ‣ → >
 
     return s;
   };
