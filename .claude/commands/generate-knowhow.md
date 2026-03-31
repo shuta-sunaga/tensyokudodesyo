@@ -41,7 +41,7 @@
    - `<meta>` タグ（description, OGP, Twitter Card）
    - JSON-LD（BreadcrumbList + BlogPosting）
    - パンくずリスト、サムネイル画像
-   - 本文（3000〜5000文字、です・ます調）
+   - 本文（5000〜7000文字、です・ます調）
    - 見出し（H2）は4〜6個、各セクションに具体例や数字
    - LINE CTA（関連性のある箇所のみ、`site.config.yaml` の `lineUrl` を使用）
    - 関連記事セクション
@@ -132,7 +132,7 @@ async function generateImage(prompt, outputPath) {
 | 1 | JSON-LD 構造 | HTML内のJSON-LDが有効なJSONか、必須フィールドがあるか |
 | 2 | 画像ファイル存在 | `public_html/assets/knowhow-{NNN}.webp` が存在するか |
 | 3 | カテゴリ整合性 | JSON の category が `knowhow-categories.json` に存在するか |
-| 4 | 文字数 | 本文が3000〜5000文字の範囲内か |
+| 4 | 文字数 | 本文が5000〜7000文字の範囲内か |
 | 5 | 禁止ワード | `site.config.yaml` の `content.forbidden` に該当しないか |
 | 6 | OGP メタタグ | og:title, og:description, og:image が設定されているか |
 | 7 | 内部リンク | detailUrl がHTMLファイルと一致するか |
