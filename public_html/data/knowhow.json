@@ -1,6 +1,33 @@
 {
   "articles": [
     {
+      "id": 36,
+      "title": "転職と副業の両立ガイド〜収入を増やしながら転職する方法",
+      "category": "kh05",
+      "excerpt": "転職活動と副業を両立させる方法を徹底解説。副業で収入を確保しながら転職する戦略、副業経験を転職でアピールする方法、就業規則の確認ポイント、おすすめの副業ジャンルまで紹介します。",
+      "image": "/assets/knowhow-036.webp",
+      "postDate": "2026-03-31",
+      "detailUrl": "/knowhow/detail/knowhow-036.html"
+    },
+    {
+      "id": 35,
+      "title": "やりたい仕事が分からない人の転職活動〜方向性の見つけ方",
+      "category": "kh03",
+      "excerpt": "やりたい仕事が分からないまま転職活動を始めてよいのか悩む方へ。「やりたいこと」が見つからない原因の分析、やりたいことではなく「できること」「避けたいこと」から方向性を定める方法を解説します。",
+      "image": "/assets/knowhow-035.webp",
+      "postDate": "2026-03-31",
+      "detailUrl": "/knowhow/detail/knowhow-035.html"
+    },
+    {
+      "id": 34,
+      "title": "転職面接の日程調整メール例文集〜返信マナーと注意点",
+      "category": "kh01",
+      "excerpt": "転職面接の日程調整メールの書き方と例文を徹底解説。初回の候補日提示、日程変更、辞退の連絡まで場面別テンプレート付き。返信スピード・件名・敬語など押さえるべきマナーも紹介します。",
+      "image": "/assets/knowhow-034.webp",
+      "postDate": "2026-03-31",
+      "detailUrl": "/knowhow/detail/knowhow-034.html"
+    },
+    {
       "id": 33,
       "title": "転職活動にかかるお金と節約術〜費用の目安と備え方",
       "category": "kh05",
