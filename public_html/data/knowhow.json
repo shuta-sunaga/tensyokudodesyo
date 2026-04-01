@@ -1,6 +1,33 @@
 {
   "articles": [
     {
+      "id": 39,
+      "title": "書類選考の通過率を上げる応募書類の見直し方",
+      "category": "kh02",
+      "excerpt": "書類選考で落ちる原因と通過率を上げるための応募書類の見直し方を徹底解説。採用担当が最初に見る3箇所、落ちる書類の共通パターン5つ、今すぐ改善できるチェックリストを紹介します。",
+      "image": "/assets/knowhow-039.webp",
+      "postDate": "2026-04-01",
+      "detailUrl": "/knowhow/detail/knowhow-039.html"
+    },
+    {
+      "id": 38,
+      "title": "転職で年収アップする業界・職種の選び方",
+      "category": "kh04",
+      "excerpt": "転職で年収アップを実現する業界・職種の選び方を徹底解説。年収が上がりやすい業界ランキング、職種変更で年収を上げる方法、年収交渉のコツ、年収ダウンを避けるチェックポイントを紹介します。",
+      "image": "/assets/knowhow-038.webp",
+      "postDate": "2026-04-01",
+      "detailUrl": "/knowhow/detail/knowhow-038.html"
+    },
+    {
+      "id": 37,
+      "title": "転職の自己PRの書き方〜強みが伝わる例文集",
+      "category": "kh02",
+      "excerpt": "転職の自己PRの書き方を職種別の例文付きで徹底解説。採用担当が評価するポイント、STAR法を使った構成テンプレート、NG例と改善例まで、書類選考を突破する自己PRの作成法を紹介します。",
+      "image": "/assets/knowhow-037.webp",
+      "postDate": "2026-04-01",
+      "detailUrl": "/knowhow/detail/knowhow-037.html"
+    },
+    {
       "id": 36,
       "title": "転職と副業の両立ガイド〜収入を増やしながら転職する方法",
       "category": "kh05",
