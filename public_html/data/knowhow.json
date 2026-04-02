@@ -1,6 +1,33 @@
 {
   "articles": [
     {
+      "id": 42,
+      "title": "適性検査・性格診断を転職に活かす方法",
+      "category": "kh03",
+      "excerpt": "転職活動で避けて通れない適性検査の種類と対策法を徹底解説。SPI・玉手箱の出題傾向、無料性格診断ツールの活用法、診断結果を自己PRや志望動機に落とし込むテクニックを紹介します。",
+      "image": "/assets/knowhow-042.webp",
+      "postDate": "2026-04-02",
+      "detailUrl": "/knowhow/detail/knowhow-042.html"
+    },
+    {
+      "id": 41,
+      "title": "内定承諾・辞退の判断基準と伝え方",
+      "category": "kh05",
+      "excerpt": "内定を受けた後の承諾・辞退の判断基準と伝え方を徹底解説。複数内定時の比較チェックリスト、承諾・辞退のメール例文、内定保留の交渉テクニック、承諾後の辞退リスクまで紹介します。",
+      "image": "/assets/knowhow-041.webp",
+      "postDate": "2026-04-02",
+      "detailUrl": "/knowhow/detail/knowhow-041.html"
+    },
+    {
+      "id": 40,
+      "title": "最終面接の対策と合格率を上げるポイント",
+      "category": "kh01",
+      "excerpt": "最終面接の合格率や一次・二次面接との違い、役員面接で見られるポイントを徹底解説。カルチャーフィットの伝え方、頻出質問と回答例、前日チェックリストまで具体的に紹介します。",
+      "image": "/assets/knowhow-040.webp",
+      "postDate": "2026-04-02",
+      "detailUrl": "/knowhow/detail/knowhow-040.html"
+    },
+    {
       "id": 39,
       "title": "書類選考の通過率を上げる応募書類の見直し方",
       "category": "kh02",
