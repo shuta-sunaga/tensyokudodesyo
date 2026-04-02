@@ -214,7 +214,7 @@ regionIdMap = {
 |---------|---------|
 | `main.js` | ページ初期化（`initHomePage`, `initInterviewPage`, `initCompanyPage`, `initKnowhowPage`）、モバイルメニュー、スクロールアニメーション、フォームバリデーション、統計カウンター |
 | `japan-map.js` | `initJapanMap()` - SVG地図操作、`prefectures.json`＋求人JSONを非同期ロード、エリア別カラー表示 |
-| `prefecture-page.js` | `window.PREFECTURE_CONFIG`に基づく都道府県ページ制御、求人フィルタリング（キーワード・職種・条件、デバウンス300ms）、ページネーション（20件/ページ） |
+| `prefecture-page.js` | `window.PREFECTURE_CONFIG`に基づく都道府県ページ制御、求人フィルタリング（キーワード・職種・人気キーワードタグ、デバウンス300ms）、ページネーション（20件/ページ）。検索対象は `title`+`company`+`keywords`+`conditions` の結合テキスト |
 | `categories.js` | `CategoryManager`シングルトン - 4種のカテゴリJSON並行ロード、ID⇔表示名変換、フィルタ用selectの動的生成 |
 | `includes.js` | ヘッダー/フッターの動的フェッチ・挿入、ベースパス計算（ページ階層に応じた相対パス）、アクティブナビリンク判定 |
 | `article-toc.js` | 記事詳細ページの目次自動生成（H2/H3階層構造対応、スムーススクロール） |
@@ -380,10 +380,8 @@ Blog Generation Pipeline仕様書 v1.0（`seisansei-website/docs/blog-pipeline-s
 ```
 [Stage 1: テーマ分析・提案] → [Stage 2: 記事HTML生成] → [Stage 3: 画像生成]
   → [Stage 4: サイト統合] → [Stage 5: 品質検証] → [Stage 6: バージョン管理]
-  → [Stage 7: デプロイ]
+  → [Stage 7: デプロイ] → [Stage 8: GSC sitemap送信]
 ```
-
-※ Stage 8（検索エンジン通知）は保留
 
 ### Issue一覧
 
@@ -527,6 +525,16 @@ GITHUB_TOKEN=ghp_xxxxx           # GitHub Personal Access Token（必須）
 ANTHROPIC_API_KEY=sk-ant-xxxxx   # Anthropic API Key（Agent実行時必須）
 GEMINI_API_KEY=xxxxx             # Gemini API Key（画像生成時必須）
 ```
+
+### .env の読み込み
+
+環境変数は `.env` ファイルで管理している。`npx miyabi status` や `gh` コマンドなど、`GITHUB_TOKEN` 等を必要とするコマンドを実行する前に、必ず `.env` を読み込むこと：
+
+```bash
+export $(grep -v '^#' .env | grep -v '^$' | xargs)
+```
+
+この読み込みはシェル起動時に自動実行されないため、コマンド実行前に毎回行う必要がある。
 
 ---
 

@@ -2863,17 +2863,10 @@ body.menu-open {
     color: var(--color-text);
 }
 
-.search-tag {
+.search-tag-keyword {
     display: inline-flex;
     align-items: center;
     cursor: pointer;
-}
-
-.search-tag input {
-    display: none;
-}
-
-.search-tag span {
     padding: 0.5rem 1rem;
     font-size: 0.875rem;
     color: var(--color-text);
@@ -2881,15 +2874,16 @@ body.menu-open {
     border: 1px solid var(--color-border);
     border-radius: var(--radius-full);
     transition: var(--transition-fast);
+    font-family: inherit;
 }
 
-.search-tag input:checked + span {
+.search-tag-keyword.active {
     background: var(--color-primary);
     border-color: var(--color-primary);
     color: #fff;
 }
 
-.search-tag:hover span {
+.search-tag-keyword:hover {
     border-color: var(--color-primary);
 }
 
@@ -3369,7 +3363,7 @@ body.menu-open {
         margin-top: var(--spacing-xs);
     }
 
-    .search-tag span {
+    .search-tag-keyword {
         padding: 0.4rem 0.75rem;
         font-size: 0.8125rem;
     }
@@ -3412,7 +3406,7 @@ body.menu-open {
         font-size: 1.25rem;
     }
 
-    .search-tag span {
+    .search-tag-keyword {
         padding: 0.375rem 0.75rem;
         font-size: 0.8125rem;
     }

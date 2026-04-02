@@ -14,15 +14,10 @@
 
 ============================================================
 </mt:Ignore>
-<mt:Ignore>
-使用例（インデックステンプレートの場合）:
+
 <mt:SetVar name="prefecture_id" value="shiga">
 <mt:SetVar name="prefecture_name" value="滋賀県">
 
-使用例（アーカイブテンプレートの場合）:
-<mt:SetVar name="prefecture_id" value="<mt:CategoryBasename>">
-<mt:SetVar name="prefecture_name" value="<mt:CategoryLabel>">
-</mt:Ignore>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -144,26 +139,12 @@
                     </button>
                 </div>
                 <div class="search-tags">
-                    <label class="search-tag">
-                        <input type="checkbox" name="conditions" value="remote">
-                        <span>リモートワーク可</span>
-                    </label>
-                    <label class="search-tag">
-                        <input type="checkbox" name="conditions" value="inexperienced">
-                        <span>未経験歓迎</span>
-                    </label>
-                    <label class="search-tag">
-                        <input type="checkbox" name="conditions" value="high_salary">
-                        <span>高年収</span>
-                    </label>
-                    <label class="search-tag">
-                        <input type="checkbox" name="conditions" value="holiday">
-                        <span>土日祝休み</span>
-                    </label>
-                    <label class="search-tag">
-                        <input type="checkbox" name="conditions" value="training">
-                        <span>研修充実</span>
-                    </label>
+                    <button type="button" class="search-tag-keyword" data-keyword="未経験">未経験歓迎</button>
+                    <button type="button" class="search-tag-keyword" data-keyword="年休">年休120日以上</button>
+                    <button type="button" class="search-tag-keyword" data-keyword="残業">残業少なめ</button>
+                    <button type="button" class="search-tag-keyword" data-keyword="研修">研修充実</button>
+                    <button type="button" class="search-tag-keyword" data-keyword="正社員">正社員登用</button>
+                    <button type="button" class="search-tag-keyword" data-keyword="リモート">リモートワーク</button>
                 </div>
             </form>
         </div>

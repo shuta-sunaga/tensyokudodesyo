@@ -12,6 +12,7 @@ let prefectureInterviews = [];
 let prefectureCompanies = [];
 let prefFilteredJobs = [];
 let prefCurrentPage = 1;
+let activeTagKeyword = '';
 const jobsPerPage = 20;
 
 /**
@@ -100,7 +101,6 @@ function setupSearchForm() {
     // Real-time filtering on input change
     const keywordInput = document.getElementById('searchKeyword');
     const jobTypeSelect = document.getElementById('searchJobType');
-    const conditionCheckboxes = document.querySelectorAll('input[name="conditions"]');
 
     if (keywordInput) {
         keywordInput.addEventListener('input', debounce(filterAndRenderJobs, 300));
@@ -110,8 +110,20 @@ function setupSearchForm() {
         jobTypeSelect.addEventListener('change', filterAndRenderJobs);
     }
 
-    conditionCheckboxes.forEach(checkbox => {
-        checkbox.addEventListener('change', filterAndRenderJobs);
+    // Popular keyword tags (single-select toggle)
+    document.querySelectorAll('.search-tag-keyword').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const keyword = btn.dataset.keyword;
+            if (activeTagKeyword === keyword) {
+                activeTagKeyword = '';
+                btn.classList.remove('active');
+            } else {
+                document.querySelectorAll('.search-tag-keyword').forEach(b => b.classList.remove('active'));
+                activeTagKeyword = keyword;
+                btn.classList.add('active');
+            }
+            filterAndRenderJobs();
+        });
     });
 }
 
@@ -121,36 +133,23 @@ function setupSearchForm() {
 function filterAndRenderJobs() {
     const keyword = document.getElementById('searchKeyword')?.value.toLowerCase() || '';
     const jobType = document.getElementById('searchJobType')?.value || '';
-    const conditions = Array.from(document.querySelectorAll('input[name="conditions"]:checked')).map(cb => cb.value);
 
     prefFilteredJobs = prefectureJobs.filter(job => {
-        // Keyword filter
-        if (keyword) {
-            const searchText = `${job.title} ${job.company} ${job.keywords || ''}`.toLowerCase();
-            if (!searchText.includes(keyword)) {
-                return false;
-            }
+        const searchText = `${job.title} ${job.company} ${job.keywords || ''} ${job.conditions || ''}`.toLowerCase();
+
+        // Keyword input filter
+        if (keyword && !searchText.includes(keyword)) {
+            return false;
+        }
+
+        // Popular keyword tag filter
+        if (activeTagKeyword && !searchText.includes(activeTagKeyword.toLowerCase())) {
+            return false;
         }
 
         // Job type filter
         if (jobType && job.category !== jobType) {
             return false;
-        }
-
-        // Conditions filter
-        if (conditions.length > 0) {
-            const jobConditions = job.conditions ? job.conditions.split(',').map(c => c.trim()) : [];
-            const hasAllConditions = conditions.every(condition => {
-                // Use CategoryManager if available for condition name lookup
-                const conditionName = typeof CategoryManager !== 'undefined'
-                    ? CategoryManager.getName('jobCondition', condition)
-                    : getConditionName(condition);
-                // Also check if job condition matches the ID directly
-                return jobConditions.includes(conditionName) || jobConditions.includes(condition);
-            });
-            if (!hasAllConditions) {
-                return false;
-            }
         }
 
         return true;
@@ -159,37 +158,6 @@ function filterAndRenderJobs() {
     prefCurrentPage = 1;
     renderJobs();
     updateResultsCount();
-}
-
-/**
- * Get condition name from ID (fallback when CategoryManager not available)
- */
-function getConditionName(conditionId) {
-    const conditionMap = {
-        'pu01': 'リモートワーク可',
-        'pu02': '土日祝休み',
-        'pu03': '未経験歓迎',
-        'pu04': '学歴不問',
-        'pu05': '残業少なめ',
-        'pu06': 'フレックス',
-        'pu07': '転勤なし',
-        'pu08': '高年収',
-        'pu09': '研修充実',
-        'pu10': '資格取得支援',
-        'pu11': 'インセンティブあり',
-        // Legacy mappings for backward compatibility
-        'remote': 'リモートワーク可',
-        'inexperienced': '未経験歓迎',
-        'high_salary': '高年収',
-        'holiday': '土日祝休み',
-        'no_overtime': '残業少なめ',
-        'training': '研修充実',
-        'flextime': 'フレックス',
-        'benefits': '福利厚生充実',
-        'certification': '資格取得支援',
-        'incentive': 'インセンティブあり'
-    };
-    return conditionMap[conditionId] || conditionId;
 }
 
 /**
