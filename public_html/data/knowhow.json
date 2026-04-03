@@ -1,6 +1,33 @@
 {
   "articles": [
     {
+      "id": 45,
+      "title": "転職活動のスケジュール管理〜3ヶ月で内定を取る計画術",
+      "category": "kh05",
+      "excerpt": "転職活動を3ヶ月で完了させるための具体的なスケジュール管理術。月別・週別の行動計画、応募の並行管理、遅れた場合のリカバリー方法、在職中と退職後の違いまで実践的に解説します。",
+      "image": "/assets/knowhow-045.webp",
+      "postDate": "2026-04-04",
+      "detailUrl": "/knowhow/detail/knowhow-045.html"
+    },
+    {
+      "id": 44,
+      "title": "転職面接のオンライン対策〜通信・背景・話し方",
+      "category": "kh01",
+      "excerpt": "オンライン面接の実践的な対策ガイド。通信環境の準備、カメラ・照明・背景の整え方、オンラインならではの話し方のコツ、事前テストチェックリスト、トラブル対処法まで徹底解説します。",
+      "image": "/assets/knowhow-044.webp",
+      "postDate": "2026-04-04",
+      "detailUrl": "/knowhow/detail/knowhow-044.html"
+    },
+    {
+      "id": 43,
+      "title": "人手不足の業界ランキングと転職のねらい目",
+      "category": "kh04",
+      "excerpt": "人手不足が深刻な業界を有効求人倍率データに基づきランキング形式で紹介。転職者にとってのメリット・注意点、未経験から狙える職種、業界選びのチェックリストまで解説します。",
+      "image": "/assets/knowhow-043.webp",
+      "postDate": "2026-04-04",
+      "detailUrl": "/knowhow/detail/knowhow-043.html"
+    },
+    {
       "id": 42,
       "title": "適性検査・性格診断を転職に活かす方法",
       "category": "kh03",
