@@ -1,6 +1,33 @@
 {
   "articles": [
     {
+      "id": 48,
+      "title": "地方の中小企業に転職するメリットと注意点",
+      "category": "kh04",
+      "excerpt": "地方の中小企業に転職するメリットと注意点を徹底解説。大手企業との違い、優良中小企業の見極め方、面接で確認すべき質問、地方中小企業の求人の探し方まで実践的に紹介します。",
+      "image": "/assets/knowhow-048.webp",
+      "postDate": "2026-04-04",
+      "detailUrl": "/knowhow/detail/knowhow-048.html"
+    },
+    {
+      "id": 47,
+      "title": "20代転職の自己分析〜キャリアの方向性を決める方法",
+      "category": "kh03",
+      "excerpt": "20代・第二新卒向けの自己分析ガイド。経験が浅い・やりたいことが分からないという悩みへの対処法、20代が重視すべき判断基準、キャリアイメージの描き方、自己分析ワークシートを紹介します。",
+      "image": "/assets/knowhow-047.webp",
+      "postDate": "2026-04-04",
+      "detailUrl": "/knowhow/detail/knowhow-047.html"
+    },
+    {
+      "id": 46,
+      "title": "転職の応募メール・送付状の書き方と例文集",
+      "category": "kh02",
+      "excerpt": "転職活動の応募メール・送付状の書き方を場面別の例文付きで徹底解説。件名の書き方、メール本文テンプレート、送付状のフォーマット、NG例と改善例、送信前チェックリストを紹介します。",
+      "image": "/assets/knowhow-046.webp",
+      "postDate": "2026-04-04",
+      "detailUrl": "/knowhow/detail/knowhow-046.html"
+    },
+    {
       "id": 45,
       "title": "転職活動のスケジュール管理〜3ヶ月で内定を取る計画術",
       "category": "kh05",
