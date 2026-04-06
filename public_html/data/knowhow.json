@@ -1,6 +1,33 @@
 {
   "articles": [
     {
+      "id": 51,
+      "title": "IT未経験から転職できる職種と必要スキル一覧",
+      "category": "kh04",
+      "excerpt": "IT未経験から転職できる職種を必要スキル・年収目安・おすすめ資格とともに一覧で紹介。3ヶ月の学習ロードマップ、SESと自社開発の違い、IT企業の選び方まで実践的に解説します。",
+      "image": "/assets/knowhow-051.webp",
+      "postDate": "2026-04-06",
+      "detailUrl": "/knowhow/detail/knowhow-051.html"
+    },
+    {
+      "id": 50,
+      "title": "職務経歴書のフォーマット選び〜3種類の特徴と使い分け",
+      "category": "kh02",
+      "excerpt": "職務経歴書の3つのフォーマット（編年体・逆編年体・キャリア式）の特徴と使い分けを徹底解説。どんな人にどのフォーマットが向いているか、記載例、レイアウトのコツまで紹介します。",
+      "image": "/assets/knowhow-050.webp",
+      "postDate": "2026-04-06",
+      "detailUrl": "/knowhow/detail/knowhow-050.html"
+    },
+    {
+      "id": 49,
+      "title": "転職の最終面接後〜内定までの流れと過ごし方",
+      "category": "kh01",
+      "excerpt": "最終面接後から内定連絡までの流れと過ごし方を徹底解説。結果通知のスケジュール目安、お礼メールの書き方、結果が遅い場合の問い合わせ方法、内定待ち期間にやるべきことを紹介します。",
+      "image": "/assets/knowhow-049.webp",
+      "postDate": "2026-04-06",
+      "detailUrl": "/knowhow/detail/knowhow-049.html"
+    },
+    {
       "id": 48,
       "title": "地方の中小企業に転職するメリットと注意点",
       "category": "kh04",
