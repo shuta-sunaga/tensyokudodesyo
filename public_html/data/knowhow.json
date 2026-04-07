@@ -1,6 +1,33 @@
 {
   "articles": [
     {
+      "id": 54,
+      "title": "転職の集団面接・グループ面接の対策と突破のコツ",
+      "category": "kh01",
+      "excerpt": "集団面接・グループ面接の対策を徹底解説。個人面接との違い、面接官が見ている3つのポイント、よくある質問と回答のコツ、グループディスカッションへの対応、NGパターン5選を紹介します。",
+      "image": "/assets/knowhow-054.webp",
+      "postDate": "2026-04-07",
+      "detailUrl": "/knowhow/detail/knowhow-054.html"
+    },
+    {
+      "id": 53,
+      "title": "転職活動に必要な書類一覧と準備スケジュール",
+      "category": "kh05",
+      "excerpt": "転職活動で必要になる書類の完全一覧と準備スケジュール。応募・内定・退職の各段階で必要な書類、取得先・費用・所要日数、よくある書類トラブルと対処法まで実践的に解説します。",
+      "image": "/assets/knowhow-053.webp",
+      "postDate": "2026-04-07",
+      "detailUrl": "/knowhow/detail/knowhow-053.html"
+    },
+    {
+      "id": 52,
+      "title": "転職の価値観診断〜仕事で大切にしたいことの見つけ方",
+      "category": "kh03",
+      "excerpt": "転職で後悔しないための価値観診断ガイド。仕事の価値観8分類、価値観を掘り下げる10の質問リスト、過去の経験から価値観を抽出するワーク、優先順位の付け方を紹介します。",
+      "image": "/assets/knowhow-052.webp",
+      "postDate": "2026-04-07",
+      "detailUrl": "/knowhow/detail/knowhow-052.html"
+    },
+    {
       "id": 51,
       "title": "IT未経験から転職できる職種と必要スキル一覧",
       "category": "kh04",
