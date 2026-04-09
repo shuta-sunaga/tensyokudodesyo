@@ -1,6 +1,33 @@
 {
   "articles": [
     {
+      "id": 57,
+      "title": "転職先の給与交渉の進め方〜年収アップを勝ち取るコツ",
+      "category": "kh05",
+      "excerpt": "転職時の給与交渉の進め方を徹底解説。交渉のベストタイミング、市場相場の調査方法、メール・電話の例文、交渉で使えるフレーズ、年収以外の交渉ポイント、NG行動5選を紹介します。",
+      "image": "/assets/knowhow-057.webp",
+      "postDate": "2026-04-09",
+      "detailUrl": "/knowhow/detail/knowhow-057.html"
+    },
+    {
+      "id": 56,
+      "title": "医療・介護業界の転職ガイド〜職種・資格・年収一覧",
+      "category": "kh04",
+      "excerpt": "医療・介護業界の転職を徹底ガイド。主要職種の年収・必要資格・未経験可否、未経験からのキャリアパス、働き方の特徴、求人の探し方、転職前に確認すべきポイントを紹介します。",
+      "image": "/assets/knowhow-056.webp",
+      "postDate": "2026-04-09",
+      "detailUrl": "/knowhow/detail/knowhow-056.html"
+    },
+    {
+      "id": 55,
+      "title": "転職の証明写真の撮り方〜好印象を与えるポイント",
+      "category": "kh02",
+      "excerpt": "転職用証明写真の撮り方を徹底解説。写真館・スピード写真・自撮りの比較、服装・表情・髪型のポイント、背景色の選び方、データ提出時の注意点、撮影前チェックリストを紹介します。",
+      "image": "/assets/knowhow-055.webp",
+      "postDate": "2026-04-09",
+      "detailUrl": "/knowhow/detail/knowhow-055.html"
+    },
+    {
       "id": 54,
       "title": "転職の集団面接・グループ面接の対策と突破のコツ",
       "category": "kh01",
