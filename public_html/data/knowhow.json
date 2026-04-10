@@ -1,6 +1,15 @@
 {
   "articles": [
     {
+      "id": 61,
+      "title": "転職が怖い人へ〜不安の正体と乗り越える方法",
+      "category": "kh03",
+      "excerpt": "転職したいけど怖い・不安で踏み出せない方へ。転職の恐怖の5つの原因を分析し、不安を和らげながら前に進む7つの具体的ステップを解説します。",
+      "image": "/assets/knowhow-061.webp",
+      "postDate": "2026-04-10",
+      "detailUrl": "/knowhow/detail/knowhow-061.html"
+    },
+    {
       "id": 58,
       "title": "AIで自己分析〜ChatGPTで強み・適職を発見する方法",
       "category": "kh03",
