@@ -1,6 +1,33 @@
 {
   "articles": [
     {
+      "id": 58,
+      "title": "AIで自己分析〜ChatGPTで強み・適職を発見する方法",
+      "category": "kh03",
+      "excerpt": "ChatGPTを使った自己分析のやり方を徹底解説。AIへの効果的な質問例、強み・価値観の言語化テクニック、適職診断の活用法まで実践的に紹介します。",
+      "image": "/assets/knowhow-058.webp",
+      "postDate": "2026-04-10",
+      "detailUrl": "/knowhow/detail/knowhow-058.html"
+    },
+    {
+      "id": 59,
+      "title": "職務経歴書が書けない人へ〜ゼロから作る5ステップ",
+      "category": "kh02",
+      "excerpt": "職務経歴書が書けないと悩む方へ。書き出せない原因の分析から、経歴の棚卸し、テンプレート活用、完成までの5ステップを具体例付きで解説します。",
+      "image": "/assets/knowhow-059.webp",
+      "postDate": "2026-04-10",
+      "detailUrl": "/knowhow/detail/knowhow-059.html"
+    },
+    {
+      "id": 60,
+      "title": "転職の内定後にやること〜入社日までの準備リスト",
+      "category": "kh05",
+      "excerpt": "転職で内定をもらった後にやるべきことを時系列で解説。内定承諾の返答、退職届の提出、入社手続きの書類準備、初日の心構えまで網羅します。",
+      "image": "/assets/knowhow-060.webp",
+      "postDate": "2026-04-10",
+      "detailUrl": "/knowhow/detail/knowhow-060.html"
+    },
+    {
       "id": 57,
       "title": "転職先の給与交渉の進め方〜年収アップを勝ち取るコツ",
       "category": "kh05",
