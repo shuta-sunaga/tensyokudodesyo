@@ -1,6 +1,33 @@
 {
   "articles": [
     {
+      "id": 62,
+      "title": "転職に成功する人の共通点〜うまくいく人の考え方",
+      "category": "kh03",
+      "excerpt": "転職に成功する人に共通する考え方や行動パターンを解説。準備・情報収集・面接・意思決定の各段階で差がつくポイントを具体的に紹介します。",
+      "image": "/assets/knowhow-062.webp",
+      "postDate": "2026-04-13",
+      "detailUrl": "/knowhow/detail/knowhow-062.html"
+    },
+    {
+      "id": 63,
+      "title": "面接で好印象を残す人の話し方〜伝え方のコツ",
+      "category": "kh01",
+      "excerpt": "面接で好印象を残す人の話し方のコツを解説。声のトーン・話すスピード・間の取り方から、結論ファーストの伝え方、エピソードの組み立て方まで実践的に紹介します。",
+      "image": "/assets/knowhow-063.webp",
+      "postDate": "2026-04-13",
+      "detailUrl": "/knowhow/detail/knowhow-063.html"
+    },
+    {
+      "id": 64,
+      "title": "転職先で早く馴染む人がやっている5つの習慣",
+      "category": "kh05",
+      "excerpt": "転職先で早く馴染む人がやっている5つの習慣を解説。入社初日から実践できる挨拶・質問・観察のコツ、人間関係の築き方、最初の3ヶ月の過ごし方を紹介します。",
+      "image": "/assets/knowhow-064.webp",
+      "postDate": "2026-04-13",
+      "detailUrl": "/knowhow/detail/knowhow-064.html"
+    },
+    {
       "id": 61,
       "title": "転職が怖い人へ〜不安の正体と乗り越える方法",
       "category": "kh03",
