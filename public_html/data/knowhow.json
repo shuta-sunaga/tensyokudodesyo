@@ -1,6 +1,33 @@
 {
   "articles": [
     {
+      "id": 65,
+      "title": "40代・50代の転職事情〜ミドル世代が求められる理由",
+      "category": "kh04",
+      "excerpt": "40代・50代の転職が増えている背景と、ミドル世代が企業から求められるスキル・経験を解説。年代別の転職成功率や年収データ、具体的な活動ステップを紹介します。",
+      "image": "/assets/knowhow-065.webp",
+      "postDate": "2026-04-14",
+      "detailUrl": "/knowhow/detail/knowhow-065.html"
+    },
+    {
+      "id": 66,
+      "title": "異業種への転職を成功させる準備と戦略",
+      "category": "kh05",
+      "excerpt": "異業種・異職種への転職を成功させるための準備と戦略を解説。越境転職の成功率データ、スキルの棚卸し方法、業界別の転職しやすさ、志望動機の作り方を紹介します。",
+      "image": "/assets/knowhow-066.webp",
+      "postDate": "2026-04-14",
+      "detailUrl": "/knowhow/detail/knowhow-066.html"
+    },
+    {
+      "id": 67,
+      "title": "転職で自分の市場価値を知る方法〜年収の目安と高め方",
+      "category": "kh03",
+      "excerpt": "転職で自分の市場価値を正しく把握する方法を解説。年収相場の調べ方、市場価値を決める5つの要素、無料診断ツールの活用法、市場価値を高める具体的なアクションを紹介します。",
+      "image": "/assets/knowhow-067.webp",
+      "postDate": "2026-04-14",
+      "detailUrl": "/knowhow/detail/knowhow-067.html"
+    },
+    {
       "id": 62,
       "title": "転職に成功する人の共通点〜うまくいく人の考え方",
       "category": "kh03",
