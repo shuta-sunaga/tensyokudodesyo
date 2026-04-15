@@ -1,6 +1,33 @@
 {
   "articles": [
     {
+      "id": 68,
+      "title": "面接での弱み・短所の伝え方〜好印象な回答例",
+      "category": "kh01",
+      "excerpt": "面接で「あなたの弱み・短所は？」と聞かれたときの答え方を解説。面接官の意図、好印象を与える回答の型、職種別の例文、避けるべきNG回答まで具体的に紹介します。",
+      "image": "/assets/knowhow-068.webp",
+      "postDate": "2026-04-15",
+      "detailUrl": "/knowhow/detail/knowhow-068.html"
+    },
+    {
+      "id": 69,
+      "title": "転職の封筒・郵送マナー〜書類を届ける正しい方法",
+      "category": "kh02",
+      "excerpt": "転職の応募書類を郵送する際の封筒の選び方、宛名の書き方、送付状の入れ方、郵送方法を解説。採用担当者に好印象を与えるビジネスマナーのポイントを紹介します。",
+      "image": "/assets/knowhow-069.webp",
+      "postDate": "2026-04-15",
+      "detailUrl": "/knowhow/detail/knowhow-069.html"
+    },
+    {
+      "id": 70,
+      "title": "物流・運送業界の転職ガイド〜職種・年収・将来性",
+      "category": "kh04",
+      "excerpt": "物流・運送業界への転職を検討中の方へ。業界の市場規模、主な職種と年収、未経験から転職する方法、必要な資格、2024年問題後の最新動向を解説します。",
+      "image": "/assets/knowhow-070.webp",
+      "postDate": "2026-04-15",
+      "detailUrl": "/knowhow/detail/knowhow-070.html"
+    },
+    {
       "id": 65,
       "title": "40代・50代の転職事情〜ミドル世代が求められる理由",
       "category": "kh04",
