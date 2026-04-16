@@ -14,7 +14,7 @@ async function loadAllKnowhowArticles() {
     const allArticles = results
         .filter(r => r.status === 'fulfilled')
         .flatMap(r => r.value.articles || []);
-    allArticles.sort((a, b) => new Date(b.postDate) - new Date(a.postDate));
+    allArticles.sort((a, b) => new Date(b.postDate) - new Date(a.postDate) || b.id - a.id);
     return allArticles;
 }
 
@@ -928,7 +928,7 @@ function createJobCardHTML(job) {
                         ${formatLocation(job.prefecture, job.city)}
                     </span>
                     <span class="job-listing-salary">
-                        年収: ${escapeHTML(job.salary)}円
+                        ${formatSalary(job.salary)}
                     </span>
                 </div>
                 <div class="job-listing-tags">
@@ -950,6 +950,20 @@ function formatLocation(prefecture, city) {
         return escapeHTML(c);
     }
     return escapeHTML(pref) + escapeHTML(c);
+}
+
+/**
+ * Format salary, avoiding duplicate prefix/suffix
+ * e.g. "450万〜700万" → "年収: 450万〜700万円"
+ *      "年収350万〜500万円" → "年収: 350万〜500万円"
+ */
+function formatSalary(salary) {
+    let s = salary || '';
+    const hasPrefix = s.startsWith('年収');
+    const hasSuffix = s.endsWith('円');
+    if (hasPrefix) s = s.slice(2);
+    if (hasSuffix) s = s.slice(0, -1);
+    return `年収: ${escapeHTML(s)}円`;
 }
 
 /**
@@ -1062,7 +1076,7 @@ function renderJobDetail() {
                         <line x1="12" y1="1" x2="12" y2="23"></line>
                         <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
                     </svg>
-                    年収: ${escapeHTML(job.salary)}円
+                    ${formatSalary(job.salary)}
                 </div>
             </div>
             <div class="job-detail-conditions-header">
