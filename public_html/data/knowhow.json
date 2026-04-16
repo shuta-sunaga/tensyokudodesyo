@@ -1,6 +1,33 @@
 {
   "articles": [
     {
+      "id": 71,
+      "title": "圧迫面接の対処法〜冷静に乗り切るコツ",
+      "category": "kh01",
+      "excerpt": "圧迫面接で冷静に対処するための具体的テクニックを解説。企業が圧迫面接を行う目的、よくある質問パターン別の回答例、ハラスメントとの境界線、辞退判断の基準まで紹介します。",
+      "image": "/assets/knowhow-071.webp",
+      "postDate": "2026-04-16",
+      "detailUrl": "/knowhow/detail/knowhow-071.html"
+    },
+    {
+      "id": 72,
+      "title": "建設・不動産業界の転職ガイド〜職種・資格・年収",
+      "category": "kh04",
+      "excerpt": "建設・不動産業界への転職を検討中の方へ。市場規模60兆円超の建設業界の主要職種・年収相場・有用資格・未経験からの転職法・2024年問題後の働き方改革まで具体的に解説します。",
+      "image": "/assets/knowhow-072.webp",
+      "postDate": "2026-04-16",
+      "detailUrl": "/knowhow/detail/knowhow-072.html"
+    },
+    {
+      "id": 73,
+      "title": "転職と失業保険〜受給条件と手続きの流れ",
+      "category": "kh05",
+      "excerpt": "転職時の失業保険（雇用保険の基本手当）を徹底解説。受給条件、自己都合と会社都合の違い、受給額の計算方法、ハローワークでの手続き、再就職手当の仕組みまで紹介します。",
+      "image": "/assets/knowhow-073.webp",
+      "postDate": "2026-04-16",
+      "detailUrl": "/knowhow/detail/knowhow-073.html"
+    },
+    {
       "id": 68,
       "title": "面接での弱み・短所の伝え方〜好印象な回答例",
       "category": "kh01",
