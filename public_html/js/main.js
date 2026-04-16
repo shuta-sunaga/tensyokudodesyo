@@ -1579,7 +1579,7 @@ async function initHomePage() {
                 <article class="article-card">
                     <a href="${article.detailUrl}">
                         <div class="article-card-image">
-                            <img src="${article.image}" alt="${escapeHTML(article.title)}" loading="lazy">
+                            <img src="${article.thumbnail || article.image}" alt="${escapeHTML(article.title)}" loading="lazy" width="600" height="338" decoding="async">
                         </div>
                         <div class="article-card-content">
                             <span class="article-card-category">${escapeHTML(categoryDisplay)}</span>
@@ -1668,7 +1668,7 @@ function renderKnowhowArticles() {
         <article class="article-card" data-category="${escapeHTML(article.category)}">
             <a href="${article.detailUrl}">
                 <div class="article-card-image">
-                    <img src="${article.image}" alt="${escapeHTML(article.title)}" loading="lazy">
+                    <img src="${article.thumbnail || article.image}" alt="${escapeHTML(article.title)}" loading="lazy" width="600" height="338" decoding="async">
                 </div>
                 <div class="article-card-content">
                     <span class="article-card-category">${escapeHTML(categoryDisplay)}</span>
