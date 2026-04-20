@@ -1,6 +1,33 @@
 {
   "articles": [
     {
+      "id": 74,
+      "title": "面接後のお礼メール〜送り方とタイミング例文",
+      "category": "kh01",
+      "excerpt": "転職の面接後に送るお礼メールの書き方を徹底解説。送るべきか判断基準、ベストなタイミング、件名・本文のテンプレート、一次〜最終・オンライン面接の場面別例文を紹介します。",
+      "image": "/assets/knowhow-074.webp",
+      "postDate": "2026-04-20",
+      "detailUrl": "/knowhow/detail/knowhow-074.html"
+    },
+    {
+      "id": 75,
+      "title": "製造・メーカー業界の転職ガイド〜職種と年収",
+      "category": "kh04",
+      "excerpt": "製造・メーカー業界への転職を徹底ガイド。市場規模、主要職種の年収相場、有用資格、大手と中小の違い、未経験から入る方法、EV・半導体・DXなど将来性と注意点を解説します。",
+      "image": "/assets/knowhow-075.webp",
+      "postDate": "2026-04-20",
+      "detailUrl": "/knowhow/detail/knowhow-075.html"
+    },
+    {
+      "id": 76,
+      "title": "リファレンスチェックの対策〜内容と進め方",
+      "category": "kh05",
+      "excerpt": "転職のリファレンスチェックを徹底解説。実施企業の特徴、聞かれる内容、推薦者の選び方、事前の根回し、ネガティブ情報が出た場合の対処法、合否への影響まで実践的に紹介します。",
+      "image": "/assets/knowhow-076.webp",
+      "postDate": "2026-04-20",
+      "detailUrl": "/knowhow/detail/knowhow-076.html"
+    },
+    {
       "id": 71,
       "title": "圧迫面接の対処法〜冷静に乗り切るコツ",
       "category": "kh01",
