@@ -1,6 +1,33 @@
 {
   "articles": [
     {
+      "id": 77,
+      "title": "履歴書の学歴・職歴欄〜書き方と年号統一ルール",
+      "category": "kh02",
+      "excerpt": "履歴書の学歴・職歴欄の正しい書き方を徹底解説。西暦・和暦の統一ルール、入学卒業・入社退社の表記、中退・浪人・休職の書き方、派遣社員の記載法まで具体例付きで紹介します。",
+      "image": "/assets/knowhow-077.webp",
+      "postDate": "2026-04-21",
+      "detailUrl": "/knowhow/detail/knowhow-077.html"
+    },
+    {
+      "id": 78,
+      "title": "転職で後悔した人の共通点〜失敗例から学ぶ",
+      "category": "kh03",
+      "excerpt": "転職で後悔した人の共通点を徹底分析。失敗例から学ぶ準備不足・情報不足・判断ミスのパターン、後悔しやすい年代・職種、同じ失敗を避けるための7つの事前対策を紹介します。",
+      "image": "/assets/knowhow-078.webp",
+      "postDate": "2026-04-21",
+      "detailUrl": "/knowhow/detail/knowhow-078.html"
+    },
+    {
+      "id": 79,
+      "title": "金融業界の転職ガイド〜銀行・証券・保険の違い",
+      "category": "kh04",
+      "excerpt": "金融業界への転職を徹底ガイド。銀行・証券・保険・ノンバンク・フィンテックの違い、職種別の年収相場、未経験転職の可否、有用資格、DXと再編で変わる将来性を具体的に解説します。",
+      "image": "/assets/knowhow-079.webp",
+      "postDate": "2026-04-21",
+      "detailUrl": "/knowhow/detail/knowhow-079.html"
+    },
+    {
       "id": 74,
       "title": "面接後のお礼メール〜送り方とタイミング例文",
       "category": "kh01",
