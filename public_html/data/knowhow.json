@@ -1,6 +1,33 @@
 {
   "articles": [
     {
+      "id": 80,
+      "title": "面接で緊張しない方法〜本番で力を出すコツ",
+      "category": "kh01",
+      "excerpt": "面接で緊張しない方法を徹底解説。緊張の原因分析、前日・当日・直前の準備法、呼吸法やマインドセット、頭が真っ白になったときの対処、練習メソッドまで具体的に紹介します。",
+      "image": "/assets/knowhow-080.webp",
+      "postDate": "2026-04-22",
+      "detailUrl": "/knowhow/detail/knowhow-080.html"
+    },
+    {
+      "id": 81,
+      "title": "退職後の健康保険〜任意継続と国保の選び方",
+      "category": "kh05",
+      "excerpt": "退職後の健康保険の選び方を徹底解説。任意継続・国民健康保険・家族の扶養の3択を保険料・期間・手続きの観点で比較し、切り替え期限や失敗パターン、最適な選び方まで紹介します。",
+      "image": "/assets/knowhow-081.webp",
+      "postDate": "2026-04-22",
+      "detailUrl": "/knowhow/detail/knowhow-081.html"
+    },
+    {
+      "id": 82,
+      "title": "コンサル業界の転職ガイド〜職種・年収・資格",
+      "category": "kh04",
+      "excerpt": "コンサル業界への転職を徹底ガイド。戦略・総合・IT・人事・専門系の違い、ファームごとの年収相場、未経験転職の可否、必要スキル・資格、将来性と注意点まで実践的に解説します。",
+      "image": "/assets/knowhow-082.webp",
+      "postDate": "2026-04-22",
+      "detailUrl": "/knowhow/detail/knowhow-082.html"
+    },
+    {
       "id": 77,
       "title": "履歴書の学歴・職歴欄〜書き方と年号統一ルール",
       "category": "kh02",
