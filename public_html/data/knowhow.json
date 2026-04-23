@@ -1,6 +1,33 @@
 {
   "articles": [
     {
+      "id": 83,
+      "title": "履歴書の本人希望欄〜書き方と注意点",
+      "category": "kh02",
+      "excerpt": "履歴書の本人希望欄の書き方を徹底解説。基本ルール、「貴社規定に従います」の使い分け、給与・勤務地・職種の希望伝達法、NG例、具体的なテンプレート例文を紹介します。",
+      "image": "/assets/knowhow-083.webp",
+      "postDate": "2026-04-23",
+      "detailUrl": "/knowhow/detail/knowhow-083.html"
+    },
+    {
+      "id": 84,
+      "title": "モチベーショングラフで転職の軸を見つける",
+      "category": "kh03",
+      "excerpt": "モチベーショングラフの作り方を徹底解説。過去の感情の波を可視化し、強みや価値観を発見する手順、転職の軸への落とし込み方、エントリーシート・面接での活用法まで紹介します。",
+      "image": "/assets/knowhow-084.webp",
+      "postDate": "2026-04-23",
+      "detailUrl": "/knowhow/detail/knowhow-084.html"
+    },
+    {
+      "id": 85,
+      "title": "ボーナス後の退職戦略〜タイミング見極め",
+      "category": "kh05",
+      "excerpt": "ボーナス後の退職戦略を徹底解説。夏冬賞与の支給日逆算カレンダー、退職届の提出タイミング、返還リスク回避、内定日と退職日の調整、円満退社の伝え方まで具体的に紹介します。",
+      "image": "/assets/knowhow-085.webp",
+      "postDate": "2026-04-23",
+      "detailUrl": "/knowhow/detail/knowhow-085.html"
+    },
+    {
       "id": 80,
       "title": "面接で緊張しない方法〜本番で力を出すコツ",
       "category": "kh01",
