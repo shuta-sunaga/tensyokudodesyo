@@ -21,7 +21,7 @@ const regionIdMap = {
     '沖縄': 'okinawa'
 };
 
-// Region colors
+// Region colors (kept for possible external reference; actual styling lives in injected CSS)
 const regionColors = {
     'hokkaido': { fill: '#a8d8ea', stroke: '#6bb3cf', hoverFill: '#7bc4de' },
     'tohoku':   { fill: '#d4b8e0', stroke: '#a67bb8', hoverFill: '#c49dd4' },
@@ -34,19 +34,83 @@ const regionColors = {
     'okinawa':  { fill: '#a8e8f5', stroke: '#5cb8d4', hoverFill: '#88d8e8' }
 };
 
-// Inactive region colors (gray)
-const inactiveRegionColors = {
-    fill: '#d0d0d0',
-    stroke: '#a0a0a0',
-    hoverFill: '#c0c0c0'
-};
-
 // Track which regions have at least one active prefecture
 let activeRegions = new Set();
 
 // Current tooltip state
 let currentTooltipRegion = null;
-let isTooltipVisible = false;
+
+/**
+ * Build CSS to be injected into the SVG document.
+ * All fill/stroke rules live here so JS only toggles data attributes.
+ */
+function buildSvgStyles() {
+    // Default rule covers paths BEFORE JS assigns data-region-active,
+    // so the map never flashes the browser-default black fill.
+    let css = `
+        svg#japanMap { background: transparent; }
+        g[data-prefecture] { cursor: pointer; }
+        g.svg-map, g[data-prefecture] { touch-action: manipulation; }
+        g[data-prefecture] path,
+        g[data-prefecture] polygon {
+            fill: #d0d0d0;
+            stroke: #a0a0a0;
+            stroke-width: 0.5;
+            transition: fill 0.2s ease, stroke-width 0.2s ease;
+        }
+        g[data-prefecture][data-region-active="false"][data-selected="true"] path,
+        g[data-prefecture][data-region-active="false"][data-selected="true"] polygon {
+            fill: #c0c0c0;
+            stroke-width: 1;
+        }
+    `;
+
+    Object.entries(regionColors).forEach(([rid, c]) => {
+        css += `
+        g[data-prefecture][data-region-active="true"][data-region="${rid}"] path,
+        g[data-prefecture][data-region-active="true"][data-region="${rid}"] polygon {
+            fill: ${c.fill};
+            stroke: ${c.stroke};
+        }
+        g[data-prefecture][data-region-active="true"][data-region="${rid}"][data-selected="true"] path,
+        g[data-prefecture][data-region-active="true"][data-region="${rid}"][data-selected="true"] polygon {
+            fill: ${c.hoverFill};
+            stroke-width: 1;
+        }`;
+    });
+
+    return css;
+}
+
+/**
+ * Inject the <style> block into the SVG document (idempotent)
+ */
+function injectSvgStyles(svgDoc) {
+    if (!svgDoc) return;
+    if (svgDoc.getElementById('japan-map-styles')) return;
+    const styleEl = svgDoc.createElementNS('http://www.w3.org/2000/svg', 'style');
+    styleEl.setAttribute('id', 'japan-map-styles');
+    styleEl.textContent = buildSvgStyles();
+    const root = svgDoc.documentElement;
+    root.insertBefore(styleEl, root.firstChild);
+}
+
+/**
+ * Inject styles as soon as the SVG document is reachable, so the map
+ * never renders the browser-default black fill while JSON is loading.
+ */
+function injectStylesASAP() {
+    const svgObject = document.getElementById('japanMapObject');
+    if (!svgObject) return;
+    const tryInject = () => {
+        const svgDoc = svgObject.contentDocument;
+        if (svgDoc && svgDoc.getElementById('japanMap')) {
+            injectSvgStyles(svgDoc);
+        }
+    };
+    svgObject.addEventListener('load', tryInject);
+    tryInject();
+}
 
 /**
  * Initialize Japan Map
@@ -54,7 +118,6 @@ let isTooltipVisible = false;
  */
 async function initJapanMap() {
     try {
-        // First, load prefectures.json
         const prefResponse = await fetch('data/prefectures.json');
         if (!prefResponse.ok) {
             throw new Error('Failed to load prefectures: HTTP ' + prefResponse.status);
@@ -62,10 +125,8 @@ async function initJapanMap() {
         const prefData = await prefResponse.json();
         prefectureData = prefData.prefectures;
 
-        // Get active prefectures
         const activePrefectures = prefectureData.filter(p => p.active);
 
-        // Load job counts from each active prefecture's JSON in parallel
         const jobCountPromises = activePrefectures.map(async (pref) => {
             try {
                 const response = await fetch(`data/jobs/${pref.id}.json`);
@@ -83,13 +144,11 @@ async function initJapanMap() {
 
         const jobCounts = await Promise.all(jobCountPromises);
 
-        // Build job count by prefecture
         jobCountByPrefecture = {};
         jobCounts.forEach(({ prefName, count }) => {
             jobCountByPrefecture[prefName] = count;
         });
 
-        // Group prefectures by region
         prefecturesByRegion = {};
         prefectureData.forEach(pref => {
             const regionId = regionIdMap[pref.region];
@@ -102,30 +161,25 @@ async function initJapanMap() {
             prefecturesByRegion[regionId].prefectures.push(pref);
         });
 
-        // Calculate which regions have at least one active prefecture
         activeRegions = new Set();
         Object.entries(prefecturesByRegion).forEach(([regionId, regionData]) => {
-            const hasActivePrefecture = regionData.prefectures.some(p => p.active);
-            if (hasActivePrefecture) {
+            if (regionData.prefectures.some(p => p.active)) {
                 activeRegions.add(regionId);
             }
         });
 
-        // Populate prefecture grid first (doesn't depend on SVG)
         populatePrefectureGrid();
 
-        // Wait for SVG object to load before setting up interaction
         const svgObject = document.getElementById('japanMapObject');
         if (svgObject) {
-            svgObject.addEventListener('load', () => {
-                setupMapInteraction();
-            });
-            // Also try immediately in case already loaded
-            if (svgObject.contentDocument) {
-                setupMapInteraction();
-            }
+            const tryInit = () => {
+                if (svgObject.contentDocument && svgObject.contentDocument.getElementById('japanMap')) {
+                    setupMapInteraction();
+                }
+            };
+            svgObject.addEventListener('load', setupMapInteraction);
+            tryInit();
         } else {
-            // Fallback for inline SVG
             setupMapInteraction();
         }
 
@@ -141,103 +195,60 @@ function setupMapInteraction() {
     const tooltip = document.getElementById('mapTooltip');
     if (!tooltip) return;
 
-    // Try to get SVG from object element (external SVG)
     const svgObject = document.getElementById('japanMapObject');
-    let svg = document.getElementById('japanMap');
-
-    if (svgObject && svgObject.contentDocument) {
-        svg = svgObject.contentDocument.getElementById('japanMap');
-    }
+    const svgDoc = svgObject && svgObject.contentDocument;
+    const svg = svgDoc
+        ? svgDoc.getElementById('japanMap')
+        : document.getElementById('japanMap');
 
     if (!svg) {
-        // Retry after a short delay if SVG not loaded yet
         setTimeout(setupMapInteraction, 100);
         return;
     }
 
-    // Store all groups for highlighting
-    const allGroups = new Map();
+    // Guard against re-run when <object> fires load() multiple times
+    if (svg.dataset.mapBound === 'true') return;
+    svg.dataset.mapBound = 'true';
 
-    // Get all prefecture groups (Geolonia SVG uses <g> elements with data-prefecture)
+    // Inject CSS once so all fill/stroke logic stays off the JS hot path
+    injectSvgStyles(svgDoc || document);
+
     const prefectureGroups = svg.querySelectorAll('g[data-prefecture]');
 
     prefectureGroups.forEach(group => {
         const prefId = group.getAttribute('data-prefecture');
         const prefInfo = prefectureData.find(p => p.id === prefId);
-
         if (!prefInfo) return;
 
-        // Get region info
         const regionId = regionIdMap[prefInfo.region];
         const isRegionActive = activeRegions.has(regionId);
-        const colors = isRegionActive ? regionColors[regionId] : inactiveRegionColors;
 
-        // Store region on group
         group.setAttribute('data-region', regionId);
         group.setAttribute('data-region-active', isRegionActive ? 'true' : 'false');
 
-        // Store group reference
-        if (!allGroups.has(regionId)) {
-            allGroups.set(regionId, []);
-        }
-        allGroups.get(regionId).push({ group, shapes: group.querySelectorAll('path, polygon'), colors, isActive: isRegionActive });
-
-        // Apply initial colors to all paths and polygons
-        const shapes = group.querySelectorAll('path, polygon');
-        shapes.forEach(shape => {
-            shape.style.fill = colors.fill;
-            shape.style.stroke = colors.stroke;
-            shape.style.strokeWidth = '0.5';
-            shape.style.transition = 'fill 0.2s ease, stroke 0.2s ease';
-            shape.style.cursor = 'pointer';
-        });
-
-        // Handle region selection (click/touch only)
-        function selectRegion(e) {
+        group.addEventListener('click', (e) => {
             e.preventDefault();
             e.stopPropagation();
 
-            // Reset all regions to normal color first
-            allGroups.forEach((items, rId) => {
-                items.forEach(({ shapes, colors }) => {
-                    shapes.forEach(shape => {
-                        shape.style.fill = colors.fill;
-                        shape.style.strokeWidth = '0.5';
-                    });
-                });
-            });
+            // Clear previous selection (at most one region is selected)
+            const prevSelected = svg.querySelectorAll('g[data-prefecture][data-selected="true"]');
+            prevSelected.forEach(g => g.removeAttribute('data-selected'));
 
-            // Highlight all prefectures in this region
-            const regionItems = allGroups.get(regionId);
-            if (regionItems) {
-                // Get hover fill color (use regionColors for active, inactiveRegionColors for inactive)
-                const hoverColors = isRegionActive ? regionColors[regionId] : inactiveRegionColors;
-                regionItems.forEach(({ shapes }) => {
-                    shapes.forEach(shape => {
-                        shape.style.fill = hoverColors.hoverFill;
-                        shape.style.strokeWidth = '1';
-                    });
-                });
-            }
+            // Select all prefectures in the clicked region
+            const regionGroups = svg.querySelectorAll(`g[data-prefecture][data-region="${regionId}"]`);
+            regionGroups.forEach(g => g.setAttribute('data-selected', 'true'));
 
-            // Mobile: Show bottom sheet instead of tooltip
+            // Mobile: bottom sheet
             if (typeof handleMobileRegionSelect === 'function' && handleMobileRegionSelect(prefInfo.region)) {
-                return; // Bottom sheet handled it
+                return;
             }
 
-            // Desktop: Update tooltip
+            // Desktop: tooltip
             currentTooltipRegion = regionId;
             showRegionTooltip(prefInfo.region, tooltip);
-        }
-
-        // Click event for desktop
-        group.addEventListener('click', selectRegion);
-
-        // Touch events for mobile
-        group.addEventListener('touchend', selectRegion);
+        });
     });
 
-    // Show initial tooltip message
     showInitialTooltip(tooltip);
 }
 
@@ -245,7 +256,6 @@ function setupMapInteraction() {
  * Show initial tooltip message (desktop only)
  */
 function showInitialTooltip(tooltip) {
-    // Skip on mobile - bottom sheet will be used
     if (typeof isMobile === 'function' && isMobile()) {
         return;
     }
@@ -266,7 +276,6 @@ function showRegionTooltip(regionName, tooltip) {
 
     if (!regionData) return;
 
-    // Build tooltip HTML
     let html = `<div class="tooltip-region">${regionName}</div>`;
     html += '<div class="tooltip-prefectures">';
 
@@ -291,7 +300,6 @@ function populatePrefectureGrid() {
     const grid = document.getElementById('prefectureGrid');
     if (!grid) return;
 
-    // Only show active prefectures in grid
     const activePrefectures = prefectureData.filter(p => p.active);
 
     if (activePrefectures.length === 0) {
@@ -315,36 +323,22 @@ function populatePrefectureGrid() {
    ※元に戻す場合はこのセクション全体を削除
    ========================================================================== */
 
-/**
- * Check if device is mobile
- */
 function isMobile() {
     return window.innerWidth <= 768;
 }
 
-// Store scroll position for restoration
 let scrollPositionBeforeSheet = 0;
 
-/**
- * Create Bottom Sheet HTML elements
- */
 function createBottomSheet() {
-    // Only create on mobile
     if (!isMobile()) return;
-
-    // Check if already exists
     if (document.getElementById('bottomSheetOverlay')) return;
 
-    // Create overlay
     const overlay = document.createElement('div');
     overlay.id = 'bottomSheetOverlay';
     overlay.className = 'bottom-sheet-overlay';
     overlay.addEventListener('click', closeBottomSheet);
-
-    // Prevent touch events from propagating through overlay
     overlay.addEventListener('touchmove', (e) => e.preventDefault(), { passive: false });
 
-    // Create bottom sheet
     const sheet = document.createElement('div');
     sheet.id = 'bottomSheet';
     sheet.className = 'bottom-sheet';
@@ -363,37 +357,26 @@ function createBottomSheet() {
         </div>
     `;
 
-    // Add to body
     document.body.appendChild(overlay);
     document.body.appendChild(sheet);
 
-    // Setup close button
     const closeBtn = document.getElementById('bottomSheetClose');
     if (closeBtn) {
         closeBtn.addEventListener('click', closeBottomSheet);
     }
 
-    // Prevent touch events from scrolling background
     sheet.addEventListener('touchmove', (e) => {
-        // Allow scrolling within the content area
         const content = sheet.querySelector('.bottom-sheet-content');
         if (content && content.contains(e.target)) {
-            // Allow if content is scrollable and not at boundaries
             const isScrollable = content.scrollHeight > content.clientHeight;
-            if (isScrollable) {
-                return; // Allow scroll within content
-            }
+            if (isScrollable) return;
         }
         e.preventDefault();
     }, { passive: false });
 
-    // Handle swipe down to close
     setupBottomSheetGestures(sheet);
 }
 
-/**
- * Setup swipe gestures for bottom sheet
- */
 function setupBottomSheetGestures(sheet) {
     let startY = 0;
     let currentY = 0;
@@ -430,9 +413,6 @@ function setupBottomSheetGestures(sheet) {
     });
 }
 
-/**
- * Show Bottom Sheet with region info
- */
 function showBottomSheet(regionName) {
     const overlay = document.getElementById('bottomSheetOverlay');
     const sheet = document.getElementById('bottomSheet');
@@ -446,10 +426,8 @@ function showBottomSheet(regionName) {
 
     if (!regionData) return;
 
-    // Update region name
     regionTitle.textContent = regionName;
 
-    // Build prefecture links
     let html = '';
     regionData.prefectures.forEach(pref => {
         const jobCount = jobCountByPrefecture[pref.name] || 0;
@@ -472,25 +450,19 @@ function showBottomSheet(regionName) {
 
     prefContainer.innerHTML = html;
 
-    // Show overlay and sheet
     overlay.style.display = 'block';
     sheet.style.display = 'block';
 
-    // Trigger animation after display is set
     requestAnimationFrame(() => {
         overlay.classList.add('visible');
         sheet.classList.add('visible');
     });
 
-    // Prevent body scroll - save scroll position first
     scrollPositionBeforeSheet = window.pageYOffset;
     document.body.classList.add('bottom-sheet-open');
     document.body.style.top = `-${scrollPositionBeforeSheet}px`;
 }
 
-/**
- * Close Bottom Sheet
- */
 function closeBottomSheet() {
     const overlay = document.getElementById('bottomSheetOverlay');
     const sheet = document.getElementById('bottomSheet');
@@ -501,36 +473,31 @@ function closeBottomSheet() {
     sheet.classList.remove('visible');
     sheet.style.transform = '';
 
-    // Re-enable body scroll and restore position
     document.body.classList.remove('bottom-sheet-open');
     document.body.style.top = '';
     window.scrollTo(0, scrollPositionBeforeSheet);
 
-    // Hide after animation
     setTimeout(() => {
         overlay.style.display = 'none';
         sheet.style.display = 'none';
     }, 300);
 }
 
-/**
- * Modified region selection for mobile
- */
 function handleMobileRegionSelect(regionName) {
     if (isMobile()) {
         showBottomSheet(regionName);
-        return true; // Handled by bottom sheet
+        return true;
     }
-    return false; // Use default tooltip
+    return false;
 }
 
-// Initialize on DOM ready
 document.addEventListener('DOMContentLoaded', () => {
+    // Inject CSS into the SVG the moment it's parseable — do not wait for JSON fetches.
+    injectStylesASAP();
     initJapanMap();
     createBottomSheet();
 });
 
-// Recreate bottom sheet on resize (if switching from desktop to mobile)
 window.addEventListener('resize', () => {
     if (isMobile()) {
         createBottomSheet();
