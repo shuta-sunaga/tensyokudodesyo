@@ -2581,6 +2581,10 @@ body.menu-open {
     overflow: hidden;
 }
 
+.article-card-title:last-child {
+    margin-bottom: 0;
+}
+
 .article-card-excerpt {
     font-size: 0.875rem;
     color: var(--color-text-light);
@@ -4041,6 +4045,11 @@ body.menu-open {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 1.5rem;
+}
+
+.related-articles + .job-detail-back {
+    margin-top: var(--spacing-lg);
+    padding-top: var(--spacing-md);
 }
 
 @media (max-width: 768px) {

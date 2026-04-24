@@ -67,6 +67,7 @@ function transformData() {
   const col = (name) => srcHeaders.indexOf(name);
 
   const IDX = {
+    id:             col('id'),
     求人票ID:       col('求人票ID'),
     求人名:         col('求人名'),
     採用企業名:     col('採用企業名'),
@@ -109,10 +110,11 @@ function transformData() {
     return text.replace(/\(/g, '（').replace(/\)/g, '）');
   };
 
-  /** 数値に千の位カンマを付与（文字列中の数字列すべてに適用） */
+  /** 数値に千の位カンマを付与（既にカンマ付きの数字も正しく処理） */
   const addCommas = (text) => {
-    return String(text).replace(/\d+/g, (match) => {
-      return Number(match).toLocaleString('en-US');
+    return String(text).replace(/\d[\d,]*/g, (match) => {
+      const num = match.replace(/,/g, '');
+      return Number(num).toLocaleString('en-US');
     });
   };
 
@@ -397,6 +399,7 @@ function transformData() {
     };
 
     set('class',              'entry');
+    set('id',                 v('id'));
     set('author',             'admin');
     set('authored_on',        execTime);
     set('modified_on',        execTime);
