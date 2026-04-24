@@ -152,9 +152,11 @@ async function generateImage(prompt, outputPath) {
 
 ## Stage 6: バージョン管理（自動実行）
 
-1. git add → commit → push
+1. **必ず `git add` → `git commit` → `git push origin master` まで実行する**（プッシュ省略禁止）
    - コミットメッセージ: `feat: 転職ノウハウ記事{ID}を追加（{タイトル短縮版}）`
-2. 更新ファイル一覧をテーブルで表示
+   - push まで成功して初めて Stage 6 完了とみなす
+2. 更新ファイル一覧をテーブルで表示（ローカルコミットハッシュとリモートpush結果を併記）
+3. push が失敗した場合のみユーザーに報告し、それ以外は Stage 7 へ進む
 
 ---
 
