@@ -336,6 +336,8 @@ regionIdMap = {
 - ユーザーから明示的に「クローズして」と指示があった場合のみクローズする
 
 ### デプロイ時のルール（MT管理ページの保護）
+- **デプロイは必ず `bash scripts/deploy.sh` 経由で実行すること**（直接SCPを叩かない）
+- `scripts/deploy.sh` がMT管理ファイルを自動ブロックする
 - **MT（Movable Type）が管理・生成するページは SCP デプロイで上書きしないこと**
 - MT管理対象:
   - 求人詳細ページ: `{prefecture}/jobs/*.html`
