@@ -1,6 +1,33 @@
 {
   "articles": [
     {
+      "id": 88,
+      "title": "二次面接の対策〜一次との違いと通過のコツ",
+      "category": "kh01",
+      "excerpt": "転職の二次面接対策を徹底解説。一次面接との違い、面接官の着眼点、よく聞かれる質問と回答例、逆質問、落ちる人の特徴、通過率を上げる準備チェックリストまで実例付きで紹介します。",
+      "image": "/assets/knowhow-088.webp",
+      "postDate": "2026-04-24",
+      "detailUrl": "/knowhow/detail/knowhow-088.html"
+    },
+    {
+      "id": 87,
+      "title": "小売・流通業界の転職ガイド〜職種と年収",
+      "category": "kh04",
+      "excerpt": "小売・流通業界への転職ガイド。主要職種の仕事内容、年収相場、業界構造、EC化やDXの最新動向、役立つ資格、未経験から成功するためのポイントを具体的なデータと共に解説します。",
+      "image": "/assets/knowhow-087.webp",
+      "postDate": "2026-04-24",
+      "detailUrl": "/knowhow/detail/knowhow-087.html"
+    },
+    {
+      "id": 86,
+      "title": "履歴書の資格欄の書き方と効果的なアピール法",
+      "category": "kh02",
+      "excerpt": "履歴書の資格欄の書き方を徹底解説。正式名称のルール、取得順の並べ方、応募職種に合わせた資格の選び方、勉強中の書き方、資格がない人の対処法、NG例と例文までまとめて紹介します。",
+      "image": "/assets/knowhow-086.webp",
+      "postDate": "2026-04-24",
+      "detailUrl": "/knowhow/detail/knowhow-086.html"
+    },
+    {
       "id": 83,
       "title": "履歴書の本人希望欄〜書き方と注意点",
       "category": "kh02",
