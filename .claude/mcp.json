@@ -56,6 +56,20 @@
       ],
       "disabled": false,
       "description": "Miyabi CLI統合 - プロジェクト作成、Agent実行、自動化機能"
+    },
+    "x-post": {
+      "command": "node",
+      "args": [
+        ".claude/mcp-servers/x-post.js"
+      ],
+      "env": {
+        "X_API_KEY": "${X_API_KEY}",
+        "X_API_SECRET": "${X_API_SECRET}",
+        "X_ACCESS_TOKEN": "${X_ACCESS_TOKEN}",
+        "X_ACCESS_SECRET": "${X_ACCESS_SECRET}"
+      },
+      "disabled": false,
+      "description": "X (Twitter) 投稿 - 記事公開の告知ツイート"
     }
   }
 }

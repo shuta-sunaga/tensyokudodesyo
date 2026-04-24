@@ -198,6 +198,47 @@ async function submitSitemap() {
 
 ---
 
+## Stage 9: X（Twitter）投稿（自動実行）
+
+1. `.env` を読み込み、X API で記事告知ツイートを投稿
+2. **投稿フォーマット**（テンショくま人格・関西弁）:
+
+```
+まいど！テンショくまやで！
+
+転職ノウハウブログを更新したから読んでみてや！
+今回のテーマは「{記事タイトル}」や。
+
+感想ぜひ教えてな！拡散も頼むわ！
+{記事URL}
+
+#転職 #転職ノウハウ
+```
+
+3. **文字数チェック**: 投稿前にURL（23文字換算）込みで140文字以内であることを確認。超過する場合はハッシュタグを削って調整
+4. **投稿コード**:
+
+```javascript
+const { TwitterApi } = require('twitter-api-v2');
+
+const client = new TwitterApi({
+  appKey: process.env.X_API_KEY,
+  appSecret: process.env.X_API_SECRET,
+  accessToken: process.env.X_ACCESS_TOKEN,
+  accessSecret: process.env.X_ACCESS_SECRET,
+});
+
+const url = 'https://www.tensyokudodesyo.com/knowhow/detail/knowhow-{NNN}.html';
+const text = `まいど！テンショくまやで！\n\n転職ノウハウブログを更新したから読んでみてや！\n今回のテーマは「{タイトル}」や。\n\n感想ぜひ教えてな！拡散も頼むわ！\n${url}\n\n#転職 #転職ノウハウ`;
+
+const result = await client.v2.tweet(text);
+console.log('投稿完了:', `https://x.com/tensyokudodesyo/status/${result.data.id}`);
+```
+
+5. **フォールバック**: API エラー時（CreditsDepleted等）は投稿テキストを表示し、手動投稿を案内
+
+---
+
 ## 注意事項
 
 - **Stage 1 のみユーザー承認で停止**。それ以外はすべて自動で最後まで進める
