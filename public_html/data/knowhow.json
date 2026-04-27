@@ -1,6 +1,33 @@
 {
   "articles": [
     {
+      "id": 91,
+      "title": "面接の入退室マナー〜ノックの回数からお辞儀まで",
+      "category": "kh01",
+      "excerpt": "転職面接の入退室マナーを所作別に解説。ノックの回数、ドアの開け方、お辞儀の角度、着席のタイミング、退室時の流れまで実践的に紹介します。",
+      "image": "/assets/knowhow-091.webp",
+      "postDate": "2026-04-27",
+      "detailUrl": "/knowhow/detail/knowhow-091.html"
+    },
+    {
+      "id": 90,
+      "title": "自分史の作り方〜過去から強みを見つける方法",
+      "category": "kh03",
+      "excerpt": "転職の自己分析に使える「自分史」の作り方を解説。年齢×出来事×感情×学びの4軸テンプレート、作成手順、強みの抽出方法までを実践的に紹介します。",
+      "image": "/assets/knowhow-090.webp",
+      "postDate": "2026-04-27",
+      "detailUrl": "/knowhow/detail/knowhow-090.html"
+    },
+    {
+      "id": 89,
+      "title": "履歴書の趣味・特技欄〜採用担当に響く書き方",
+      "category": "kh02",
+      "excerpt": "履歴書の趣味・特技欄の書き方を解説。採用担当が見るポイントや業界別おすすめ例、NG例、1行例文30選まで具体的に紹介します。",
+      "image": "/assets/knowhow-089.webp",
+      "postDate": "2026-04-27",
+      "detailUrl": "/knowhow/detail/knowhow-089.html"
+    },
+    {
       "id": 88,
       "title": "二次面接の対策〜一次との違いと通過のコツ",
       "category": "kh01",
