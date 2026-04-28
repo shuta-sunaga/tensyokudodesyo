@@ -1,6 +1,33 @@
 {
   "articles": [
     {
+      "id": 94,
+      "title": "教育業界の転職ガイド〜職種・年収・将来性",
+      "category": "kh04",
+      "excerpt": "教育業界への転職ガイド。学校・塾予備校・EdTech・教材出版の主要職種と年収相場、必要資格、未経験からの参入ルート、業界の将来性とDX動向を具体的に解説します。",
+      "image": "/assets/knowhow-094.webp",
+      "postDate": "2026-04-28",
+      "detailUrl": "/knowhow/detail/knowhow-094.html"
+    },
+    {
+      "id": 93,
+      "title": "キャリアプランの答え方〜面接の回答例",
+      "category": "kh01",
+      "excerpt": "面接でのキャリアプラン質問への答え方を徹底解説。5年後・10年後の質問パターン、年代別の回答例、面接官の評価軸、NG回答、企業ニーズへの合わせ方まで紹介します。",
+      "image": "/assets/knowhow-093.webp",
+      "postDate": "2026-04-28",
+      "detailUrl": "/knowhow/detail/knowhow-093.html"
+    },
+    {
+      "id": 92,
+      "title": "職務経歴書の数字で実績を伝える書き方",
+      "category": "kh02",
+      "excerpt": "職務経歴書で実績を数字で伝える書き方を徹底解説。定量化フレーム、Before/After変換例、職種別KPI、数字がない仕事の表現法、NG例まで具体的に紹介します。",
+      "image": "/assets/knowhow-092.webp",
+      "postDate": "2026-04-28",
+      "detailUrl": "/knowhow/detail/knowhow-092.html"
+    },
+    {
       "id": 91,
       "title": "面接の入退室マナー〜ノックの回数からお辞儀まで",
       "category": "kh01",
