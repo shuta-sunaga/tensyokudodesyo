@@ -1,6 +1,33 @@
 {
   "articles": [
     {
+      "id": 97,
+      "title": "広告・マーケ業界の転職ガイド〜職種・年収",
+      "category": "kh04",
+      "excerpt": "広告・マーケティング業界の転職ガイド。市場規模7.7兆円の業界構造、代理店・事業会社・支援会社の違い、主要職種の仕事内容と年収相場、必要スキル、未経験からの転職ルート、デジタル化の動向まで解説します。",
+      "image": "/assets/knowhow-097.webp",
+      "postDate": "2026-04-30",
+      "detailUrl": "/knowhow/detail/knowhow-097.html"
+    },
+    {
+      "id": 96,
+      "title": "キャリアアンカー診断〜8タイプで適職発見",
+      "category": "kh03",
+      "excerpt": "キャリアアンカー診断を徹底解説。エドガー・シャインが提唱した8タイプの分類と特徴、自分のアンカーを30分で見つける手順、タイプ別の適職と転職時の注意点、面接での活かし方まで具体的に紹介します。",
+      "image": "/assets/knowhow-096.webp",
+      "postDate": "2026-04-30",
+      "detailUrl": "/knowhow/detail/knowhow-096.html"
+    },
+    {
+      "id": 95,
+      "title": "履歴書のブランク期間の書き方〜空白の説明法",
+      "category": "kh02",
+      "excerpt": "履歴書のブランク期間の書き方を徹底解説。3ヶ月以上の空白の説明ルール、理由別（療養・育児・学習・就活）の記載例、面接での回答パターン、5つのテンプレート例文まで具体的に紹介します。",
+      "image": "/assets/knowhow-095.webp",
+      "postDate": "2026-04-30",
+      "detailUrl": "/knowhow/detail/knowhow-095.html"
+    },
+    {
       "id": 94,
       "title": "教育業界の転職ガイド〜職種・年収・将来性",
       "category": "kh04",
