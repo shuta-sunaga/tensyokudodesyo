@@ -1,6 +1,33 @@
 {
   "articles": [
     {
+      "id": 100,
+      "title": "退職届と退職願の違い〜書き方と提出方法",
+      "category": "kh05",
+      "excerpt": "退職届と退職願の違いを徹底解説。法的効力・撤回可否・提出タイミングの違い、書式と記入ルール、提出方法と封筒の書き方、受理されない場合の対処、辞表との違いまで具体例とテンプレート付きで紹介します。",
+      "image": "/assets/knowhow-100.webp",
+      "postDate": "2026-05-01",
+      "detailUrl": "/knowhow/detail/knowhow-100.html"
+    },
+    {
+      "id": 99,
+      "title": "ジョハリの窓〜他者の視点で自分を知る方法",
+      "category": "kh03",
+      "excerpt": "ジョハリの窓を使った自己分析を徹底解説。4つの窓の意味、他者から見た自分を発見する手順、信頼できる他者の選び方、結果を強み・弱み・自己PRに落とし込む方法、転職活動での具体的活用法を紹介します。",
+      "image": "/assets/knowhow-099.webp",
+      "postDate": "2026-05-01",
+      "detailUrl": "/knowhow/detail/knowhow-099.html"
+    },
+    {
+      "id": 98,
+      "title": "カジュアル面談の対策〜本選考につなげる流れ",
+      "category": "kh01",
+      "excerpt": "カジュアル面談の対策を徹底解説。本選考との違い、企業側の目的、聞かれる質問と回答例、こちらから聞くべき逆質問、服装と当日の流れ、本選考につなげる伝え方、NG行動まで具体的に紹介します。",
+      "image": "/assets/knowhow-098.webp",
+      "postDate": "2026-05-01",
+      "detailUrl": "/knowhow/detail/knowhow-098.html"
+    },
+    {
       "id": 97,
       "title": "広告・マーケ業界の転職ガイド〜職種・年収",
       "category": "kh04",
