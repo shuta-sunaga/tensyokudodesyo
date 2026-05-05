@@ -1,6 +1,33 @@
 {
   "articles": [
     {
+      "id": 103,
+      "title": "転職時の住民税の手続き〜納付方法と注意点",
+      "category": "kh05",
+      "excerpt": "転職時の住民税の手続きを徹底解説。特別徴収から普通徴収への切替、退職月による納付方法の違い、新会社での再特別徴収、納付書の届くタイミング、滞納リスクと対策まで具体例付きで紹介します。",
+      "image": "/assets/knowhow-103.webp",
+      "postDate": "2026-05-05",
+      "detailUrl": "/knowhow/detail/knowhow-103.html"
+    },
+    {
+      "id": 102,
+      "title": "マンダラチャートで目標設定〜キャリア計画の作り方",
+      "category": "kh03",
+      "excerpt": "マンダラチャートでキャリア計画を作る方法を徹底解説。9マスの構造と作成手順、転職活動への落とし込み、目標設定の具体例、達成のためのアクション分解、活用のコツとNG例まで具体的に紹介します。",
+      "image": "/assets/knowhow-102.webp",
+      "postDate": "2026-05-05",
+      "detailUrl": "/knowhow/detail/knowhow-102.html"
+    },
+    {
+      "id": 101,
+      "title": "応募書類のPDF化とメール送付マナー",
+      "category": "kh02",
+      "excerpt": "応募書類のPDF化とメール送付マナーを徹底解説。WordからのPDF変換手順、ファイル名規則、添付ファイルのパスワード保護、メール件名と本文の例文、送信前チェックリストまで具体的に紹介します。",
+      "image": "/assets/knowhow-101.webp",
+      "postDate": "2026-05-05",
+      "detailUrl": "/knowhow/detail/knowhow-101.html"
+    },
+    {
       "id": 100,
       "title": "退職届と退職願の違い〜書き方と提出方法",
       "category": "kh05",
