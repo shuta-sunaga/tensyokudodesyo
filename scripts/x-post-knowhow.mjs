@@ -8,9 +8,9 @@ const client = new TwitterApi({
 });
 
 const articles = [
-    { id: '083', title: '履歴書の本人希望欄〜書き方と注意点' },
-    { id: '084', title: 'モチベーショングラフで転職の軸を見つける' },
-    { id: '085', title: 'ボーナス後の退職戦略〜タイミング見極め' },
+    { id: '104', title: '面接の「最後に一言」で印象を残す回答例' },
+    { id: '105', title: '飲食・サービス業界の転職ガイド〜職種・年収' },
+    { id: '106', title: '試用期間中の過ごし方〜本採用への流れと注意点' },
 ];
 
 function buildTweet({ id, title }) {
