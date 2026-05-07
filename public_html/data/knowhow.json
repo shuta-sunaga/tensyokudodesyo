@@ -1,6 +1,33 @@
 {
   "articles": [
     {
+      "id": 106,
+      "title": "試用期間中の過ごし方〜本採用への流れと注意点",
+      "category": "kh05",
+      "excerpt": "試用期間中の過ごし方を徹底解説。本採用への流れ、解雇のルール、評価軸、給与・待遇の違い、勤怠・退職時の注意点、トラブル時の相談先、本採用を勝ち取る5つの行動まで具体例付きで紹介します。",
+      "image": "/assets/knowhow-106.webp",
+      "postDate": "2026-05-07",
+      "detailUrl": "/knowhow/detail/knowhow-106.html"
+    },
+    {
+      "id": 105,
+      "title": "飲食・サービス業界の転職ガイド〜職種・年収",
+      "category": "kh04",
+      "excerpt": "飲食・サービス業界の転職ガイド。市場規模30兆円超の業界構造、職種別の年収相場、必要スキル・有用資格、未経験からの転職ルート、インバウンド・DXの動向、ブラック企業を避ける見分け方まで具体的に解説します。",
+      "image": "/assets/knowhow-105.webp",
+      "postDate": "2026-05-07",
+      "detailUrl": "/knowhow/detail/knowhow-105.html"
+    },
+    {
+      "id": 104,
+      "title": "面接の「最後に一言」で印象を残す回答例",
+      "category": "kh01",
+      "excerpt": "面接で「最後に一言ありますか」と聞かれた時の答え方を徹底解説。質問の意図、印象に残る回答の型、ケース別の例文10選、NG例、逆質問との使い分け、最終面接での応用まで具体的に紹介します。",
+      "image": "/assets/knowhow-104.webp",
+      "postDate": "2026-05-07",
+      "detailUrl": "/knowhow/detail/knowhow-104.html"
+    },
+    {
       "id": 103,
       "title": "転職時の住民税の手続き〜納付方法と注意点",
       "category": "kh05",
