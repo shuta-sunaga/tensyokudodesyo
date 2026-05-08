@@ -30,7 +30,7 @@ connect-src 'self'
   https://challenges.cloudflare.com
   https://www.google-analytics.com
   https://*.google-analytics.com;
-frame-src
+frame-src 'self'                             (※ <object data="...svg"> も frame 扱い)
   https://challenges.cloudflare.com
   https://sjpfkixxkhe8.jp.larksuite.com;     (面談予約)
 frame-ancestors 'self';
