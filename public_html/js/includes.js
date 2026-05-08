@@ -110,17 +110,6 @@ if (window._includesJsLoaded) {
                             btn.style.cssText = 'display: flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 1rem; font-size: 1rem; text-decoration: none; border-radius: 8px; width: 100%;';
                         });
 
-                        const lineBtn = menuActions.querySelector('.btn-line');
-                        if (lineBtn) {
-                            // PC版と同じデザイン: 白背景+緑ボーダー
-                            lineBtn.style.cssText += 'background: #fff; color: #06C755; border: 2px solid #06C755;';
-                            // LINE icon with white background
-                            const lineImg = lineBtn.querySelector('img');
-                            if (lineImg) {
-                                lineImg.style.cssText = 'display: inline-block; width: 24px; height: 24px; background: #fff; border-radius: 4px; padding: 2px;';
-                            }
-                        }
-
                         const outlineBtn = menuActions.querySelector('.btn-outline');
                         if (outlineBtn) {
                             outlineBtn.style.cssText += 'background: transparent; color: #2d8a39; border: 2px solid #2d8a39;';
@@ -148,8 +137,6 @@ if (window._includesJsLoaded) {
                         if (menuActions) {
                             menuActions.style.cssText = '';
                             menuActions.querySelectorAll('.btn').forEach(btn => btn.style.cssText = '');
-                            const lineImg = menuActions.querySelector('.btn-line img');
-                            if (lineImg) lineImg.style.cssText = '';
                         }
                     }, 250);
                 }

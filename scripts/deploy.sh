@@ -20,9 +20,12 @@ SCP_OPTS="-i $KEY_FILE -o StrictHostKeyChecking=no"
 
 # --- MT管理ファイルのブロックリスト（正規表現パターン） ---
 # これらのパスに一致するファイルはデプロイ禁止
+# 都道府県を新規追加するときは PREFECTURE_DIRS に追記すること
+PREFECTURE_DIRS="(shiga|shizuoka)"
 BLOCKED_PATTERNS=(
     # 都道府県ページ（MT再構築で生成）
-    "public_html/[a-z]+/index\.html"
+    "public_html/${PREFECTURE_DIRS}/index\.html"
+    "public_html/${PREFECTURE_DIRS}/jobs/.*\.html"
     # トップページ・一覧ページ
     "public_html/index\.html"
     "public_html/interviews/index\.html"
@@ -31,7 +34,6 @@ BLOCKED_PATTERNS=(
     # 詳細ページ（MT生成分）— パイプライン生成の knowhow-NNN.html は許可
     "public_html/interviews/detail/.*\.html"
     "public_html/companies/detail/.*\.html"
-    "public_html/[a-z]+/jobs/.*\.html"
     # MT生成JSON
     "public_html/data/knowhow-mt\.json"
     # ヘッダー/フッター（MT生成）

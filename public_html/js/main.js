@@ -348,7 +348,7 @@ function initFormValidation() {
                             <path d="M9 12l2 2 4-4"></path>
                         </svg>
                         <h3 style="font-size: 1.25rem; margin-bottom: 0.5rem;">送信完了</h3>
-                        <p style="color: #666;">お問い合わせありがとうございます。<br>担当者より2営業日以内にご連絡いたします。</p>
+                        <p style="color: #666;">ご相談ありがとうございます。<br>担当者より2営業日以内にご連絡いたします。</p>
                     </div>
                 `;
             }, 1500);
@@ -1185,10 +1185,9 @@ function renderJobDetail() {
 
         <div class="job-detail-cta">
             <h3 class="job-detail-cta-title">この求人に興味がありますか？</h3>
-            <p class="job-detail-cta-text">LINEで気軽にご相談ください。キャリアアドバイザーが詳しくご説明します。</p>
-            <a href="#" class="btn btn-line btn-lg">
-                <img src="assets/LINE_Brand_icon.png" alt="LINE" width="24" height="24">
-                LINEで相談する
+            <p class="job-detail-cta-text">お気軽にご相談ください。キャリアアドバイザーが詳しくご説明します。</p>
+            <a href="/contact/?ref=${encodeURIComponent(job.id)}&title=${encodeURIComponent(job.title || '')}" class="btn btn-primary btn-lg">
+                転職相談はこちら
             </a>
         </div>
 

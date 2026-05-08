@@ -10,3 +10,6 @@ backend/local-dev/.env
 backend/lambda/submit-form/node_modules/
 backend/local-dev/node_modules/
 backend/lambda/submit-form/.aws-sam/
+
+# screenshots & temporary files
+tmp/
