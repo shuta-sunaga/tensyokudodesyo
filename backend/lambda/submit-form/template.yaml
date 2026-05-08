@@ -19,6 +19,14 @@ Parameters:
     Type: String
     Default: noreply@tensyokudodesyo.com
     Description: 唯一許可される FROM アドレス
+  AlertEmail:
+    Type: String
+    Default: shuta.sunaga@sei-san-sei.com
+    Description: アラート通知先メールアドレス
+  MonthlyBudgetUSD:
+    Type: Number
+    Default: 10
+    Description: 月額予算アラート閾値 (USD)
 
 Globals:
   Function:
@@ -98,7 +106,153 @@ Resources:
   # WAF: HTTP API (v2) は直接紐付け不可のため、Phase 6 (CloudFront) と統合して対応する。
   # 暫定: API Gateway DefaultRouteSettings の throttling と Lambda ReservedConcurrentExecutions に依存。
 
+  # ===========================================================================
+  # Phase 3: 監視・通知 (SNS + CloudWatch Alarms + Budgets)
+  # ===========================================================================
+  AlertTopic:
+    Type: AWS::SNS::Topic
+    Properties:
+      TopicName: !Sub tensyokudodesyo-contact-alerts-${Stage}
+      DisplayName: 転職どうでしょう Contact Alerts
+
+  AlertEmailSubscription:
+    Type: AWS::SNS::Subscription
+    Properties:
+      TopicArn: !Ref AlertTopic
+      Protocol: email
+      Endpoint: !Ref AlertEmail
+
+  # Lambda エラー検知 (1分で5件以上)
+  LambdaErrorsAlarm:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      AlarmName: !Sub tensyokudodesyo-contact-lambda-errors-${Stage}
+      AlarmDescription: Lambda関数で1分間に5件以上のエラー発生
+      Namespace: AWS/Lambda
+      MetricName: Errors
+      Dimensions:
+        - Name: FunctionName
+          Value: !Ref SubmitFormFunction
+      Statistic: Sum
+      Period: 60
+      EvaluationPeriods: 1
+      Threshold: 5
+      ComparisonOperator: GreaterThanOrEqualToThreshold
+      TreatMissingData: notBreaching
+      AlarmActions:
+        - !Ref AlertTopic
+
+  # Lambda スロットル検知 (同時実行制限ヒット)
+  LambdaThrottlesAlarm:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      AlarmName: !Sub tensyokudodesyo-contact-lambda-throttles-${Stage}
+      AlarmDescription: Lambda同時実行制限ヒット (DoS攻撃の可能性)
+      Namespace: AWS/Lambda
+      MetricName: Throttles
+      Dimensions:
+        - Name: FunctionName
+          Value: !Ref SubmitFormFunction
+      Statistic: Sum
+      Period: 60
+      EvaluationPeriods: 1
+      Threshold: 1
+      ComparisonOperator: GreaterThanOrEqualToThreshold
+      TreatMissingData: notBreaching
+      AlarmActions:
+        - !Ref AlertTopic
+
+  # API Gateway 5xx エラー検知
+  ApiGateway5xxAlarm:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      AlarmName: !Sub tensyokudodesyo-contact-api-5xx-${Stage}
+      AlarmDescription: API Gateway 5xx エラー (バックエンド障害)
+      Namespace: AWS/ApiGateway
+      MetricName: 5xx
+      Dimensions:
+        - Name: ApiId
+          Value: !Ref ContactApi
+        - Name: Stage
+          Value: $default
+      Statistic: Sum
+      Period: 60
+      EvaluationPeriods: 1
+      Threshold: 1
+      ComparisonOperator: GreaterThanOrEqualToThreshold
+      TreatMissingData: notBreaching
+      AlarmActions:
+        - !Ref AlertTopic
+
+  # SES バウンス率検知 (15分で 5% 超)
+  SesBounceRateAlarm:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      AlarmName: !Sub tensyokudodesyo-contact-ses-bounce-${Stage}
+      AlarmDescription: SES バウンス率 5% 超 (アカウント停止リスク)
+      Namespace: AWS/SES
+      MetricName: Reputation.BounceRate
+      Statistic: Average
+      Period: 900  # 15分
+      EvaluationPeriods: 1
+      Threshold: 0.05
+      ComparisonOperator: GreaterThanThreshold
+      TreatMissingData: notBreaching
+      AlarmActions:
+        - !Ref AlertTopic
+
+  # SES 苦情率検知 (15分で 0.1% 超)
+  SesComplaintRateAlarm:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      AlarmName: !Sub tensyokudodesyo-contact-ses-complaint-${Stage}
+      AlarmDescription: SES 苦情率 0.1% 超 (アカウント停止リスク)
+      Namespace: AWS/SES
+      MetricName: Reputation.ComplaintRate
+      Statistic: Average
+      Period: 900
+      EvaluationPeriods: 1
+      Threshold: 0.001
+      ComparisonOperator: GreaterThanThreshold
+      TreatMissingData: notBreaching
+      AlarmActions:
+        - !Ref AlertTopic
+
+  # 月額予算アラート
+  MonthlyBudget:
+    Type: AWS::Budgets::Budget
+    Properties:
+      Budget:
+        BudgetName: !Sub tensyokudodesyo-contact-monthly-${Stage}
+        BudgetLimit:
+          Amount: !Ref MonthlyBudgetUSD
+          Unit: USD
+        TimeUnit: MONTHLY
+        BudgetType: COST
+      NotificationsWithSubscribers:
+        # 80%到達で警告
+        - Notification:
+            NotificationType: ACTUAL
+            ComparisonOperator: GREATER_THAN
+            Threshold: 80
+            ThresholdType: PERCENTAGE
+          Subscribers:
+            - SubscriptionType: EMAIL
+              Address: !Ref AlertEmail
+        # 100%超過でクリティカル
+        - Notification:
+            NotificationType: ACTUAL
+            ComparisonOperator: GREATER_THAN
+            Threshold: 100
+            ThresholdType: PERCENTAGE
+          Subscribers:
+            - SubscriptionType: EMAIL
+              Address: !Ref AlertEmail
+
 Outputs:
   ContactApiEndpoint:
     Description: HTTP API endpoint
     Value: !Sub https://${ContactApi}.execute-api.${AWS::Region}.amazonaws.com
+  AlertTopicArn:
+    Description: SNS Topic for alerts
+    Value: !Ref AlertTopic
