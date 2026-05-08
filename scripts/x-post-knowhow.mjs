@@ -8,9 +8,9 @@ const client = new TwitterApi({
 });
 
 const articles = [
-    { id: '104', title: '面接の「最後に一言」で印象を残す回答例' },
-    { id: '105', title: '飲食・サービス業界の転職ガイド〜職種・年収' },
-    { id: '106', title: '試用期間中の過ごし方〜本採用への流れと注意点' },
+    { id: '107', title: 'プロンプトエンジニア転職〜年収・スキル・参入法' },
+    { id: '108', title: 'ChatGPTで面接練習〜想定問答と回答改善法' },
+    { id: '109', title: 'Perplexityで企業研究〜AI情報収集術' },
 ];
 
 function buildTweet({ id, title }) {
