@@ -11,6 +11,14 @@ Parameters:
     Type: String
     Default: tensyokudodesyo/contact-form
     Description: AWS Secrets Manager secret name
+  SesIdentityDomain:
+    Type: String
+    Default: tensyokudodesyo.com
+    Description: SES identity domain (Lambda が送信を許可されるドメイン)
+  SesFromAddress:
+    Type: String
+    Default: noreply@tensyokudodesyo.com
+    Description: 唯一許可される FROM アドレス
 
 Globals:
   Function:
@@ -32,6 +40,8 @@ Resources:
       CodeUri: src/
       Handler: index.handler
       Description: Receives contact form, writes to Lark Base, sends SES confirmation
+      # Phase 1: 同時実行を10に制限してコストDoSを抑制
+      ReservedConcurrentExecutions: 10
       Policies:
         - Version: '2012-10-17'
           Statement:
@@ -40,10 +50,15 @@ Resources:
                 - secretsmanager:GetSecretValue
               Resource:
                 - !Sub arn:aws:secretsmanager:${AWS::Region}:${AWS::AccountId}:secret:${SecretName}-*
+            # Phase 1: ses:SendEmail の Resource と FromAddress を厳格化
             - Effect: Allow
               Action:
                 - ses:SendEmail
-              Resource: '*'
+              Resource:
+                - !Sub arn:aws:ses:${AWS::Region}:${AWS::AccountId}:identity/${SesIdentityDomain}
+              Condition:
+                StringEquals:
+                  ses:FromAddress: !Ref SesFromAddress
       Events:
         ApiPost:
           Type: HttpApi
@@ -79,6 +94,9 @@ Resources:
     Properties:
       LogGroupName: !Sub /aws/lambda/tensyokudodesyo-contact-submit-${Stage}
       RetentionInDays: 30
+
+  # WAF: HTTP API (v2) は直接紐付け不可のため、Phase 6 (CloudFront) と統合して対応する。
+  # 暫定: API Gateway DefaultRouteSettings の throttling と Lambda ReservedConcurrentExecutions に依存。
 
 Outputs:
   ContactApiEndpoint:
