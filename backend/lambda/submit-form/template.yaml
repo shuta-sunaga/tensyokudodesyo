@@ -1,0 +1,86 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: tensyokudodesyo.com /contact/ form backend
+
+Parameters:
+  Stage:
+    Type: String
+    Default: prod
+    AllowedValues: [dev, staging, prod]
+  SecretName:
+    Type: String
+    Default: tensyokudodesyo/contact-form
+    Description: AWS Secrets Manager secret name
+
+Globals:
+  Function:
+    Runtime: nodejs20.x
+    MemorySize: 256
+    Timeout: 15
+    Architectures: [arm64]
+    Tracing: Active
+    Environment:
+      Variables:
+        NODE_ENV: production
+        SECRET_NAME: !Ref SecretName
+
+Resources:
+  SubmitFormFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub tensyokudodesyo-contact-submit-${Stage}
+      CodeUri: src/
+      Handler: index.handler
+      Description: Receives contact form, writes to Lark Base, sends SES confirmation
+      Policies:
+        - Version: '2012-10-17'
+          Statement:
+            - Effect: Allow
+              Action:
+                - secretsmanager:GetSecretValue
+              Resource:
+                - !Sub arn:aws:secretsmanager:${AWS::Region}:${AWS::AccountId}:secret:${SecretName}-*
+            - Effect: Allow
+              Action:
+                - ses:SendEmail
+              Resource: '*'
+      Events:
+        ApiPost:
+          Type: HttpApi
+          Properties:
+            ApiId: !Ref ContactApi
+            Path: /api/contact
+            Method: POST
+        ApiOptions:
+          Type: HttpApi
+          Properties:
+            ApiId: !Ref ContactApi
+            Path: /api/contact
+            Method: OPTIONS
+
+  ContactApi:
+    Type: AWS::Serverless::HttpApi
+    Properties:
+      Name: !Sub tensyokudodesyo-contact-api-${Stage}
+      CorsConfiguration:
+        AllowOrigins:
+          - https://www.tensyokudodesyo.com
+          - https://tensyokudodesyo.com
+        AllowMethods: [POST, OPTIONS]
+        AllowHeaders: [Content-Type, Accept]
+        MaxAge: 600
+      DefaultRouteSettings:
+        ThrottlingBurstLimit: 20
+        ThrottlingRateLimit: 5  # 5 req/sec average
+
+  # CloudWatch Logs retention
+  SubmitFormLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub /aws/lambda/tensyokudodesyo-contact-submit-${Stage}
+      RetentionInDays: 30
+
+Outputs:
+  ContactApiEndpoint:
+    Description: HTTP API endpoint
+    Value: !Sub https://${ContactApi}.execute-api.${AWS::Region}.amazonaws.com

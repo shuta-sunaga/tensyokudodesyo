@@ -4,3 +4,9 @@ node_modules/
 nul
 .claude/settings.local.json
 docs/tensyokudodesyo-1dcb1b08e015.json
+
+# /contact/ form backend
+backend/local-dev/.env
+backend/lambda/submit-form/node_modules/
+backend/local-dev/node_modules/
+backend/lambda/submit-form/.aws-sam/

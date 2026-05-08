@@ -1,0 +1,17 @@
+{
+  "name": "tensyokudodesyo-contact-local-dev",
+  "version": "1.0.0",
+  "description": "Local development server for /contact/ Lambda",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "node --watch server.mjs",
+    "start": "node server.mjs"
+  },
+  "dependencies": {
+    "express": "^4.21.0",
+    "dotenv": "^16.4.5",
+    "@aws-sdk/client-secrets-manager": "^3.620.0",
+    "@aws-sdk/client-sesv2": "^3.620.0"
+  }
+}

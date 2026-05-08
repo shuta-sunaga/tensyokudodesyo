@@ -1,0 +1,741 @@
+/* ==========================================================================
+   /contact/ — 転職相談フォームページ
+   PRODUCT.md/DESIGN.md に基づく実装
+   ========================================================================== */
+
+/* ----- Page-scoped helpers ------------------------------------------------ */
+.contact-page {
+    background: var(--color-bg-warm);
+    padding-bottom: clamp(40px, 6vw, 72px);
+}
+
+.contact-page .container {
+    max-width: 920px;
+}
+
+.contact-page .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* ----- Hero --------------------------------------------------------------- */
+.contact-hero {
+    padding-top: calc(var(--header-height) + clamp(24px, 3.5vw, 48px));
+    padding-bottom: clamp(24px, 3.5vw, 40px);
+    background: linear-gradient(180deg, #f5f2e8 0%, var(--color-bg-warm) 100%);
+}
+
+.contact-hero__inner {
+    max-width: 720px;
+}
+
+.contact-hero__eyebrow {
+    color: var(--color-primary-dark);
+    font-size: 0.8125rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin: 0 0 12px;
+}
+
+.contact-hero__title {
+    font-size: clamp(1.625rem, 3.6vw, 2.125rem);
+    font-weight: 700;
+    line-height: 1.45;
+    color: var(--color-text);
+    letter-spacing: 0.02em;
+    margin: 0 0 16px;
+    word-break: keep-all;
+    overflow-wrap: anywhere;
+}
+
+.contact-hero__lead {
+    font-size: 0.9375rem;
+    line-height: 1.85;
+    color: var(--color-text-light);
+    max-width: 56ch;
+    margin: 0 0 20px;
+    /* CJK の自然な改行 (句読点・wbr) を尊重 */
+    line-break: strict;
+    word-break: normal;
+}
+
+.contact-hero__assurance {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255, 255, 255, 0.85);
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--radius-md);
+    padding: 10px 16px;
+    font-size: 0.8125rem;
+    line-height: 1.65;
+    color: var(--color-text-light);
+    box-shadow: var(--shadow-sm);
+    max-width: 100%;
+}
+
+.contact-hero__assurance svg {
+    color: var(--color-primary);
+    flex-shrink: 0;
+}
+
+@media (max-width: 640px) {
+    .contact-hero__assurance {
+        display: flex;
+        align-items: flex-start;
+    }
+    .contact-hero__assurance svg {
+        margin-top: 3px;
+    }
+}
+
+/* ----- Section common ----------------------------------------------------- */
+.contact-page .section-title {
+    font-size: clamp(1.25rem, 2.4vw, 1.5rem);
+    font-weight: 700;
+    color: var(--color-text);
+    letter-spacing: 0.02em;
+    line-height: 1.5;
+    margin: 0 0 6px;
+}
+
+.contact-page .section-lead {
+    color: var(--color-text-light);
+    font-size: 0.875rem;
+    line-height: 1.7;
+    margin: 0 0 24px;
+}
+
+/* ----- Flow steps --------------------------------------------------------- */
+.contact-flow {
+    padding: clamp(28px, 4vw, 48px) 0 clamp(20px, 3vw, 32px);
+}
+
+.flow-steps {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    position: relative;
+}
+
+.flow-step {
+    background: var(--color-bg);
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--radius-md);
+    padding: 18px 16px;
+    box-shadow: var(--shadow-sm);
+    position: relative;
+    transition: var(--transition-base);
+}
+
+.flow-step:hover {
+    box-shadow: var(--shadow-md);
+}
+
+.flow-step__num {
+    width: 28px;
+    height: 28px;
+    border-radius: var(--radius-full);
+    background: var(--color-bg-cream);
+    color: var(--color-text-muted);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.875rem;
+    margin-bottom: 10px;
+    transition: var(--transition-base);
+}
+
+.flow-step.is-current .flow-step__num {
+    background: var(--gradient-cta);
+    color: #fff;
+    box-shadow: 0 0 0 3px var(--color-primary-light);
+}
+
+.flow-step.is-current {
+    border-color: var(--color-primary);
+}
+
+.flow-step__title {
+    font-size: 0.9375rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin: 0 0 4px;
+    line-height: 1.5;
+    letter-spacing: 0.01em;
+}
+
+.flow-step__desc {
+    font-size: 0.8125rem;
+    line-height: 1.65;
+    color: var(--color-text-light);
+    margin: 0;
+}
+
+@media (max-width: 768px) {
+    .flow-steps {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+    .flow-step {
+        display: grid;
+        grid-template-columns: 32px 1fr;
+        gap: 14px;
+        align-items: flex-start;
+        padding: 14px 16px;
+    }
+    .flow-step__num {
+        margin-bottom: 0;
+    }
+}
+
+/* ----- Form card ---------------------------------------------------------- */
+.contact-form-section {
+    padding: clamp(16px, 2.5vw, 28px) 0 clamp(28px, 4vw, 48px);
+}
+
+.form-card {
+    background: var(--color-bg);
+    border-radius: var(--radius-lg);
+    padding: clamp(24px, 4vw, 40px);
+    box-shadow: var(--shadow-md);
+    max-width: 760px;
+    margin: 0 auto;
+}
+
+.form-card__head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 0 0 20px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--color-border-light);
+}
+
+.form-card__head .section-title {
+    margin: 0;
+}
+
+.form-card__hint {
+    margin: 0;
+    font-size: 0.8125rem;
+    color: var(--color-text-muted);
+    line-height: 1.5;
+}
+
+.required-mark {
+    color: var(--color-primary);
+    font-weight: 700;
+    margin-left: 2px;
+}
+
+/* hidden 属性が display: flex 等に負けないようにする */
+[hidden] {
+    display: none !important;
+}
+
+/* ----- Form rows ---------------------------------------------------------- */
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.form-row {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.form-row--split {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 14px;
+}
+
+.form-row--split .form-row__col {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+@media (max-width: 540px) {
+    .form-row--split {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+}
+
+.form-label {
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--color-text);
+    line-height: 1.5;
+}
+
+.form-label__hint {
+    font-size: 0.75rem;
+    font-weight: 400;
+    color: var(--color-text-muted);
+    margin-left: 6px;
+}
+
+/* ----- Inputs ------------------------------------------------------------- */
+.form-input,
+.form-select,
+.form-textarea {
+    width: 100%;
+    font-family: var(--font-primary);
+    font-size: 16px; /* iOS auto-zoom 防止 */
+    color: var(--color-text);
+    background: var(--color-bg);
+    border: 1.5px solid var(--color-border);
+    border-radius: 10px;
+    padding: 11px 14px;
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast);
+    line-height: 1.5;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.form-input::placeholder,
+.form-textarea::placeholder {
+    color: var(--color-text-muted);
+    opacity: 0.7;
+}
+
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    background: var(--color-primary-light);
+    box-shadow: 0 0 0 3px rgba(90, 158, 111, 0.15);
+}
+
+.form-textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.form-select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%235a5a5a' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 40px;
+}
+
+/* invalid (after blur via .has-error) */
+.form-row.has-error .form-input,
+.form-row.has-error .form-select,
+.form-row.has-error .form-textarea,
+.form-row__col.has-error .form-input,
+.form-row__col.has-error .form-select {
+    border-color: #d97757;
+    background: #fff5f0;
+}
+
+.form-row.has-error .form-input:focus,
+.form-row.has-error .form-select:focus,
+.form-row.has-error .form-textarea:focus,
+.form-row__col.has-error .form-input:focus,
+.form-row__col.has-error .form-select:focus {
+    box-shadow: 0 0 0 3px rgba(217, 119, 87, 0.18);
+}
+
+.form-helper {
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    line-height: 1.5;
+    margin-top: 2px;
+}
+
+.form-error {
+    font-size: 0.85rem;
+    color: #c8593a;
+    line-height: 1.5;
+    min-height: 1.2em;
+    margin-top: 2px;
+}
+
+.form-error:empty {
+    display: none;
+}
+
+.form-error--global {
+    margin-top: var(--spacing-md);
+    padding: var(--spacing-sm);
+    background: #fff5f0;
+    border-radius: var(--radius-sm);
+    border-left: 3px solid #d97757;
+}
+
+.form-error--global:empty {
+    display: none;
+}
+
+/* ----- Radio --------------------------------------------------------------- */
+.radio-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.radio-option {
+    cursor: pointer;
+    user-select: none;
+}
+
+.radio-option input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.radio-option span {
+    display: inline-block;
+    padding: 8px 16px;
+    background: var(--color-bg);
+    border: 1.5px solid var(--color-border);
+    border-radius: var(--radius-full);
+    font-size: 0.9rem;
+    color: var(--color-text-light);
+    transition: var(--transition-fast);
+}
+
+.radio-option:hover span {
+    border-color: var(--color-primary);
+    color: var(--color-primary-dark);
+}
+
+.radio-option input:checked + span {
+    background: var(--color-primary-light);
+    border-color: var(--color-primary);
+    color: var(--color-primary-dark);
+    font-weight: 600;
+}
+
+.radio-option input:focus-visible + span {
+    box-shadow: 0 0 0 3px rgba(90, 158, 111, 0.25);
+}
+
+/* ----- Consent group (利用規約 + 個人情報保護方針) ------------------------- */
+.consent-group {
+    background: var(--color-bg-cream);
+    border-radius: 10px;
+    padding: 14px 18px;
+    border: 1px solid var(--color-border-light);
+    margin-top: 4px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.consent-item .form-error {
+    margin-top: 4px;
+    margin-left: 34px;
+}
+
+.checkbox-option {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    cursor: pointer;
+    user-select: none;
+    line-height: 1.6;
+}
+
+.checkbox-option input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.checkbox-option__box {
+    flex-shrink: 0;
+    width: 22px;
+    height: 22px;
+    border: 2px solid var(--color-border);
+    border-radius: 6px;
+    background: var(--color-bg);
+    transition: var(--transition-fast);
+    display: inline-block;
+    position: relative;
+    margin-top: 2px;
+}
+
+.checkbox-option:hover .checkbox-option__box {
+    border-color: var(--color-primary);
+}
+
+.checkbox-option input:checked + .checkbox-option__box {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+}
+
+.checkbox-option input:checked + .checkbox-option__box::after {
+    content: "";
+    position: absolute;
+    top: 3px;
+    left: 6px;
+    width: 5px;
+    height: 11px;
+    border: solid #fff;
+    border-width: 0 2.5px 2.5px 0;
+    transform: rotate(45deg);
+}
+
+.checkbox-option input:focus-visible + .checkbox-option__box {
+    box-shadow: 0 0 0 3px rgba(90, 158, 111, 0.25);
+}
+
+.checkbox-option__label {
+    font-size: 0.95rem;
+    color: var(--color-text);
+}
+
+.checkbox-option__label a {
+    color: var(--color-primary-dark);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+/* ----- Honeypot ----------------------------------------------------------- */
+.hp-field {
+    position: absolute;
+    left: -9999px;
+    top: -9999px;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    overflow: hidden;
+}
+
+/* ----- Turnstile ---------------------------------------------------------- */
+.turnstile-wrap {
+    display: flex;
+    justify-content: center;
+    margin-top: var(--spacing-xs);
+}
+
+/* ----- Submit ------------------------------------------------------------- */
+.form-submit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-top: 8px;
+}
+
+#submit-btn {
+    width: 100%;
+    max-width: 320px;
+    padding: 14px 28px;
+    font-size: 1rem;
+    font-weight: 700;
+    border-radius: 10px;
+    background: var(--gradient-cta);
+    color: #fff;
+    border: 0;
+    cursor: pointer;
+    box-shadow: var(--shadow-md);
+    transition: var(--transition-fast);
+    position: relative;
+    letter-spacing: 0.02em;
+}
+
+#submit-btn:not(:disabled):hover {
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-lg);
+}
+
+#submit-btn:not(:disabled):active {
+    transform: translateY(0);
+}
+
+#submit-btn:disabled {
+    background: var(--color-text-muted);
+    cursor: not-allowed;
+    opacity: 0.55;
+    box-shadow: none;
+}
+
+#submit-btn .btn-loading {
+    display: none;
+    align-items: center;
+    gap: 8px;
+}
+
+#submit-btn.is-loading .btn-label {
+    display: none;
+}
+
+#submit-btn.is-loading .btn-loading {
+    display: inline-flex;
+}
+
+.spinner {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.form-submit__note {
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+    text-align: center;
+}
+
+/* ----- Success panel ------------------------------------------------------ */
+.success-panel {
+    text-align: center;
+    padding: clamp(24px, 5vw, 48px) clamp(16px, 4vw, 32px);
+}
+
+.success-panel__icon {
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-md);
+}
+
+.success-panel__title {
+    font-size: clamp(1.25rem, 3vw, 1.5rem);
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-md);
+    letter-spacing: 0.02em;
+}
+
+.success-panel__lead {
+    font-size: 1rem;
+    line-height: 1.85;
+    color: var(--color-text-light);
+    margin-bottom: var(--spacing-lg);
+    max-width: 50ch;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.success-panel__lead strong {
+    color: var(--color-primary-dark);
+    font-weight: 700;
+}
+
+.success-panel .btn {
+    padding: 14px 32px;
+    font-size: 1rem;
+    font-weight: 700;
+    border-radius: var(--radius-md);
+    background: var(--gradient-cta);
+    color: #fff;
+    text-decoration: none;
+    box-shadow: var(--shadow-md);
+    display: inline-block;
+    transition: var(--transition-fast);
+}
+
+.success-panel .btn:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-lg);
+}
+
+.success-panel__note {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    line-height: 1.7;
+    margin-top: var(--spacing-lg);
+}
+
+/* ----- Privacy note (page bottom) ----------------------------------------- */
+.privacy-note {
+    padding: 0;
+}
+
+.privacy-card {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 18px;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--radius-md);
+    padding: 18px 22px;
+    box-shadow: var(--shadow-sm);
+    max-width: 760px;
+    margin: 0 auto;
+}
+
+.privacy-card__icon {
+    width: 38px;
+    height: 38px;
+    border-radius: var(--radius-full);
+    background: var(--color-primary-light);
+    color: var(--color-primary-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.privacy-card__title {
+    font-size: 0.9375rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin: 0 0 6px;
+}
+
+.privacy-card__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.privacy-card__list li {
+    font-size: 0.8125rem;
+    line-height: 1.75;
+    color: var(--color-text-light);
+    position: relative;
+    padding-left: 1em;
+}
+
+.privacy-card__list li::before {
+    content: "・";
+    position: absolute;
+    left: 0;
+    color: var(--color-primary);
+}
+
+.privacy-card__list a {
+    color: var(--color-primary-dark);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+@media (max-width: 540px) {
+    .privacy-card {
+        grid-template-columns: auto 1fr;
+        gap: 14px;
+        padding: 16px 18px;
+    }
+}
