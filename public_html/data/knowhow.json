@@ -1,6 +1,33 @@
 {
   "articles": [
     {
+      "id": 109,
+      "title": "Perplexityで企業研究〜AI情報収集術",
+      "category": "kh05",
+      "excerpt": "Perplexityを使った企業研究の手順を徹底解説。出典付きAI検索の強み、業界レポートを15分で作るプロンプト集、競合企業との比較分析、面接直前のニュースリサーチ、無料/有料プランの違い、ハルシネーション対策の二次検証ポイントまで実践的に紹介します。",
+      "image": "/assets/knowhow-109.webp",
+      "postDate": "2026-05-08",
+      "detailUrl": "/knowhow/detail/knowhow-109.html"
+    },
+    {
+      "id": 108,
+      "title": "ChatGPTで面接練習〜想定問答と回答改善法",
+      "category": "kh01",
+      "excerpt": "ChatGPTで面接練習する具体的な手順を徹底解説。想定問答30問の生成プロンプト、模擬面接ロールプレイ設定、PREP法・STAR法を使った回答ブラッシュアップ、録画を組み合わせた本格メソッド、丸暗記など失敗パターンの対処法まで紹介します。",
+      "image": "/assets/knowhow-108.webp",
+      "postDate": "2026-05-08",
+      "detailUrl": "/knowhow/detail/knowhow-108.html"
+    },
+    {
+      "id": 107,
+      "title": "プロンプトエンジニア転職〜年収・スキル・参入法",
+      "category": "kh04",
+      "excerpt": "プロンプトエンジニアの転職を徹底解説。年収相場800万〜2,000万円の実態、技術系・非技術系の必要スキル、未経験からの参入ルート3つ、採用が活発な企業カテゴリ、ポートフォリオの作り方と面接で評価されるポイントまで実践ガイドします。",
+      "image": "/assets/knowhow-107.webp",
+      "postDate": "2026-05-08",
+      "detailUrl": "/knowhow/detail/knowhow-107.html"
+    },
+    {
       "id": 106,
       "title": "試用期間中の過ごし方〜本採用への流れと注意点",
       "category": "kh05",
