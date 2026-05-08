@@ -15,20 +15,60 @@ const ALLOWED_ORIGINS_DEV = [
     'http://127.0.0.1:8080',
 ];
 
+function getAllowedOrigins() {
+    return process.env.NODE_ENV === 'production'
+        ? ALLOWED_ORIGINS
+        : [...ALLOWED_ORIGINS, ...ALLOWED_ORIGINS_DEV];
+}
+
+/**
+ * Origin が allowlist に含まれない場合は CORS ヘッダ自体を返さない。
+ * これにより、ブラウザは攻撃元 Origin からのレスポンスを読めない。
+ */
 function corsHeaders(origin) {
-    const allowed = (process.env.NODE_ENV === 'production' ? ALLOWED_ORIGINS : [...ALLOWED_ORIGINS, ...ALLOWED_ORIGINS_DEV]);
-    const allowOrigin = allowed.includes(origin) ? origin : allowed[0];
-    return {
-        'Access-Control-Allow-Origin': allowOrigin,
-        'Access-Control-Allow-Methods': 'POST, OPTIONS',
-        'Access-Control-Allow-Headers': 'Content-Type, Accept',
-        'Access-Control-Max-Age': '600',
-        'Vary': 'Origin',
+    const baseHeaders = {
         'Content-Type': 'application/json; charset=utf-8',
         'X-Content-Type-Options': 'nosniff',
         'Strict-Transport-Security': 'max-age=63072000; includeSubDomains; preload',
         'Referrer-Policy': 'strict-origin-when-cross-origin',
+        'Vary': 'Origin',
     };
+    const allowed = getAllowedOrigins();
+    if (!origin || !allowed.includes(origin)) {
+        // CORS ヘッダなし — ブラウザは結果を読めない
+        return baseHeaders;
+    }
+    return {
+        ...baseHeaders,
+        'Access-Control-Allow-Origin': origin,
+        'Access-Control-Allow-Methods': 'POST, OPTIONS',
+        'Access-Control-Allow-Headers': 'Content-Type, Accept',
+        'Access-Control-Max-Age': '600',
+    };
+}
+
+/**
+ * 405 Method Not Allowed 用に Allow ヘッダ付き
+ */
+function methodNotAllowed(origin) {
+    return {
+        statusCode: 405,
+        headers: { ...corsHeaders(origin), 'Allow': 'POST, OPTIONS' },
+        body: JSON.stringify({ message: 'Method Not Allowed' }),
+    };
+}
+
+/**
+ * Referer の Origin と allowlist を比較。startsWith は不正 (evil.com.attacker.com を通す)。
+ */
+function isRefererAllowed(referer, allowedOrigins) {
+    if (!referer) return false;
+    try {
+        const refererOrigin = new URL(referer).origin;
+        return allowedOrigins.includes(refererOrigin);
+    } catch (_) {
+        return false;
+    }
 }
 
 function jsonResponse(statusCode, body, origin) {
@@ -56,17 +96,26 @@ export async function handle(event) {
         return { statusCode: 204, headers: corsHeaders(origin), body: '' };
     }
     if (method !== 'POST') {
-        return jsonResponse(405, { message: 'Method Not Allowed' }, origin);
+        return methodNotAllowed(origin);
     }
 
-    // ----- 2. Origin/Referer 検証 -------------------------------------------
-    const allowed = (process.env.NODE_ENV === 'production' ? ALLOWED_ORIGINS : [...ALLOWED_ORIGINS, ...ALLOWED_ORIGINS_DEV]);
+    // ----- 2. Origin/Referer 検証 (Phase 2 強化版) ---------------------------
+    const allowed = getAllowedOrigins();
+    const isProduction = process.env.NODE_ENV === 'production';
+
+    // 本番では Origin ヘッダ必須。未送信は 403 (curl/script からの直叩き拒否)
+    if (isProduction && !origin) {
+        console.warn('Origin missing (production)');
+        return jsonResponse(403, { message: 'Forbidden' }, origin);
+    }
+    // Origin が allowlist 外なら 403
     if (origin && !allowed.includes(origin)) {
-        console.warn('Origin rejected:', origin);
+        console.warn('Origin rejected:', String(origin).replace(/[\r\n]/g, ''));
         return jsonResponse(403, { message: 'Forbidden origin' }, origin);
     }
-    if (process.env.NODE_ENV === 'production' && referer && !allowed.some((o) => referer.startsWith(o))) {
-        console.warn('Referer rejected:', referer);
+    // Referer は URL.origin で厳密比較 (本番のみ・送られてきた場合)
+    if (isProduction && referer && !isRefererAllowed(referer, allowed)) {
+        console.warn('Referer rejected:', String(referer).replace(/[\r\n]/g, '').slice(0, 200));
         return jsonResponse(403, { message: 'Forbidden referer' }, origin);
     }
 

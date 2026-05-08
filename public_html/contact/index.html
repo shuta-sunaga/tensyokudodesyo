@@ -22,8 +22,8 @@
     <meta name="twitter:description" content="転職に関するご相談はこちらから。面談まで無料でご案内します。">
     <meta name="twitter:image" content="https://www.tensyokudodesyo.com/assets/ogp.png">
 
-    <link rel="stylesheet" href="/css/style.css?v=2026-05-08-7">
-    <link rel="stylesheet" href="/css/contact.css?v=2026-05-08-7">
+    <link rel="stylesheet" href="/css/style.css?v=2026-05-08-8">
+    <link rel="stylesheet" href="/css/contact.css?v=2026-05-08-8">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
@@ -40,16 +40,21 @@
       gtag('config', 'G-GJSD6BRJ0T');
     </script>
 
-    <!-- Turnstile sitekey をホストに応じて差し替える (本番ドメインは prod-sitekey を採用) -->
+    <!--
+      Turnstile sitekey:
+      HTML には**本番サイトキー**を直書きする (Phase 2 セキュリティ強化)。
+      ローカル開発時のみ JS で Cloudflare 公式テストキーに差し替えて常時成功させる。
+      これにより「テストキーを本番で使い続けるバイパス攻撃」を防ぐ。
+    -->
     <script>
       (function () {
         try {
           var host = window.location.hostname;
           var isLocal = host === 'localhost' || host === '127.0.0.1' || host === '';
-          if (isLocal) return;
+          if (!isLocal) return;
           document.addEventListener('DOMContentLoaded', function () {
-            document.querySelectorAll('.cf-turnstile[data-prod-sitekey]').forEach(function (el) {
-              el.setAttribute('data-sitekey', el.dataset.prodSitekey);
+            document.querySelectorAll('.cf-turnstile[data-dev-sitekey]').forEach(function (el) {
+              el.setAttribute('data-sitekey', el.dataset.devSitekey);
             });
           });
         } catch (e) {}
@@ -378,16 +383,16 @@
 
                         <!--
                             Cloudflare Turnstile
-                            sitekey は contact.js でホスト名に応じて動的に差し替える:
-                              localhost / 127.0.0.1 → テストキー (1x00000000000000000000AA)
-                              tensyokudodesyo.com   → 本番キー
+                            data-sitekey は **本番キー**を直書き。
+                            ローカル開発時のみ <head> 内の inline script が
+                            data-dev-sitekey を data-sitekey に差し替えてテストキーで動かす。
                             secret key は AWS Secrets Manager (本番) / .env (ローカル) に設定。
                         -->
                         <div class="turnstile-wrap">
                             <div
                                 class="cf-turnstile"
-                                data-sitekey="1x00000000000000000000AA"
-                                data-prod-sitekey="0x4AAAAAADLIU8gtfWDd-ZjJ"
+                                data-sitekey="0x4AAAAAADLIU8gtfWDd-ZjJ"
+                                data-dev-sitekey="1x00000000000000000000AA"
                                 data-theme="light"
                                 data-language="ja"
                             ></div>
@@ -460,7 +465,7 @@
 
     <div id="footer-placeholder"></div>
 
-    <script src="/js/includes.js?v=2026-05-08-7"></script>
-    <script src="/js/contact.js?v=2026-05-08-7"></script>
+    <script src="/js/includes.js?v=2026-05-08-8"></script>
+    <script src="/js/contact.js?v=2026-05-08-8"></script>
 </body>
 </html>
