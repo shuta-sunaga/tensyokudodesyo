@@ -4,7 +4,7 @@
 
 import { SESv2Client, SendEmailCommand } from '@aws-sdk/client-sesv2';
 
-const SCHEDULER_URL = 'https://sjpfkixxkhe8.jp.larksuite.com/scheduler/52e92ce096e6f1be';
+const SCHEDULER_URL = 'https://sjpfkixxkhe8.jp.larksuite.com/scheduler/f87a0259f5d1099f';
 const SITE_URL = 'https://www.tensyokudodesyo.com';
 
 const sesClient = new SESv2Client({
