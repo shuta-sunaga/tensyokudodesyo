@@ -37,7 +37,7 @@ frame-ancestors 'self';
 form-action 'self'
   https://2kyofn1cn7.execute-api.ap-northeast-1.amazonaws.com;
 base-uri 'self';
-object-src 'none';
+object-src 'self';     (※ トップページの <object data="assets/japan-map.svg"> 用)
 upgrade-insecure-requests;
 ```
 
