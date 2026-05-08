@@ -3,7 +3,10 @@ import { verifyTurnstile } from './turnstile.mjs';
 import { writeToLarkBase } from './lark.mjs';
 import { sendConfirmationMail } from './mailer.mjs';
 import { getSecrets } from './secrets.mjs';
-import { maskEmail, redactPII } from './log.mjs';
+import { maskEmail, redactPII, safeLog, assertProductionSafety } from './log.mjs';
+
+// 本番でテスト/モックフラグが立っていたら起動時に即 throw する
+assertProductionSafety();
 
 const ALLOWED_ORIGINS = [
     'https://www.tensyokudodesyo.com',
@@ -110,12 +113,12 @@ export async function handle(event) {
     }
     // Origin が allowlist 外なら 403
     if (origin && !allowed.includes(origin)) {
-        console.warn('Origin rejected:', String(origin).replace(/[\r\n]/g, ''));
+        console.warn('Origin rejected:', safeLog(origin));
         return jsonResponse(403, { message: 'Forbidden origin' }, origin);
     }
     // Referer は URL.origin で厳密比較 (本番のみ・送られてきた場合)
     if (isProduction && referer && !isRefererAllowed(referer, allowed)) {
-        console.warn('Referer rejected:', String(referer).replace(/[\r\n]/g, '').slice(0, 200));
+        console.warn('Referer rejected:', safeLog(referer).slice(0, 200));
         return jsonResponse(403, { message: 'Forbidden referer' }, origin);
     }
 

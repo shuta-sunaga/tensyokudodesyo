@@ -96,12 +96,12 @@ Resources:
         ThrottlingBurstLimit: 20
         ThrottlingRateLimit: 5  # 5 req/sec average
 
-  # CloudWatch Logs retention
+  # CloudWatch Logs retention (Phase 4: 30→14日に短縮 - PII 滞留期間を抑制)
   SubmitFormLogGroup:
     Type: AWS::Logs::LogGroup
     Properties:
       LogGroupName: !Sub /aws/lambda/tensyokudodesyo-contact-submit-${Stage}
-      RetentionInDays: 30
+      RetentionInDays: 14
 
   # WAF: HTTP API (v2) は直接紐付け不可のため、Phase 6 (CloudFront) と統合して対応する。
   # 暫定: API Gateway DefaultRouteSettings の throttling と Lambda ReservedConcurrentExecutions に依存。
