@@ -18,6 +18,14 @@ const ALLOWED_ORIGINS_DEV = [
     'http://127.0.0.1:8080',
 ];
 
+// Phase 5: 同意ポリシーのサーバー側信頼バージョン
+// privacy.html / terms.html の改訂日に合わせて更新。
+// クライアント送信値は信頼せず、ここに記載した値だけが Lark Base に保存される。
+const SERVER_PRIVACY_POLICY_VERSION = '2026-04-06';
+const SERVER_TERMS_VERSION = '2026-05-07';
+
+const MAX_PAYLOAD_BYTES = 16384; // 16KB
+
 function getAllowedOrigins() {
     return process.env.NODE_ENV === 'production'
         ? ALLOWED_ORIGINS
@@ -128,25 +136,32 @@ export async function handle(event) {
         return jsonResponse(415, { message: 'Unsupported Media Type' }, origin);
     }
 
-    // ----- 4. JSON parse ----------------------------------------------------
-    let body;
-    try {
-        body = JSON.parse(event.body || '{}');
-    } catch (e) {
-        return jsonResponse(400, { message: 'Invalid JSON' }, origin);
-    }
-
-    // ----- 5. Body サイズ制限 -----------------------------------------------
-    if ((event.body || '').length > 16384) {
+    // ----- 4. Body サイズ制限 (Phase 5: parse 前にチェック) -----------------
+    const rawBody = event.body || '';
+    if (rawBody.length > MAX_PAYLOAD_BYTES) {
         return jsonResponse(413, { message: 'Payload too large' }, origin);
     }
 
-    // ----- 6. ハニーポット + 経過時間 ---------------------------------------
-    if (body.website && String(body.website).trim() !== '') {
-        // ハニーポットに値が入っているのは bot
-        console.warn('Honeypot triggered from', maskIp(sourceIp));
-        // bot にも成功風レスポンスを返す
-        return jsonResponse(200, { message: 'OK' }, origin);
+    // ----- 5. JSON parse ----------------------------------------------------
+    let body;
+    try {
+        body = JSON.parse(rawBody || '{}');
+    } catch (e) {
+        return jsonResponse(400, { message: 'Invalid JSON' }, origin);
+    }
+    if (typeof body !== 'object' || body === null || Array.isArray(body)) {
+        return jsonResponse(400, { message: 'Invalid payload shape' }, origin);
+    }
+
+    // ----- 6. ハニーポット + 経過時間 (Phase 5: 複数ハニーポット) ----------
+    // 「website」 + 「fax_number」 の2つを罠として配置
+    // 賢い bot が `website` をスキップしても、もう一方を埋めれば検知
+    const hpFields = ['website', 'fax_number'];
+    for (const hp of hpFields) {
+        if (body[hp] && String(body[hp]).trim() !== '') {
+            console.warn('Honeypot triggered:', hp, 'from', maskIp(sourceIp));
+            return jsonResponse(200, { message: 'OK' }, origin);
+        }
     }
     if (typeof body.form_elapsed_ms === 'number' && body.form_elapsed_ms < 3000) {
         return jsonResponse(400, { message: '送信が早すぎます。少し時間を置いてからお試しください。' }, origin);
@@ -184,12 +199,27 @@ export async function handle(event) {
 
     // ----- 10. Lark Base へ書き込み -----------------------------------------
     const submittedAt = new Date();
+    // Phase 5: referrer_url は URL として妥当な場合のみ保存
+    let safeReferrer = '';
+    try {
+        const r = String(body.referrer_url || '');
+        if (r) {
+            const u = new URL(r);
+            if (u.protocol === 'http:' || u.protocol === 'https:') {
+                safeReferrer = u.href.slice(0, 500);
+            }
+        }
+    } catch (_) { safeReferrer = ''; }
+
     const larkRecord = {
         ...value,
         submitted_at: submittedAt.toISOString(),
         consent_ip: sourceIp,
-        user_agent: userAgent.slice(0, 500),
-        referrer_url: (body.referrer_url || '').slice(0, 500),
+        user_agent: safeLog(userAgent).slice(0, 500),
+        referrer_url: safeReferrer,
+        // Phase 5: 同意バージョンはサーバー側で固定値を記録
+        privacy_policy_version: SERVER_PRIVACY_POLICY_VERSION,
+        terms_version: SERVER_TERMS_VERSION,
     };
 
     let larkResult;

@@ -31,28 +31,39 @@ async function getTenantAccessToken(appId, appSecret) {
     return _tokenCache.token;
 }
 
+/**
+ * Phase 5: スプレッドシート Formula Injection 対策
+ * Lark Base から CSV/Excel エクスポート時、先頭が = + - @ \t \r 等の値が
+ * 数式として評価される脆弱性 (CVE-2014-3524 系) を防ぐ。
+ */
+const FORMULA_PREFIX_RE = /^[=+\-@\t\r]/;
+function escapeFormulaInjection(value) {
+    if (typeof value !== 'string' || value === '') return value;
+    return FORMULA_PREFIX_RE.test(value) ? "'" + value : value;
+}
+
 function buildFields(record) {
     // Lark Base のフィールド名は docs/lark-base-setup.md に従う
     const submittedAtMs = new Date(record.submitted_at).getTime();
     return {
         // 日時フィールドはミリ秒タイムスタンプ
         submitted_at: submittedAtMs,
-        name: record.name || '',
-        name_kana: record.name_kana || '',
-        email: record.email || '',
-        phone: record.phone || '',
+        name: escapeFormulaInjection(record.name || ''),
+        name_kana: escapeFormulaInjection(record.name_kana || ''),
+        email: escapeFormulaInjection(record.email || ''),
+        phone: escapeFormulaInjection(record.phone || ''),
         prefecture: record.prefecture || '',
         age: record.age != null ? record.age : null,
         current_status: record.current_status || '',
-        interested_job: record.interested_job || '',
-        message: record.message || '',
+        interested_job: escapeFormulaInjection(record.interested_job || ''),
+        message: escapeFormulaInjection(record.message || ''),
         terms_consent: !!record.terms_consent,
         terms_version: record.terms_version || '',
         privacy_consent: !!record.privacy_consent,
         privacy_policy_version: record.privacy_policy_version || '',
         consent_ip: record.consent_ip || '',
-        user_agent: record.user_agent || '',
-        referrer_url: record.referrer_url || '',
+        user_agent: escapeFormulaInjection(record.user_agent || ''),
+        referrer_url: escapeFormulaInjection(record.referrer_url || ''),
         status: '未対応',
     };
 }

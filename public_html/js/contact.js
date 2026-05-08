@@ -308,8 +308,9 @@
             return;
         }
 
-        // 2. ハニーポット
-        if (honeypot && honeypot.value) {
+        // 2. ハニーポット (複数)
+        const honeypots = [honeypot, document.getElementById('fax_number')].filter(Boolean);
+        if (honeypots.some((el) => el.value)) {
             // bot 確定。ユーザーには送信成功として見せ、バックエンドには到達させない
             showSuccess();
             return;
