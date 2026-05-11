@@ -13,16 +13,16 @@ const genAI = new GoogleGenerativeAI(apiKey);
 
 const articles = [
     {
-        id: 89,
-        prompt: "A neat Japanese resume document on a wooden desk, with a fountain pen, a small green plant, and a coffee cup nearby. Soft natural light coming from a window. Clean, calm, and professional atmosphere. The resume paper is blank with no visible text. Bright pastel tones with a hint of green. Editorial photography style."
+        id: 110,
+        prompt: "A modern editorial-style illustration of a desk with a Japanese resume document, a red highlighter pen lying nearby, crumpled draft papers in the background, soft warm cream background, calm green plant accent. Conveys the idea of revising and improving a written application. Clean minimalist style. No text on the resume."
     },
     {
-        id: 90,
-        prompt: "An open hardcover notebook on a wooden desk, with a vintage fountain pen and a stack of old photos beside it. Warm afternoon light, calm and reflective atmosphere suggesting introspection and timeline-based personal history writing. Soft pastel colors with creamy beige and faded sepia tones. The notebook page is empty with no visible text. Editorial photography style."
+        id: 111,
+        prompt: "A modern flat illustration showing colorful abstract puzzle pieces of different shapes coming together, representing personal strengths and self-discovery. Soft cream and sage green palette, warm minimalist composition, conceptual visualization of inner talents being revealed. Editorial style. No text or letters."
     },
     {
-        id: 91,
-        prompt: "A modern Japanese office meeting room with a closed wooden door slightly ajar, a clean reception desk in the foreground, soft daylight from large windows, neutral pastel walls, calm and professional atmosphere suggesting a job interview environment. No people visible. No text or signage. Editorial photography style with subtle green accent."
+        id: 112,
+        prompt: "A modern Japanese executive boardroom scene from a wide angle, polished long wooden table with elegant chairs facing each other, soft natural daylight from tall windows, a glass of water and notebook on the table, calm and dignified corporate atmosphere suggesting a final-stage executive interview. No people visible. No text or signage. Editorial photography style with subtle green accent."
     }
 ];
 

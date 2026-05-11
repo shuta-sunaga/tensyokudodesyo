@@ -1,6 +1,33 @@
 {
   "articles": [
     {
+      "id": 112,
+      "title": "役員面接の逆質問〜社長に響く質問例10選",
+      "category": "kh01",
+      "excerpt": "役員面接の逆質問例を10選で徹底解説。社長・役員に響く質問の作り方、避けるべきNG質問、業界別の応用テンプレート、回答から逆提案につなげるコツまで実践ガイドします。",
+      "image": "/assets/knowhow-112.webp",
+      "postDate": "2026-05-11",
+      "detailUrl": "/knowhow/detail/knowhow-112.html"
+    },
+    {
+      "id": 111,
+      "title": "ストレングスファインダー34資質を転職に活かす方法",
+      "category": "kh03",
+      "excerpt": "ストレングスファインダー34資質を転職でどう活かすか徹底解説。診断の受け方、上位5資質の読み解き方、職種別の強み発揮例、自己PRと志望動機への落とし込み、面接での伝え方を実践ガイドします。",
+      "image": "/assets/knowhow-111.webp",
+      "postDate": "2026-05-11",
+      "detailUrl": "/knowhow/detail/knowhow-111.html"
+    },
+    {
+      "id": 110,
+      "title": "志望動機のNG例〜落とす表現と書き換え法",
+      "category": "kh02",
+      "excerpt": "志望動機のNG例と書き換え法を徹底解説。落ちる定型表現5パターン、採用担当が即不合格にする地雷ワード、NG→OK書き換え事例10本、業界別の落とし穴まで実例で紹介します。",
+      "image": "/assets/knowhow-110.webp",
+      "postDate": "2026-05-11",
+      "detailUrl": "/knowhow/detail/knowhow-110.html"
+    },
+    {
       "id": 109,
       "title": "Perplexityで企業研究〜AI情報収集術",
       "category": "kh05",
