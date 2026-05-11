@@ -8,9 +8,9 @@ const client = new TwitterApi({
 });
 
 const articles = [
-    { id: '107', title: 'プロンプトエンジニア転職〜年収・スキル・参入法' },
-    { id: '108', title: 'ChatGPTで面接練習〜想定問答と回答改善法' },
-    { id: '109', title: 'Perplexityで企業研究〜AI情報収集術' },
+    { id: '110', title: '志望動機のNG例〜落とす表現と書き換え法' },
+    { id: '111', title: 'ストレングスファインダー34資質を転職に活かす方法' },
+    { id: '112', title: '役員面接の逆質問〜社長に響く質問例10選' },
 ];
 
 function buildTweet({ id, title }) {
