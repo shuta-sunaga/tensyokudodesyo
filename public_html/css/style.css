@@ -4390,12 +4390,24 @@ body.menu-open {
     padding: var(--spacing-md) 0 var(--spacing-2xl);
 }
 
-/* Knowhow article card readmore */
+/* Knowhow article card spacing override */
+.knowhow-card .article-card-content {
+    padding: var(--spacing-sm) var(--spacing-sm) var(--spacing-sm);
+}
+
+.knowhow-card .article-card-category {
+    margin-bottom: 0.5rem;
+}
+
+.knowhow-card .article-card-title {
+    margin-bottom: 0.5rem;
+}
+
 .knowhow-card-readmore {
     display: inline-flex;
     align-items: center;
     gap: 0.35rem;
-    margin-top: var(--spacing-sm);
+    margin-top: 0.625rem;
     font-size: 0.8125rem;
     font-weight: 600;
     color: var(--color-primary);
