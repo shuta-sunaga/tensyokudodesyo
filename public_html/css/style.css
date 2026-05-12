@@ -4114,7 +4114,7 @@ body.menu-open {
 }
 
 .knowhow-header {
-    padding-bottom: var(--spacing-sm);
+    padding-bottom: 0.75rem;
 }
 
 .knowhow-header-inner {
