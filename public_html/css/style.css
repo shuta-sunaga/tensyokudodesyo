@@ -4114,7 +4114,7 @@ body.menu-open {
 }
 
 .knowhow-header {
-    padding-bottom: var(--spacing-md);
+    padding-bottom: var(--spacing-sm);
 }
 
 .knowhow-header-inner {
@@ -4391,20 +4391,11 @@ body.menu-open {
 }
 
 /* Knowhow article card readmore */
-.knowhow-card .article-card-content {
-    display: flex;
-    flex-direction: column;
-}
-
-.knowhow-card .article-card-excerpt {
-    margin-bottom: var(--spacing-sm);
-}
-
 .knowhow-card-readmore {
-    margin-top: auto;
     display: inline-flex;
     align-items: center;
     gap: 0.35rem;
+    margin-top: var(--spacing-sm);
     font-size: 0.8125rem;
     font-weight: 600;
     color: var(--color-primary);
