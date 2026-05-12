@@ -1776,7 +1776,7 @@ function renderKnowhowCard(article) {
         : article.category;
 
     return `
-        <article class="article-card" data-category="${escapeHTML(article.category)}">
+        <article class="article-card knowhow-card" data-category="${escapeHTML(article.category)}">
             <a href="${article.detailUrl}">
                 <div class="article-card-image">
                     <img src="${article.thumbnail || article.image}" alt="${escapeHTML(article.title)}" loading="lazy" width="600" height="338" decoding="async">
@@ -1785,6 +1785,9 @@ function renderKnowhowCard(article) {
                     <span class="article-card-category">${escapeHTML(categoryDisplay)}</span>
                     <h3 class="article-card-title">${escapeHTML(article.title)}</h3>
                     <p class="article-card-excerpt">${escapeHTML(article.excerpt)}</p>
+                    <span class="knowhow-card-readmore">この記事を読む
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+                    </span>
                 </div>
             </a>
         </article>

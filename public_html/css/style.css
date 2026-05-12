@@ -4114,7 +4114,7 @@ body.menu-open {
 }
 
 .knowhow-header {
-    padding-bottom: var(--spacing-lg);
+    padding-bottom: var(--spacing-md);
 }
 
 .knowhow-header-inner {
@@ -4177,7 +4177,7 @@ body.menu-open {
 /* Hero card */
 .knowhow-hero {
     background: var(--color-bg);
-    padding: var(--spacing-lg) 0 var(--spacing-sm);
+    padding: var(--spacing-md) 0 var(--spacing-sm);
 }
 
 .knowhow-hero-card {
@@ -4387,7 +4387,42 @@ body.menu-open {
 /* Results bar */
 .knowhow-list {
     background: var(--color-bg-warm);
-    padding: var(--spacing-lg) 0 var(--spacing-2xl);
+    padding: var(--spacing-md) 0 var(--spacing-2xl);
+}
+
+/* Knowhow article card readmore */
+.knowhow-card .article-card-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.knowhow-card .article-card-excerpt {
+    margin-bottom: var(--spacing-sm);
+}
+
+.knowhow-card-readmore {
+    margin-top: auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    line-height: 1;
+}
+
+.knowhow-card-readmore svg {
+    transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.knowhow-card:hover .knowhow-card-readmore svg {
+    transform: translateX(3px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .knowhow-card-readmore svg {
+        transition: none;
+    }
 }
 
 .knowhow-results-bar {
