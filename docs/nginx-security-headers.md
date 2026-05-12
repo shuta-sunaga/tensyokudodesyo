@@ -17,10 +17,13 @@
 
 ```
 default-src 'self';
-script-src 'self' 'unsafe-inline'
+script-src 'self' 'unsafe-inline' 'unsafe-eval'
   https://challenges.cloudflare.com         (Turnstile)
   https://www.googletagmanager.com           (GA4)
   https://www.google-analytics.com;
+# 'unsafe-eval' は MT 9.0.5 管理画面の mt_core_compact.js が
+# new Function() で内部メソッドを動的生成するため必須 (2026-05-12 追加)。
+# 公開サイトには eval 使用箇所がないため実害なし。
 style-src 'self' 'unsafe-inline'
   https://fonts.googleapis.com;
 font-src 'self' https://fonts.gstatic.com data:;
