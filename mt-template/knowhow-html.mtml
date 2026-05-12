@@ -68,40 +68,100 @@
     <div id="header-placeholder"></div>
 
     <!-- Page Header -->
-    <section class="page-header">
-        <div class="container">
-            <nav class="breadcrumb">
-                <a href="/">ホーム</a>
-                <span>転職ノウハウ</span>
-            </nav>
-            <h1 class="page-title">転職ノウハウ</h1>
-            <p class="page-description">転職活動を成功させるためのノウハウをご紹介します</p>
+    <section class="page-header knowhow-header">
+        <div class="container knowhow-header-inner">
+            <div class="knowhow-header-text">
+                <nav class="breadcrumb">
+                    <a href="/">ホーム</a>
+                    <span>転職ノウハウ</span>
+                </nav>
+                <h1 class="page-title">転職ノウハウ</h1>
+                <p class="page-description">面接対策・履歴書の書き方・自己分析・業界研究まで、転職を一歩前に進めるための実践記事を集めました</p>
+            </div>
+            <div class="knowhow-header-meta" id="knowhowHeaderMeta" aria-live="polite">
+                <span class="knowhow-header-meta-count" id="knowhowTotalCount">—</span>
+                <span class="knowhow-header-meta-label">本の記事</span>
+            </div>
         </div>
     </section>
 
-    <!-- Category Filter -->
-    <section class="column-filter">
+    <!-- Hero Article (latest) -->
+    <section class="knowhow-hero" id="knowhowHero" hidden>
         <div class="container">
-            <div class="filter-controls filter-controls-row">
-                <div class="filter-select-wrapper">
-                    <label for="knowhowFilter">カテゴリ</label>
+            <a class="knowhow-hero-card" id="knowhowHeroCard" href="#">
+                <div class="knowhow-hero-image">
+                    <img id="knowhowHeroImage" src="" alt="" loading="eager" decoding="async" width="800" height="450">
+                </div>
+                <div class="knowhow-hero-body">
+                    <span class="knowhow-hero-eyebrow">PICK UP</span>
+                    <span class="article-card-category" id="knowhowHeroCategory"></span>
+                    <h2 class="knowhow-hero-title" id="knowhowHeroTitle"></h2>
+                    <p class="knowhow-hero-excerpt" id="knowhowHeroExcerpt"></p>
+                    <span class="knowhow-hero-readmore">この記事を読む
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+                    </span>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <!-- Filter + Search -->
+    <section class="column-filter knowhow-controls">
+        <div class="container">
+            <form class="knowhow-search-form" id="knowhowSearchForm" role="search" autocomplete="off">
+                <label class="knowhow-search-input-wrapper" for="knowhowSearchInput">
+                    <svg class="knowhow-search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <circle cx="11" cy="11" r="7"/>
+                        <path d="M21 21l-4.3-4.3"/>
+                    </svg>
+                    <input id="knowhowSearchInput" type="search" placeholder="キーワードで記事を探す（例: 面接、履歴書、年代別）" aria-label="記事をキーワードで検索">
+                    <button type="button" id="knowhowSearchClear" class="knowhow-search-clear" aria-label="検索条件をクリア" hidden>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18"/><path d="M6 6l12 12"/></svg>
+                    </button>
+                </label>
+                <div class="filter-select-wrapper knowhow-filter-select-wrapper">
+                    <label for="knowhowFilter" class="visually-hidden">カテゴリ</label>
                     <select id="knowhowFilter" class="filter-select">
-                        <!-- カテゴリは categories.js により動的生成 -->
-                        <option value="">すべて</option>
+                        <option value="">すべてのカテゴリ</option>
                     </select>
                 </div>
-            </div>
+            </form>
         </div>
     </section>
 
     <!-- Article Card List -->
-    <section class="article-list">
+    <section class="article-list knowhow-list">
         <div class="container">
+            <div class="knowhow-results-bar">
+                <p class="knowhow-results-count" id="knowhowResultsCount" aria-live="polite"></p>
+            </div>
             <div class="article-grid" id="articleGrid">
-                <div class="loading-placeholder" style="grid-column: 1 / -1; text-align: center; padding: 2rem; color: #666;">
-                    記事を読み込み中...
+                <div class="article-card knowhow-skeleton" aria-hidden="true">
+                    <div class="knowhow-skeleton-image"></div>
+                    <div class="knowhow-skeleton-body">
+                        <div class="knowhow-skeleton-line short"></div>
+                        <div class="knowhow-skeleton-line"></div>
+                        <div class="knowhow-skeleton-line"></div>
+                    </div>
+                </div>
+                <div class="article-card knowhow-skeleton" aria-hidden="true">
+                    <div class="knowhow-skeleton-image"></div>
+                    <div class="knowhow-skeleton-body">
+                        <div class="knowhow-skeleton-line short"></div>
+                        <div class="knowhow-skeleton-line"></div>
+                        <div class="knowhow-skeleton-line"></div>
+                    </div>
+                </div>
+                <div class="article-card knowhow-skeleton" aria-hidden="true">
+                    <div class="knowhow-skeleton-image"></div>
+                    <div class="knowhow-skeleton-body">
+                        <div class="knowhow-skeleton-line short"></div>
+                        <div class="knowhow-skeleton-line"></div>
+                        <div class="knowhow-skeleton-line"></div>
+                    </div>
                 </div>
             </div>
+            <nav class="pagination knowhow-pagination" id="knowhowPagination" aria-label="ページネーション"></nav>
         </div>
     </section>
 

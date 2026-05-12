@@ -1601,6 +1601,10 @@ async function initHomePage() {
  */
 let allKnowhowArticles = [];
 let knowhowFilter = '';
+let knowhowKeyword = '';
+let knowhowCurrentPage = 1;
+let knowhowImeComposing = false;
+const KNOWHOW_PER_PAGE = 12;
 
 async function initKnowhowPage() {
     const articleGrid = document.getElementById('articleGrid');
@@ -1608,27 +1612,60 @@ async function initKnowhowPage() {
 
     // Generate knowhow category filter dropdown dynamically
     if (typeof CategoryManager !== 'undefined') {
-        CategoryManager.renderFilterSelect('knowhowFilter', 'knowhow', 'すべて');
+        CategoryManager.renderFilterSelect('knowhowFilter', 'knowhow', 'すべてのカテゴリ');
         CategoryManager.setupFilterSelectHandler('knowhowFilter', function(categoryId) {
             knowhowFilter = categoryId;
+            knowhowCurrentPage = 1;
             renderKnowhowArticles();
         });
     } else {
-        // Fallback for legacy dropdown
         const knowhowSelect = document.getElementById('knowhowFilter');
         if (knowhowSelect) {
             knowhowSelect.addEventListener('change', function() {
                 knowhowFilter = this.value;
+                knowhowCurrentPage = 1;
                 renderKnowhowArticles();
             });
         }
     }
 
-    // Load knowhow articles from both pipeline and MT JSON (merged)
+    // Search input wiring (IME-aware debounce)
+    const searchInput = document.getElementById('knowhowSearchInput');
+    const clearBtn = document.getElementById('knowhowSearchClear');
+    if (searchInput) {
+        const handleSearchInput = debounce(() => {
+            if (knowhowImeComposing) return;
+            knowhowKeyword = searchInput.value.trim().toLowerCase();
+            knowhowCurrentPage = 1;
+            if (clearBtn) clearBtn.hidden = !searchInput.value;
+            renderKnowhowArticles();
+        }, 300);
+        searchInput.addEventListener('compositionstart', () => { knowhowImeComposing = true; });
+        searchInput.addEventListener('compositionend', () => {
+            knowhowImeComposing = false;
+            handleSearchInput();
+        });
+        searchInput.addEventListener('input', handleSearchInput);
+    }
+    if (clearBtn) {
+        clearBtn.addEventListener('click', () => {
+            if (searchInput) searchInput.value = '';
+            knowhowKeyword = '';
+            knowhowCurrentPage = 1;
+            clearBtn.hidden = true;
+            renderKnowhowArticles();
+            if (searchInput) searchInput.focus();
+        });
+    }
+
+    // Prevent form submission from reloading
+    const form = document.getElementById('knowhowSearchForm');
+    if (form) form.addEventListener('submit', (e) => e.preventDefault());
+
     try {
         allKnowhowArticles = await loadAllKnowhowArticles();
-
-        // Render articles
+        const totalEl = document.getElementById('knowhowTotalCount');
+        if (totalEl) totalEl.textContent = String(allKnowhowArticles.length);
         renderKnowhowArticles();
     } catch (error) {
         console.error('Error loading knowhow articles:', error);
@@ -1636,34 +1673,109 @@ async function initKnowhowPage() {
     }
 }
 
-function renderKnowhowArticles() {
-    const container = document.getElementById('articleGrid');
-    if (!container) return;
-
-    let filtered = allKnowhowArticles;
-
-    // Filter by category
-    if (knowhowFilter) {
-        filtered = filtered.filter(article => {
+function getFilteredKnowhowArticles() {
+    return allKnowhowArticles.filter(article => {
+        if (knowhowFilter) {
             const articleCategoryId = typeof CategoryManager !== 'undefined'
                 ? CategoryManager.normalizeToId('knowhow', article.category)
                 : article.category;
-            return articleCategoryId === knowhowFilter || article.category === knowhowFilter;
-        });
+            if (articleCategoryId !== knowhowFilter && article.category !== knowhowFilter) {
+                return false;
+            }
+        }
+        if (knowhowKeyword) {
+            const haystack = `${article.title || ''} ${article.excerpt || ''}`.toLowerCase();
+            if (!haystack.includes(knowhowKeyword)) return false;
+        }
+        return true;
+    });
+}
+
+function renderKnowhowArticles() {
+    const container = document.getElementById('articleGrid');
+    const heroSection = document.getElementById('knowhowHero');
+    const pagination = document.getElementById('knowhowPagination');
+    const resultsCount = document.getElementById('knowhowResultsCount');
+    if (!container) return;
+
+    const filtered = getFilteredKnowhowArticles();
+    const total = filtered.length;
+    const isUnfiltered = !knowhowFilter && !knowhowKeyword;
+
+    // Hero only visible when no filters/search are active
+    let listArticles = filtered;
+    if (heroSection) {
+        if (isUnfiltered && filtered.length > 0) {
+            renderKnowhowHero(filtered[0]);
+            heroSection.hidden = false;
+            listArticles = filtered.slice(1);
+        } else {
+            heroSection.hidden = true;
+        }
     }
 
-    if (filtered.length === 0) {
-        container.innerHTML = '<p style="grid-column:1/-1;text-align:center;padding:2rem;color:#666;">条件に合う記事がありません</p>';
+    if (total === 0) {
+        container.innerHTML = `
+            <div class="knowhow-empty" role="status">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="11" cy="11" r="7"/>
+                    <path d="M21 21l-4.3-4.3"/>
+                </svg>
+                <p class="knowhow-empty-title">該当する記事は見つかりませんでした</p>
+                <p class="knowhow-empty-text">キーワードを変えるか、条件をリセットしてお試しください</p>
+                <button type="button" class="knowhow-empty-reset" id="knowhowEmptyReset">条件をクリア</button>
+            </div>
+        `;
+        const resetBtn = document.getElementById('knowhowEmptyReset');
+        if (resetBtn) resetBtn.addEventListener('click', resetKnowhowFilters);
+        if (pagination) pagination.innerHTML = '';
+        if (resultsCount) resultsCount.textContent = '';
         return;
     }
 
-    container.innerHTML = filtered.map(article => {
-        // Get display name for category
-        const categoryDisplay = typeof CategoryManager !== 'undefined'
-            ? CategoryManager.normalizeToName('knowhow', article.category)
-            : article.category;
+    const totalPages = Math.max(1, Math.ceil(listArticles.length / KNOWHOW_PER_PAGE));
+    if (knowhowCurrentPage > totalPages) knowhowCurrentPage = totalPages;
+    const startIndex = (knowhowCurrentPage - 1) * KNOWHOW_PER_PAGE;
+    const endIndex = startIndex + KNOWHOW_PER_PAGE;
+    const pageArticles = listArticles.slice(startIndex, endIndex);
 
-        return `
+    container.innerHTML = pageArticles.map(renderKnowhowCard).join('');
+
+    if (resultsCount) {
+        const heroOffset = isUnfiltered && filtered.length > 0 ? 1 : 0;
+        const fromN = heroOffset + startIndex + 1;
+        const toN = heroOffset + startIndex + pageArticles.length;
+        resultsCount.textContent = `${total}件中 ${fromN}〜${toN}件を表示`;
+    }
+
+    renderKnowhowPagination(totalPages);
+}
+
+function renderKnowhowHero(article) {
+    const categoryDisplay = typeof CategoryManager !== 'undefined'
+        ? CategoryManager.normalizeToName('knowhow', article.category)
+        : article.category;
+    const card = document.getElementById('knowhowHeroCard');
+    const img = document.getElementById('knowhowHeroImage');
+    const cat = document.getElementById('knowhowHeroCategory');
+    const title = document.getElementById('knowhowHeroTitle');
+    const excerpt = document.getElementById('knowhowHeroExcerpt');
+    if (card) card.href = article.detailUrl;
+    if (img) {
+        img.src = article.thumbnail || article.image;
+        img.alt = article.title || '';
+    }
+    if (cat) cat.textContent = categoryDisplay || '';
+    if (title) title.textContent = article.title || '';
+    if (excerpt) excerpt.textContent = article.excerpt || '';
+}
+
+function renderKnowhowCard(article) {
+    const categoryDisplay = typeof CategoryManager !== 'undefined'
+        ? CategoryManager.normalizeToName('knowhow', article.category)
+        : article.category;
+
+    return `
         <article class="article-card" data-category="${escapeHTML(article.category)}">
             <a href="${article.detailUrl}">
                 <div class="article-card-image">
@@ -1677,7 +1789,65 @@ function renderKnowhowArticles() {
             </a>
         </article>
     `;
-    }).join('');
+}
+
+function renderKnowhowPagination(totalPages) {
+    const container = document.getElementById('knowhowPagination');
+    if (!container) return;
+    if (totalPages <= 1) {
+        container.innerHTML = '';
+        return;
+    }
+    const cur = knowhowCurrentPage;
+    let html = '';
+
+    if (cur > 1) {
+        html += `<button type="button" class="pagination-btn pagination-prev" data-page="${cur - 1}" aria-label="前のページへ">前へ</button>`;
+    }
+    for (let i = 1; i <= totalPages; i++) {
+        if (i === cur) {
+            html += `<span class="pagination-btn active" aria-current="page">${i}</span>`;
+        } else if (i === 1 || i === totalPages || (i >= cur - 2 && i <= cur + 2)) {
+            html += `<button type="button" class="pagination-btn" data-page="${i}" aria-label="${i}ページ目へ">${i}</button>`;
+        } else if (i === cur - 3 || i === cur + 3) {
+            html += '<span class="pagination-ellipsis" aria-hidden="true">…</span>';
+        }
+    }
+    if (cur < totalPages) {
+        html += `<button type="button" class="pagination-btn pagination-next" data-page="${cur + 1}" aria-label="次のページへ">次へ</button>`;
+    }
+    container.innerHTML = html;
+
+    container.querySelectorAll('.pagination-btn[data-page]').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const page = parseInt(btn.dataset.page, 10);
+            if (!Number.isFinite(page)) return;
+            goToKnowhowPage(page);
+        });
+    });
+}
+
+function goToKnowhowPage(page) {
+    knowhowCurrentPage = page;
+    renderKnowhowArticles();
+    const anchor = document.querySelector('.knowhow-controls') || document.getElementById('articleGrid');
+    if (anchor) {
+        const top = anchor.getBoundingClientRect().top + window.pageYOffset - 80;
+        window.scrollTo({ top, behavior: 'smooth' });
+    }
+}
+
+function resetKnowhowFilters() {
+    knowhowKeyword = '';
+    knowhowFilter = '';
+    knowhowCurrentPage = 1;
+    const input = document.getElementById('knowhowSearchInput');
+    const clearBtn = document.getElementById('knowhowSearchClear');
+    const select = document.getElementById('knowhowFilter');
+    if (input) input.value = '';
+    if (clearBtn) clearBtn.hidden = true;
+    if (select) select.value = '';
+    renderKnowhowArticles();
 }
 
 } // End of double-execution guard
