@@ -4390,10 +4390,24 @@ body.menu-open {
     padding: var(--spacing-md) 0 var(--spacing-2xl);
 }
 
-/* Knowhow article card layout override */
+/* Knowhow article card — borderless editorial layout */
+.knowhow-card {
+    background: transparent;
+    border-radius: 0;
+    box-shadow: none;
+    overflow: visible;
+}
+
+.knowhow-card:hover {
+    transform: none;
+    box-shadow: none;
+}
+
 .knowhow-card .article-card-image {
     aspect-ratio: 16 / 9;
     overflow: hidden;
+    border-radius: var(--radius-lg);
+    margin-bottom: 0.875rem;
 }
 
 .knowhow-card .article-card-image img {
@@ -4403,20 +4417,27 @@ body.menu-open {
 }
 
 .knowhow-card .article-card-content {
-    padding: 0.875rem 1rem;
+    padding: 0;
     display: flex;
     flex-direction: column;
-    gap: 0.4rem;
+    gap: 0.5rem;
 }
 
 .knowhow-card .article-card-category {
     align-self: flex-start;
-    margin-bottom: 0.125rem;
+    margin-bottom: 0;
 }
 
 .knowhow-card .article-card-title {
     margin-bottom: 0;
     line-height: 1.55;
+    font-size: 1.0625rem;
+    color: var(--color-text);
+    transition: color 0.2s ease;
+}
+
+.knowhow-card:hover .article-card-title {
+    color: var(--color-primary-dark);
 }
 
 .knowhow-card .article-card-excerpt {
@@ -4424,12 +4445,11 @@ body.menu-open {
 }
 
 .knowhow-card-readmore {
-    margin-top: auto;
+    margin-top: 0.25rem;
     align-self: flex-end;
     display: inline-flex;
     align-items: center;
     gap: 0.35rem;
-    padding-top: 0.5rem;
     font-size: 0.8125rem;
     font-weight: 600;
     color: var(--color-primary);
@@ -4445,8 +4465,11 @@ body.menu-open {
 }
 
 @media (max-width: 768px) {
-    .knowhow-card .article-card-content {
-        padding: 0.75rem 0.875rem;
+    .knowhow-card .article-card-image {
+        margin-bottom: 0.625rem;
+    }
+    .knowhow-card .article-card-title {
+        font-size: 1rem;
     }
     .knowhow-card-readmore {
         align-self: flex-start;
@@ -4454,6 +4477,7 @@ body.menu-open {
 }
 
 @media (prefers-reduced-motion: reduce) {
+    .knowhow-card .article-card-title,
     .knowhow-card-readmore svg {
         transition: none;
     }
