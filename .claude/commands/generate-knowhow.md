@@ -11,7 +11,7 @@
 - **サイト設定**: `site.config.yaml`
 - **パイプライン記事データ**: `public_html/data/knowhow.json`
 - **MT記事データ**: `public_html/data/knowhow-mt.json`
-- **テンプレート**: `public_html/knowhow/detail/6.html`
+- **テンプレート**: `public_html/knowhow/detail/knowhow-006.html`（**必ずこのファイルを Read してから流用すること**。class名・id・DOM構造を勝手に変更しない）
 - **カテゴリマスター**: `public_html/data/categories/knowhow-categories.json`（面接対策:kh01 / 履歴書の書き方:kh02 / 自己分析:kh03 / 業界研究:kh04 / 転職準備:kh05）
 
 ---
@@ -38,6 +38,11 @@
 
 1. **ID採番**: `knowhow.json` と `knowhow-mt.json` の最大ID + 1
 2. **HTML生成**: `public_html/knowhow/detail/knowhow-006.html` をテンプレートとして新規作成:
+   - **重要: 既存テンプレートのクラス名・id・DOM構造を必ず踏襲すること**
+     - 本文ラッパーは `<div class="article-body" id="articleBody">` 固定（`article-content` は CSS 未定義かつ `article-toc.js` も拾えないので使用禁止）
+     - 序文は `<div class="article-introduction">`、目次は `<nav class="article-toc">` + `<ol class="toc-list" id="tocList">` 固定
+     - CTA は `<section class="article-cta">`、戻るリンクは `<div class="article-back">` 固定
+     - JS 読込順は `includes.js` → `categories.js` → `main.js` → `article-toc.js` → `related-articles.js` → `blog-ad.min.js`
    - **タイトル**: 32文字以内（検索結果でのタイトル書き換え防止）
    - `<meta name="description">`: 80〜120文字（検索結果で途切れない長さ）
    - `<meta>` タグ（description, OGP, Twitter Card）
@@ -145,6 +150,7 @@ async function generateImage(prompt, outputPath) {
 | 6 | OGP メタタグ | og:title, og:description, og:image が設定されているか |
 | 7 | 内部リンク | detailUrl がHTMLファイルと一致するか |
 | 8 | sitemap エントリ | sitemap.xml に新記事URLが追加されているか |
+| 9 | DOM 構造 | 本文ラッパーが `<div class="article-body" id="articleBody">` であること（`article-content` は NG） |
 
 失敗項目があれば自動修正して再検証する。
 
