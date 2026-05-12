@@ -1,6 +1,33 @@
 {
   "articles": [
     {
+      "id": 115,
+      "title": "退職代行サービスの使い方〜選び方と料金相場",
+      "category": "kh05",
+      "excerpt": "退職代行サービスの使い方を徹底解説。料金相場、業者の種類、選び方の5つのポイント、依頼の流れ、トラブル事例、退職代行を使うべき人・使うべきでない人まで実践ガイドします。",
+      "image": "/assets/knowhow-115.webp",
+      "postDate": "2026-05-12",
+      "detailUrl": "/knowhow/detail/knowhow-115.html"
+    },
+    {
+      "id": 114,
+      "title": "エネルギー業界の転職ガイド〜再エネ・電力の職種",
+      "category": "kh04",
+      "excerpt": "エネルギー業界の転職を徹底解説。市場規模24兆円、再エネ・電力小売・系統運用・ガス・水素の主要セグメント、職種別年収、必須資格、参入ルート、面接対策、ブラック企業の見抜き方まで実践ガイドします。",
+      "image": "/assets/knowhow-114.webp",
+      "postDate": "2026-05-12",
+      "detailUrl": "/knowhow/detail/knowhow-114.html"
+    },
+    {
+      "id": 113,
+      "title": "ライフキャリアレインボー〜人生の役割で適職を考える",
+      "category": "kh03",
+      "excerpt": "ライフキャリアレインボー理論を転職判断に活かす方法を徹底解説。6つのライフロール、ライフステージ別の重み付け、30分でできるワーク、年代別パターン、ワークシート、向く人・向かない人まで実践ガイドします。",
+      "image": "/assets/knowhow-113.webp",
+      "postDate": "2026-05-12",
+      "detailUrl": "/knowhow/detail/knowhow-113.html"
+    },
+    {
       "id": 112,
       "title": "役員面接の逆質問〜社長に響く質問例10選",
       "category": "kh01",

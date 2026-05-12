@@ -13,16 +13,8 @@ const genAI = new GoogleGenerativeAI(apiKey);
 
 const articles = [
     {
-        id: 110,
-        prompt: "A modern editorial-style illustration of a desk with a Japanese resume document, a red highlighter pen lying nearby, crumpled draft papers in the background, soft warm cream background, calm green plant accent. Conveys the idea of revising and improving a written application. Clean minimalist style. No text on the resume."
-    },
-    {
-        id: 111,
-        prompt: "A modern flat illustration showing colorful abstract puzzle pieces of different shapes coming together, representing personal strengths and self-discovery. Soft cream and sage green palette, warm minimalist composition, conceptual visualization of inner talents being revealed. Editorial style. No text or letters."
-    },
-    {
-        id: 112,
-        prompt: "A modern Japanese executive boardroom scene from a wide angle, polished long wooden table with elegant chairs facing each other, soft natural daylight from tall windows, a glass of water and notebook on the table, calm and dignified corporate atmosphere suggesting a final-stage executive interview. No people visible. No text or signage. Editorial photography style with subtle green accent."
+        id: 113,
+        prompt: "A soft pastel rainbow arc curving across a calm horizon, with abstract silhouettes of a small tree, a house, and rolling hills below. Warm cream sky, sage green accents, peaceful editorial illustration evoking life stages and personal growth. Minimalist flat design, soft brush strokes, no people, no signs, no symbols."
     }
 ];
 
