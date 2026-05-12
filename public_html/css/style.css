@@ -4390,24 +4390,46 @@ body.menu-open {
     padding: var(--spacing-md) 0 var(--spacing-2xl);
 }
 
-/* Knowhow article card spacing override */
+/* Knowhow article card layout override */
+.knowhow-card .article-card-image {
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+}
+
+.knowhow-card .article-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
 .knowhow-card .article-card-content {
-    padding: var(--spacing-sm) var(--spacing-sm) var(--spacing-sm);
+    padding: 1.125rem 1.25rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
 }
 
 .knowhow-card .article-card-category {
-    margin-bottom: 0.5rem;
+    align-self: flex-start;
+    margin-bottom: 0.125rem;
 }
 
 .knowhow-card .article-card-title {
-    margin-bottom: 0.5rem;
+    margin-bottom: 0;
+    line-height: 1.55;
+}
+
+.knowhow-card .article-card-excerpt {
+    margin-bottom: 0;
 }
 
 .knowhow-card-readmore {
+    margin-top: auto;
+    align-self: flex-end;
     display: inline-flex;
     align-items: center;
     gap: 0.35rem;
-    margin-top: 0.625rem;
+    padding-top: 0.5rem;
     font-size: 0.8125rem;
     font-weight: 600;
     color: var(--color-primary);
@@ -4420,6 +4442,15 @@ body.menu-open {
 
 .knowhow-card:hover .knowhow-card-readmore svg {
     transform: translateX(3px);
+}
+
+@media (max-width: 768px) {
+    .knowhow-card .article-card-content {
+        padding: 1rem 1rem 0.875rem;
+    }
+    .knowhow-card-readmore {
+        align-self: flex-start;
+    }
 }
 
 @media (prefers-reduced-motion: reduce) {
