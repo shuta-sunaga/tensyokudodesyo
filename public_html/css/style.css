@@ -4124,8 +4124,8 @@ body.menu-open {
     gap: var(--spacing-lg);
 }
 
-.knowhow-header-text .breadcrumb {
-    margin-bottom: var(--spacing-sm);
+.knowhow-header .breadcrumb {
+    margin-bottom: var(--spacing-md);
 }
 
 .knowhow-header-text .page-title {
