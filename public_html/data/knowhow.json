@@ -1,6 +1,33 @@
 {
   "articles": [
     {
+      "id": 118,
+      "title": "Deep Research活用の企業研究｜AIで競合・財務分析",
+      "category": "kh04",
+      "excerpt": "ChatGPT・Gemini・Claude・PerplexityのDeep Research機能を比較し、転職企業研究に活用する方法を徹底解説。競合分析・財務分析・人物分析のプロンプト例と業界別の使い分けまで実装レベルで紹介します。",
+      "image": "/assets/knowhow-118.webp",
+      "postDate": "2026-05-13",
+      "detailUrl": "/knowhow/detail/knowhow-118.html"
+    },
+    {
+      "id": 117,
+      "title": "Notion AIで転職活動を管理｜応募・タスクを一元化",
+      "category": "kh05",
+      "excerpt": "Notion AIで転職活動を一元管理する方法を解説。応募状況・面接記録・タスク管理・自己分析までを1ヶ所にまとめるデータベース設計と、AI機能を使った効率化テクニックを実例付きで紹介します。",
+      "image": "/assets/knowhow-117.webp",
+      "postDate": "2026-05-13",
+      "detailUrl": "/knowhow/detail/knowhow-117.html"
+    },
+    {
+      "id": 116,
+      "title": "AI活用経験を職務経歴書に書く方法｜業務別の表現例集",
+      "category": "kh02",
+      "excerpt": "ChatGPTやClaudeなどのAI活用経験を職務経歴書に書く方法を解説。営業・企画・エンジニアなど業務別の表現例、定量化のコツ、採用担当に響くアピール術を例文付きで紹介します。",
+      "image": "/assets/knowhow-116.webp",
+      "postDate": "2026-05-13",
+      "detailUrl": "/knowhow/detail/knowhow-116.html"
+    },
+    {
       "id": 115,
       "title": "退職代行サービスの使い方〜選び方と料金相場",
       "category": "kh05",

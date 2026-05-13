@@ -809,4 +809,22 @@
         <changefreq>monthly</changefreq>
         <priority>0.6</priority>
     </url>
+    <url>
+        <loc>https://www.tensyokudodesyo.com/knowhow/detail/knowhow-116.html</loc>
+        <lastmod>2026-05-13</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://www.tensyokudodesyo.com/knowhow/detail/knowhow-117.html</loc>
+        <lastmod>2026-05-13</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://www.tensyokudodesyo.com/knowhow/detail/knowhow-118.html</loc>
+        <lastmod>2026-05-13</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
 </urlset>
