@@ -110,11 +110,17 @@ tensyokudodesyo/
 | `/companies/detail/{id}.html` | 企業詳細 | MT生成 |
 | `/knowhow/` | 転職ノウハウ一覧 | `knowhow.json` |
 | `/knowhow/detail/{id}.html` | ノウハウ詳細 | MT生成 |
+| `/contact/` | 転職相談フォーム | 静的（Lambda + Lark Base + SES連携） |
+| `/terms.html` | 利用規約 | 静的 |
 | `/privacy.html` | 個人情報の取り扱い | 静的 |
 | `/{prefecture}/` | 都道府県求人一覧 | `data/jobs/{prefecture}.json` |
 | `/{prefecture}/jobs/job-{id}.html` | 求人詳細 | 静的HTML |
 
 ナビゲーション4項目: 転職先を探す(`/`) / 転職インタビュー(`/interviews/`) / 企業インタビュー(`/companies/`) / 転職ノウハウ(`/knowhow/`)
+
+ヘッダーCTA: **「求職者様はこちら」**(→ `/contact/`) と **「企業様はこちら」**(→ Lark Base 公開フォーム) のピル型ボタン2つ。
+
+旧 LINE 相談 (`https://lin.ee/xZ1Tksm`) は2026-05-08 に**全廃**し、`/contact/` フォーム経由に統一。
 
 ---
 
@@ -441,6 +447,100 @@ Stage 7: デプロイ（SCP → AWS EC2）
 
 ---
 
+## 転職相談フォーム (`/contact/`)
+
+求職者からの相談受付フォーム。送信後、Lark Base に格納＋AWS SES から確認メール。詳細は `docs/lark-base-setup.md` 等。
+
+### 構成
+
+```
+[ブラウザ /contact/] → API Gateway HTTP API → Lambda submit-form
+  ├─ Cloudflare Turnstile siteverify
+  ├─ Lark Bitable API (write record)
+  └─ AWS SES v2 (confirmation email)
+```
+
+### 主要 URL
+
+| 用途 | URL |
+|------|-----|
+| 公開フォーム | https://www.tensyokudodesyo.com/contact/ |
+| 利用規約 | https://www.tensyokudodesyo.com/terms.html |
+| 面談予約 (Lark Scheduler) | https://sjpfkixxkhe8.jp.larksuite.com/scheduler/f87a0259f5d1099f |
+| API endpoint | https://2kyofn1cn7.execute-api.ap-northeast-1.amazonaws.com/api/contact |
+
+### AWS リソース (region: ap-northeast-1, account: 677450897992)
+
+| 種類 | 名前 |
+|------|------|
+| CFN Stack | `tensyokudodesyo-contact-prod` |
+| Lambda | `tensyokudodesyo-contact-submit-prod` (Node 20.x / arm64 / 256MB / Reserved Concurrency 10) |
+| HTTP API | `tensyokudodesyo-contact-api-prod` (id: 2kyofn1cn7) |
+| Secrets Manager | `tensyokudodesyo/contact-form` |
+| SNS Topic | `tensyokudodesyo-contact-alerts-prod` |
+| SES Identity | `tensyokudodesyo.com` (DKIM SUCCESS, MAIL FROM `mail.tensyokudodesyo.com`) |
+| AWS Budget | `tensyokudodesyo-contact-monthly-prod` ($10/月で 80%・100% 通知) |
+
+### 連携サービス
+
+- **Cloudflare Turnstile** Site Key: `0x4AAAAAADLIU8gtfWDd-ZjJ` (公開可)
+- **Lark Base**: 19フィールド構成、主フィールド = AutoNumber ID
+
+### ローカル開発
+
+```powershell
+# 依存
+cd backend/lambda/submit-form && npm install
+cd ../../local-dev && npm install
+
+# 起動 (PORT 3001)
+$env:MOCK_MODE='true'   # Lark/SES/Turnstile を全部モック
+node backend/local-dev/server.mjs
+
+# 部分モック (Lark+SES実、Turnstile スキップ)
+$env:MOCK_MODE='false'; $env:SKIP_TURNSTILE='true'; $env:SKIP_SES='true'; node backend/local-dev/server.mjs
+
+# 静的サイト (http-server推奨, serveだとディレクトリリストになる)
+npx http-server public_html -p 8080 -c-1
+```
+
+### 重要な仕様
+
+- **Cloudflare Turnstile**: 本番sitekey は HTML 直書き、ローカル時のみ JS で `data-dev-sitekey` (テストキー) に差替
+- 求人詳細→フォーム遷移時、**referrer ベース**で「気になった求人」自動入力 (MT再構築不要)
+- 送信完了後はフォーム周辺を全部 hidden、完了パネルだけ表示
+- 同意バージョンは**サーバー側で固定値記録** (`SERVER_PRIVACY_POLICY_VERSION` / `SERVER_TERMS_VERSION` in handler.mjs)
+- ハニーポット2つ: `website` + `fax_number`
+- ペイロード上限: 16KB (JSON.parse 前にチェック)
+- CloudWatch Logs 保持: 14日 (PII 滞留期間抑制)
+- **本番起動時アサーション**: `NODE_ENV=production` で `MOCK_MODE_ACTIVE` / `SKIP_TURNSTILE` / `SKIP_SES` / `USE_LOCAL_SECRETS` のいずれかが `true` ならコールド起動時に即 throw（誤デプロイ防止）
+
+### セキュリティ強化 (Epic #27 / 2026-05-08 完了)
+
+| Phase | 内容 | 状態 |
+|-------|------|------|
+| 1 (#28) | Lambda concurrency 10 + IAM `ses:SendEmail` 絞込み | ✅ |
+| 2 (#29) | Origin必須化 / Referer URL.origin比較 / CORS厳密化 / Turnstile本番sitekey直書き | ✅ |
+| 3 (#30) | SNS+CloudWatch Alarms 5件+Budget | ✅ |
+| 4 (#31) | redactPII強化, メアドフルマスク, CRLF除去, 起動時アサーション | ✅ |
+| 5 (#32) | 同意バージョンサーバー固定, Formula Injection対策, parseInt厳密化, ペイロード事前チェック, ハニーポット2つ | ✅ |
+| 6 (#33) | nginx CSP/HSTS/X-Frame等 + Lambda X-Frame: DENY | ✅ |
+| 7 (#34) | 個情法対応 (保管期間ポリシー、退会フォーム等) | 🟡 **Defer** (件数増 or 退職者発生で再開) |
+
+### 残課題
+
+- **WAF 未適用**: HTTP API v2 が WAF に直接紐付け不可。CloudFront 移行が必要。月¥1,000-2,000 + 設定 2-3h で対応可能。**現状**は API Gateway 全体スロットル (5 req/s) + Lambda concurrency 10 で「攻撃が来ても致命的にはならない」状態 (最悪月¥30,000程度)
+- **AWS Budget Action (自動停止) 未設定**: Budget は通知のみ
+- **Phase 7 個情法対応は defer**: 提出件数が少ないうちは問題なし
+
+### MT 連携の特殊運用
+
+MT管理ページ (header.html / footer.html / index.html / 求人詳細等) も**ローカル mt-template の SQL UPDATE + Python regex 変換 + 全blog 強制再構築 (Force=1)** で更新する仕組みを採用済。スクリプトは `scripts/mt-bulk-*.sh` / `scripts/mt-rebuild-*.pl` / `scripts/fix-output-files.py`。
+
+詳細: `docs/mt-template-deploy-guide.md`
+
+---
+
 ## Miyabi Framework
 
 識学理論(Shikigaku Theory)とAI Agentsを組み合わせた自律型開発環境。
@@ -546,6 +646,15 @@ export $(grep -v '^#' .env | grep -v '^$' | xargs)
 |------------|------|
 | `SPECIFICATION.md` | サイト仕様書（ページ別仕様・JSONスキーマ・JSモジュール詳細） |
 | `docs/detail-page-specification.md` | MT詳細ページ仕様（コンテンツタイプ・ブロックエディタ・テンプレート） |
+| `docs/lark-base-setup.md` | Lark Open Platform アプリ作成 + Base フィールド設計手順 |
+| `docs/lark-base-automation-notify.md` | フォーム送信時の Lark UI 通知ワークフロー設定手順 |
+| `docs/security-measures.md` | フォームのセキュリティ対策一覧（脅威 → 対策の対応表） |
+| `docs/ses-setup-guide.md` | AWS SES ドメイン認証 + DKIM + Sandbox 解除手順 |
+| `docs/mt-template-deploy-guide.md` | MT テンプレ更新時の管理画面反映手順 |
+| `docs/nginx-security-headers.md` | EC2 nginx の CSP/HSTS 等セキュリティヘッダ設定とロールバック |
+| `docs/terms-draft.txt` | 利用規約テキスト版（FBレビュー用 + 観点付き） |
+| `PRODUCT.md` / `DESIGN.md` | Impeccable スキル用 ブランド・デザイン定義 |
+| `backend/README.md` | Lambda submit-form バックエンドの構成・デプロイ手順 |
 
 ---
 

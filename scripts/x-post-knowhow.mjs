@@ -8,9 +8,9 @@ const client = new TwitterApi({
 });
 
 const articles = [
-    { id: '110', title: '志望動機のNG例〜落とす表現と書き換え法' },
-    { id: '111', title: 'ストレングスファインダー34資質を転職に活かす方法' },
-    { id: '112', title: '役員面接の逆質問〜社長に響く質問例10選' },
+    { id: '113', title: 'ライフキャリアレインボー〜人生の役割で適職を考える' },
+    { id: '114', title: 'エネルギー業界の転職ガイド〜再エネ・電力の職種' },
+    { id: '115', title: '退職代行サービスの使い方〜選び方と料金相場' },
 ];
 
 function buildTweet({ id, title }) {
