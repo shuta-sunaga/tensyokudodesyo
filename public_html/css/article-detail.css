@@ -411,12 +411,6 @@
     margin-bottom: 1.5rem;
 }
 
-.article-cta .btn-line {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
 /* Related Articles */
 .related-articles {
     margin-top: 4rem;
