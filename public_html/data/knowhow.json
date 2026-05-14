@@ -1,6 +1,33 @@
 {
   "articles": [
     {
+      "id": 121,
+      "title": "退職前の有給消化｜全部使い切る交渉と注意点",
+      "category": "kh05",
+      "excerpt": "退職前の有給消化を完全ガイド。労働基準法39条の根拠、時季変更権、買取の合法性、拒否されたときの対処、引き継ぎと両立するスケジュール例、申請書テンプレートまで解説します。",
+      "image": "/assets/knowhow-121.webp",
+      "postDate": "2026-05-14",
+      "detailUrl": "/knowhow/detail/knowhow-121.html"
+    },
+    {
+      "id": 120,
+      "title": "半導体業界の転職ガイド〜職種・年収・将来性",
+      "category": "kh04",
+      "excerpt": "半導体業界への転職を徹底ガイド。市場規模、前工程・後工程・装置・材料の4軸、職種別年収、TSMC熊本やラピダス北海道など地方拠点、未経験参入の現実と方法を解説します。",
+      "image": "/assets/knowhow-120.webp",
+      "postDate": "2026-05-14",
+      "detailUrl": "/knowhow/detail/knowhow-120.html"
+    },
+    {
+      "id": 119,
+      "title": "履歴書は手書きとパソコンどっち？採用担当の本音",
+      "category": "kh02",
+      "excerpt": "履歴書は手書きとパソコンどちらで作るべきか。採用担当者の本音、業界・企業規模・提出形態別の最適解、写真や印鑑、修正の注意点まで2026年版で徹底解説します。",
+      "image": "/assets/knowhow-119.webp",
+      "postDate": "2026-05-14",
+      "detailUrl": "/knowhow/detail/knowhow-119.html"
+    },
+    {
       "id": 118,
       "title": "Deep Research活用の企業研究｜AIで競合・財務分析",
       "category": "kh04",
