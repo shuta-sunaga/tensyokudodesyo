@@ -100,6 +100,18 @@
                 <h1 class="section-title"><mt:Var name="prefecture_name">の求人</h1>
                 <p class="section-subtitle"><span id="resultsCount">0</span>件の求人があります</p>
             </div>
+            <mt:If name="prefecture_name" eq="福岡県">
+            <aside class="prefecture-sponsor" aria-label="スポンサー">
+                <a href="https://kyushucarina.com/" target="_blank" rel="noopener" class="prefecture-sponsor__logo">
+                    <img src="/assets/sponsor-carina.webp" alt="九州カリーナ" width="440" height="405" loading="lazy">
+                </a>
+                <div class="prefecture-sponsor__body">
+                    <span class="prefecture-sponsor__label">SUPPORTER</span>
+                    <p class="prefecture-sponsor__heading"><a href="https://kyushucarina.com/" target="_blank" rel="noopener">福岡を盛り上げる九州カリーナへ</a></p>
+                    <p class="prefecture-sponsor__lead">地域とともに歩むチームの活動を、地元密着の転職支援で応援しています。</p>
+                </div>
+            </aside>
+            </mt:If>
             <form class="search-form" id="jobSearchForm">
                 <input type="hidden" name="prefecture" id="prefectureFilter" value="<mt:Var name="prefecture_name">">
                 <div class="search-form-main">

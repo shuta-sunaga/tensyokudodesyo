@@ -21,7 +21,7 @@ SCP_OPTS="-i $KEY_FILE -o StrictHostKeyChecking=no"
 # --- MT管理ファイルのブロックリスト（正規表現パターン） ---
 # これらのパスに一致するファイルはデプロイ禁止
 # 都道府県を新規追加するときは PREFECTURE_DIRS に追記すること
-PREFECTURE_DIRS="(shiga|shizuoka)"
+PREFECTURE_DIRS="(shiga|shizuoka|fukuoka)"
 BLOCKED_PATTERNS=(
     # 都道府県ページ（MT再構築で生成）
     "public_html/${PREFECTURE_DIRS}/index\.html"
