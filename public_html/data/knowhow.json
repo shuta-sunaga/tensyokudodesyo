@@ -1,6 +1,33 @@
 {
   "articles": [
     {
+      "id": 124,
+      "title": "面接「5年後10年後」答え方｜将来ビジョン例文",
+      "category": "kh01",
+      "excerpt": "面接の「5年後10年後どうなりたいか」質問の答え方を徹底解説。時間軸別の回答テンプレ、業界別の時間感覚、派生質問7パターン、NG表現の言い換え例まで紹介します。",
+      "image": "/assets/knowhow-124.webp",
+      "postDate": "2026-05-15",
+      "detailUrl": "/knowhow/detail/knowhow-124.html"
+    },
+    {
+      "id": 123,
+      "title": "Will/Can/Mustで転職軸を決める方法と例文",
+      "category": "kh03",
+      "excerpt": "Will/Can/Mustフレームワークで転職の軸を決める方法を解説。3軸の発掘法・交差点で適職を導くマトリクス・自己PRや志望動機への活かし方を例文付きで紹介します。",
+      "image": "/assets/knowhow-123.webp",
+      "postDate": "2026-05-15",
+      "detailUrl": "/knowhow/detail/knowhow-123.html"
+    },
+    {
+      "id": 122,
+      "title": "40代・50代の自己分析｜ミドルの強み言語化術",
+      "category": "kh03",
+      "excerpt": "40代・50代の転職で必要な自己分析を徹底解説。肩書きを外した棚卸し、経験の市場価値化、年代別ワークシート、強み言語化テンプレートまで具体的に紹介します。",
+      "image": "/assets/knowhow-122.webp",
+      "postDate": "2026-05-15",
+      "detailUrl": "/knowhow/detail/knowhow-122.html"
+    },
+    {
       "id": 121,
       "title": "退職前の有給消化｜全部使い切る交渉と注意点",
       "category": "kh05",
