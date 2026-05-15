@@ -8,9 +8,9 @@ const client = new TwitterApi({
 });
 
 const articles = [
-    { id: '119', title: '履歴書は手書きとパソコンどっち？採用担当の本音' },
-    { id: '120', title: '半導体業界の転職ガイド〜職種・年収・将来性' },
-    { id: '121', title: '退職前の有給消化｜全部使い切る交渉と注意点' },
+    { id: '122', title: '40代・50代の自己分析｜ミドルの強み言語化術' },
+    { id: '123', title: 'Will/Can/Mustで転職軸を決める方法と例文' },
+    { id: '124', title: '面接「5年後10年後」答え方｜将来ビジョン例文' },
 ];
 
 function buildTweet({ id, title }) {
