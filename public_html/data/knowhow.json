@@ -1,6 +1,33 @@
 {
   "articles": [
     {
+      "id": 127,
+      "title": "NotebookLMで業界研究｜PDF・動画を一括解析",
+      "category": "kh04",
+      "excerpt": "NotebookLMで転職の業界研究を行う方法を解説。最大50ソース投入の使い方、IR資料・業界レポート・YouTube動画の一括解析、音声サマリー、競合分析プロンプトまで実践ガイドします。",
+      "image": "/assets/knowhow-127.webp",
+      "postDate": "2026-05-18",
+      "detailUrl": "/knowhow/detail/knowhow-127.html"
+    },
+    {
+      "id": 126,
+      "title": "Geminiで面接対策｜動画分析で表情まで改善",
+      "category": "kh01",
+      "excerpt": "Geminiの動画・画像解析機能で面接対策する方法を解説。録画した模擬面接の表情・姿勢分析、Gemini Liveでのリアルタイム模擬面接、業界別プロンプト例まで実践的に紹介します。",
+      "image": "/assets/knowhow-126.webp",
+      "postDate": "2026-05-18",
+      "detailUrl": "/knowhow/detail/knowhow-126.html"
+    },
+    {
+      "id": 125,
+      "title": "Claudeで職務経歴書を作る｜ChatGPTとの違い",
+      "category": "kh02",
+      "excerpt": "Claudeで職務経歴書を作る具体的な手順を解説。Projects機能・200K Token・Artifactsの活用法、ChatGPTとの違い、業務別プロンプト例まで実例付きで紹介します。",
+      "image": "/assets/knowhow-125.webp",
+      "postDate": "2026-05-18",
+      "detailUrl": "/knowhow/detail/knowhow-125.html"
+    },
+    {
       "id": 124,
       "title": "面接「5年後10年後」答え方｜将来ビジョン例文",
       "category": "kh01",
