@@ -1,4 +1,4 @@
-// 一回限りの画像生成スクリプト (#125, #126, #127)
+// 一回限りの画像生成スクリプト
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 const sharp = require("sharp");
 const fs = require("fs");
@@ -8,16 +8,16 @@ const NO_TEXT = "\n\nIMPORTANT: Do NOT include any text, letters, numbers, words
 
 const TASKS = [
   {
-    id: "125",
-    prompt: "A warm, professional illustration of a Japanese business person sitting at a wooden desk, working on a laptop to refine their resume document. Soft afternoon light from a window. A printed document lies next to the laptop. The atmosphere conveys careful craftsmanship and the elegance of polished writing. Modern flat illustration style, warm cream and soft green color palette. No text whatsoever."
+    id: "128",
+    prompt: "A warm, professional illustration of a Japanese business person sitting at a desk, working on a laptop displaying a document editor with a sidebar AI assistant. Multiple Office-style application windows are arranged on a second screen, suggesting integration between word processor and spreadsheet. Soft afternoon light from a window. Modern flat illustration style, warm cream and soft green color palette with gentle blue accents for the digital elements. No text whatsoever."
   },
   {
-    id: "126",
-    prompt: "A warm illustration showing a Japanese business person sitting in front of a laptop computer, practicing for a job interview via a video call interface. The screen shows a multimodal AI assistant analyzing the person's posture and facial expressions, depicted with subtle glowing accent rings around the face area. Calm home office environment, soft natural lighting. Modern flat illustration style, warm cream and soft green color palette with gentle blue accents for the digital elements. No text whatsoever."
+    id: "129",
+    prompt: "A warm illustration of a Japanese business person sitting in a quiet study room, having a deep reflective dialogue with an AI assistant displayed on a laptop. A sketchbook, a coffee cup, and printed notes are arranged on the wooden desk. The atmosphere conveys introspection, contemplation, and a long thoughtful conversation. Soft natural light, warm cream and soft green color palette. Modern flat illustration style. No text whatsoever."
   },
   {
-    id: "127",
-    prompt: "A warm illustration of a Japanese business person at a desk surrounded by stacks of printed industry reports, PDF documents, and a laptop displaying an analytical research workspace. Soft glowing connection lines suggest AI consolidating multiple sources into insight. Library-like atmosphere with subtle warmth, wooden desk, soft natural light. Modern flat illustration style, warm cream and soft green color palette with subtle gold accents. No text whatsoever."
+    id: "130",
+    prompt: "A warm illustration of a Japanese business person walking outdoors during a commute, wearing wireless earbuds and practicing speaking. Subtle audio wave motif emanates from the earbuds suggesting voice conversation with an AI assistant. The person looks confident and focused. Urban Japanese morning street setting with soft sunlight. Modern flat illustration style, warm cream and soft green color palette. No text whatsoever."
   }
 ];
 

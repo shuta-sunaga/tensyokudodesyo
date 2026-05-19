@@ -1,6 +1,33 @@
 {
   "articles": [
     {
+      "id": 130,
+      "title": "ChatGPT Voiceで面接練習｜音声リアル会話術",
+      "category": "kh01",
+      "excerpt": "ChatGPT Advanced Voice Modeで面接練習する方法を解説。音声リアルタイム会話、9種類の音声プリセット活用、GPTsとの組み合わせ、通勤中の練習法まで実例付きで紹介します。",
+      "image": "/assets/knowhow-130.webp",
+      "postDate": "2026-05-19",
+      "detailUrl": "/knowhow/detail/knowhow-130.html"
+    },
+    {
+      "id": 129,
+      "title": "Claudeで深掘り自己分析｜長対話で価値観発見",
+      "category": "kh03",
+      "excerpt": "Claudeで自己分析を深掘りする方法を解説。200K Context・Projects機能・Artifactsを使った長対話プロセス、価値観マップ作成、ChatGPTとの違いまで実例付きで紹介します。",
+      "image": "/assets/knowhow-129.webp",
+      "postDate": "2026-05-19",
+      "detailUrl": "/knowhow/detail/knowhow-129.html"
+    },
+    {
+      "id": 128,
+      "title": "Copilotで職務経歴書｜Office連携の強み活用",
+      "category": "kh02",
+      "excerpt": "Microsoft Copilotで職務経歴書を作る手順を解説。Wordネイティブ編集・Excelで実績一覧化・組織グラフ参照・ChatGPT/Claudeとの違いまで実例付きで紹介します。",
+      "image": "/assets/knowhow-128.webp",
+      "postDate": "2026-05-19",
+      "detailUrl": "/knowhow/detail/knowhow-128.html"
+    },
+    {
       "id": 127,
       "title": "NotebookLMで業界研究｜PDF・動画を一括解析",
       "category": "kh04",
