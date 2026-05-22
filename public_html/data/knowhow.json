@@ -1,6 +1,33 @@
 {
   "articles": [
     {
+      "id": 139,
+      "title": "アルムナイ転職｜出戻り採用の進め方と注意点",
+      "category": "kh05",
+      "excerpt": "アルムナイ転職（出戻り採用）の進め方を徹底解説。導入企業・メリット・デメリット・退職時の関係性メンテナンス・年収交渉・再入社の流れ・注意点まで具体例付きで紹介します。",
+      "image": "/assets/knowhow-139.webp",
+      "postDate": "2026-05-22",
+      "detailUrl": "/knowhow/detail/knowhow-139.html"
+    },
+    {
+      "id": 138,
+      "title": "ホテル・観光業界の転職｜職種・年収・将来性",
+      "category": "kh04",
+      "excerpt": "ホテル・観光業界の転職を徹底解説。市場規模・主要職種・年収相場・必須スキル・インバウンド回復後の動向・未経験参入ルート・ブラック企業の見抜き方まで具体的に紹介します。",
+      "image": "/assets/knowhow-138.webp",
+      "postDate": "2026-05-22",
+      "detailUrl": "/knowhow/detail/knowhow-138.html"
+    },
+    {
+      "id": 137,
+      "title": "エニアグラム9タイプ別｜転職活用ガイド",
+      "category": "kh03",
+      "excerpt": "エニアグラム9タイプ別の転職活用ガイド。各タイプの強み・適職・面接対策・自己PR例文を網羅し、診断の受け方や他の自己分析フレームワークとの組み合わせも解説します。",
+      "image": "/assets/knowhow-137.webp",
+      "postDate": "2026-05-22",
+      "detailUrl": "/knowhow/detail/knowhow-137.html"
+    },
+    {
       "id": 136,
       "title": "ワーママの転職活動｜両立可能な仕事の見つけ方",
       "category": "kh05",
