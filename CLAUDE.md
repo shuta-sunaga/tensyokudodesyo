@@ -106,8 +106,10 @@ tensyokudodesyo/
 | `/` | トップページ（日本地図MV） | `interviews.json`, `companies.json` |
 | `/interviews/` | 転職者インタビュー一覧 | `interviews.json` |
 | `/interviews/detail/{id}.html` | インタビュー詳細 | MT生成 |
-| `/companies/` | 企業インタビュー一覧 | `companies.json` |
-| `/companies/detail/{id}.html` | 企業詳細 | MT生成 |
+| `/companies/` | 企業インタビュー一覧（Q&A編集記事） | `companies.json` |
+| `/companies/detail/{id}.html` | 企業インタビュー詳細 | MT生成 |
+| `/clients/` | 会社紹介一覧（クライアント企業プロファイル） | `clients.json` |
+| `/clients/detail/{companyKey}.html` | 会社紹介詳細（その会社の求人一覧連携） | `clients.json` + `jobs.json` |
 | `/knowhow/` | 転職ノウハウ一覧 | `knowhow.json` |
 | `/knowhow/detail/{id}.html` | ノウハウ詳細 | MT生成 |
 | `/contact/` | 転職相談フォーム | 静的（Lambda + Lark Base + SES連携） |
@@ -225,6 +227,8 @@ regionIdMap = {
 | `includes.js` | ヘッダー/フッターの動的フェッチ・挿入、ベースパス計算（ページ階層に応じた相対パス）、アクティブナビリンク判定 |
 | `article-toc.js` | 記事詳細ページの目次自動生成（H2/H3階層構造対応、スムーススクロール） |
 | `related-articles.js` | 詳細ページに関連記事を動的表示。ページ種別を自動判定し、コンテンツ横断リンクを生成。CategoryManagerがない場合はカテゴリJSONを直接読み込む |
+| `client-detail.js` | 会社紹介詳細ページで「その会社の求人」(`jobs.json` の `company` 名前一致でフィルタ) と「関連会社紹介」を動的描画。`<meta name="client-*">` を起点に動作 |
+| `clients-page.js` | 会社紹介一覧ページのフィルタ（業界・エリア）＋ ページネーション（12件/ページ） |
 
 ### 関連記事の表示ロジック（`related-articles.js`）
 
@@ -374,6 +378,74 @@ regionIdMap = {
 
 ### プロジェクト概要・仕様・ルールの管理
 - **CLAUDE.mdに追記する** - プロジェクト概要、仕様、ルールの変更は必ずこのファイルに反映する
+
+---
+
+## 会社紹介セクション (/clients/)（Epic #35）
+
+クライアント企業のコーポレートプロファイルを構造化して掲載するセクション。既存 `/companies/`（編集記事スタイルの企業インタビュー）とは URL/データ/性質ともに分離して並走させる。
+
+### URL/ファイル構成
+
+| パス | 役割 | ソース |
+|------|-----|-------|
+| `/clients/index.html` | 一覧（フィルタ・ページネーション） | `data/clients.json` |
+| `/clients/detail/{companyKey}.html` | 詳細 | `data/clients.json` + `jobs.json` 動的連携 |
+| `assets/clients/{companyKey}.webp` | サムネイル画像（手動アップ優先、なければ Gemini 生成） | - |
+
+### データスキーマ (`data/clients.json`)
+
+`companyKey` (kebab-case slug) で一意性を担保。`industry` は既存の `company-industries.json` (in01-in09) を流用。
+
+```json
+{
+  "id": 1,
+  "companyKey": "techno-solution",
+  "name": "株式会社テクノソリューション",
+  "tagline": "...", "industry": "in04",
+  "prefecture": "...", "city": "...",
+  "image": "/assets/clients/techno-solution.webp",
+  "established": "...", "employees": "...", "ceo": "...", "address": "...",
+  "businessContent": "...",
+  "vision": "...", "culture": "...", "idealPerson": "...", "message": "...",
+  "postDate": "YYYY-MM-DD",
+  "detailUrl": "/clients/detail/techno-solution.html"
+}
+```
+
+### 求人連携の仕様
+
+- 詳細ページ HTML に `<meta name="client-name" content="株式会社XXX">` を埋め込む
+- `client-detail.js` が `jobs.json` を fetch → `job.company` を会社名で完全一致フィルタ → `#clientJobsGrid` に描画
+- 0件時はフォールバック表示（CTAへ誘導）
+- 関連会社紹介は `#clientRelatedGrid` に「同業界 > 同エリア > その他」の優先順で最大3件
+
+### CSS / JS
+
+| ファイル | 用途 |
+|---------|-----|
+| `css/client-detail.css` | 一覧 + 詳細の専用スタイル（既存 `article-detail.css` とは別建て） |
+| `js/clients-page.js` | 一覧フィルタ・ページネーション |
+| `js/client-detail.js` | 詳細ページの求人連携・関連表示 |
+
+### ヘッダーナビ
+
+5項目（転職先を探す / 会社紹介 / 転職インタビュー / 企業インタビュー / 転職ノウハウ）。1180px 以下でナビフォント/余白を縮小して PC レイアウト崩れを防止。
+
+### `/generate-client` パイプライン
+
+`.claude/commands/generate-client.md` 参照。Word(.docx) → 構造化抽出 → HTML 生成 → サイト統合 → デプロイ。
+
+- **Stage 1** (構造化抽出) と **Stage 7** (デプロイ) のみユーザー承認で停止
+- Word 抽出は `mammoth` (devDependencies) + `scripts/extract-client-docx.mjs` を使用
+- 抽出規則: 見出し別マッピング (タグライン / 業界 / 所在地 / 設立 / 代表 / 従業員数 / 事業内容 / ビジョン / カルチャー / 求める人物像 / メッセージ)
+- 画像は `assets/clients/{key}.webp` が存在すればスキップ、なければ Gemini 生成（文字なし指示）
+- 業界IDは `company-industries.json` (in01-in09) からテキスト推測で割当
+
+### デプロイ可否
+
+- `data/clients.json` / `js/clients-page.js` / `js/client-detail.js` / `css/client-detail.css` / `clients/index.html` / `clients/detail/*.html` / `assets/clients/*.webp` は **すべて手動/パイプライン管理 → SCP デプロイ可**
+- MT は本セクションに関与しない
 
 ---
 

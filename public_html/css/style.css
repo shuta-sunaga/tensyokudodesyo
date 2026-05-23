@@ -270,7 +270,7 @@ ul, ol {
 .nav-list {
     display: flex;
     align-items: center;
-    gap: var(--spacing-lg);
+    gap: 1.5rem;
 }
 
 .nav-list li {
@@ -286,6 +286,16 @@ ul, ol {
     position: relative;
     display: flex;
     align-items: center;
+    white-space: nowrap;
+}
+
+@media (max-width: 1180px) {
+    .nav-list {
+        gap: 1.1rem;
+    }
+    .nav-list a {
+        font-size: 0.875rem;
+    }
 }
 
 .nav-list a::after {

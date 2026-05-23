@@ -1479,9 +1479,49 @@ async function initHomePage() {
     const homeInterviewsContainer = document.getElementById('homeInterviewsContainer');
     const homeCompaniesContainer = document.getElementById('homeCompaniesContainer');
     const homeKnowhowContainer = document.getElementById('homeKnowhowContainer');
+    const homeClientsContainer = document.getElementById('homeClientsContainer');
 
     // Skip if not on home page
-    if (!homeInterviewsContainer && !homeCompaniesContainer && !homeKnowhowContainer) return;
+    if (!homeInterviewsContainer && !homeCompaniesContainer && !homeKnowhowContainer && !homeClientsContainer) return;
+
+    // Load clients (会社紹介) for home page
+    if (homeClientsContainer) {
+        try {
+            const response = await fetch('/data/clients.json');
+            if (!response.ok) throw new Error('HTTP ' + response.status);
+            const data = await response.json();
+            const clients = data.clients || [];
+
+            const latestClients = [...clients]
+                .sort((a, b) => new Date(b.postDate) - new Date(a.postDate))
+                .slice(0, 3);
+
+            homeClientsContainer.innerHTML = latestClients.map(client => {
+                const industryDisplay = typeof CategoryManager !== 'undefined'
+                    ? CategoryManager.normalizeToName('company', client.industry)
+                    : client.industry;
+                const detailUrl = client.detailUrl || ('/clients/detail/' + client.companyKey + '.html');
+                const img = client.image || '/assets/ogp.png';
+                return `
+                <article class="article-card">
+                    <a href="${escapeHTML(detailUrl)}">
+                        <div class="article-card-image">
+                            <img src="${escapeHTML(img)}" alt="${escapeHTML(client.name)}" loading="lazy" onerror="this.src='/assets/ogp.png'">
+                        </div>
+                        <div class="article-card-content">
+                            <span class="article-card-category">${escapeHTML(industryDisplay)}</span>
+                            <h3 class="article-card-title">${escapeHTML(client.name)}</h3>
+                            <p class="article-card-company">${escapeHTML(client.tagline || '')}</p>
+                        </div>
+                    </a>
+                </article>
+            `;
+            }).join('');
+        } catch (error) {
+            console.error('Error loading home clients:', error);
+            homeClientsContainer.innerHTML = '<p style="grid-column:1/-1;text-align:center;padding:2rem;color:#666;">読み込みに失敗しました</p>';
+        }
+    }
 
     // Load interviews for home page
     if (homeInterviewsContainer) {
