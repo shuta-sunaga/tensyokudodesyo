@@ -277,7 +277,7 @@ regionIdMap = {
 | `knowhow-detail.mtml` | `/knowhow/detail/{ContentID}.html` |
 | `jobs-json.mtml` | 求人JSON出力 |
 | `prefectures-json.mtml` | 都道府県JSON出力 |
-| `header-html.mtml` / `footer-html.mtml` | 共通パーツ |
+| ~~`header-html.mtml` / `footer-html.mtml`~~ | **削除済み** — `includes/header.html` / `footer.html` を直接編集・SCPデプロイに移行 |
 
 ### 求人詳細の出力パス
 
@@ -359,6 +359,7 @@ regionIdMap = {
   - JSONデータ: `knowhow-mt.json`（MT出力先）
 - **デプロイ可能なファイル（パイプライン・手動管理）**:
   - `js/`, `css/`, `assets/` 配下の静的アセット
+  - `includes/header.html`, `includes/footer.html`（直接編集・SCPデプロイ）
   - `data/knowhow.json`（パイプライン記事）
   - `data/categories/` 配下のカテゴリJSON
   - `sitemap.xml`, `robots.txt`

@@ -36,9 +36,7 @@ BLOCKED_PATTERNS=(
     "public_html/companies/detail/.*\.html"
     # MT生成JSON
     "public_html/data/knowhow-mt\.json"
-    # ヘッダー/フッター（MT生成）
-    "public_html/includes/header\.html"
-    "public_html/includes/footer\.html"
+    # ヘッダー/フッターは直接デプロイ管理（MT管理から移行済み）
     # 都道府県別データJSON（MT生成）
     "public_html/data/jobs/.*\.json"
     "public_html/data/interviews/.*\.json"
