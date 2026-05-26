@@ -1,6 +1,33 @@
 {
   "articles": [
     {
+      "id": 142,
+      "title": "カスタムGPTで模擬面接｜AI面接官の作り方",
+      "category": "kh01",
+      "excerpt": "カスタムGPTで自分専用のAI面接官を作る方法を解説。GPTs・Google Gems・Claude Projectsの設定手順、業界別プロンプト例、効果的な練習法まで紹介します。",
+      "image": "/assets/knowhow-142.webp",
+      "postDate": "2026-05-26",
+      "detailUrl": "/knowhow/detail/knowhow-142.html"
+    },
+    {
+      "id": 141,
+      "title": "AIで求人票を読み解く｜隠れ優良企業の発見法",
+      "category": "kh04",
+      "excerpt": "AIで求人票を分析してブラック企業を見抜く方法を解説。ChatGPT・Claudeの分析プロンプト、危険シグナル7選、隠れ優良企業の発見法まで具体例付きで紹介します。",
+      "image": "/assets/knowhow-141.webp",
+      "postDate": "2026-05-26",
+      "detailUrl": "/knowhow/detail/knowhow-141.html"
+    },
+    {
+      "id": 140,
+      "title": "MBTI 16タイプ別｜転職の適職診断ガイド",
+      "category": "kh03",
+      "excerpt": "MBTI 16タイプ別の適職・転職戦略を徹底解説。4指標の仕組み、タイプ別の強み・向いている職種、自己PRへの活かし方、面接での伝え方まで具体例付きで紹介します。",
+      "image": "/assets/knowhow-140.webp",
+      "postDate": "2026-05-26",
+      "detailUrl": "/knowhow/detail/knowhow-140.html"
+    },
+    {
       "id": 139,
       "title": "アルムナイ転職｜出戻り採用の進め方と注意点",
       "category": "kh05",

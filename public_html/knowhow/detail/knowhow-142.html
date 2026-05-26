@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="カスタムGPTで自分専用のAI面接官を作る方法を解説。GPTs・Google Gems・Claude Projectsの設定手順、業界別プロンプト例、効果的な練習法まで紹介します。">
+
+    <title>カスタムGPTで模擬面接｜AI面接官の作り方 | 転職どうでしょう</title>
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://www.tensyokudodesyo.com/knowhow/detail/knowhow-142.html">
+
+    <!-- OGP -->
+    <meta property="og:title" content="カスタムGPTで模擬面接｜AI面接官の作り方">
+    <meta property="og:description" content="カスタムGPTで自分専用のAI面接官を作る方法を解説。GPTs・Google Gems・Claude Projectsの設定手順、業界別プロンプト例、効果的な練習法まで紹介します。">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://www.tensyokudodesyo.com/knowhow/detail/knowhow-142.html">
+    <meta property="og:image" content="https://www.tensyokudodesyo.com/assets/knowhow-142.webp">
+    <meta property="og:site_name" content="転職どうでしょう">
+    <meta property="og:locale" content="ja_JP">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="カスタムGPTで模擬面接｜AI面接官の作り方">
+    <meta name="twitter:description" content="カスタムGPTで自分専用のAI面接官を作る方法を解説。GPTs・Google Gems・Claude Projectsの設定手順、業界別プロンプト例、効果的な練習法まで紹介します。">
+    <meta name="twitter:image" content="https://www.tensyokudodesyo.com/assets/knowhow-142.webp">
+
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/article-detail.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GJSD6BRJ0T"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-GJSD6BRJ0T');
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "ホーム",
+                "item": "https://www.tensyokudodesyo.com/"
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "転職ノウハウ",
+                "item": "https://www.tensyokudodesyo.com/knowhow/"
+            },
+            {
+                "@type": "ListItem",
+                "position": 3,
+                "name": "カスタムGPTで模擬面接｜AI面接官の作り方"
+            }
+        ]
+    }
+    </script>
+
+    <!-- JSON-LD: BlogPosting -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "カスタムGPTで模擬面接｜AI面接官の作り方",
+        "description": "カスタムGPTで自分専用のAI面接官を作る方法を解説。GPTs・Google Gems・Claude Projectsの設定手順、業界別プロンプト例、効果的な練習法まで紹介します。",
+        "datePublished": "2026-05-26",
+        "dateModified": "2026-05-26",
+        "author": {
+            "@type": "Organization",
+            "name": "転職どうでしょう"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "転職どうでしょう",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://www.tensyokudodesyo.com/assets/logo.webp"
+            }
+        },
+        "image": "https://www.tensyokudodesyo.com/assets/knowhow-142.webp",
+        "mainEntityOfPage": "https://www.tensyokudodesyo.com/knowhow/detail/knowhow-142.html",
+        "articleSection": "面接対策"
+    }
+    </script>
+
+</head>
+<body>
+    <!-- Header -->
+    <div id="header-placeholder"></div>
+
+    <main class="article-detail">
+        <div class="container">
+            <!-- Breadcrumb -->
+            <nav class="breadcrumb">
+                <a href="/">ホーム</a>
+                <a href="/knowhow/">転職ノウハウ</a>
+                <span>カスタムGPTで模擬面接｜AI面接官の作り方</span>
+            </nav>
+
+            <!-- Article Header -->
+            <header class="article-header">
+                <img src="https://www.tensyokudodesyo.com/assets/knowhow-142.webp" alt="カスタムGPTで模擬面接｜AI面接官の作り方" class="article-thumbnail" loading="lazy">
+
+                <h1 class="article-title">カスタムGPTで模擬面接｜AI面接官の作り方</h1>
+
+                <div class="article-meta">
+                    <span class="article-category">面接対策</span>
+                    <time class="article-date" datetime="2026-05-26">
+                        2026年05月26日
+                    </time>
+                </div>
+            </header>
+
+            <!-- Introduction -->
+            <div class="article-introduction">
+                面接対策で「想定問答を読むだけ」になっていませんか。転職面接では深掘り質問や予想外の質問が飛んでくるため、一問一答の暗記だけでは対応しきれません。特に中途採用の面接では「なぜ？」「具体的に教えて」と3〜4回掘り下げられることが一般的です。<br><br>そこで有効なのが、ChatGPTのGPTs・GoogleのGems・ClaudeのProjectsといった「カスタムAI」を使った模擬面接です。応募先企業の情報を組み込んだ自分専用のAI面接官を作ることで、本番さながらの深掘り面接を何度でも練習できます。<br><br>この記事では、3つのプラットフォームでカスタムAI面接官を構築する手順を、コピペで使えるシステムプロンプト付きで解説します。AI面接練習の質を一段階上げたい方は、ぜひ最後までお読みください。
+            </div>
+
+            <!-- Table of Contents -->
+            <nav class="article-toc">
+                <h2 class="toc-title">目次</h2>
+                <ol class="toc-list" id="tocList">
+                    <!-- JavaScriptで動的生成 -->
+                </ol>
+            </nav>
+
+            <!-- Article Body -->
+            <div class="article-body" id="articleBody">
+                <h2>なぜカスタムAI面接官が有効なのか</h2>
+
+                <p>　通常のChatGPTやClaudeに「面接官をやって」と頼むだけでも模擬面接はできますが、カスタムAIを使うことで以下の3つの差が生まれます。</p>
+
+                <ul>
+                    <li><strong>企業固有の質問を再現できる</strong>：応募先の事業内容・採用ページ・面接体験談をナレッジとして読み込ませることで、その企業特有の質問パターンを生成できる</li>
+                    <li><strong>面接官のペルソナを固定できる</strong>：「IT企業の人事部長、面接歴10年」のようなペルソナを設定することで、毎回一貫した評価軸でフィードバックが返ってくる</li>
+                    <li><strong>セッション間でコンテキストが維持される</strong>：過去の回答を記憶したうえで「前回の弱点を重点的に聞く」といった継続的な練習が可能になる</li>
+                </ul>
+
+                <p>　人材大手のエン・ジャパンの調査（2025年）によると、面接練習を3回以上行った転職者の内定率は、練習なしの転職者と比べて約1.8倍高いという結果が出ています。カスタムAIなら、この「3回以上の練習」を時間や場所を選ばずに実行できます。</p>
+
+                <p>　<strong>関連記事：</strong><a href="/knowhow/detail/knowhow-108.html">ChatGPTで面接練習〜想定問答と回答改善法</a></p>
+
+                <h2>OpenAI GPTsで面接官を作る手順</h2>
+
+                <p>　GPTsはChatGPT Plus/Team/Enterprise（月額20ドル〜）で利用できるカスタムBot作成機能です。ノーコードで専用のAI面接官を構築できます。</p>
+
+                <h3>Step 1：GPT Builderを開く</h3>
+                <p>　ChatGPTの左サイドバーから「GPTを探索する」→右上の「作成」をクリックします。</p>
+
+                <h3>Step 2：システムプロンプトを設定する</h3>
+                <p>　「構成」タブの「指示」欄に以下のシステムプロンプトを貼り付けます。</p>
+
+                <p>　<strong>GPTs用システムプロンプト（コピペ用）：</strong></p>
+
+                <p>「あなたは[業界]の[役職]として10年以上の面接経験を持つ採用責任者です。以下のルールで模擬面接を行ってください。(1)1回に1問だけ質問する (2)回答に対して必ず深掘り質問を1〜2回行う (3)深掘り後にSTAR法の観点でフィードバックする（状況・課題・行動・結果の4要素が含まれているか） (4)フィードバック後に次の質問に移る (5)全8問終了後に総合評価を100点満点で採点し、改善点を3つ挙げる。面接の最初に応募者の名前と志望職種を確認してから開始してください。」</p>
+
+                <h3>Step 3：ナレッジファイルをアップロードする</h3>
+                <p>　「ナレッジ」セクションに以下のファイルをアップロードします。</p>
+                <ul>
+                    <li>応募先企業の採用ページをPDF保存したもの</li>
+                    <li>企業の最新決算説明資料</li>
+                    <li>OpenWorkや転職会議の面接体験談（テキストにコピー）</li>
+                    <li>自分の職務経歴書（AIが回答内容と経歴の整合性をチェックできる）</li>
+                </ul>
+
+                <h3>Step 4：会話スターターを設定する</h3>
+                <p>　ユーザーが迷わず使い始められるよう、以下のような会話スターターを3つ設定します。</p>
+                <ul>
+                    <li>「一次面接の模擬面接を始めてください」</li>
+                    <li>「最終面接（役員面接）の模擬面接をお願いします」</li>
+                    <li>「前回の面接の弱点を重点的に練習したいです」</li>
+                </ul>
+
+                <h2>Google Gemsで面接コーチを作る方法</h2>
+
+                <p>　GemsはGemini Advanced（月額2,900円）で利用できるカスタムAI機能です。GPTsと同様にシステムプロンプトでAI面接官を構築できます。</p>
+
+                <h3>Gemsの作成手順</h3>
+
+                <ul>
+                    <li><strong>1.</strong> gemini.google.comにアクセスし、左サイドバーの「Gem マネージャー」→「新しいGemを作成」をクリック</li>
+                    <li><strong>2.</strong> 名前を「面接コーチ - [応募先企業名]」に設定</li>
+                    <li><strong>3.</strong> 「カスタム指示」欄にシステムプロンプトを入力</li>
+                    <li><strong>4.</strong> Googleドライブから企業資料を参照設定</li>
+                </ul>
+
+                <h3>Gems固有の活用ポイント</h3>
+
+                <p>　Gemsの強みは<strong>Geminiの音声会話モード（Gemini Live）と組み合わせられる</strong>点です。テキストでカスタム面接官を構築し、実際の練習はGemini Liveの音声モードで行うことで、発声・間の取り方・話すスピードも含めた実践的な面接練習が可能になります。</p>
+
+                <p>　音声モードでは「えーっと」「あのー」といったフィラー（つなぎ言葉）の頻度もフィードバックしてもらえるよう、システムプロンプトに「回答中のフィラーの多さも評価してください」と追記しておくのがおすすめです。</p>
+
+                <h2>Claude Projectsで深掘り面接を再現する</h2>
+
+                <p>　Claude Projects（Claude Pro、月額20ドル）は、最大200Kトークンのコンテキストに複数ファイルを常駐させたまま会話できる機能です。面接に必要な情報を丸ごと読み込ませて、深い文脈の中で面接シミュレーションを行えます。</p>
+
+                <h3>Projectsの設定手順</h3>
+
+                <ul>
+                    <li><strong>1.</strong> claude.aiの左サイドバーから「Projects」→「New Project」を作成</li>
+                    <li><strong>2.</strong> プロジェクト名を「[企業名] 面接対策」に設定</li>
+                    <li><strong>3.</strong> 「Project Instructions」にシステムプロンプトを入力</li>
+                    <li><strong>4.</strong> 「Knowledge」に企業資料・職務経歴書・過去の面接フィードバックをアップロード</li>
+                </ul>
+
+                <h3>Claudeの深掘り力を活かすプロンプト</h3>
+
+                <p>「あなたは[企業名]の[部門名]で採用を担当する部長です。私の職務経歴書をすでに読んでいます。以下のルールで模擬面接を実施してください。(1)各質問に対する私の回答の「矛盾点」「曖昧な点」「根拠が弱い点」を見つけて追及する (2)「具体的に教えてください」「数字で言うとどのくらいですか」「なぜそう判断したのですか」のような深掘り質問を必ず2回行う (3)面接終了後に、回答の論理的一貫性・具体性・熱意の3軸で10点満点で採点する」</p>
+
+                <p>　Claudeは長い文脈の中で矛盾を検出する能力が高いため、職務経歴書に書いた内容と面接での回答のずれを指摘してくれるのが大きなメリットです。</p>
+
+                <p>　<strong>関連記事：</strong><a href="/knowhow/detail/knowhow-130.html">ChatGPT Voiceで面接練習｜音声リアル会話術</a></p>
+
+                <h2>業界・職種別のシステムプロンプト設計例</h2>
+
+                <p>　カスタムAI面接官の精度は、システムプロンプトの設計で大きく変わります。以下に業界別のプロンプト調整例を示します。</p>
+
+                <h3>IT・Web業界向け</h3>
+                <p>　プロンプトに追加する指示：「技術的な質問（使用言語・開発手法・アーキテクチャ選定の理由）を全体の30％含めてください。コードレビューやシステム障害対応の経験も質問してください。」</p>
+
+                <h3>営業職向け</h3>
+                <p>　プロンプトに追加する指示：「数字で成果を語るよう促してください。売上目標に対する達成率、新規獲得件数、商談のクロージング率について具体的に質問してください。ロールプレイとして『あなたが提案した商品を私は買いません。説得してください』というシーンも含めてください。」</p>
+
+                <h3>管理職・マネジメント職向け</h3>
+                <p>　プロンプトに追加する指示：「リーダーシップスタイル、部下育成の具体例、チーム目標未達時の対処法、他部署との連携方法を重点的に質問してください。ケーススタディとして『部下が退職を申し出た場合どう対応するか』も出題してください。」</p>
+
+                <h3>未経験・異業種転職向け</h3>
+                <p>　プロンプトに追加する指示：「なぜこの業界・職種を選んだのかを深く掘り下げてください。前職の経験がこの仕事にどう活かせるかを具体的に説明させ、ポータブルスキルの言語化を促してください。」</p>
+
+                <h2>カスタムAI面接官の効果的な使い方</h2>
+
+                <p>　AIツールを作っただけでは面接力は上がりません。以下の練習法を組み合わせて、着実にスキルを向上させましょう。</p>
+
+                <h3>週3回・1回30分のルーティン化</h3>
+                <p>　面接練習は量が質を生みます。週3回・1回30分（約8問の模擬面接1セット分）を目安にスケジュールに組み込みましょう。通勤時間を活用するなら、音声モード（Gemini Live / ChatGPT Voice）で「聞いて→答える」練習がおすすめです。面接本番の2週間前から始めれば、最低6セットの模擬面接が完了します。初回と6回目の録音を聞き比べると、回答の構成力と自信が明らかに向上しているはずです。</p>
+
+                <h3>弱点克服モードを活用する</h3>
+                <p>　AIの評価で繰り返しスコアが低い質問ジャンル（たとえば「退職理由」や「キャリアビジョン」）がある場合、そのジャンルだけを集中練習する「弱点克服モード」が効果的です。システムプロンプトに「今回は退職理由に関する質問だけを5問出してください。回答のたびに10点満点で採点し、8点以上になるまで同じ質問を繰り返してください」と追記するだけで実装できます。反復練習により、苦手な質問に対する回答の型が体に染み付きます。</p>
+
+                <h3>録画・録音して自分で振り返る</h3>
+                <p>　スマホで自分の回答を録画し、以下の3点をチェックします。</p>
+                <ul>
+                    <li>結論から話せているか（PREP法：結論→理由→具体例→結論）</li>
+                    <li>1回の回答が60〜90秒に収まっているか</li>
+                    <li>「えーっと」「あのー」などのフィラーが多くないか</li>
+                </ul>
+
+                <h3>フィードバックをノートに蓄積する</h3>
+                <p>　AI面接官から受けたフィードバックをNotionやスプレッドシートに記録し、改善の推移を可視化します。記録項目は「日付・質問内容・AIスコア・指摘事項・改善アクション」の5列で十分です。3回目以降は過去の指摘事項が減っていくのが実感できるはずです。</p>
+
+                <h2>AI模擬面接の限界と補完する練習法</h2>
+
+                <p>　カスタムAI面接官は強力なツールですが、以下の点では人間による練習が必要です。</p>
+
+                <h3>AIでは補えないこと</h3>
+
+                <ul>
+                    <li><strong>非言語コミュニケーション</strong>：表情、姿勢、アイコンタクト、手の動きはAIが評価できない。鏡の前で練習するか、友人とビデオ通話で模擬面接を行う</li>
+                    <li><strong>沈黙や間の使い方</strong>：AIは即座に次の質問に移るため、意図的な間を置く練習には不向き。対人での練習でタイミングを磨く</li>
+                    <li><strong>想定外の空気感</strong>：圧迫面接の緊張感や雑談から始まる面接の空気は、AIでは完全に再現できない</li>
+                </ul>
+
+                <h3>AI＋人間のハイブリッド練習法</h3>
+
+                <p>　最も効果的なのは「AI練習7割＋人間練習3割」のハイブリッドです。AIで回答の骨格と論理構成を固めてから、転職エージェントの模擬面接やハローワークの面接セミナーで非言語スキルを磨く流れが理想的です。</p>
+
+                <h3>面接前日のファイナルチェック用プロンプト</h3>
+
+                <p>　面接前日の最終確認にも、カスタムAI面接官は有効です。以下のプロンプトで短時間の集中練習ができます。</p>
+
+                <p>「明日[企業名]の[面接種別]面接があります。以下の3問だけ模擬面接してください。(1)志望動機 (2)前職の退職理由 (3)当社でやりたいこと。各回答に対して、一言で改善ポイントを指摘してください。」</p>
+
+                <p>　この「3問集中モード」は15分で完了するため、面接前夜の最終仕上げに最適です。前日に新しい質問を大量に練習すると混乱するリスクがあるため、核心の3問に絞って精度を高める戦略が有効です。</p>
+
+                <h3>3つのプラットフォームの使い分け</h3>
+
+                <p>　GPTs・Gems・Claude Projectsにはそれぞれ得意分野があります。状況に応じて使い分けましょう。</p>
+
+                <ul>
+                    <li><strong>GPTs</strong>：ナレッジファイルのアップロード上限が大きく、企業資料を大量に読み込ませたい場合に最適。会話スターターで初回の操作が簡単</li>
+                    <li><strong>Gems</strong>：Gemini Liveの音声モードと連携でき、発声や間の取り方も含めた実践練習に最適。Googleドライブ連携で資料管理も楽</li>
+                    <li><strong>Claude Projects</strong>：200Kトークンの長大コンテキストを活かし、職務経歴書と回答の矛盾検出、過去の練習履歴を踏まえた継続的な改善に最適</li>
+                </ul>
+
+                <p>　理想は3つとも作成し、練習初期はGPTsで回答の骨格を固め、中盤はClaude Projectsで深掘り耐性を鍛え、直前期はGemsの音声モードで本番感覚を磨くフローです。</p>
+
+                <h2>まとめ</h2>
+
+                <p>　カスタムGPT・Gems・Claude Projectsを使えば、応募先企業に特化した自分専用のAI面接官を構築できます。ナレッジに企業資料や職務経歴書を読み込ませることで、本番さながらの深掘り面接を何度でもサブスクリプション内で練習可能です。初期設定には約30分かかりますが、一度作れば応募先が変わるたびにナレッジファイルを差し替えるだけで再利用できるため、長期的な投資対効果は非常に高いと言えます。</p>
+
+                <p>　ただし、AIはあくまで「回答の内容」を磨くツールです。表情やアイコンタクトといった非言語スキルは対人練習で補完する必要があります。AI7割・対人3割のバランスで面接力を総合的に高めていきましょう。まずは今日、応募先企業1社分のカスタムAI面接官を作成することから始めてみてください。</p>
+
+                <p>　『転職どうでしょう』では、AI活用のアドバイスから模擬面接の実施まで、あなたの面接対策を個別にサポートしています。「面接で深掘りされると答えられなくなる」「どんな質問が来るか不安」など、お悩みがありましたらお気軽に<a href="/contact/" target="_blank" rel="noopener">転職相談フォーム</a>からご相談ください。</p>
+            </div>
+
+            <!-- CTA -->
+            <section class="article-cta">
+                <h3>転職活動の悩み、専属アドバイザーが無料で解決</h3>
+                <p>「自分の市場価値が分からない」「書類が通らない」「内定の選び方に迷う」——あなたの状況に合わせた具体策をご提案します。フォーム入力は約2分、面談予約まで一気通貫。</p>
+                <a href="/contact/" class="btn btn-primary btn-lg">
+                    無料で転職相談する
+                </a>
+            </section>
+
+            <!-- Related Articles (dynamically loaded) -->
+            <div id="relatedArticlesContainer"></div>
+
+            <!-- Back Link -->
+            <div class="article-back">
+                <a href="/knowhow/">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M19 12H5"></path>
+                        <path d="M12 19l-7-7 7-7"></path>
+                    </svg>
+                    転職ノウハウ一覧に戻る
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <div id="footer-placeholder"></div>
+
+    <script src="/js/includes.js"></script>
+    <script src="/js/categories.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/article-toc.js"></script>
+    <script src="/js/related-articles.js"></script>
+    <script src="/js/blog-ad.min.js" defer></script>
+</body>
+</html>
