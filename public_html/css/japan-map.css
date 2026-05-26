@@ -13,6 +13,12 @@
     align-items: center;
     box-sizing: border-box;
     overflow: hidden;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.japan-map-container,
+.japan-map-container object {
+    -webkit-tap-highlight-color: transparent;
 }
 
 /* Remove margin when new-jobs follows map-hero (home page) */

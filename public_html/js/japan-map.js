@@ -48,8 +48,8 @@ function buildSvgStyles() {
     // Default rule covers paths BEFORE JS assigns data-region-active,
     // so the map never flashes the browser-default black fill.
     let css = `
-        svg#japanMap { background: transparent; }
-        g[data-prefecture] { cursor: pointer; }
+        svg#japanMap { background: transparent; -webkit-tap-highlight-color: transparent; }
+        g[data-prefecture] { cursor: pointer; -webkit-tap-highlight-color: transparent; }
         g.svg-map, g[data-prefecture] { touch-action: manipulation; }
         g[data-prefecture] path,
         g[data-prefecture] polygon {
@@ -332,12 +332,14 @@ function createBottomSheet() {
     const overlay = document.createElement('div');
     overlay.id = 'bottomSheetOverlay';
     overlay.className = 'bottom-sheet-overlay';
+    overlay.style.display = 'none';
     overlay.addEventListener('click', closeBottomSheet);
     overlay.addEventListener('touchmove', (e) => e.preventDefault(), { passive: false });
 
     const sheet = document.createElement('div');
     sheet.id = 'bottomSheet';
     sheet.className = 'bottom-sheet';
+    sheet.style.display = 'none';
     sheet.innerHTML = `
         <div class="bottom-sheet-handle"></div>
         <div class="bottom-sheet-header">
