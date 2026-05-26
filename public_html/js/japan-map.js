@@ -118,22 +118,18 @@ function injectStylesASAP() {
  */
 async function initJapanMap() {
     try {
-        const prefResponse = await fetch('data/prefectures.json');
-        if (!prefResponse.ok) {
-            throw new Error('Failed to load prefectures: HTTP ' + prefResponse.status);
-        }
-        const prefData = await prefResponse.json();
+        const prefData = typeof DataCache !== 'undefined'
+            ? await DataCache.fetchJSON('data/prefectures.json')
+            : await fetch('data/prefectures.json').then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); });
         prefectureData = prefData.prefectures;
 
         const activePrefectures = prefectureData.filter(p => p.active);
 
         const jobCountPromises = activePrefectures.map(async (pref) => {
             try {
-                const response = await fetch(`data/jobs/${pref.id}.json`);
-                if (!response.ok) {
-                    return { prefName: pref.name, count: 0 };
-                }
-                const data = await response.json();
+                const data = typeof DataCache !== 'undefined'
+                    ? await DataCache.fetchJSON(`data/jobs/${pref.id}.json`)
+                    : await fetch(`data/jobs/${pref.id}.json`).then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); });
                 const jobCount = (data.jobs || []).length;
                 return { prefName: pref.name, count: jobCount };
             } catch (err) {

@@ -8,9 +8,10 @@
  */
 async function loadAllKnowhowArticles() {
     const urls = ['/data/knowhow.json', '/data/knowhow-mt.json'];
-    const results = await Promise.allSettled(
-        urls.map(url => fetch(url).then(r => r.ok ? r.json() : { articles: [] }))
-    );
+    const fetcher = typeof DataCache !== 'undefined'
+        ? url => DataCache.fetchJSON(url).catch(() => ({ articles: [] }))
+        : url => fetch(url).then(r => r.ok ? r.json() : { articles: [] });
+    const results = await Promise.allSettled(urls.map(fetcher));
     const allArticles = results
         .filter(r => r.status === 'fulfilled')
         .flatMap(r => r.value.articles || []);
@@ -204,30 +205,19 @@ function initScrollAnimations() {
 
     if (!animatedElements.length) return;
 
-    const observerOptions = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.1
-    };
-
     const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry, index) => {
+        entries.forEach((entry) => {
             if (entry.isIntersecting) {
-                // Add staggered delay for grid items
-                setTimeout(() => {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }, index * 100);
-
+                entry.target.classList.add('scroll-visible');
                 observer.unobserve(entry.target);
             }
         });
-    }, observerOptions);
+    }, { threshold: 0.1 });
 
-    animatedElements.forEach(el => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(30px)';
-        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    animatedElements.forEach((el) => {
+        var siblings = el.parentElement ? Array.from(el.parentElement.children) : [];
+        el.style.setProperty('--stagger', siblings.indexOf(el));
+        el.classList.add('scroll-animate');
         observer.observe(el);
     });
 }
@@ -390,24 +380,21 @@ function animateCounter(element) {
     const targetNum = parseInt(match[1].replace(/,/g, ''));
     const suffix = text.replace(match[1], '');
     const duration = 2000;
-    const steps = 60;
-    const stepDuration = duration / steps;
+    let startTime = null;
 
-    let currentStep = 0;
-
-    const timer = setInterval(() => {
-        currentStep++;
-        const progress = currentStep / steps;
+    function tick(timestamp) {
+        if (!startTime) startTime = timestamp;
+        const progress = Math.min((timestamp - startTime) / duration, 1);
         const easeOutQuart = 1 - Math.pow(1 - progress, 4);
-        const currentNum = Math.floor(targetNum * easeOutQuart);
-
-        element.innerHTML = currentNum.toLocaleString() + suffix;
-
-        if (currentStep >= steps) {
-            clearInterval(timer);
-            element.innerHTML = targetNum.toLocaleString() + suffix;
+        element.textContent = Math.floor(targetNum * easeOutQuart).toLocaleString() + suffix;
+        if (progress < 1) {
+            requestAnimationFrame(tick);
+        } else {
+            element.textContent = targetNum.toLocaleString() + suffix;
         }
-    }, stepDuration);
+    }
+
+    requestAnimationFrame(tick);
 }
 
 /**
@@ -523,22 +510,17 @@ async function loadJobs() {
 
     try {
         // First, load prefectures.json to get active prefectures
-        const prefResponse = await fetch('/data/prefectures.json');
-        if (!prefResponse.ok) {
-            throw new Error('Failed to load prefectures: HTTP ' + prefResponse.status);
-        }
-        const prefData = await prefResponse.json();
+        const prefData = typeof DataCache !== 'undefined'
+            ? await DataCache.fetchJSON('/data/prefectures.json')
+            : await fetch('/data/prefectures.json').then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); });
         const activePrefectures = prefData.prefectures.filter(p => p.active);
 
         // Load all active prefecture job JSONs in parallel
         const jobPromises = activePrefectures.map(async (pref) => {
             try {
-                const response = await fetch(`/data/jobs/${pref.id}.json`);
-                if (!response.ok) {
-                    console.warn(`Jobs not found for ${pref.name}: HTTP ${response.status}`);
-                    return [];
-                }
-                const data = await response.json();
+                const data = typeof DataCache !== 'undefined'
+                    ? await DataCache.fetchJSON(`/data/jobs/${pref.id}.json`)
+                    : await fetch(`/data/jobs/${pref.id}.json`).then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); });
                 // Add prefecture info to each job if not present
                 return (data.jobs || []).map(job => ({
                     ...job,
@@ -1221,9 +1203,9 @@ async function initInterviewPage() {
     }
 
     try {
-        const response = await fetch('/data/interviews.json');
-        if (!response.ok) throw new Error('HTTP ' + response.status);
-        const data = await response.json();
+        const data = typeof DataCache !== 'undefined'
+            ? await DataCache.fetchJSON('/data/interviews.json')
+            : await fetch('/data/interviews.json').then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); });
         allInterviews = data.interviews || [];
 
         // Handle URL parameters
@@ -1355,9 +1337,9 @@ async function initCompanyPage() {
     }
 
     try {
-        const response = await fetch('/data/companies.json');
-        if (!response.ok) throw new Error('HTTP ' + response.status);
-        const data = await response.json();
+        const data = typeof DataCache !== 'undefined'
+            ? await DataCache.fetchJSON('/data/companies.json')
+            : await fetch('/data/companies.json').then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); });
         allCompanies = data.companies || [];
 
         // Handle URL parameters
@@ -1487,9 +1469,9 @@ async function initHomePage() {
     // Load clients (会社紹介) for home page
     if (homeClientsContainer) {
         try {
-            const response = await fetch('/data/clients.json');
-            if (!response.ok) throw new Error('HTTP ' + response.status);
-            const data = await response.json();
+            const data = typeof DataCache !== 'undefined'
+                ? await DataCache.fetchJSON('/data/clients.json')
+                : await fetch('/data/clients.json').then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); });
             const clients = data.clients || [];
 
             const latestClients = [...clients]
@@ -1526,9 +1508,9 @@ async function initHomePage() {
     // Load interviews for home page
     if (homeInterviewsContainer) {
         try {
-            const response = await fetch('/data/interviews.json');
-            if (!response.ok) throw new Error('HTTP ' + response.status);
-            const data = await response.json();
+            const data = typeof DataCache !== 'undefined'
+                ? await DataCache.fetchJSON('/data/interviews.json')
+                : await fetch('/data/interviews.json').then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); });
             const interviews = data.interviews || [];
 
             // Sort by date and get latest 3
@@ -1565,9 +1547,9 @@ async function initHomePage() {
     // Load companies for home page
     if (homeCompaniesContainer) {
         try {
-            const response = await fetch('/data/companies.json');
-            if (!response.ok) throw new Error('HTTP ' + response.status);
-            const data = await response.json();
+            const data = typeof DataCache !== 'undefined'
+                ? await DataCache.fetchJSON('/data/companies.json')
+                : await fetch('/data/companies.json').then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); });
             const companies = data.companies || [];
 
             // Sort by date and get latest 3

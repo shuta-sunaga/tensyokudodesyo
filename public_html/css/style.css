@@ -1278,6 +1278,18 @@ body.menu-open {
     animation: fadeInUp 0.6s ease forwards;
 }
 
+.scroll-animate {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+    transition-delay: calc(var(--stagger, 0) * 80ms);
+}
+
+.scroll-animate.scroll-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
 /* Scroll animations */
 [data-aos] {
     opacity: 0;

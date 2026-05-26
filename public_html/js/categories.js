@@ -48,11 +48,9 @@ var CategoryManager = (function() {
         const url = `/data/categories/${filename}`;
 
         try {
-            const response = await fetch(url);
-            if (!response.ok) {
-                throw new Error(`HTTP ${response.status}`);
-            }
-            const data = await response.json();
+            const data = typeof DataCache !== 'undefined'
+                ? await DataCache.fetchJSON(url)
+                : await fetch(url).then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); });
 
             categories[type] = data.categories || [];
 
@@ -80,11 +78,9 @@ var CategoryManager = (function() {
         const url = `/data/prefectures.json`;
 
         try {
-            const response = await fetch(url);
-            if (!response.ok) {
-                throw new Error(`HTTP ${response.status}`);
-            }
-            const data = await response.json();
+            const data = typeof DataCache !== 'undefined'
+                ? await DataCache.fetchJSON(url)
+                : await fetch(url).then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); });
             prefectures = data.prefectures || [];
             return true;
         } catch (error) {
