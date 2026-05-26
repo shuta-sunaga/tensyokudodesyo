@@ -14,7 +14,7 @@ Word(.docx) 形式のインタビュー原稿から「会社紹介」ページ (
 ## 設定ファイル / 参照先
 
 - **データ**: `public_html/data/clients.json`
-- **テンプレート**: `public_html/clients/detail/techno-solution.html`（**必ず Read してから流用**。class名・id・DOM構造を勝手に変更しない）
+- **テンプレート**: `public_html/clients/detail/aru.html`（**必ず Read してから流用**。class名・id・DOM構造を勝手に変更しない）
 - **CSS**: `public_html/css/client-detail.css`（共通）
 - **動的JS**: `public_html/js/client-detail.js`（共通）
 - **業界マスター**: `public_html/data/categories/company-industries.json`（in01-in09）
@@ -37,7 +37,11 @@ Word(.docx) 形式のインタビュー原稿から「会社紹介」ページ (
    - 抽出された各フィールドを `public_html/data/clients.json` のスキーマに合わせる:
      ```
      name / tagline / industry / prefecture / city / address / established /
-     employees / ceo / businessContent / vision / culture / idealPerson / message
+     employees / ceo / businessContent / businessDetail / vision / culture / idealPerson / message
+     ```
+   - **businessContent**: 会社概要テーブル用の短文（1行）
+   - **businessDetail**: 事業内容セクション用の本文（複数段落 `<p>` タグ。事業ごとに `<strong>事業名</strong>` で強調）
+     ```
      ```
    - **業界**: `industryHint` → `company-industries.json` の ID (in01〜in09) に変換（テキスト中の業界キーワードから推測）
    - **prefecture / city**: `address` フィールドから正規表現で抽出（`(\S+?[都道府県])(\S+?[市区町村])`）
@@ -57,7 +61,7 @@ Word(.docx) 形式のインタビュー原稿から「会社紹介」ページ (
 
 ## Stage 2: 詳細ページHTML生成（承認後、自動実行）
 
-1. **テンプレート読込**: `public_html/clients/detail/techno-solution.html` を Read
+1. **テンプレート読込**: `public_html/clients/detail/aru.html` を Read
 2. **新規HTML生成**: `public_html/clients/detail/{companyKey}.html` に出力
 3. **置換ポイント**（テンプレート内の固定値をすべて差し替え）:
    - title / description / OGP / Twitter Card / canonical URL
@@ -66,13 +70,21 @@ Word(.docx) 形式のインタビュー原稿から「会社紹介」ページ (
    - パンくず
    - ヒーロー（画像パス・name・tagline・industry/area タグ）
    - quickfacts（業界・所在地・従業員数・設立）
-   - 会社概要テーブル
-   - ビジョン / カルチャー / 求める人物像 / メッセージ
+   - 会社概要テーブル（代表者・設立・従業員数・所在地）
+   - 事業内容 / ビジョン / カルチャー / 求める人物像 / メッセージ
 4. **DOM構造の遵守**:
-   - `<section class="client-section">` + `<div class="client-editorial">` / `<div class="client-overview">`
+   - ヒーロー: `<section class="client-hero">` に `padding: 0`（グローバル section padding を打ち消し済み）。画像のみ、テキストは左下にオーバーレイ（text-shadow、背景グラデーションなし）
+   - editorial-group 内のセクション順序と左ボーダー色:
+     1. 会社概要 `<div class="client-overview-grid">` — ボーダーなし（テーブル形式）
+     2. 事業内容 `<div class="client-editorial client-editorial--business">` — 青 (#5b8fb9)
+     3. ビジョン `<div class="client-editorial">` — 緑（デフォルト primary）
+     4. カルチャー `<div class="client-editorial client-editorial--accent">` — オレンジ（secondary）
+     5. 求める人物像 `<div class="client-editorial client-editorial--ideal">` — 紫 (#7b6cb0)
+     6. メッセージ `<div class="client-editorial client-editorial--message">` — 緑（背景付き）
    - 求人セクションは `<section class="client-section client-jobs">` 固定
    - 関連セクションは `<section class="client-section client-related">` 固定
    - JS読込順: `includes.js` → `categories.js` → `client-detail.js`
+5. **SP対応**: ヒーローのオーバーレイは768px以下で `position: static` に切り替わり、テキストが画像下に表示される（CSS側で自動対応、HTML側の対処不要）
 
 ---
 
@@ -135,7 +147,7 @@ Word(.docx) 形式のインタビュー原稿から「会社紹介」ページ (
 | 1 | JSON-LD 構造 | BreadcrumbList + Organization が有効JSON、必須フィールドあり |
 | 2 | 画像ファイル存在 | `public_html/assets/clients/{key}.webp` が存在（onerror fallback で許容しない） |
 | 3 | 業界整合性 | `industry` が `company-industries.json` に存在 |
-| 4 | DOM構造 | `<section class="client-hero">`、`<div class="client-overview">`、`<div id="clientJobsGrid">`、`<div id="clientRelatedGrid">` が揃っているか |
+| 4 | DOM構造 | `<section class="client-hero">`、`<div class="client-overview-grid">`、`client-editorial--business`、`client-editorial--accent`、`client-editorial--ideal`、`client-editorial--message`、`<div id="clientJobsGrid">`、`<div id="clientRelatedGrid">` が揃っているか |
 | 5 | meta タグ | `client-name`/`client-key`/`client-industry`/`client-prefecture` が設定されているか |
 | 6 | clients.json | JSONとして valid、id が一意、companyKey が一意 |
 | 7 | sitemap | 新URLエントリが追加されているか |

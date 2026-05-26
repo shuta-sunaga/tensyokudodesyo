@@ -371,6 +371,62 @@
         "selectionProcess": "書類選考 → 面接 → 内定",
         "applicationMethod": "LINEよりお気軽にご応募ください。"
       }
+    },
+    {
+      "id": 662,
+      "title": "【大分/月給30万~】福祉×BPOの新規事業立ち上げ◆サービス管理責任者／組織創りのコアメンバー",
+      "postDate": "2026-02-24",
+      "company": "株式会社ARU",
+      "prefecture": "大分県",
+      "city": "大分市",
+      "salary": "年収360万円〜",
+      "conditions": "土日休み,副業OK,服装自由",
+      "category": "専門職（医療・福祉・介護）",
+      "keywords": "福祉,就労支援,サビ管,BPO",
+      "detailUrl": "oita/jobs/SJ250353.html",
+      "detail": {
+        "description": "就労継続支援Ｂ型事業所におけるサービス管理責任者として、福祉サービスの提供だけでなく、新たに立ち上がる「BPO事業」と連携した組織づくりをお任せします。",
+        "requirements": "サービス管理責任者基礎研修・実践研修受講済の方",
+        "location": "大分県大分市長浜町２丁目２-４",
+        "workHours": "9時30分~17時30分(休憩1時間) 実働7時間",
+        "employmentType": "正社員",
+        "salaryDetail": "月給 30万円 ~（基本給 26万5,000円 ~ ＋ 一律手当 3万5,000円 ~ 6万円）",
+        "bonus": "2か月毎にプチボーナス支給",
+        "benefits": "健康保険、厚生年金保険、雇用保険、労災保険、交通費規定支給、車通勤OK、副業OK、服装自由",
+        "holidays": "土日休み（会社カレンダーによる）",
+        "companyAddress": "大分県大分市長浜町２丁目２-４",
+        "employees": "80名",
+        "businessContent": "福祉・就労支援",
+        "selectionProcess": "書類選考→1次面接→最終面接→内定"
+      }
+    },
+    {
+      "id": 661,
+      "title": "【大分/正社員】実働7h・残業なし◆相談支援専門員／副業OK・インセンティブ有で好待遇",
+      "postDate": "2026-02-24",
+      "company": "株式会社ARU",
+      "prefecture": "大分県",
+      "city": "大分市",
+      "salary": "年収228万〜360万円",
+      "conditions": "残業なし,副業OK,資格取得支援",
+      "category": "専門職（医療・福祉・介護）",
+      "keywords": "福祉,相談支援,専門員",
+      "detailUrl": "oita/jobs/SJ250352.html",
+      "detail": {
+        "description": "相談支援専門員として、障害のある方やそのご家族の人生設計をサポートします。",
+        "requirements": "相談支援専門員の資格をお持ちの方、普通自動車免許",
+        "location": "大分県大分市長浜町２丁目２-４",
+        "workHours": "実働7時間 残業なし 原則定時退社",
+        "employmentType": "正社員",
+        "salaryDetail": "月給 19万円 ~ 30万円 インセンティブあり",
+        "bonus": "",
+        "benefits": "健康保険、厚生年金保険、雇用保険、労災保険、交通費支給、副業OK、資格取得支援",
+        "holidays": "月18日~23日勤務",
+        "companyAddress": "大分県大分市長浜町２丁目２-４",
+        "employees": "80名",
+        "businessContent": "福祉・就労支援",
+        "selectionProcess": "面接1回（場合によっては2回）"
+      }
     }
   ]
 }

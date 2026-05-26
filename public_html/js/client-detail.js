@@ -128,7 +128,7 @@
             return '' +
                 '<a class="article-card" href="' + escapeHTML(detailUrl) + '">' +
                     '<div class="article-card-image">' +
-                        '<img src="' + escapeHTML(img) + '" alt="' + escapeHTML(c.name) + '" loading="lazy">' +
+                        '<img src="' + escapeHTML(img) + '" alt="' + escapeHTML(c.name) + '" loading="lazy" onerror="this.onerror=null;this.src=\'https://placehold.co/600x450/5a9e6f/ffffff?text=' + encodeURIComponent(c.name) + '\'">' +
                     '</div>' +
                     '<div class="article-card-content">' +
                         '<div class="article-card-category">' + escapeHTML(industryName) + '</div>' +
