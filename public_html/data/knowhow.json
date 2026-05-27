@@ -1,6 +1,33 @@
 {
   "articles": [
     {
+      "id": 145,
+      "title": "AIで企業別の面接対策｜求人票から質問を予測",
+      "category": "kh01",
+      "excerpt": "AIで企業別の面接対策を行う方法を解説。求人票の分析プロンプト、企業固有の質問予測、回答の作成・ブラッシュアップまで実例付きで紹介します。",
+      "image": "/assets/knowhow-145.webp",
+      "postDate": "2026-05-27",
+      "detailUrl": "/knowhow/detail/knowhow-145.html"
+    },
+    {
+      "id": 144,
+      "title": "Geminiで自己分析｜画像と対話で適職発見",
+      "category": "kh03",
+      "excerpt": "Geminiで自己分析を行う方法を解説。画像アップロードやGemsの設定手順、Google Workspace連携、ChatGPT・Claudeとの違いまで実例付きで紹介します。",
+      "image": "/assets/knowhow-144.webp",
+      "postDate": "2026-05-27",
+      "detailUrl": "/knowhow/detail/knowhow-144.html"
+    },
+    {
+      "id": 143,
+      "title": "AIで応募書類を企業別にカスタマイズする方法",
+      "category": "kh02",
+      "excerpt": "AIで応募書類を企業ごとにカスタマイズする方法を解説。求人票の分析プロンプト、志望動機・職務経歴書の最適化手順、ツール別の使い分けまで実例付きで紹介します。",
+      "image": "/assets/knowhow-143.webp",
+      "postDate": "2026-05-27",
+      "detailUrl": "/knowhow/detail/knowhow-143.html"
+    },
+    {
       "id": 142,
       "title": "カスタムGPTで模擬面接｜AI面接官の作り方",
       "category": "kh01",
