@@ -1,6 +1,33 @@
 {
   "articles": [
     {
+      "id": 148,
+      "title": "AIでSPI非言語対策｜苦手パターン自動分析",
+      "category": "kh03",
+      "excerpt": "AIでSPI非言語対策を行う方法を解説。苦手パターンの自動分析、ChatGPTやClaudeでの解法トレーニング、本番シミュレーションまで具体的な手順を紹介します。",
+      "image": "/assets/knowhow-148.webp",
+      "postDate": "2026-05-28",
+      "detailUrl": "/knowhow/detail/knowhow-148.html"
+    },
+    {
+      "id": 147,
+      "title": "生成AI副業で実績を作り転職する方法",
+      "category": "kh04",
+      "excerpt": "生成AI副業で転職に活きる実績を作る方法を解説。AI副業の種類・収益目安・始め方から、ポートフォリオ化・職務経歴書への書き方まで実例付きで紹介します。",
+      "image": "/assets/knowhow-147.webp",
+      "postDate": "2026-05-28",
+      "detailUrl": "/knowhow/detail/knowhow-147.html"
+    },
+    {
+      "id": 146,
+      "title": "AIエージェントで転職活動を自動化する方法",
+      "category": "kh05",
+      "excerpt": "AIエージェントで転職活動を自動化する方法を解説。求人収集の自動化、スカウト返信テンプレ、応募進捗管理まで2026年最新ツールと設定手順を実例付きで紹介します。",
+      "image": "/assets/knowhow-146.webp",
+      "postDate": "2026-05-28",
+      "detailUrl": "/knowhow/detail/knowhow-146.html"
+    },
+    {
       "id": 145,
       "title": "AIで企業別の面接対策｜求人票から質問を予測",
       "category": "kh01",
