@@ -1,6 +1,33 @@
 {
   "articles": [
     {
+      "id": 151,
+      "title": "AIで逆質問を生成｜企業別カスタム100案",
+      "category": "kh01",
+      "excerpt": "AIで面接の逆質問を企業別にカスタム生成する方法を解説。IR資料や採用ページからの動的生成、役職別の最適化、100案からの絞り込みまで実践プロンプト付きで紹介します。",
+      "image": "/assets/knowhow-151.webp",
+      "postDate": "2026-05-29",
+      "detailUrl": "/knowhow/detail/knowhow-151.html"
+    },
+    {
+      "id": 150,
+      "title": "AIで退職交渉ロールプレイ｜引き止め対策",
+      "category": "kh05",
+      "excerpt": "AIで退職交渉をロールプレイする方法を解説。上司役・人事役の演じ分け、引き止めパターン別の対応、対話シミュレーション、退職届の文面生成まで実践的に紹介します。",
+      "image": "/assets/knowhow-150.webp",
+      "postDate": "2026-05-29",
+      "detailUrl": "/knowhow/detail/knowhow-150.html"
+    },
+    {
+      "id": 149,
+      "title": "AIで複数内定を比較｜スコアリング決定法",
+      "category": "kh05",
+      "excerpt": "AIで複数内定を比較する方法を解説。5軸スコアリングフレームワーク、ChatGPTでの比較表作成、感情面の整理、辞退連絡文の自動生成まで実例付きで紹介します。",
+      "image": "/assets/knowhow-149.webp",
+      "postDate": "2026-05-29",
+      "detailUrl": "/knowhow/detail/knowhow-149.html"
+    },
+    {
       "id": 148,
       "title": "AIでSPI非言語対策｜苦手パターン自動分析",
       "category": "kh03",
