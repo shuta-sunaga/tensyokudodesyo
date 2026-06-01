@@ -1,6 +1,33 @@
 {
   "articles": [
     {
+      "id": 154,
+      "title": "面接で希望年収を聞かれたら〜角を立てない答え方",
+      "category": "kh01",
+      "excerpt": "転職面接で「希望年収は？」と聞かれたときの答え方を解説。低く言って損しない・高すぎて落とされないための相場の調べ方、レンジ提示の伝え方、そのまま使える回答例文を紹介します。",
+      "image": "/assets/knowhow-154.webp",
+      "postDate": "2026-06-01",
+      "detailUrl": "/knowhow/detail/knowhow-154.html"
+    },
+    {
+      "id": 153,
+      "title": "商社業界の転職ガイド〜総合・専門商社の職種と年収",
+      "category": "kh04",
+      "excerpt": "商社業界への転職ガイド。総合商社と専門商社の違い、営業・事業投資・コーポレートなど職種別の仕事内容、年収相場、求められるスキルと選考対策を分かりやすく解説します。",
+      "image": "/assets/knowhow-153.webp",
+      "postDate": "2026-06-01",
+      "detailUrl": "/knowhow/detail/knowhow-153.html"
+    },
+    {
+      "id": 152,
+      "title": "職務経歴書の職務要約の書き方〜冒頭3行の例文集",
+      "category": "kh02",
+      "excerpt": "職務経歴書の冒頭に置く「職務要約」の書き方を解説。採用担当が最初に読む3〜5行で印象を決めるコツ、職種別の例文テンプレート、NG例と改善法をまとめました。",
+      "image": "/assets/knowhow-152.webp",
+      "postDate": "2026-06-01",
+      "detailUrl": "/knowhow/detail/knowhow-152.html"
+    },
+    {
       "id": 151,
       "title": "AIで逆質問を生成｜企業別カスタム100案",
       "category": "kh01",
