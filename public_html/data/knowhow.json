@@ -1,6 +1,33 @@
 {
   "articles": [
     {
+      "id": 157,
+      "title": "AIで企業の評判を分析｜口コミの読み解き方",
+      "category": "kh04",
+      "excerpt": "企業の口コミ・評判をAIで分析する方法を解説。バイアスや誇張の見抜き方、感情語を除いた事実抽出、信憑性のスコアリング、公式情報での二次検証、面接で確認すべき質問への変換まで実例付きで紹介します。",
+      "image": "/assets/knowhow-157.webp",
+      "postDate": "2026-06-02",
+      "detailUrl": "/knowhow/detail/knowhow-157.html"
+    },
+    {
+      "id": 156,
+      "title": "AIでキャリアプランを設計｜5年後の戦略立案",
+      "category": "kh03",
+      "excerpt": "AIで中長期のキャリアプランを設計する方法を解説。5年後の理想像からの逆算、複数キャリアパスの比較、スキル獲得ロードマップ、定期的な見直しまで、そのまま使えるプロンプト例つきで紹介します。",
+      "image": "/assets/knowhow-156.webp",
+      "postDate": "2026-06-02",
+      "detailUrl": "/knowhow/detail/knowhow-156.html"
+    },
+    {
+      "id": 155,
+      "title": "AIで面接を振り返る｜録画文字起こし改善法",
+      "category": "kh01",
+      "excerpt": "面接の振り返りをAIで効率化する方法を解説。録画・録音の文字起こし、回答の論理やSTAR法を添削するプロンプト、次の面接に活かすPDCA、複数社の記録を蓄積した弱点分析まで実例付きで紹介します。",
+      "image": "/assets/knowhow-155.webp",
+      "postDate": "2026-06-02",
+      "detailUrl": "/knowhow/detail/knowhow-155.html"
+    },
+    {
       "id": 154,
       "title": "面接で希望年収を聞かれたら〜角を立てない答え方",
       "category": "kh01",
