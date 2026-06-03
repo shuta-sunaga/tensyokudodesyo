@@ -1,6 +1,33 @@
 {
   "articles": [
     {
+      "id": 160,
+      "title": "AIで企業研究を深掘り｜面接で差がつく調べ方",
+      "category": "kh04",
+      "excerpt": "面接で深い質問に答えられない方へ。ChatGPTやGeminiで企業研究を効率化し、事業構造・競合・将来性まで深掘りする手順を解説。面接で差がつく企業分析と逆質問の作り方をプロンプト付きで紹介します。",
+      "image": "/assets/knowhow-160.webp",
+      "postDate": "2026-06-03",
+      "detailUrl": "/knowhow/detail/knowhow-160.html"
+    },
+    {
+      "id": 159,
+      "title": "AIで転職の軸を決める｜後悔しない優先順位",
+      "category": "kh03",
+      "excerpt": "転職の軸が定まらず求人選びに迷う方へ。ChatGPTやGeminiを使って自分の価値観を引き出し、譲れない条件の優先順位を決める手順を解説。後悔しない転職のための軸づくりをAIで効率化します。",
+      "image": "/assets/knowhow-159.webp",
+      "postDate": "2026-06-03",
+      "detailUrl": "/knowhow/detail/knowhow-159.html"
+    },
+    {
+      "id": 158,
+      "title": "AIで志望動機を作成｜通過率が上がる書き方",
+      "category": "kh02",
+      "excerpt": "志望動機が思いつかない、ありきたりになる方へ。ChatGPTやGeminiで自分の経験と企業の特徴を結びつけ、書類選考の通過率が上がる志望動機を作る手順とコピペ可能なプロンプト例を解説します。",
+      "image": "/assets/knowhow-158.webp",
+      "postDate": "2026-06-03",
+      "detailUrl": "/knowhow/detail/knowhow-158.html"
+    },
+    {
       "id": 157,
       "title": "AIで企業の評判を分析｜口コミの読み解き方",
       "category": "kh04",
