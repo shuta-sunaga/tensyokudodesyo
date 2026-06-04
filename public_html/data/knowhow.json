@@ -1,6 +1,33 @@
 {
   "articles": [
     {
+      "id": 163,
+      "title": "アルバイト・パート経験の職務経歴書の書き方",
+      "category": "kh02",
+      "excerpt": "アルバイト・パートの経験を正社員転職の職務経歴書でどう書くか解説。雇用形態の明記ルール、複数バイトのまとめ方、空白期間の扱い、経験を強みに変える例文とチェックリストを紹介します。",
+      "image": "/assets/knowhow-163.webp",
+      "postDate": "2026-06-04",
+      "detailUrl": "/knowhow/detail/knowhow-163.html"
+    },
+    {
+      "id": 162,
+      "title": "在職中の職務経歴書の書き方〜現職の実績の伝え方",
+      "category": "kh02",
+      "excerpt": "在職中の職務経歴書の書き方を解説。現職を「現在に至る」で締める書式、進行中の業務や未確定の実績の表現、退職予定日の扱いまで、そのまま使える例文とチェックリストで紹介します。",
+      "image": "/assets/knowhow-162.webp",
+      "postDate": "2026-06-04",
+      "detailUrl": "/knowhow/detail/knowhow-162.html"
+    },
+    {
+      "id": 161,
+      "title": "職務経歴書のスキル欄の書き方〜PC・語学・資格の伝え方",
+      "category": "kh02",
+      "excerpt": "職務経歴書のスキル欄の書き方を解説。PCスキルのレベル表現、語学スコアの示し方、資格の順番や「勉強中」の扱いまで、採用担当に伝わる例文とチェックリストで紹介します。",
+      "image": "/assets/knowhow-161.webp",
+      "postDate": "2026-06-04",
+      "detailUrl": "/knowhow/detail/knowhow-161.html"
+    },
+    {
       "id": 160,
       "title": "AIで企業研究を深掘り｜面接で差がつく調べ方",
       "category": "kh04",
