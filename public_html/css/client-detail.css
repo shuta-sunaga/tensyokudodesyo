@@ -227,6 +227,15 @@
     .client-list-filter .filter-select-wrapper {
         flex: 1 1 0;
         min-width: 0;
+        flex-direction: column;     /* 狭い画面ではラベルをセレクトの上に積む */
+        align-items: stretch;
+        gap: 0.25rem;
+    }
+
+    /* セレクトが固有幅で溢れて隣のフィルターに被るのを防ぐ */
+    .client-list-filter .filter-select {
+        width: 100%;
+        min-width: 0;
     }
 
     .client-list-grid {
