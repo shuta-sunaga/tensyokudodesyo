@@ -40,23 +40,69 @@
         return String(name || '').replace(/\s+/g, '').trim();
     }
 
+    // 都道府県別JSON(MT生成)が 404 等でも静かに無視する取得関数
+    async function fetchJSONQuiet(url) {
+        try {
+            const res = await fetch(url);
+            if (!res.ok) return null;
+            return await res.json();
+        } catch (err) {
+            return null;
+        }
+    }
+
+    // MT軽量JSONの生salary("3,600,000~4,300,000" / "3,600,000~0")を「年収◯万〜◯万円」に整形
+    function formatSalary(raw) {
+        if (!raw) return '';
+        const parts = String(raw).split('~');
+        const low = parseInt((parts[0] || '').replace(/[^0-9]/g, ''), 10) || 0;
+        const high = parts.length > 1 ? (parseInt((parts[1] || '').replace(/[^0-9]/g, ''), 10) || 0) : 0;
+        const man = function (n) { return Math.round(n / 10000); };
+        if (!low && !high) return '';
+        if (!high) return '年収' + man(low) + '万円〜';
+        if (!low) return '年収〜' + man(high) + '万円';
+        return '年収' + man(low) + '万〜' + man(high) + '万円';
+    }
+
     /**
-     * その会社に紐づく求人を描画
+     * その会社に紐づく求人を「全都道府県のMT生成JSON」から集約し、最新5件を描画する。
+     * - data/jobs/{prefecture_id}.json は MT が求人登録時に自動生成するため、
+     *   ここを参照すれば求人追加が自動でこのページにも反映される。
      */
     async function renderClientJobs(clientName) {
         const container = document.getElementById('clientJobsGrid');
         if (!container) return;
 
-        const data = await fetchJSON('/data/jobs.json');
-        if (!data || !Array.isArray(data.jobs)) {
+        // 全都道府県リストを取得し、各 data/jobs/{id}.json を並列フェッチ（存在しない県は静かに無視）
+        const prefData = await fetchJSON('/data/prefectures.json');
+        const prefectures = (prefData && Array.isArray(prefData.prefectures)) ? prefData.prefectures : [];
+        if (prefectures.length === 0) {
             container.innerHTML = '<div class="client-jobs-empty">求人情報を読み込めませんでした</div>';
             return;
         }
 
+        const jobArrays = await Promise.all(prefectures.map(function (pref) {
+            return fetchJSONQuiet('/data/jobs/' + pref.id + '.json').then(function (data) {
+                if (!data || !Array.isArray(data.jobs)) return [];
+                return data.jobs.map(function (job) {
+                    return Object.assign({}, job, {
+                        prefecture: job.prefecture || data.prefecture || pref.name
+                    });
+                });
+            });
+        }));
+        const allJobs = jobArrays.reduce(function (acc, arr) { return acc.concat(arr); }, []);
+
         const target = normalizeCompanyName(clientName);
-        const matched = data.jobs.filter(function (j) {
-            return normalizeCompanyName(j.company) === target;
-        });
+        const matched = allJobs
+            .filter(function (j) { return normalizeCompanyName(j.company) === target; })
+            .sort(function (a, b) {
+                const da = new Date(a.postDate || 0).getTime();
+                const db = new Date(b.postDate || 0).getTime();
+                if (db !== da) return db - da;          // postDate 新しい順
+                return (b.id || 0) - (a.id || 0);        // 同日は id の大きい順
+            })
+            .slice(0, 5);                                // 最新5件
 
         if (matched.length === 0) {
             container.innerHTML = '<div class="client-jobs-empty">現在、この会社の公開求人はありません。<br>転職相談からご希望をお聞かせください。</div>';
@@ -69,7 +115,8 @@
             const tagHtml = conditions.map(function (c) {
                 return '<span class="client-job-card-tag">' + escapeHTML(c) + '</span>';
             }).join('');
-            const area = [job.prefecture, job.city].filter(Boolean).join(' ');
+            const area = job.city || job.prefecture || '';
+            const salaryText = formatSalary(job.salary);
 
             return '' +
                 '<a class="client-job-card" href="' + escapeHTML(detailUrl) + '">' +
@@ -78,7 +125,7 @@
                         tagHtml +
                     '</div>' +
                     '<h3 class="client-job-card-title">' + escapeHTML(job.title) + '</h3>' +
-                    (job.salary ? '<div class="client-job-card-salary">' + escapeHTML(job.salary) + '</div>' : '') +
+                    (salaryText ? '<div class="client-job-card-salary">' + escapeHTML(salaryText) + '</div>' : '') +
                     '<span class="client-job-card-link">求人を見る</span>' +
                 '</a>';
         }).join('');
