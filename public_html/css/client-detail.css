@@ -419,7 +419,7 @@
 .client-section-heading {
     font-size: 0.7rem;
     font-weight: 700;
-    color: var(--color-primary);
+    color: var(--section-accent, var(--color-primary));
     letter-spacing: 0.14em;
     text-transform: uppercase;
     margin-bottom: var(--c-stack-2);
@@ -432,7 +432,7 @@
     content: "";
     width: 1.25rem;
     height: 2px;
-    background: var(--color-primary);
+    background: var(--section-accent, var(--color-primary));
     border-radius: 2px;
 }
 
@@ -531,35 +531,121 @@
 }
 
 /* --------------------------------------------------------------------------
-   Editorial sections (ビジョン・カルチャー・求める人物像)
-   カードをやめ、薄い縦線アクセント + 整理された本文で「読み物」として連続させる
+   Editorial sections (事業内容・ビジョン・カルチャー・求める人物像・メッセージ)
+   ------------------------------------------------------------------------
+   設計意図：
+   - 全体に縦線を引く「引用」風をやめ、セクション色は eyebrow（小見出し）に集約して識別
+   - 事業内容・ビジョンは H3 見出し付きの feature カードで段落構造を明示
+   - 文章セクション（カルチャー・求める人物像）はリード段落で階層を作り読み物として整える
+   - メッセージのみ編集者の声として淡い背景カードで差別化
+   各セクションは --section-accent を持ち、eyebrow / feature の H3 マーカー / 番号バッジが参照する
    -------------------------------------------------------------------------- */
+.client-section {
+    --section-accent: var(--color-primary);
+}
+.client-section:has(> .client-editorial--business) { --section-accent: #5b8fb9; }
+.client-section:has(> .client-editorial--accent)   { --section-accent: var(--color-secondary); }
+.client-section:has(> .client-editorial--ideal)    { --section-accent: #7b6cb0; }
+.client-section:has(> .client-editorial--message)  { --section-accent: var(--color-primary); }
+
 .client-editorial {
-    border-left: 3px solid var(--color-primary);
-    padding-left: 1.1rem;
+    /* 縦線は撤去。本文ラッパーとしてのみ機能 */
 }
 
-.client-editorial--business {
-    border-left-color: #5b8fb9;
+/* リード段落：各セクション冒頭の導入文。やや大きめ・中太で本文への入口をつくる */
+.client-lead {
+    font-size: 1.05rem;
+    font-weight: 600;
+    line-height: 1.8;
+    color: var(--color-text);
+    margin-bottom: var(--c-stack-5);
+}
+.client-lead:last-child {
+    margin-bottom: 0;
 }
 
-.client-editorial--accent {
-    border-left-color: var(--color-secondary);
+/* Feature リスト：事業内容・ビジョンの各項目を H3 見出し付きカードで表現 */
+.client-feature-grid {
+    display: flex;
+    flex-direction: column;
+    gap: var(--c-stack-4);
 }
 
-.client-editorial--ideal {
-    border-left-color: #7b6cb0;
+.client-feature {
+    position: relative;
+    background: var(--color-bg-cream);
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--radius-md);
+    padding: var(--c-stack-5) var(--c-stack-5);
+}
+
+.client-feature-title {
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: var(--color-text);
+    line-height: 1.5;
+    margin-bottom: var(--c-stack-2);
+    padding-left: 0.85rem;
+    position: relative;
+}
+.client-feature-title::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.2em;
+    bottom: 0.2em;
+    width: 4px;
+    border-radius: 2px;
+    background: var(--section-accent);
+}
+
+.client-feature-body {
+    font-size: 0.9375rem;
+    line-height: 1.85;
+    color: var(--color-text-muted);
+}
+
+/* 番号付きバリアント（ビジョン）：01 / 02 / 03 のバッジで「3つのビジョン」を視覚化 */
+.client-feature-grid--numbered {
+    counter-reset: client-vnum;
+}
+.client-feature-grid--numbered .client-feature {
+    counter-increment: client-vnum;
+    padding-left: calc(var(--c-stack-5) + 3rem);
+}
+.client-feature-grid--numbered .client-feature::before {
+    content: counter(client-vnum, decimal-leading-zero);
+    position: absolute;
+    left: var(--c-stack-5);
+    top: var(--c-stack-5);
+    width: 2.1rem;
+    height: 2.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    font-weight: 800;
+    color: #fff;
+    background: var(--section-accent);
+    border-radius: 50%;
+    line-height: 1;
+}
+.client-feature-grid--numbered .client-feature-title {
+    padding-left: 0;
+}
+.client-feature-grid--numbered .client-feature-title::before {
+    display: none;
 }
 
 /* メッセージは編集者の声として、控えめなトーン違いで強調 */
 .client-editorial--message {
     background: var(--color-primary-light);
-    border-left: 3px solid var(--color-primary);
-    border-radius: var(--radius-sm);
-    padding: 1.1rem 1.4rem;
+    border-radius: var(--radius-md);
+    padding: var(--c-stack-5) var(--c-stack-5);
 }
 
-.client-editorial--message .client-section-body {
+.client-editorial--message .client-section-body,
+.client-editorial--message .client-lead {
     color: #2c4a37;
 }
 
@@ -861,12 +947,26 @@
         font-size: 0.75rem;
     }
 
-    .client-editorial {
-        padding-left: 0.9rem;
+    .client-feature {
+        padding: var(--c-stack-4) 1.1rem;
+    }
+
+    .client-feature-grid--numbered .client-feature {
+        padding-left: 1.1rem;
+        padding-top: calc(var(--c-stack-4) + 2.6rem);
+    }
+
+    .client-feature-grid--numbered .client-feature::before {
+        left: 1.1rem;
+        top: var(--c-stack-4);
     }
 
     .client-editorial--message {
-        padding: 1rem 1.1rem;
+        padding: var(--c-stack-4) 1.1rem;
+    }
+
+    .client-lead {
+        font-size: 1rem;
     }
 
     .client-jobs {

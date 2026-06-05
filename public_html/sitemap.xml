@@ -48,6 +48,20 @@
         <priority>0.7</priority>
     </url>
 
+    <!-- Clients -->
+    <url>
+        <loc>https://www.tensyokudodesyo.com/clients/</loc>
+        <lastmod>2026-06-05</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://www.tensyokudodesyo.com/clients/detail/aru.html</loc>
+        <lastmod>2026-06-05</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
     <!-- Knowhow -->
     <url>
         <loc>https://www.tensyokudodesyo.com/knowhow/</loc>
