@@ -1,6 +1,33 @@
 {
   "articles": [
     {
+      "id": 166,
+      "title": "転職面接の持ち物リスト｜当日準備と忘れ物対策",
+      "category": "kh01",
+      "excerpt": "転職面接の持ち物を必須・あると安心・Web面接用に分けて完全網羅。前日にバッグへ詰める段取りや忘れ物を防ぐ仕組み、コピペで使えるチェックリストまで具体的に解説します。",
+      "image": "/assets/knowhow-166.webp",
+      "postDate": "2026-06-05",
+      "detailUrl": "/knowhow/detail/knowhow-166.html"
+    },
+    {
+      "id": 165,
+      "title": "転職時の年金手続き｜切替方法と空白期間の対処",
+      "category": "kh05",
+      "excerpt": "転職時の年金手続きをケース別に解説。空白期間の国民年金切替、退職特例の保険料免除、配偶者の扶養、企業型DC・iDeCoの移換まで、必要書類と期限を含めてわかりやすくまとめました。",
+      "image": "/assets/knowhow-165.webp",
+      "postDate": "2026-06-05",
+      "detailUrl": "/knowhow/detail/knowhow-165.html"
+    },
+    {
+      "id": 164,
+      "title": "自己分析のSWOT分析｜強み弱みを4象限で整理",
+      "category": "kh03",
+      "excerpt": "転職の自己分析に使えるSWOT分析の手順を解説。強み・弱み・機会・脅威の4象限の埋め方と、クロス分析で具体的な転職戦略に落とし込む方法を記入例つきで紹介します。",
+      "image": "/assets/knowhow-164.webp",
+      "postDate": "2026-06-05",
+      "detailUrl": "/knowhow/detail/knowhow-164.html"
+    },
+    {
       "id": 163,
       "title": "アルバイト・パート経験の職務経歴書の書き方",
       "category": "kh02",
