@@ -13,3 +13,8 @@ backend/lambda/submit-form/.aws-sam/
 
 # screenshots & temporary files
 tmp/
+
+# docs配下のソース素材・スクショ（リポジトリ管理しない）
+docs/スクリーンショット*.png
+docs/【ARU】転職どうでしょう企業ページ案.docx
+docs/会社紹介_ARU様.jpg
