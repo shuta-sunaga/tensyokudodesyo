@@ -477,7 +477,8 @@ function transformData() {
     blob.setDataFromString(csvContent, 'Shift_JIS');
     blob.setName(fileName);
     const file = DriveApp.createFile(blob);
-    return file.getDownloadUrl();
+    file.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);
+    return 'https://drive.google.com/uc?export=download&id=' + file.getId();
   };
 
   // チャンクごとにCSVファイルを生成
