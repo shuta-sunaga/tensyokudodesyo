@@ -3119,7 +3119,7 @@ body.menu-open {
 /* --------------------------------------------------------------------------
    Home Page Content Sections
    -------------------------------------------------------------------------- */
-/* MV直下から交互に背景色を切替（new-jobs: cream → interview: white → client: cream → company: white → knowhow: cream → CTA: green） */
+/* MV直下から交互に背景色を切替（new-jobs: cream → client: white → interview: cream → company: white → knowhow: cream → CTA: green） */
 .interview-section-home,
 .company-section-home,
 .knowhow-section-home,
@@ -3127,8 +3127,8 @@ body.menu-open {
     padding: var(--spacing-2xl) 0;
 }
 
-.interview-section-home { background: var(--color-bg); }       /* white */
-.client-section-home    { background: var(--color-bg-warm); }  /* cream */
+.client-section-home    { background: var(--color-bg); }       /* white */
+.interview-section-home { background: var(--color-bg-warm); }  /* cream */
 .company-section-home   { background: var(--color-bg); }       /* white */
 .knowhow-section-home   { background: var(--color-bg-warm); }  /* cream */
 
