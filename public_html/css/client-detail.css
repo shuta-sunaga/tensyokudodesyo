@@ -53,6 +53,119 @@
     min-width: 160px;
 }
 
+/* --------------------------------------------------------------------------
+   Custom Dropdown (ネイティブselectの代替・常に下方向に展開)
+   clients-page.js の enhanceSelect が生成。元の<select>は非表示でデータ源として残る。
+   -------------------------------------------------------------------------- */
+.cdrop {
+    position: relative;
+    flex: 1 1 auto;
+    min-width: 0;
+    width: 100%;
+}
+
+.cdrop-native-hidden {
+    display: none !important;
+}
+
+.cdrop-trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    width: 100%;
+    padding: 0.55rem 0.9rem;
+    font-size: 0.9375rem;
+    color: var(--color-text);
+    background: #fff;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    user-select: none;
+    transition: border-color var(--transition-fast, 0.15s ease);
+}
+
+.cdrop-trigger:hover {
+    border-color: var(--color-primary);
+}
+
+.cdrop-trigger:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 1px;
+}
+
+.cdrop--open .cdrop-trigger {
+    border-color: var(--color-primary);
+}
+
+.cdrop-trigger-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.cdrop-caret {
+    flex-shrink: 0;
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 6px solid var(--color-text-muted);
+    transition: transform var(--transition-fast, 0.15s ease);
+}
+
+.cdrop--open .cdrop-caret {
+    transform: rotate(180deg);
+}
+
+/* リストは常に top:100%（トリガーの直下）に絶対配置 = 必ず下方向に展開 */
+.cdrop-list {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    right: 0;
+    z-index: 50;
+    margin: 0;
+    padding: 0.35rem;
+    list-style: none;
+    background: #fff;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    box-shadow: 0 10px 28px rgba(61, 74, 63, 0.16);
+    max-height: 280px;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+}
+
+.cdrop-list[hidden] {
+    display: none;
+}
+
+.cdrop-option {
+    padding: 0.5rem 0.7rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.9rem;
+    line-height: 1.4;
+    color: var(--color-text);
+    cursor: pointer;
+}
+
+.cdrop-option--active,
+.cdrop-option:hover {
+    background: var(--color-bg-warm);
+}
+
+.cdrop-option[aria-selected="true"] {
+    color: var(--color-primary);
+    font-weight: 700;
+}
+
+.cdrop-option[aria-selected="true"]::after {
+    content: "✓";
+    float: right;
+    margin-left: 0.5rem;
+}
+
 .client-list-section {
     padding: 2.5rem 0 4rem;
     background: var(--color-bg-warm);

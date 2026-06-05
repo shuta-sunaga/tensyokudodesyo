@@ -116,6 +116,162 @@
         });
     }
 
+    // ネイティブ<select>を「常に下方向に開く」カスタムドロップダウンに拡張する。
+    // 元のselectはデータ源として残し、選択時にvalueを書き戻して change を発火させるため、
+    // 既存のフィルタ処理（prefecture/industry）はそのまま動作する。ARIA combobox 準拠。
+    function enhanceSelect(selectEl) {
+        if (!selectEl || selectEl.dataset.enhanced) return;
+        selectEl.dataset.enhanced = '1';
+
+        var listId = (selectEl.id || 'cdrop') + '-list';
+        var options = [];
+        var activeIndex = -1;
+
+        var wrapper = document.createElement('div');
+        wrapper.className = 'cdrop';
+
+        var trigger = document.createElement('div');
+        trigger.className = 'cdrop-trigger';
+        trigger.setAttribute('role', 'combobox');
+        trigger.setAttribute('tabindex', '0');
+        trigger.setAttribute('aria-haspopup', 'listbox');
+        trigger.setAttribute('aria-expanded', 'false');
+        trigger.setAttribute('aria-controls', listId);
+
+        var label = selectEl.id ? document.querySelector('label[for="' + selectEl.id + '"]') : null;
+        if (label) {
+            if (!label.id) label.id = selectEl.id + '-label';
+            trigger.setAttribute('aria-labelledby', label.id);
+            label.addEventListener('click', function (e) { e.preventDefault(); trigger.focus(); });
+        }
+
+        var triggerText = document.createElement('span');
+        triggerText.className = 'cdrop-trigger-text';
+        trigger.appendChild(triggerText);
+
+        var caret = document.createElement('span');
+        caret.className = 'cdrop-caret';
+        caret.setAttribute('aria-hidden', 'true');
+        trigger.appendChild(caret);
+
+        var list = document.createElement('ul');
+        list.className = 'cdrop-list';
+        list.id = listId;
+        list.setAttribute('role', 'listbox');
+        if (label) list.setAttribute('aria-labelledby', label.id);
+        list.hidden = true;
+
+        function syncTriggerText() {
+            var sel = selectEl.options[selectEl.selectedIndex];
+            triggerText.textContent = sel ? sel.textContent : '';
+        }
+
+        function buildOptions() {
+            list.innerHTML = '';
+            options = [];
+            Array.prototype.forEach.call(selectEl.options, function (opt, i) {
+                var li = document.createElement('li');
+                li.className = 'cdrop-option';
+                li.id = listId + '-opt-' + i;
+                li.setAttribute('role', 'option');
+                li.setAttribute('aria-selected', opt.value === selectEl.value ? 'true' : 'false');
+                li.textContent = opt.textContent;
+                li.addEventListener('click', function () { choose(i); });
+                li.addEventListener('mousemove', function () { setActive(i); });
+                list.appendChild(li);
+                options.push({ value: opt.value, el: li });
+            });
+            syncTriggerText();
+        }
+
+        function setActive(i) {
+            if (i < 0 || i >= options.length) return;
+            options.forEach(function (o, idx) {
+                o.el.classList.toggle('cdrop-option--active', idx === i);
+            });
+            activeIndex = i;
+            trigger.setAttribute('aria-activedescendant', options[i].el.id);
+            options[i].el.scrollIntoView({ block: 'nearest' });
+        }
+
+        function open() {
+            if (!list.hidden) return;
+            list.hidden = false;
+            wrapper.classList.add('cdrop--open');
+            trigger.setAttribute('aria-expanded', 'true');
+            setActive(selectEl.selectedIndex >= 0 ? selectEl.selectedIndex : 0);
+            document.addEventListener('click', onDocClick, true);
+        }
+
+        function close() {
+            if (list.hidden) return;
+            list.hidden = true;
+            wrapper.classList.remove('cdrop--open');
+            trigger.setAttribute('aria-expanded', 'false');
+            trigger.removeAttribute('aria-activedescendant');
+            document.removeEventListener('click', onDocClick, true);
+        }
+
+        function choose(i) {
+            if (i < 0 || i >= options.length) return;
+            selectEl.value = options[i].value;
+            options.forEach(function (o, idx) {
+                o.el.setAttribute('aria-selected', idx === i ? 'true' : 'false');
+            });
+            syncTriggerText();
+            selectEl.dispatchEvent(new Event('change', { bubbles: true }));
+            close();
+            trigger.focus();
+        }
+
+        function onDocClick(e) {
+            if (!wrapper.contains(e.target)) close();
+        }
+
+        trigger.addEventListener('click', function () {
+            if (list.hidden) open(); else close();
+        });
+
+        trigger.addEventListener('keydown', function (e) {
+            switch (e.key) {
+                case 'ArrowDown': case 'Down':
+                    e.preventDefault();
+                    if (list.hidden) open(); else setActive(Math.min(activeIndex + 1, options.length - 1));
+                    break;
+                case 'ArrowUp': case 'Up':
+                    e.preventDefault();
+                    if (list.hidden) open(); else setActive(Math.max(activeIndex - 1, 0));
+                    break;
+                case 'Enter': case ' ': case 'Spacebar':
+                    e.preventDefault();
+                    if (list.hidden) open(); else choose(activeIndex);
+                    break;
+                case 'Escape':
+                    if (!list.hidden) { e.preventDefault(); close(); }
+                    break;
+                case 'Home':
+                    if (!list.hidden) { e.preventDefault(); setActive(0); }
+                    break;
+                case 'End':
+                    if (!list.hidden) { e.preventDefault(); setActive(options.length - 1); }
+                    break;
+                case 'Tab':
+                    close();
+                    break;
+            }
+        });
+
+        selectEl.parentNode.insertBefore(wrapper, selectEl);
+        wrapper.appendChild(trigger);
+        wrapper.appendChild(list);
+        wrapper.appendChild(selectEl);
+        selectEl.classList.add('cdrop-native-hidden');
+        selectEl.setAttribute('tabindex', '-1');
+        selectEl.setAttribute('aria-hidden', 'true');
+
+        buildOptions();
+    }
+
     function setupFilters() {
         if (typeof CategoryManager !== 'undefined') {
             CategoryManager.renderPrefectureSelect('prefectureFilter', 'すべてのエリア');
@@ -147,6 +303,10 @@
                 });
             }
         }
+
+        // ネイティブselectを下方向固定のカスタムドロップダウンに置き換え（changeで上記ハンドラに接続）
+        enhanceSelect(document.getElementById('prefectureFilter'));
+        enhanceSelect(document.getElementById('industryFilter'));
     }
 
     async function init() {
