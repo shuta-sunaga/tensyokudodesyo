@@ -1,6 +1,33 @@
 {
   "articles": [
     {
+      "id": 169,
+      "title": "AIで入社後90日の立ち上がり計画を作る",
+      "category": "kh05",
+      "excerpt": "転職後の入社90日をAIで計画する方法を解説。30/60/90日プランの作り方、AIへの指示プロンプト例、早期に信頼を得るタスク設計を具体的に紹介します。",
+      "image": "/assets/knowhow-169.webp",
+      "postDate": "2026-06-08",
+      "detailUrl": "/knowhow/detail/knowhow-169.html"
+    },
+    {
+      "id": 168,
+      "title": "AIで証明写真を作るのはアリ？注意点と作り方",
+      "category": "kh02",
+      "excerpt": "AIで証明写真やビジネスプロフ写真を作る方法と注意点を解説。履歴書に使ってよいか、加工の許容範囲、失敗しない作り方の手順、リスクと使い分けを紹介します。",
+      "image": "/assets/knowhow-168.webp",
+      "postDate": "2026-06-08",
+      "detailUrl": "/knowhow/detail/knowhow-168.html"
+    },
+    {
+      "id": 167,
+      "title": "AIの落とし穴｜転職でやってはいけない使い方",
+      "category": "kh05",
+      "excerpt": "転職活動でAIを使うときにやってはいけない5つの落とし穴（機密情報入力・ハルシネーション・AI生成バレ・丸暗記・選考ルール違反）と安全に使うチェックリストを解説します。",
+      "image": "/assets/knowhow-167.webp",
+      "postDate": "2026-06-08",
+      "detailUrl": "/knowhow/detail/knowhow-167.html"
+    },
+    {
       "id": 166,
       "title": "転職面接の持ち物リスト｜当日準備と忘れ物対策",
       "category": "kh01",
