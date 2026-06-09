@@ -1,6 +1,33 @@
 {
   "articles": [
     {
+      "id": 172,
+      "title": "音声入力×AIで職務経歴書を作る｜話して下書き",
+      "category": "kh02",
+      "excerpt": "音声入力とAIで職務経歴書を作る方法を解説。話すだけで素材を集め、AIで整形する手順、書くのが苦手な人やスキマ時間を活かしたい人向けのコツと注意点を紹介します。",
+      "image": "/assets/knowhow-172.webp",
+      "postDate": "2026-06-09",
+      "detailUrl": "/knowhow/detail/knowhow-172.html"
+    },
+    {
+      "id": 171,
+      "title": "AIでリファレンスチェックに備える｜回答準備術",
+      "category": "kh05",
+      "excerpt": "リファレンスチェックの対策をAIで準備する方法を解説。想定質問の洗い出し、推薦者との認識合わせ、応募書類との一貫性チェックまで、落ち着いて臨むための準備術を紹介します。",
+      "image": "/assets/knowhow-171.webp",
+      "postDate": "2026-06-09",
+      "detailUrl": "/knowhow/detail/knowhow-171.html"
+    },
+    {
+      "id": 170,
+      "title": "AIで未経験業界を予習する｜転職前の下調べ術",
+      "category": "kh04",
+      "excerpt": "未経験の業界へ転職する前にAIで予習する方法を解説。業界の全体像・専門用語・主要企業・キャリアパス・必要スキルを効率的に調べる5ステップとプロンプト例を紹介します。",
+      "image": "/assets/knowhow-170.webp",
+      "postDate": "2026-06-09",
+      "detailUrl": "/knowhow/detail/knowhow-170.html"
+    },
+    {
       "id": 169,
       "title": "AIで入社後90日の立ち上がり計画を作る",
       "category": "kh05",
