@@ -1,6 +1,15 @@
 {
   "articles": [
     {
+      "id": 173,
+      "title": "転職を繰り返す人の特徴と抜け出す方法",
+      "category": "kh03",
+      "excerpt": "転職を繰り返してしまう人に共通する特徴と根本原因を解説。転職回数が採用に与える影響のデータ、同じ失敗を断ち切る自己分析の手順と企業選びのチェックリストまで紹介します。",
+      "image": "/assets/knowhow-173.webp",
+      "postDate": "2026-06-10",
+      "detailUrl": "/knowhow/detail/knowhow-173.html"
+    },
+    {
       "id": 172,
       "title": "音声入力×AIで職務経歴書を作る｜話して下書き",
       "category": "kh02",
