@@ -1,6 +1,33 @@
 {
   "articles": [
     {
+      "id": 176,
+      "title": "Geminiで職務経歴書｜Googleドキュメント連携",
+      "category": "kh02",
+      "excerpt": "Geminiで職務経歴書を作る方法を解説。Googleドキュメント連携での整形、経歴素材の引き出し方、職務要約・自己PRを磨くプロンプト、スプレッドシートでの実績数値化までを実例付きで紹介します。",
+      "image": "/assets/knowhow-176.webp",
+      "postDate": "2026-06-11",
+      "detailUrl": "/knowhow/detail/knowhow-176.html"
+    },
+    {
+      "id": 175,
+      "title": "Geminiで業界研究｜Google検索連携の調べ方",
+      "category": "kh04",
+      "excerpt": "Geminiで業界研究をする方法を解説。Google検索連携で最新トレンドを掴む手順、市場規模や将来性の調べ方、スプレッドシートでの業界比較、Deep Research活用までプロンプト付きで紹介します。",
+      "image": "/assets/knowhow-175.webp",
+      "postDate": "2026-06-11",
+      "detailUrl": "/knowhow/detail/knowhow-175.html"
+    },
+    {
+      "id": 174,
+      "title": "Claudeで面接対策｜深い回答を磨く練習法",
+      "category": "kh01",
+      "excerpt": "Claudeで面接対策をする方法を解説。長文コンテキストとProjects機能を活かした回答の壁打ち、STAR法・PREP法での論理添削、深い回答に磨くプロンプト例を紹介します。",
+      "image": "/assets/knowhow-174.webp",
+      "postDate": "2026-06-11",
+      "detailUrl": "/knowhow/detail/knowhow-174.html"
+    },
+    {
       "id": 173,
       "title": "転職を繰り返す人の特徴と抜け出す方法",
       "category": "kh03",
