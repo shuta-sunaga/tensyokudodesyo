@@ -1,6 +1,33 @@
 {
   "articles": [
     {
+      "id": 179,
+      "title": "ChatGPTを専属キャリア相談役にする設定術",
+      "category": "kh03",
+      "excerpt": "ChatGPTのカスタム指示・メモリ・プロジェクト機能で、転職活動を継続相談できる専属キャリア相談役を作る設定術を解説。設定テンプレートと週1回の壁打ちルーティンも紹介します。",
+      "image": "/assets/knowhow-179.webp",
+      "postDate": "2026-06-12",
+      "detailUrl": "/knowhow/detail/knowhow-179.html"
+    },
+    {
+      "id": 178,
+      "title": "ChatGPTで応募書類を校正｜提出前チェック術",
+      "category": "kh02",
+      "excerpt": "完成した履歴書・職務経歴書をChatGPTで提出前に校正する方法を解説。誤字脱字や表記ゆれの洗い出し、日付・数字の整合性チェック、敬語点検のプロンプトと最終チェックリストを紹介します。",
+      "image": "/assets/knowhow-178.webp",
+      "postDate": "2026-06-12",
+      "detailUrl": "/knowhow/detail/knowhow-178.html"
+    },
+    {
+      "id": 177,
+      "title": "ChatGPTで退職メール・挨拶文を作成する方法",
+      "category": "kh05",
+      "excerpt": "退職の切り出しメールから退職願、社内外への挨拶メール、引き継ぎ書までChatGPTで効率よく作る方法を解説。場面別プロンプトとそのまま使える例文、送信前チェックリストを紹介します。",
+      "image": "/assets/knowhow-177.webp",
+      "postDate": "2026-06-12",
+      "detailUrl": "/knowhow/detail/knowhow-177.html"
+    },
+    {
       "id": 176,
       "title": "Geminiで職務経歴書｜Googleドキュメント連携",
       "category": "kh02",
