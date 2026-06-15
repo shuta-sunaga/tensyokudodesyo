@@ -1,6 +1,33 @@
 {
   "articles": [
     {
+      "id": 182,
+      "title": "やりたい仕事がわからない時の見つけ方",
+      "category": "kh03",
+      "excerpt": "やりたい仕事がわからない人へ、適職を見つける手順を解説。原因の4タイプ整理、過去の経験から「好き・得意・大事」を掘り起こす3つの問い、消去法での絞り込み、小さく試す行動ステップとチェックリストを紹介します。",
+      "image": "/assets/knowhow-182.webp",
+      "postDate": "2026-06-15",
+      "detailUrl": "/knowhow/detail/knowhow-182.html"
+    },
+    {
+      "id": 181,
+      "title": "IT・Web業界の転職ガイド｜職種・年収・将来性",
+      "category": "kh04",
+      "excerpt": "IT・Web業界への転職ガイド。SIer・自社開発・SES・Web系の業界構造、エンジニア／非エンジニア職種別の年収相場、必要スキル、未経験からの参入ルート3パターン、ブラック企業の見抜き方まで具体的に解説します。",
+      "image": "/assets/knowhow-181.webp",
+      "postDate": "2026-06-15",
+      "detailUrl": "/knowhow/detail/knowhow-181.html"
+    },
+    {
+      "id": 180,
+      "title": "面接の退職理由・転職理由の答え方と例文",
+      "category": "kh01",
+      "excerpt": "面接の退職理由・転職理由の答え方を例文付きで解説。ネガティブな本音をポジティブに変換する3ステップ、避けたいNG表現5パターン、理由別の回答例文、深掘り対策とチェックリストを紹介します。",
+      "image": "/assets/knowhow-180.webp",
+      "postDate": "2026-06-15",
+      "detailUrl": "/knowhow/detail/knowhow-180.html"
+    },
+    {
       "id": 179,
       "title": "ChatGPTを専属キャリア相談役にする設定術",
       "category": "kh03",
