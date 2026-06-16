@@ -1,6 +1,33 @@
 {
   "articles": [
     {
+      "id": 185,
+      "title": "キャリアの棚卸しのやり方｜転職準備の第一歩",
+      "category": "kh03",
+      "excerpt": "キャリアの棚卸しのやり方を解説。職務経歴を書き出す4ステップ、経験を強み・実績に変換するコツ、そのまま使える棚卸しシートのテンプレート、転職の軸・職務経歴書・面接への活かし方まで具体的に紹介します。",
+      "image": "/assets/knowhow-185.webp",
+      "postDate": "2026-06-16",
+      "detailUrl": "/knowhow/detail/knowhow-185.html"
+    },
+    {
+      "id": 184,
+      "title": "物流・運輸業界の転職ガイド｜職種・年収",
+      "category": "kh04",
+      "excerpt": "物流・運輸業界への転職ガイド。トラック・倉庫・3PLなどの業界構造、ドライバー・倉庫管理・物流企画など職種別の年収相場、2024年問題の影響、必要資格、未経験参入ルートまで具体的に解説します。",
+      "image": "/assets/knowhow-184.webp",
+      "postDate": "2026-06-16",
+      "detailUrl": "/knowhow/detail/knowhow-184.html"
+    },
+    {
+      "id": 183,
+      "title": "圧迫面接の対処法｜冷静に切り返すコツ",
+      "category": "kh01",
+      "excerpt": "圧迫面接の対処法を例文付きで解説。意図型と無自覚型の見極め、冷静に切り返す5つのコツ、質問パターン別の返し方、当日のメンタルコントロール、本当に避けるべき企業の見分け方まで紹介します。",
+      "image": "/assets/knowhow-183.webp",
+      "postDate": "2026-06-16",
+      "detailUrl": "/knowhow/detail/knowhow-183.html"
+    },
+    {
       "id": 182,
       "title": "やりたい仕事がわからない時の見つけ方",
       "category": "kh03",
