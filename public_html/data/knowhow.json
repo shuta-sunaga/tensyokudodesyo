@@ -1,6 +1,33 @@
 {
   "articles": [
     {
+      "id": 188,
+      "title": "派遣から正社員への職務経歴書の書き方",
+      "category": "kh02",
+      "excerpt": "派遣社員から正社員を目指す方へ。職務経歴書での派遣経験の書き方、登録元と派遣先の記載ルール、複数の派遣先のまとめ方、強みに変える自己PRの作り方を例文付きで解説します。",
+      "image": "/assets/knowhow-188.webp",
+      "postDate": "2026-06-17",
+      "detailUrl": "/knowhow/detail/knowhow-188.html"
+    },
+    {
+      "id": 187,
+      "title": "転職時の確定申告｜年末調整との違いと手続き",
+      "category": "kh05",
+      "excerpt": "転職したら確定申告は必要？年末調整との違い、申告が必要・不要なケース、年内転職と退職後無職のパターン別の手続き、必要書類、還付の可能性まで具体的に解説します。",
+      "image": "/assets/knowhow-187.webp",
+      "postDate": "2026-06-17",
+      "detailUrl": "/knowhow/detail/knowhow-187.html"
+    },
+    {
+      "id": 186,
+      "title": "ゲーム業界の転職ガイド｜職種・年収・将来性",
+      "category": "kh04",
+      "excerpt": "ゲーム業界への転職を考える方へ。市場規模、プランナー・エンジニア・デザイナーなど主要職種の仕事内容と年収相場、求められるスキル、未経験から入る方法、将来性まで具体的に解説します。",
+      "image": "/assets/knowhow-186.webp",
+      "postDate": "2026-06-17",
+      "detailUrl": "/knowhow/detail/knowhow-186.html"
+    },
+    {
       "id": 185,
       "title": "キャリアの棚卸しのやり方｜転職準備の第一歩",
       "category": "kh03",
