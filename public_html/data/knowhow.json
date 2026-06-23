@@ -1,6 +1,33 @@
 {
   "articles": [
     {
+      "id": 192,
+      "title": "一次面接の対策｜二次との違いと通過のコツ",
+      "category": "kh01",
+      "excerpt": "転職の一次面接を突破したい方へ。一次面接で見られるポイント、二次・最終面接との違い、よく聞かれる質問と回答例、通過率を上げる準備のコツを具体的に解説します。",
+      "image": "/assets/knowhow-192.webp",
+      "postDate": "2026-06-23",
+      "detailUrl": "/knowhow/detail/knowhow-192.html"
+    },
+    {
+      "id": 191,
+      "title": "身元保証書の書き方｜転職入社時の手続きと注意点",
+      "category": "kh05",
+      "excerpt": "入社時に提出を求められる「身元保証書」の書き方を解説。保証人の選び方・依頼の仕方、保証期間や賠償の上限など2020年法改正のポイント、提出時の注意点まで具体的にまとめました。",
+      "image": "/assets/knowhow-191.webp",
+      "postDate": "2026-06-23",
+      "detailUrl": "/knowhow/detail/knowhow-191.html"
+    },
+    {
+      "id": 190,
+      "title": "美容業界の転職ガイド｜職種・年収・将来性",
+      "category": "kh04",
+      "excerpt": "美容業界への転職を検討する方へ。美容師・エステ・ネイル・美容部員・コスメメーカー本社職など主な職種、職種別の年収相場、将来性、未経験からの転職方法を具体的に解説します。",
+      "image": "/assets/knowhow-190.webp",
+      "postDate": "2026-06-23",
+      "detailUrl": "/knowhow/detail/knowhow-190.html"
+    },
+    {
       "id": 189,
       "title": "アパレル・ファッション業界の転職ガイド｜職種・年収",
       "category": "kh04",
