@@ -1,6 +1,24 @@
 {
   "articles": [
     {
+      "id": 194,
+      "title": "金融業界の転職ガイド｜職種・年収・将来性",
+      "category": "kh04",
+      "excerpt": "金融業界への転職を考える方へ。銀行・証券・保険などの職種と仕事内容、年収相場、将来性、未経験から狙える職種、求められるスキルまで具体的に解説します。",
+      "image": "/assets/knowhow-194.webp",
+      "postDate": "2026-06-24",
+      "detailUrl": "/knowhow/detail/knowhow-194.html"
+    },
+    {
+      "id": 193,
+      "title": "試用期間の注意点｜本採用されないケースと対処法",
+      "category": "kh05",
+      "excerpt": "転職先の試用期間に不安を感じる方へ。試用期間の意味や法的な扱い、本採用されないケースと対処法、給与や解雇のルールまで具体的に解説します。",
+      "image": "/assets/knowhow-193.webp",
+      "postDate": "2026-06-24",
+      "detailUrl": "/knowhow/detail/knowhow-193.html"
+    },
+    {
       "id": 192,
       "title": "一次面接の対策｜二次との違いと通過のコツ",
       "category": "kh01",
