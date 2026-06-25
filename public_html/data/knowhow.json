@@ -1,6 +1,33 @@
 {
   "articles": [
     {
+      "id": 197,
+      "title": "転職するか迷った時の判断基準｜残留と比較",
+      "category": "kh03",
+      "excerpt": "転職するか今の会社に残るか迷っている方へ。残留と転職を比較する判断基準、後悔しない決断のためのチェックリスト、逃げの転職の見分け方、決断のタイミングまでを具体的に解説します。",
+      "image": "/assets/knowhow-197.webp",
+      "postDate": "2026-06-25",
+      "detailUrl": "/knowhow/detail/knowhow-197.html"
+    },
+    {
+      "id": 196,
+      "title": "食品業界の転職ガイド｜職種・年収・将来性",
+      "category": "kh04",
+      "excerpt": "食品業界への転職を考える方へ。食品メーカー・外食・中食の違い、研究開発や品質管理など主要職種の仕事内容と年収相場、HACCPや健康志向で変わる将来性、未経験から狙うコツまで具体的に解説します。",
+      "image": "/assets/knowhow-196.webp",
+      "postDate": "2026-06-25",
+      "detailUrl": "/knowhow/detail/knowhow-196.html"
+    },
+    {
+      "id": 195,
+      "title": "労働条件通知書の見方｜入社前の確認ポイント",
+      "category": "kh05",
+      "excerpt": "内定後に受け取る労働条件通知書・雇用契約書の見方を解説。労働基準法が定める明示事項、固定残業代や試用期間など見落としやすい注意点、入社前に使えるチェックリストを具体例つきで紹介します。",
+      "image": "/assets/knowhow-195.webp",
+      "postDate": "2026-06-25",
+      "detailUrl": "/knowhow/detail/knowhow-195.html"
+    },
+    {
       "id": 194,
       "title": "金融業界の転職ガイド｜職種・年収・将来性",
       "category": "kh04",
