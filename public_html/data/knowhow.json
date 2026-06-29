@@ -1,6 +1,15 @@
 {
   "articles": [
     {
+      "id": 199,
+      "title": "ポートフォリオの作り方｜職種別の構成と例",
+      "category": "kh02",
+      "excerpt": "転職用ポートフォリオの作り方を解説。掲載すべき5要素、エンジニア・デザイナー・マーケターなど職種別の構成例、避けたいNG例、無料で作れるツールまで具体例つきで紹介します。",
+      "image": "/assets/knowhow-199.webp",
+      "postDate": "2026-06-29",
+      "detailUrl": "/knowhow/detail/knowhow-199.html"
+    },
+    {
       "id": 198,
       "title": "年収交渉のやり方｜転職で年収を上げるコツ",
       "category": "kh01",
