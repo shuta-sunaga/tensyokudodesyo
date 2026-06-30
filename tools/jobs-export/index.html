@@ -90,7 +90,7 @@
     const payload = {
       prefecture: sel.value,
       since: document.getElementById('since').value,
-      password: document.getElementById('password').value,
+      password: document.getElementById('password').value.trim(),
     };
 
     try {

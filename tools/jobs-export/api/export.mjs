@@ -27,11 +27,11 @@ const NEEDED_FIELDS = [...new Set([
   PREFECTURE_FIELD,
 ])];
 
-/** タイミング安全なパスワード比較 */
+/** タイミング安全なパスワード比較 (コピペ事故対策で前後空白は除去) */
 function passwordOk(input) {
-  const expected = process.env.EXPORT_PASSWORD || '';
+  const expected = String(process.env.EXPORT_PASSWORD || '').trim();
   if (!expected) return false;
-  const a = Buffer.from(String(input || ''));
+  const a = Buffer.from(String(input || '').trim());
   const b = Buffer.from(expected);
   if (a.length !== b.length) return false;
   return crypto.timingSafeEqual(a, b);
