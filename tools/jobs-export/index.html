@@ -122,7 +122,7 @@
       a.remove(); URL.revokeObjectURL(url);
 
       let okMsg = fileCount > 1
-        ? `✅ ${count} 件を ${fileCount} ファイル（500件ごと）に分割し、ZIPでダウンロードしました（${fileName}）`
+        ? `✅ ${count} 件を ${fileCount} ファイル（1ファイル498件＝ヘッダー込み499行）に分割し、ZIPでダウンロードしました（${fileName}）`
         : `✅ ${count} 件をダウンロードしました（${fileName}）`;
       if (unmapped) okMsg += `<br><small>⚠ Shift_JIS変換不能文字を「?」に置換: ${decodeURIComponent(unmapped)}</small>`;
       show(okMsg, 'ok');

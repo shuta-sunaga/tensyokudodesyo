@@ -19,8 +19,9 @@ import {
 import { buildRows, rowsToCsvString, prefectureCore, matchesPrefectureCore, SRC_FIELDS } from '../transform.mjs';
 import { encodeShiftJIS } from '../csv-shiftjis.mjs';
 
-// 1ファイルあたりの最大件数。超えると複数CSVに分割しZIPでまとめる。
-const CHUNK_SIZE = Number(process.env.EXPORT_CHUNK_SIZE) || 500;
+// 1ファイルあたりの最大データ件数。超えると複数CSVに分割しZIPでまとめる。
+// ヘッダー1行 + データ498行 = 全体499行に収まるよう498に設定。
+const CHUNK_SIZE = Number(process.env.EXPORT_CHUNK_SIZE) || 498;
 
 // 県フィルタは「勤務地（県）」(実際の勤務地)。本社所在地ではない点に注意。
 const PREFECTURE_FIELD = process.env.PREFECTURE_FIELD || '勤務地（県）';
