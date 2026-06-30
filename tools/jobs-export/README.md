@@ -13,8 +13,16 @@ Lark Base の求人データを **県名 + 日付で絞り込み**、Movable Typ
    ↓ POST /api/export
 [Vercel Function] パスワード照合 → Lark search APIで県フィルタ取得
    → created_time で日付フィルタ → MT形式に整形 → Shift_JIS エンコード
+   → 500件超なら500件ごとに分割しZIP化
    ↓
-[ブラウザ] CSV を自動ダウンロード → MT に手動インポート（従来どおり）
+[ブラウザ] CSV(or ZIP) を自動ダウンロード → MT に手動インポート（従来どおり）
+
+## 分割（500件ごと）
+
+- 500件以下: 単一 `.csv`
+- 500件超: 500件ごとに分割し `.zip` で一括ダウンロード。ZIP内の各CSVはヘッダー付きで
+  独立してMTインポート可能。ZIP内ファイル名はWindowsでの文字化け回避のためASCII
+  (`export_日時_NofM.csv`)。1ファイル件数は `EXPORT_CHUNK_SIZE` で変更可(default 500)。
 ```
 
 ## 構成
