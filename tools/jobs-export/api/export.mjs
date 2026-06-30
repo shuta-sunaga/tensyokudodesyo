@@ -12,11 +12,15 @@
  */
 
 import crypto from 'node:crypto';
+import JSZip from 'jszip';
 import {
   getTenantAccessToken, listFields, searchRecords, normalizeRecord, flattenFieldValue,
 } from '../lark.mjs';
 import { buildRows, rowsToCsvString, prefectureCore, matchesPrefectureCore, SRC_FIELDS } from '../transform.mjs';
 import { encodeShiftJIS } from '../csv-shiftjis.mjs';
+
+// 1ファイルあたりの最大件数。超えると複数CSVに分割しZIPでまとめる。
+const CHUNK_SIZE = Number(process.env.EXPORT_CHUNK_SIZE) || 500;
 
 // 県フィルタは「勤務地（県）」(実際の勤務地)。本社所在地ではない点に注意。
 const PREFECTURE_FIELD = process.env.PREFECTURE_FIELD || '勤務地（県）';
@@ -107,17 +111,43 @@ export default async function handler(req, res) {
 
     const records = filtered.map((r) => normalizeRecord(r.fields));
 
-    // ── 整形 → CSV → Shift_JIS ──
+    // ── 整形 → CHUNK_SIZE件ごとに分割 → Shift_JIS ──
     const rows = buildRows(records, jstExecTime());
-    const csvString = rowsToCsvString(rows);
-    const { buffer, unmapped } = encodeShiftJIS(csvString);
+    const ts = jstTimestamp();
+    const chunks = [];
+    for (let i = 0; i < rows.length; i += CHUNK_SIZE) chunks.push(rows.slice(i, i + CHUNK_SIZE));
 
-    const fileName = `jobs_${prefecture}_${jstTimestamp()}.csv`;
-    res.setHeader('Content-Type', 'text/csv; charset=Shift_JIS');
-    res.setHeader('Content-Disposition', `attachment; filename="export.csv"; filename*=UTF-8''${encodeURIComponent(fileName)}`);
+    const allUnmapped = new Set();
+    const encodeChunk = (chunkRows) => {
+      const { buffer, unmapped } = encodeShiftJIS(rowsToCsvString(chunkRows));
+      unmapped.forEach((u) => allUnmapped.add(u));
+      return buffer;
+    };
+
     res.setHeader('X-Record-Count', String(filtered.length));
-    if (unmapped.length) res.setHeader('X-Unmapped-Chars', encodeURIComponent(unmapped.join('')));
-    return res.status(200).send(buffer);
+    res.setHeader('X-File-Count', String(chunks.length));
+
+    // 1ファイルに収まる場合は単一CSV、超える場合はZIPでまとめて返す
+    if (chunks.length === 1) {
+      const buffer = encodeChunk(chunks[0]);
+      if (allUnmapped.size) res.setHeader('X-Unmapped-Chars', encodeURIComponent([...allUnmapped].join('')));
+      const fileName = `jobs_${prefecture}_${ts}.csv`;
+      res.setHeader('Content-Type', 'text/csv; charset=Shift_JIS');
+      res.setHeader('Content-Disposition', `attachment; filename="export.csv"; filename*=UTF-8''${encodeURIComponent(fileName)}`);
+      return res.status(200).send(buffer);
+    }
+
+    // ZIP内のファイル名は Windows での文字化け回避のため ASCII (GAS同様 export_日時_NofM.csv)
+    const zip = new JSZip();
+    chunks.forEach((chunkRows, i) => {
+      zip.file(`export_${ts}_${i + 1}of${chunks.length}.csv`, encodeChunk(chunkRows));
+    });
+    const zipBuf = await zip.generateAsync({ type: 'nodebuffer', compression: 'DEFLATE' });
+    if (allUnmapped.size) res.setHeader('X-Unmapped-Chars', encodeURIComponent([...allUnmapped].join('')));
+    const zipName = `jobs_${prefecture}_${ts}.zip`;
+    res.setHeader('Content-Type', 'application/zip');
+    res.setHeader('Content-Disposition', `attachment; filename="export.zip"; filename*=UTF-8''${encodeURIComponent(zipName)}`);
+    return res.status(200).send(zipBuf);
   } catch (e) {
     console.error('export error:', e);
     return res.status(500).json({ error: 'internal_error', message: String(e?.message || e) });

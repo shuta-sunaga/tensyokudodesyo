@@ -110,6 +110,7 @@
 
       const blob = await res.blob();
       const count = res.headers.get('X-Record-Count') || '?';
+      const fileCount = parseInt(res.headers.get('X-File-Count') || '1', 10);
       const unmapped = res.headers.get('X-Unmapped-Chars');
       const cd = res.headers.get('Content-Disposition') || '';
       const m = cd.match(/filename\*=UTF-8''([^;]+)/);
@@ -120,7 +121,9 @@
       a.href = url; a.download = fileName; document.body.appendChild(a); a.click();
       a.remove(); URL.revokeObjectURL(url);
 
-      let okMsg = `✅ ${count} 件をダウンロードしました（${fileName}）`;
+      let okMsg = fileCount > 1
+        ? `✅ ${count} 件を ${fileCount} ファイル（500件ごと）に分割し、ZIPでダウンロードしました（${fileName}）`
+        : `✅ ${count} 件をダウンロードしました（${fileName}）`;
       if (unmapped) okMsg += `<br><small>⚠ Shift_JIS変換不能文字を「?」に置換: ${decodeURIComponent(unmapped)}</small>`;
       show(okMsg, 'ok');
     } catch (err) {
