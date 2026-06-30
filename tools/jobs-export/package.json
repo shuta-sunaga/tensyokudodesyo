@@ -1,0 +1,13 @@
+{
+  "name": "jobs-export",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Lark Base 求人データを MT インポート用 Shift_JIS CSV に整形・エクスポートする社内ツール (Vercel)",
+  "scripts": {
+    "test:transform": "node test/transform.test.mjs"
+  },
+  "dependencies": {
+    "iconv-lite": "^0.6.3"
+  }
+}

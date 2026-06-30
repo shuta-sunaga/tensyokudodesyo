@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>求人CSVエクスポート | 転職どうでしょう（社内ツール）</title>
+<style>
+  :root {
+    --green: #5a9e6f; --green-dark: #4a8a5e; --orange: #e8a85a;
+    --bg: #faf8f0; --dark: #3d4a3f; --border: #d8d4c4;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+    background: var(--bg); color: var(--dark); margin: 0; padding: 24px;
+    display: flex; justify-content: center; align-items: flex-start; min-height: 100vh;
+  }
+  .card {
+    background: #fff; border-radius: 14px; box-shadow: 0 6px 24px rgba(0,0,0,.08);
+    width: 100%; max-width: 460px; padding: 32px 28px; margin-top: 4vh;
+  }
+  h1 { font-size: 20px; margin: 0 0 4px; color: var(--green-dark); }
+  .sub { font-size: 12px; color: #888; margin: 0 0 24px; }
+  label { display: block; font-size: 13px; font-weight: 600; margin: 18px 0 6px; }
+  select, input {
+    width: 100%; padding: 11px 12px; font-size: 15px; border: 1px solid var(--border);
+    border-radius: 8px; background: #fff; color: var(--dark);
+  }
+  select:focus, input:focus { outline: none; border-color: var(--green); box-shadow: 0 0 0 3px rgba(90,158,111,.15); }
+  .hint { font-size: 11px; color: #999; margin-top: 4px; }
+  button {
+    width: 100%; margin-top: 28px; padding: 14px; font-size: 15px; font-weight: 700;
+    color: #fff; background: var(--green); border: none; border-radius: 8px; cursor: pointer;
+    transition: background .15s;
+  }
+  button:hover:not(:disabled) { background: var(--green-dark); }
+  button:disabled { background: #b8c8bd; cursor: not-allowed; }
+  .msg { margin-top: 18px; padding: 12px 14px; border-radius: 8px; font-size: 13px; display: none; }
+  .msg.ok { background: #e7f3ea; color: #2c6b3f; display: block; }
+  .msg.err { background: #fbe9e7; color: #b3261e; display: block; }
+  .msg.info { background: #fff7e6; color: #8a6d1a; display: block; }
+  .spinner { display: inline-block; width: 14px; height: 14px; border: 2px solid #fff;
+    border-top-color: transparent; border-radius: 50%; animation: spin .7s linear infinite;
+    vertical-align: middle; margin-right: 8px; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+</style>
+</head>
+<body>
+  <div class="card">
+    <h1>求人CSVエクスポート</h1>
+    <p class="sub">Lark Base から求人データを取得し、MTインポート用 Shift_JIS CSV を生成します（社内ツール）</p>
+
+    <form id="form">
+      <label for="prefecture">都道府県</label>
+      <select id="prefecture" required></select>
+
+      <label for="since">この日付以降のデータを取得</label>
+      <input type="date" id="since">
+      <p class="hint">空欄なら日付で絞らず全件を対象にします</p>
+
+      <label for="password">パスワード</label>
+      <input type="password" id="password" required autocomplete="current-password">
+
+      <button type="submit" id="submitBtn">CSVを生成してダウンロード</button>
+    </form>
+
+    <div id="msg" class="msg"></div>
+  </div>
+
+<script>
+  const PREFS = ['北海道','青森県','岩手県','宮城県','秋田県','山形県','福島県','茨城県','栃木県','群馬県','埼玉県','千葉県','東京都','神奈川県','新潟県','富山県','石川県','福井県','山梨県','長野県','岐阜県','静岡県','愛知県','三重県','滋賀県','京都府','大阪府','兵庫県','奈良県','和歌山県','鳥取県','島根県','岡山県','広島県','山口県','徳島県','香川県','愛媛県','高知県','福岡県','佐賀県','長崎県','熊本県','大分県','宮崎県','鹿児島県','沖縄県'];
+  const sel = document.getElementById('prefecture');
+  PREFS.forEach(p => { const o = document.createElement('option'); o.value = p; o.textContent = p; sel.appendChild(o); });
+  sel.value = '静岡県';
+
+  const form = document.getElementById('form');
+  const btn = document.getElementById('submitBtn');
+  const msg = document.getElementById('msg');
+
+  function show(text, type) { msg.className = 'msg ' + type; msg.innerHTML = text; }
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    btn.disabled = true;
+    const orig = btn.textContent;
+    btn.innerHTML = '<span class="spinner"></span>生成中…';
+    show('Lark から取得して整形しています…', 'info');
+
+    const payload = {
+      prefecture: sel.value,
+      since: document.getElementById('since').value,
+      password: document.getElementById('password').value,
+    };
+
+    try {
+      const res = await fetch('/api/export', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+
+      if (!res.ok || (res.headers.get('Content-Type') || '').includes('application/json')) {
+        const data = await res.json().catch(() => ({}));
+        if (res.status === 401) show('パスワードが違います。', 'err');
+        else if (data.error === 'no_records') show(data.message || '該当データがありません。', 'info');
+        else show('エラー: ' + (data.message || data.error || res.status), 'err');
+        return;
+      }
+
+      const blob = await res.blob();
+      const count = res.headers.get('X-Record-Count') || '?';
+      const unmapped = res.headers.get('X-Unmapped-Chars');
+      const cd = res.headers.get('Content-Disposition') || '';
+      const m = cd.match(/filename\*=UTF-8''([^;]+)/);
+      const fileName = m ? decodeURIComponent(m[1]) : 'export.csv';
+
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = fileName; document.body.appendChild(a); a.click();
+      a.remove(); URL.revokeObjectURL(url);
+
+      let okMsg = `✅ ${count} 件をダウンロードしました（${fileName}）`;
+      if (unmapped) okMsg += `<br><small>⚠ Shift_JIS変換不能文字を「?」に置換: ${decodeURIComponent(unmapped)}</small>`;
+      show(okMsg, 'ok');
+    } catch (err) {
+      show('通信エラー: ' + err.message, 'err');
+    } finally {
+      btn.disabled = false;
+      btn.textContent = orig;
+    }
+  });
+</script>
+</body>
+</html>
