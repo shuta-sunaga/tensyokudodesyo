@@ -1,6 +1,15 @@
 {
   "articles": [
     {
+      "id": 200,
+      "title": "英文履歴書（レジュメ）の書き方｜外資転職",
+      "category": "kh02",
+      "excerpt": "外資系転職で求められる英文履歴書（レジュメ）の書き方を解説。和文履歴書との違い、必須6項目の構成、成果を強く見せる動詞リスト、そのまま使える例文とNG例まで具体的に紹介します。",
+      "image": "/assets/knowhow-200.webp",
+      "postDate": "2026-06-30",
+      "detailUrl": "/knowhow/detail/knowhow-200.html"
+    },
+    {
       "id": 199,
       "title": "ポートフォリオの作り方｜職種別の構成と例",
       "category": "kh02",
