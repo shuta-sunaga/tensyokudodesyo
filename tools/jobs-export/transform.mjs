@@ -256,21 +256,30 @@ export function buildRows(records, execTime) {
   });
 }
 
+const escapeCell = (cell) => {
+  const s = String(cell);
+  if (s.includes(',') || s.includes('\n') || s.includes('"')) {
+    return '"' + s.replace(/"/g, '""') + '"';
+  }
+  return s;
+};
+
+/** CSV ヘッダー行 (44列) */
+export function csvHeaderLine() {
+  return DST_HEADERS.join(',');
+}
+
+/** 1行オブジェクトを CSV 1行に変換する */
+export function rowToCsvLine(row) {
+  return DST_HEADERS.map((h) => escapeCell(row[h])).join(',');
+}
+
 /**
  * 行オブジェクト配列を CSV 文字列 (UTF-8 内部表現) に変換する。
  * Shift_JIS への実エンコードは csv-shiftjis.mjs 側で行う。
  */
 export function rowsToCsvString(rows) {
-  const escapeCell = (cell) => {
-    const s = String(cell);
-    if (s.includes(',') || s.includes('\n') || s.includes('"')) {
-      return '"' + s.replace(/"/g, '""') + '"';
-    }
-    return s;
-  };
-  const headerLine = DST_HEADERS.join(',');
-  const dataLines = rows.map((row) => DST_HEADERS.map((h) => escapeCell(row[h])).join(','));
-  return [headerLine, ...dataLines].join('\r\n');
+  return [csvHeaderLine(), ...rows.map(rowToCsvLine)].join('\r\n');
 }
 
 export { replaceUnsafeChars, normalizeParens, addCommas, normalizeTilde };

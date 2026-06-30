@@ -13,17 +13,21 @@ Lark Base の求人データを **県名 + 日付で絞り込み**、Movable Typ
    ↓ POST /api/export
 [Vercel Function] パスワード照合 → Lark search APIで県フィルタ取得
    → created_time で日付フィルタ → MT形式に整形 → Shift_JIS エンコード
-   → 498件超なら498件ごとに分割しZIP化（ヘッダー込み1ファイル499行に収める）
+   → 容量(MAX_BYTES)/件数(CHUNK_SIZE)の上限で分割しZIP化
    ↓
 [ブラウザ] CSV(or ZIP) を自動ダウンロード → MT に手動インポート（従来どおり）
 
-## 分割（ヘッダー込み499行 = データ498件ごと）
+## 分割（ファイル容量ベース）
 
-- 498件以下: 単一 `.csv`
-- 498件超: 498件ごとに分割し `.zip` で一括ダウンロード。各CSVは「ヘッダー1行 + データ最大498行
-  = 全体499行」で**末尾に空白行を付けない**（MTの行数上限対策）。ヘッダー付きで独立してMT
-  インポート可能。ZIP内ファイル名はWindows文字化け回避のためASCII (`export_日時_NofM.csv`)。
-  1ファイル件数は `EXPORT_CHUNK_SIZE` で変更可(default 498)。
+求人1件は仕事内容・会社概要など長文を含み ~4KB あるため、498件で約2MBになり MT/nginx の
+アップロード上限(既定1MB)を超える。そこで**バイトサイズで分割**する。
+
+- 1ファイルが収まるなら単一 `.csv`、超えるなら `.zip` で一括ダウンロード
+- 分割上限は **容量 `EXPORT_MAX_BYTES`(default 900KB)** と **件数 `EXPORT_CHUNK_SIZE`(default 498)**
+  の早い方。実運用ではほぼ容量基準で ~200件/ファイル前後になる
+- 各CSVは「ヘッダー1行 + データ行」で**末尾に空白行を付けない**。ヘッダー付きで独立してMT
+  インポート可能。ZIP内ファイル名はWindows文字化け回避のためASCII (`export_日時_NofM.csv`)
+- MT/nginx 側で `client_max_body_size` を上げれば `EXPORT_MAX_BYTES` も上げてファイル数を減らせる
 ```
 
 ## 構成

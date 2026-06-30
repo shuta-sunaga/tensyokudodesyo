@@ -16,12 +16,13 @@ import JSZip from 'jszip';
 import {
   getTenantAccessToken, listFields, searchRecords, normalizeRecord, flattenFieldValue,
 } from '../lark.mjs';
-import { buildRows, rowsToCsvString, prefectureCore, matchesPrefectureCore, SRC_FIELDS } from '../transform.mjs';
+import { buildRows, csvHeaderLine, rowToCsvLine, prefectureCore, matchesPrefectureCore, SRC_FIELDS } from '../transform.mjs';
 import { encodeShiftJIS } from '../csv-shiftjis.mjs';
 
-// 1ファイルあたりの最大データ件数。超えると複数CSVに分割しZIPでまとめる。
-// ヘッダー1行 + データ498行 = 全体499行に収まるよう498に設定。
+// 1ファイルあたりの最大データ件数(ヘッダー込み499行)。バイト上限と併用し早い方で分割。
 const CHUNK_SIZE = Number(process.env.EXPORT_CHUNK_SIZE) || 498;
+// 1ファイルあたりの最大バイト数(Shift_JIS実体)。MT/nginx の既定1MB上限に収めるため余裕をもって設定。
+const MAX_BYTES = Number(process.env.EXPORT_MAX_BYTES) || 900 * 1024;
 
 // 県フィルタは「勤務地（県）」(実際の勤務地)。本社所在地ではない点に注意。
 const PREFECTURE_FIELD = process.env.PREFECTURE_FIELD || '勤務地（県）';
@@ -112,26 +113,51 @@ export default async function handler(req, res) {
 
     const records = filtered.map((r) => normalizeRecord(r.fields));
 
-    // ── 整形 → CHUNK_SIZE件ごとに分割 → Shift_JIS ──
+    // ── 整形 → 各行を Shift_JIS エンコード ──
     const rows = buildRows(records, jstExecTime());
     const ts = jstTimestamp();
-    const chunks = [];
-    for (let i = 0; i < rows.length; i += CHUNK_SIZE) chunks.push(rows.slice(i, i + CHUNK_SIZE));
+    const CRLF = Buffer.from('\r\n', 'latin1'); // 0x0D 0x0A (2 bytes)
 
     const allUnmapped = new Set();
-    const encodeChunk = (chunkRows) => {
-      const { buffer, unmapped } = encodeShiftJIS(rowsToCsvString(chunkRows));
+    const enc = (str) => {
+      const { buffer, unmapped } = encodeShiftJIS(str);
       unmapped.forEach((u) => allUnmapped.add(u));
       return buffer;
+    };
+    const headerBuf = enc(csvHeaderLine());
+    const lineBufs = rows.map((r) => enc(rowToCsvLine(r)));
+
+    // ── ファイル容量(MAX_BYTES)と件数(CHUNK_SIZE)の両方を上限に分割 ──
+    // MT/nginx のアップロード上限(既定1MB)に収めるためバイト基準で分割する。
+    const chunks = []; // 各要素 = そのファイルに入れる行バッファ配列
+    let cur = [];
+    let curBytes = headerBuf.length;
+    for (const lb of lineBufs) {
+      const add = CRLF.length + lb.length;
+      if (cur.length > 0 && (curBytes + add > MAX_BYTES || cur.length >= CHUNK_SIZE)) {
+        chunks.push(cur);
+        cur = [];
+        curBytes = headerBuf.length;
+      }
+      cur.push(lb);
+      curBytes += add;
+    }
+    if (cur.length) chunks.push(cur);
+
+    // ヘッダー + 各行(CRLF区切り)でファイルバッファを組む。末尾改行は付けない。
+    const buildFile = (lineBufArr) => {
+      const parts = [headerBuf];
+      for (const lb of lineBufArr) { parts.push(CRLF, lb); }
+      return Buffer.concat(parts);
     };
 
     res.setHeader('X-Record-Count', String(filtered.length));
     res.setHeader('X-File-Count', String(chunks.length));
+    if (allUnmapped.size) res.setHeader('X-Unmapped-Chars', encodeURIComponent([...allUnmapped].join('')));
 
     // 1ファイルに収まる場合は単一CSV、超える場合はZIPでまとめて返す
-    if (chunks.length === 1) {
-      const buffer = encodeChunk(chunks[0]);
-      if (allUnmapped.size) res.setHeader('X-Unmapped-Chars', encodeURIComponent([...allUnmapped].join('')));
+    if (chunks.length <= 1) {
+      const buffer = buildFile(chunks[0] || []);
       const fileName = `jobs_${prefecture}_${ts}.csv`;
       res.setHeader('Content-Type', 'text/csv; charset=Shift_JIS');
       res.setHeader('Content-Disposition', `attachment; filename="export.csv"; filename*=UTF-8''${encodeURIComponent(fileName)}`);
@@ -140,11 +166,10 @@ export default async function handler(req, res) {
 
     // ZIP内のファイル名は Windows での文字化け回避のため ASCII (GAS同様 export_日時_NofM.csv)
     const zip = new JSZip();
-    chunks.forEach((chunkRows, i) => {
-      zip.file(`export_${ts}_${i + 1}of${chunks.length}.csv`, encodeChunk(chunkRows));
+    chunks.forEach((lineBufArr, i) => {
+      zip.file(`export_${ts}_${i + 1}of${chunks.length}.csv`, buildFile(lineBufArr));
     });
     const zipBuf = await zip.generateAsync({ type: 'nodebuffer', compression: 'DEFLATE' });
-    if (allUnmapped.size) res.setHeader('X-Unmapped-Chars', encodeURIComponent([...allUnmapped].join('')));
     const zipName = `jobs_${prefecture}_${ts}.zip`;
     res.setHeader('Content-Type', 'application/zip');
     res.setHeader('Content-Disposition', `attachment; filename="export.zip"; filename*=UTF-8''${encodeURIComponent(zipName)}`);
