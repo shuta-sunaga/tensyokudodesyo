@@ -1,6 +1,15 @@
 {
   "articles": [
     {
+      "id": 202,
+      "title": "他己分析のやり方｜質問リストと依頼文例",
+      "category": "kh03",
+      "excerpt": "転職の自己分析を深める「他己分析」のやり方を解説。依頼する相手の選び方、そのまま使える依頼文の例文、質問リスト、集めた回答を志望動機や自己PRに活かす手順まで具体的に紹介します。",
+      "image": "/assets/knowhow-202.webp",
+      "postDate": "2026-07-02",
+      "detailUrl": "/knowhow/detail/knowhow-202.html"
+    },
+    {
       "id": 201,
       "title": "面接「他社の選考状況」の答え方と例文",
       "category": "kh01",
