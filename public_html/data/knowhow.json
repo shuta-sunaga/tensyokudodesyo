@@ -1,6 +1,15 @@
 {
   "articles": [
     {
+      "id": 203,
+      "title": "自動車業界の転職ガイド｜職種・年収・EV",
+      "category": "kh04",
+      "excerpt": "自動車業界への転職を考える方へ。完成車メーカー・部品サプライヤー・ディーラーの構造、開発や生産技術など職種別の年収相場、CASE・EVシフトで変わる将来性、未経験からの参入ルートまで具体的に解説します。",
+      "image": "/assets/knowhow-203.webp",
+      "postDate": "2026-07-03",
+      "detailUrl": "/knowhow/detail/knowhow-203.html"
+    },
+    {
       "id": 202,
       "title": "他己分析のやり方｜質問リストと依頼文例",
       "category": "kh03",
