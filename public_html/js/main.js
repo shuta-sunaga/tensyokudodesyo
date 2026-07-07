@@ -946,6 +946,10 @@ function formatSalary(salary) {
     if (hasPrefix) s = s.slice(2).replace(/^[:：]\s*/, '');
     if (s.endsWith('円')) s = s.slice(0, -1);
     s = toManYen(s);
+    // 上限なし（例: "330万〜"）は「330万円〜」の形にする
+    if (s.endsWith('〜')) {
+        return `年収: ${escapeHTML(s.slice(0, -1))}円〜`;
+    }
     return `年収: ${escapeHTML(s)}円`;
 }
 
