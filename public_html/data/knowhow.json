@@ -1,6 +1,24 @@
 {
   "articles": [
     {
+      "id": 206,
+      "title": "志望動機と自己PRの違い｜書き分けと例文",
+      "category": "kh02",
+      "excerpt": "志望動機と自己PRの違いが分からない方へ。役割の違い、混同しやすいNG例、それぞれの書き方の型と例文、同じエピソードを使い回さない書き分けのコツを具体的に解説します。",
+      "image": "/assets/knowhow-206.webp",
+      "postDate": "2026-07-07",
+      "detailUrl": "/knowhow/detail/knowhow-206.html"
+    },
+    {
+      "id": 205,
+      "title": "退職時に受け取る書類｜離職票・源泉徴収票の確認",
+      "category": "kh05",
+      "excerpt": "退職時に会社から受け取る書類を一覧で解説。離職票・源泉徴収票・雇用保険被保険者証・年金手帳など、いつ届くか、使い道、もらえない時の対処法まで具体的に紹介します。",
+      "image": "/assets/knowhow-205.webp",
+      "postDate": "2026-07-07",
+      "detailUrl": "/knowhow/detail/knowhow-205.html"
+    },
+    {
       "id": 204,
       "title": "面接辞退・選考辞退の伝え方｜メール例文集",
       "category": "kh01",
