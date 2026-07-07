@@ -204,7 +204,7 @@ function renderJobs() {
                             ${formatLocation(job.prefecture, job.city)}
                         </span>
                         <span class="job-listing-salary">
-                            年収: ${escapeHTML(job.salary)}円
+                            ${typeof formatSalary === 'function' ? formatSalary(job.salary) : '年収: ' + escapeHTML(job.salary) + '円'}
                         </span>
                     </div>
                     <div class="job-listing-tags">

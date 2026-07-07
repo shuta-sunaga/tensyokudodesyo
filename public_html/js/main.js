@@ -938,14 +938,31 @@ function formatLocation(prefecture, city) {
  * Format salary, avoiding duplicate prefix/suffix
  * e.g. "450万〜700万" → "年収: 450万〜700万円"
  *      "年収350万〜500万円" → "年収: 350万〜500万円"
+ *      "2,800,000~3,700,000" → "年収: 280万〜370万円"
  */
 function formatSalary(salary) {
     let s = salary || '';
     const hasPrefix = s.startsWith('年収');
-    const hasSuffix = s.endsWith('円');
-    if (hasPrefix) s = s.slice(2);
-    if (hasSuffix) s = s.slice(0, -1);
+    if (hasPrefix) s = s.slice(2).replace(/^[:：]\s*/, '');
+    if (s.endsWith('円')) s = s.slice(0, -1);
+    s = toManYen(s);
     return `年収: ${escapeHTML(s)}円`;
+}
+
+/**
+ * Convert raw yen amounts to 万円 notation for readability
+ * e.g. "2,800,000~3,700,000" → "280万〜370万", "3,300,000-" → "330万〜"
+ */
+function toManYen(s) {
+    let out = String(s).replace(/(\d{1,3}(?:,\d{3})+|\d{5,})/g, function (m) {
+        const n = parseInt(m.replace(/,/g, ''), 10);
+        if (isNaN(n) || n < 10000) return m;
+        const man = n / 10000;
+        return (Number.isInteger(man) ? man : Math.round(man * 10) / 10) + '万';
+    });
+    // 範囲記号を「〜」に統一（末尾の「-」は「〜」= 以上 の意）
+    out = out.replace(/万\s*[~～\-]\s*/g, '万〜');
+    return out;
 }
 
 /**

@@ -12,7 +12,7 @@
 }
 
 .article-detail .container {
-    max-width: 960px;
+    max-width: 800px;
 }
 
 /* Article Header */
@@ -346,6 +346,34 @@
     margin: 1.5rem 0;
 }
 
+/* Tables */
+.article-body table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    font-size: 0.92rem;
+    line-height: 1.6;
+}
+
+.article-body th,
+.article-body td {
+    padding: 0.65rem 0.85rem;
+    border: 1px solid #dde5dd;
+    text-align: left;
+    vertical-align: top;
+}
+
+.article-body th {
+    background: #eef5ef;
+    font-weight: 700;
+    color: var(--color-text);
+    white-space: nowrap;
+}
+
+.article-body tr:nth-child(even) td {
+    background: #fafcfa;
+}
+
 /* Article Series Box (内部リンクハブ) */
 .article-series-box {
     margin: 2.5rem 0;
@@ -513,6 +541,18 @@
 
     .article-body li {
         font-size: 0.9375rem;
+    }
+
+    /* 表は横スクロールで崩れを防ぐ */
+    .article-body table {
+        display: block;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .article-body th,
+    .article-body td {
+        min-width: 7.5em;
     }
 
     .article-cta {

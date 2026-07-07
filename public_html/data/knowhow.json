@@ -1,6 +1,15 @@
 {
   "articles": [
     {
+      "id": 207,
+      "title": "転職のAI活用完全ガイド｜ChatGPT・Claude・Geminiの使い分け",
+      "category": "kh05",
+      "excerpt": "転職活動でのAI活用法を完全ガイド。ChatGPT・Claude・Gemini・Copilotの使い分けから、自己分析・職務経歴書・面接対策・企業研究まで、目的別のAI活用記事50本をステップ順にまとめました。",
+      "image": "/assets/knowhow-207.webp",
+      "postDate": "2026-07-07",
+      "detailUrl": "/knowhow/detail/knowhow-207.html"
+    },
+    {
       "id": 206,
       "title": "志望動機と自己PRの違い｜書き分けと例文",
       "category": "kh02",
@@ -947,9 +956,9 @@
     },
     {
       "id": 101,
-      "title": "応募書類のPDF化とメール送付マナー",
+      "title": "履歴書・職務経歴書のPDF化のやり方｜変換方法とメール送付マナー",
       "category": "kh02",
-      "excerpt": "応募書類のPDF化とメール送付マナーを徹底解説。WordからのPDF変換手順、ファイル名規則、添付ファイルのパスワード保護、メール件名と本文の例文、送信前チェックリストまで具体的に紹介します。",
+      "excerpt": "履歴書・職務経歴書をPDF形式に変換して送る方法を解説。Word・スマホ・Googleドキュメント別の変換手順、ファイル名ルール、メール件名と本文例文、送信前チェックリストまで網羅した実務ガイド。",
       "image": "/assets/knowhow-101.webp",
       "postDate": "2026-05-05",
       "detailUrl": "/knowhow/detail/knowhow-101.html"
@@ -1028,9 +1037,9 @@
     },
     {
       "id": 92,
-      "title": "職務経歴書の数字で実績を伝える書き方",
+      "title": "職務経歴書の実績の書き方｜数字で伝える例文とNG例",
       "category": "kh02",
-      "excerpt": "職務経歴書で実績を数字で伝える書き方を徹底解説。定量化フレーム、Before/After変換例、職種別KPI、数字がない仕事の表現法、NG例まで具体的に紹介します。",
+      "excerpt": "職務経歴書の実績の書き方を例文付きで解説。「実績がない」「数字にできない」を解決する5つの変換フレーム、職種別の記載例文、KPI一覧、NG例まで。書類選考の通過率を上げる完全ガイド。",
       "image": "/assets/knowhow-092.webp",
       "postDate": "2026-04-28",
       "detailUrl": "/knowhow/detail/knowhow-092.html"
@@ -1469,9 +1478,9 @@
     },
     {
       "id": 46,
-      "title": "転職の応募メール・送付状の書き方と例文集",
+      "title": "転職の応募メール例文集｜HPからの直接応募・知人の紹介・送付状",
       "category": "kh02",
-      "excerpt": "転職活動の応募メール・送付状の書き方を場面別の例文付きで徹底解説。件名の書き方、メール本文テンプレート、送付状のフォーマット、NG例と改善例、送信前チェックリストを紹介します。",
+      "excerpt": "企業ホームページからの直接応募・知人の紹介・求人サイト経由など場面別の応募メール例文集。件名の付け方、送付状の書き方、NG例と改善例、送信前チェックリスト付き。コピペで使えます。",
       "image": "/assets/knowhow-046.webp",
       "postDate": "2026-04-04",
       "detailUrl": "/knowhow/detail/knowhow-046.html",

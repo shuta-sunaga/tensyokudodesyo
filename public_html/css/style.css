@@ -4314,6 +4314,134 @@ body.menu-open {
     }
 }
 
+/* Popular articles (よく読まれている記事) */
+.knowhow-popular {
+    padding: var(--spacing-md) 0 var(--spacing-lg);
+    background: var(--color-bg);
+}
+
+.knowhow-popular-title {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-md);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.knowhow-popular-title::before {
+    content: "";
+    display: inline-block;
+    width: 4px;
+    height: 1.2em;
+    background: var(--color-secondary);
+    border-radius: 2px;
+}
+
+.knowhow-popular-list {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: var(--spacing-md);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.knowhow-popular-item a {
+    display: block;
+    position: relative;
+    text-decoration: none;
+    color: var(--color-text);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    background: #fff;
+    border: 1px solid var(--color-border-light);
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+    height: 100%;
+}
+
+.knowhow-popular-item a:hover {
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+    transform: translateY(-2px);
+}
+
+.knowhow-popular-item img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    display: block;
+}
+
+.knowhow-popular-rank {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1.75rem;
+    height: 1.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-secondary);
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.9375rem;
+    border-radius: 0 0 var(--radius-sm) 0;
+    z-index: 1;
+}
+
+.knowhow-popular-text {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    padding: 0.6rem 0.75rem 0.75rem;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    line-height: 1.5;
+}
+
+@media (max-width: 900px) {
+    .knowhow-popular-list {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .knowhow-popular-item:nth-child(n+5) {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .knowhow-popular {
+        padding: var(--spacing-sm) 0 var(--spacing-md);
+    }
+    .knowhow-popular-list {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-sm);
+    }
+    .knowhow-popular-item:nth-child(n+5) {
+        display: list-item;
+    }
+    .knowhow-popular-item a {
+        display: grid;
+        grid-template-columns: 120px 1fr;
+        align-items: center;
+    }
+    .knowhow-popular-item img {
+        aspect-ratio: 16 / 10;
+        height: 100%;
+    }
+    .knowhow-popular-rank {
+        width: 1.5rem;
+        height: 1.5rem;
+        font-size: 0.8125rem;
+    }
+    .knowhow-popular-text {
+        padding: 0.5rem 0.75rem;
+        -webkit-line-clamp: 2;
+    }
+}
+
 /* Search + filter row */
 .knowhow-controls {
     background: var(--color-bg);
