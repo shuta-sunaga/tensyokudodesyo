@@ -176,6 +176,10 @@ tensyokudodesyo/
 
 カテゴリの追加はJSONファイルの編集のみで対応可能（コード変更不要）。
 
+**⚠️ `company-industries.json` は本番MT生成**: MTテンプレート `mt-template/company-industries.mtml`（カテゴリセット「企業業界」）が出力するため、**SCPデプロイ禁止・ローカル編集は本番に反映されない**。本番の実ラベル: in01金融・保険 / in02建設・不動産 / in03コンサルティング / in04メーカー・商社 / in05流通・小売・サービス / in06メディカル / in07マスコミ・エンタメ / in08運輸・物流 / in09その他（「IT・通信」は存在しない）。業界割当時は必ず本番 `https://www.tensyokudodesyo.com/data/categories/company-industries.json` を確認すること。
+
+**マスターに無い業界を表示したい場合**: `clients.json` の `industry` に生ラベル文字列（例: `"IT・通信"`）を直接入れてよい。`CategoryManager.normalizeToName` はID形式（in\d{2}等）以外の値をそのまま返すため、カード・関連表示にそのラベルが表示される。ただし一覧の業界フィルタのプルダウンには出ない（「すべて」でのみ表示）。Sei San Sei がこの方式。
+
 ---
 
 ## 日本地図（Japan Map）実装詳細
@@ -361,7 +365,7 @@ regionIdMap = {
   - `js/`, `css/`, `assets/` 配下の静的アセット
   - `includes/header.html`, `includes/footer.html`（直接編集・SCPデプロイ）
   - `data/knowhow.json`（パイプライン記事）
-  - `data/categories/` 配下のカテゴリJSON
+  - `data/categories/` 配下のカテゴリJSON（**例外: `company-industries.json` はMT生成のためデプロイ禁止**）
   - `sitemap.xml`, `robots.txt`
   - パイプラインで生成したノウハウ記事HTML
   - `privacy.html`
