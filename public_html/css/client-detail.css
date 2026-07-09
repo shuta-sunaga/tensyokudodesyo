@@ -693,6 +693,11 @@
     gap: var(--c-stack-4);
 }
 
+/* 通常段落の直後にグリッドが続く場合の余白（lead 直後は lead の margin-bottom と相殺され同値） */
+.client-section-body p + .client-feature-grid {
+    margin-top: var(--c-stack-5);
+}
+
 .client-feature {
     position: relative;
     background: var(--color-bg-cream);
