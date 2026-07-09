@@ -1,6 +1,15 @@
 {
   "articles": [
     {
+      "id": 208,
+      "title": "面接結果が遅い時の対処法｜連絡の目安と催促メール",
+      "category": "kh01",
+      "excerpt": "面接結果の連絡が遅いと不安な方へ。選考段階別の連絡日数の目安、連絡が遅れる企業側の理由、失礼にならない催促メールの例文、結果を待つ間にやるべきことまで具体的に解説します。",
+      "image": "/assets/knowhow-208.webp",
+      "postDate": "2026-07-09",
+      "detailUrl": "/knowhow/detail/knowhow-208.html"
+    },
+    {
       "id": 207,
       "title": "転職のAI活用完全ガイド｜ChatGPT・Claude・Geminiの使い分け",
       "category": "kh05",
