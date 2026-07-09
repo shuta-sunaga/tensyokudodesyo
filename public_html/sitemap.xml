@@ -61,6 +61,12 @@
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
+    <url>
+        <loc>https://www.tensyokudodesyo.com/clients/detail/sei-san-sei.html</loc>
+        <lastmod>2026-07-09</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
 
     <!-- Knowhow -->
     <url>
