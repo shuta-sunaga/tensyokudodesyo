@@ -1,6 +1,24 @@
 {
   "articles": [
     {
+      "id": 210,
+      "title": "製薬・医薬品業界の転職ガイド｜職種・年収",
+      "category": "kh04",
+      "excerpt": "製薬・医薬品業界への転職を考える方へ。先発・ジェネリック・CRO・卸の業界構造、MR・臨床開発・品質管理など職種別の仕事内容と年収相場、将来性、未経験からの参入ルートまで具体的に解説します。",
+      "image": "/assets/knowhow-210.webp",
+      "postDate": "2026-07-10",
+      "detailUrl": "/knowhow/detail/knowhow-210.html"
+    },
+    {
+      "id": 209,
+      "title": "転職活動に疲れた時の対処法｜休み方と再開のコツ",
+      "category": "kh03",
+      "excerpt": "転職活動に疲れた方へ。疲れの原因4タイプの見極め方、罪悪感なく休むための戦略的な休み方、不採用続きで心が折れそうな時の考え方、小さく再開する5ステップまで具体的に解説します。",
+      "image": "/assets/knowhow-209.webp",
+      "postDate": "2026-07-10",
+      "detailUrl": "/knowhow/detail/knowhow-209.html"
+    },
+    {
       "id": 208,
       "title": "面接結果が遅い時の対処法｜連絡の目安と催促メール",
       "category": "kh01",
