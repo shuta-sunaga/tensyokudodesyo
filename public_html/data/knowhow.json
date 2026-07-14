@@ -1,6 +1,15 @@
 {
   "articles": [
     {
+      "id": 212,
+      "title": "ChatGPTでATS対策｜AI書類選考に通る書き方",
+      "category": "kh02",
+      "excerpt": "書類選考にATS（採用管理システム）やAIスクリーニングを導入する企業が増えています。ATSに落とされやすい書類の5つの特徴と、ChatGPTでキーワード抽出・経歴最適化・セルフ採点を行う3ステップを、コピーして使えるプロンプト例付きで解説します。",
+      "image": "/assets/knowhow-212.webp",
+      "postDate": "2026-07-14",
+      "detailUrl": "/knowhow/detail/knowhow-212.html"
+    },
+    {
       "id": 211,
       "title": "HSPの転職｜向いてる仕事と自己分析のコツ",
       "category": "kh03",
