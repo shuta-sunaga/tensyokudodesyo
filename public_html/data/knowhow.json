@@ -1,6 +1,33 @@
 {
   "articles": [
     {
+      "id": 215,
+      "title": "ChatGPTでスカウト返信｜見極め方と例文",
+      "category": "kh05",
+      "excerpt": "転職サイトのスカウトメール、どれに返信すべきか迷いませんか？ChatGPTでスカウトの本気度をS〜Cで判定する方法と、興味あり・情報収集・辞退のパターン別返信例文、面談につなげる逆質問の作り方をプロンプト付きで解説します。",
+      "image": "/assets/knowhow-215.webp",
+      "postDate": "2026-07-15",
+      "detailUrl": "/knowhow/detail/knowhow-215.html"
+    },
+    {
+      "id": 214,
+      "title": "Claudeでケース面接対策｜コンサル転職準備",
+      "category": "kh01",
+      "excerpt": "コンサル転職の関門であるケース面接・フェルミ推定は、Claudeを面接官役にすれば一人でも実戦練習できます。面接官ロールプレイの設定文、答案の構造化添削、2週間の練習プランまでプロンプト例付きで解説します。",
+      "image": "/assets/knowhow-214.webp",
+      "postDate": "2026-07-15",
+      "detailUrl": "/knowhow/detail/knowhow-214.html"
+    },
+    {
+      "id": 213,
+      "title": "ChatGPTでリスキリング｜転職に効く学習計画",
+      "category": "kh05",
+      "excerpt": "求人で求められるスキルと今の自分のギャップを、ChatGPTで見える化して学習計画に落とし込む方法を解説。スキルギャップ診断から12週間ロードマップ、週次学習コーチ化、職務経歴書への変換までプロンプト例付きで紹介します。",
+      "image": "/assets/knowhow-213.webp",
+      "postDate": "2026-07-15",
+      "detailUrl": "/knowhow/detail/knowhow-213.html"
+    },
+    {
       "id": 212,
       "title": "ChatGPTでATS対策｜AI書類選考に通る書き方",
       "category": "kh02",
