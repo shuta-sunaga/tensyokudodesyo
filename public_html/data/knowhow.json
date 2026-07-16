@@ -1,6 +1,33 @@
 {
   "articles": [
     {
+      "id": 218,
+      "title": "2026年最新AIモデル比較｜転職に強いのはどれ",
+      "category": "kh04",
+      "excerpt": "GPT-5.6・Claude Fable 5・Gemini 3.5など2026年最新AIモデルを転職の視点で徹底比較。自己分析・職務経歴書・面接対策・企業研究の場面別にどのモデルが強いかと、無料・有料のおすすめの組み合わせを解説します。",
+      "image": "/assets/knowhow-218.webp",
+      "postDate": "2026-07-16",
+      "detailUrl": "/knowhow/detail/knowhow-218.html"
+    },
+    {
+      "id": 217,
+      "title": "Claude Fable 5を転職に活用｜何が変わった？",
+      "category": "kh05",
+      "excerpt": "2026年7月に一般開放されたAnthropicの最上位モデル「Claude Fable 5」。従来のClaudeから何が変わったのか、数十件の求人票一括比較・深掘り自己分析・応募書類の横断チェックなど新モデルならではの転職活用術を解説します。",
+      "image": "/assets/knowhow-217.webp",
+      "postDate": "2026-07-16",
+      "detailUrl": "/knowhow/detail/knowhow-217.html"
+    },
+    {
+      "id": 216,
+      "title": "GPT-5.6を転職に活用｜3モデル使い分け術",
+      "category": "kh05",
+      "excerpt": "2026年7月リリースの最新モデルGPT-5.6を転職活動に活かす方法を解説。Sol・Terra・Lunaの3モデルの違いと、自己分析・応募書類・面接対策での使い分けを、コピペで使えるプロンプト例とチェックリスト付きで紹介します。",
+      "image": "/assets/knowhow-216.webp",
+      "postDate": "2026-07-16",
+      "detailUrl": "/knowhow/detail/knowhow-216.html"
+    },
+    {
       "id": 215,
       "title": "ChatGPTでスカウト返信｜見極め方と例文",
       "category": "kh05",
