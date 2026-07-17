@@ -1,6 +1,24 @@
 {
   "articles": [
     {
+      "id": 220,
+      "title": "人材業界の転職ガイド｜職種・年収・将来性",
+      "category": "kh04",
+      "excerpt": "人材業界への転職を考える方向けに、人材紹介・人材派遣・求人広告・人材コンサルの4分野の違い、キャリアアドバイザーや法人営業など主要職種の仕事内容と年収相場、未経験から転職を成功させるコツを解説します。",
+      "image": "/assets/knowhow-220.webp",
+      "postDate": "2026-07-17",
+      "detailUrl": "/knowhow/detail/knowhow-220.html"
+    },
+    {
+      "id": 219,
+      "title": "面接に落ち続ける時の原因と立て直し方",
+      "category": "kh01",
+      "excerpt": "面接に落ち続けるのには必ず原因があります。不合格が続く人に共通する7つの原因と選考段階別の見直しポイント、落ちた面接を資産に変える振り返りノートの作り方、気持ちを立て直す具体的なステップを解説します。",
+      "image": "/assets/knowhow-219.webp",
+      "postDate": "2026-07-17",
+      "detailUrl": "/knowhow/detail/knowhow-219.html"
+    },
+    {
       "id": 218,
       "title": "2026年最新AIモデル比較｜転職に強いのはどれ",
       "category": "kh04",
