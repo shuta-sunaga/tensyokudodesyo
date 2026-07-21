@@ -1,6 +1,15 @@
 {
   "articles": [
     {
+      "id": 222,
+      "title": "適職診断は当たる？結果の活かし方と限界",
+      "category": "kh03",
+      "excerpt": "適職診断は当たるのか、その仕組みと精度の限界を解説します。MBTI・ストレングスファインダーなど主要診断の違い、バーナム効果など結果を鵜呑みにしない注意点、診断を実際の転職行動に落とし込む5ステップを具体例つきで紹介します。",
+      "image": "/assets/knowhow-222.webp",
+      "postDate": "2026-07-21",
+      "detailUrl": "/knowhow/detail/knowhow-222.html"
+    },
+    {
       "id": 221,
       "title": "職務経歴書は何枚が正解？2枚に収めるコツ",
       "category": "kh02",
