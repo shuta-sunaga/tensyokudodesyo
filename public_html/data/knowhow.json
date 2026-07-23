@@ -1,6 +1,15 @@
 {
   "articles": [
     {
+      "id": 223,
+      "title": "Gemini 3を転職に活用｜旧版との違いと使い方",
+      "category": "kh05",
+      "excerpt": "Googleの最新AIモデル「Gemini 3」を転職活動に活かす方法を解説。Gemini 2.5からの進化点、検索連携やDeep Researchを使った企業研究、無料・有料プランの使い分けまで具体的に紹介します。",
+      "image": "/assets/knowhow-223.webp",
+      "postDate": "2026-07-23",
+      "detailUrl": "/knowhow/detail/knowhow-223.html"
+    },
+    {
       "id": 222,
       "title": "適職診断は当たる？結果の活かし方と限界",
       "category": "kh03",
