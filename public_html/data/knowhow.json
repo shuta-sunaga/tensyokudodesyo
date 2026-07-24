@@ -1,6 +1,15 @@
 {
   "articles": [
     {
+      "id": 224,
+      "title": "Grokを転職に活用｜Xのリアルな声で企業研究",
+      "category": "kh05",
+      "excerpt": "xAIのGrokはX（旧Twitter）のリアルタイム投稿を検索できる点が転職に効きます。企業の本音の評判や業界トレンドの集め方、そのまま使えるプロンプト例、他AIとの使い分けまで具体的に解説します。",
+      "image": "/assets/knowhow-224.webp",
+      "postDate": "2026-07-24",
+      "detailUrl": "/knowhow/detail/knowhow-224.html"
+    },
+    {
       "id": 223,
       "title": "Gemini 3を転職に活用｜旧版との違いと使い方",
       "category": "kh05",
