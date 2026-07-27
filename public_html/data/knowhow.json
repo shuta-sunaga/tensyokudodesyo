@@ -1,6 +1,15 @@
 {
   "articles": [
     {
+      "id": 225,
+      "title": "ikigaiチャートで適職を見つける方法",
+      "category": "kh03",
+      "excerpt": "日本語の「生きがい」を語源に世界へ広まったikigaiチャートは、「好き・得意・稼げる・求められる」の4つの円の重なりから適職を探すフレームワークです。書き方5ステップと40の質問リスト、転職への活かし方を記入例つきで解説します。",
+      "image": "/assets/knowhow-225.webp",
+      "postDate": "2026-07-27",
+      "detailUrl": "/knowhow/detail/knowhow-225.html"
+    },
+    {
       "id": 224,
       "title": "Grokを転職に活用｜Xのリアルな声で企業研究",
       "category": "kh05",
