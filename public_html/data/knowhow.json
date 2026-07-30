@@ -1,6 +1,24 @@
 {
   "articles": [
     {
+      "id": 227,
+      "title": "履歴書の退職理由の書き方｜一身上の都合の使い方",
+      "category": "kh02",
+      "excerpt": "履歴書の退職理由は「一身上の都合により退職」が基本です。自己都合・会社都合・契約期間満了の書き分けルール、倒産・介護・病気などケース別の記入例、書いてはいけないNG例、あえて理由を書いた方が有利になるケースまでまとめて解説します。",
+      "image": "/assets/knowhow-227.webp",
+      "postDate": "2026-07-30",
+      "detailUrl": "/knowhow/detail/knowhow-227.html"
+    },
+    {
+      "id": 226,
+      "title": "面接で嘘はバレる？経歴を盛るリスクと対処法",
+      "category": "kh01",
+      "excerpt": "面接での嘘は深掘り質問・入社書類・リファレンスチェックの3ルートで高確率でバレます。経歴詐称のリスクと「嘘」「盛る」「アピール」の境界線、経歴に自信がなくても正直なまま評価を高める言い換え例文を紹介します。",
+      "image": "/assets/knowhow-226.webp",
+      "postDate": "2026-07-30",
+      "detailUrl": "/knowhow/detail/knowhow-226.html"
+    },
+    {
       "id": 225,
       "title": "ikigaiチャートで適職を見つける方法",
       "category": "kh03",
