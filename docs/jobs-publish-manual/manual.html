@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>求人公開 運用マニュアル | 転職どうでしょう</title>
+<style>
+  :root {
+    --green: #5a9e6f;
+    --orange: #e8a85a;
+    --dark: #3d4a3f;
+    --cream: #faf8f0;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, sans-serif;
+    color: #333;
+    line-height: 1.8;
+    font-size: 14px;
+  }
+  .page { max-width: 800px; margin: 0 auto; padding: 32px 40px; }
+  header.doc-header {
+    background: var(--dark);
+    color: #fff;
+    padding: 28px 40px;
+    margin-bottom: 8px;
+  }
+  header.doc-header h1 { font-size: 22px; letter-spacing: 0.05em; }
+  header.doc-header p { color: #cfd8cf; font-size: 12px; margin-top: 6px; }
+  h2 {
+    font-size: 18px;
+    color: var(--dark);
+    border-left: 6px solid var(--green);
+    padding: 4px 0 4px 12px;
+    margin: 40px 0 16px;
+    page-break-after: avoid;
+  }
+  h3 { font-size: 15px; color: var(--dark); margin: 20px 0 8px; page-break-after: avoid; }
+  p { margin-bottom: 10px; }
+  ol.steps { padding-left: 1.4em; margin-bottom: 12px; }
+  ol.steps li { margin-bottom: 6px; }
+  ul { padding-left: 1.4em; margin-bottom: 12px; }
+  .shot {
+    margin: 14px 0 22px;
+    page-break-inside: avoid;
+  }
+  .shot img {
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  }
+  .shot figcaption {
+    font-size: 12px;
+    color: #666;
+    margin-top: 6px;
+    text-align: center;
+  }
+  .note {
+    background: #fdf4e7;
+    border: 1px solid var(--orange);
+    border-radius: 6px;
+    padding: 12px 16px;
+    margin: 14px 0;
+    page-break-inside: avoid;
+  }
+  .note .label { font-weight: bold; color: #b57722; }
+  .warn {
+    background: #fdeeee;
+    border: 1px solid #d9807f;
+    border-radius: 6px;
+    padding: 12px 16px;
+    margin: 14px 0;
+    page-break-inside: avoid;
+  }
+  .warn .label { font-weight: bold; color: #b0413e; }
+  .flow {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 16px 0 8px;
+  }
+  .flow span {
+    background: var(--cream);
+    border: 1.5px solid var(--green);
+    color: var(--dark);
+    border-radius: 20px;
+    padding: 6px 14px;
+    font-size: 13px;
+    font-weight: bold;
+  }
+  .flow .arrow { border: none; background: none; color: var(--green); padding: 6px 0; }
+  table.info {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0 18px;
+    font-size: 13px;
+  }
+  table.info th, table.info td {
+    border: 1px solid #ddd;
+    padding: 8px 12px;
+    text-align: left;
+    vertical-align: top;
+  }
+  table.info th { background: var(--cream); white-space: nowrap; width: 200px; }
+  code {
+    background: #f0f0ec;
+    border-radius: 3px;
+    padding: 1px 6px;
+    font-family: Consolas, monospace;
+    font-size: 12.5px;
+  }
+  .setting-box {
+    background: #f4f8f5;
+    border: 1px solid var(--green);
+    border-radius: 6px;
+    padding: 12px 16px;
+    margin: 12px 0;
+    page-break-inside: avoid;
+  }
+  .setting-box b { color: var(--dark); }
+  footer {
+    margin-top: 48px;
+    padding-top: 12px;
+    border-top: 1px solid #ddd;
+    font-size: 11px;
+    color: #999;
+  }
+  @media print {
+    body { font-size: 12.5px; }
+    .page { padding: 16px 8px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="doc-header">
+  <h1>求人公開 運用マニュアル</h1>
+  <p>転職どうでしょう（tensyokudodesyo.com）｜新規求人の追加公開作業手順｜2026年8月4日版</p>
+</header>
+
+<div class="page">
+
+<h2>この作業について</h2>
+<p>Lark に登録された求人データをもとに CSV を生成し、CMS（Movable Type）に取り込んでサイトに公開するまでの手順です。全体の流れは次の5ステップです。</p>
+
+<div class="flow">
+  <span>① CSVダウンロード</span><span class="arrow">▶</span>
+  <span>② ZIP展開</span><span class="arrow">▶</span>
+  <span>③ CMSへインポート</span><span class="arrow">▶</span>
+  <span>④ 公開</span><span class="arrow">▶</span>
+  <span>⑤ 表示確認</span>
+</div>
+
+<table class="info">
+  <tr><th>作業時間の目安</th><td>①〜③で15〜30分程度、④の公開処理に5〜15分、⑤の確認は公開の約30分後</td></tr>
+  <tr><th>実施タイミング</th><td><b>稼働時間に2時間以上の余裕があるとき</b>に実施してください。残り30分未満しかない場合は次回に延期してください（公開処理がサーバーに負荷をかけるため、途中で作業を止めない）</td></tr>
+  <tr><th>困ったときは</th><td>エラー画面や様子がおかしい画面の<b>スクリーンショットを添えて須長へ連絡</b>してください</td></tr>
+</table>
+
+<h2>① CSVダウンロード（求人CSVエクスポートアプリ）</h2>
+<ol class="steps">
+  <li>ブラウザで <code>https://jobs-export.vercel.app</code> を開く</li>
+  <li><b>都道府県</b>：今回公開する都道府県を選択</li>
+  <li><b>この日付以降のデータを取得</b>：前回作業した日付を入力（この日付以降に Lark に登録された求人だけが対象になります。空欄のままだと全件が対象になるので注意）</li>
+  <li><b>パスワード</b>：共有されているパスワードを入力</li>
+  <li><b>「CSVを生成してダウンロード」</b>ボタンを押す</li>
+</ol>
+
+<figure class="shot">
+  <img src="img/01-app-form.jpg" alt="求人CSVエクスポートアプリの入力画面">
+  <figcaption>求人CSVエクスポートアプリ。都道府県・日付・パスワードを入力してボタンを押すだけです</figcaption>
+</figure>
+
+<div class="note">
+  <span class="label">📌 補足</span><br>
+  ・件数が多い場合、ダウンロードが始まるまで<b>数分かかる</b>ことがあります。そのまま待ってください。<br>
+  ・件数が少なければ CSV ファイル1つ、多ければ複数の CSV をまとめた <b>ZIP ファイル</b>がダウンロードされます。<br>
+  ・処理が途中で止まってしまった（いつまでも終わらない）場合は、須長へ連絡してください。
+</div>
+
+<h2>② ZIPファイルの展開</h2>
+<ol class="steps">
+  <li>ダウンロードした ZIP ファイルをエクスプローラーで右クリック →<b>「すべて展開」</b></li>
+  <li>展開したフォルダの中に <code>export_20260804_1of6.csv</code> のような連番のファイルがあることを確認（この番号順に③でインポートします）</li>
+</ol>
+
+<div class="note">
+  <span class="label">📌 補足</span> ZIP ではなく CSV が1つだけダウンロードされた場合は、展開は不要です。そのまま③へ進んでください。
+</div>
+
+<h2>③ CMS（Movable Type）へのインポート</h2>
+
+<h3>3-1. CMSにログインして対象の都道府県を開く</h3>
+<ol class="steps">
+  <li><code>https://www.tensyokudodesyo.com/mt/</code> にアクセスしてログイン</li>
+  <li>ダッシュボードの「サイトの一覧」から、今回公開する<b>都道府県のサイト</b>（例：大阪府）をクリック</li>
+</ol>
+
+<figure class="shot">
+  <img src="img/02-mt-dashboard.jpg" alt="Movable Typeのダッシュボード">
+  <figcaption>ログイン後のダッシュボード。下にスクロールすると都道府県ごとのサイトが並んでいます</figcaption>
+</figure>
+
+<h3>3-2. インポート画面を開いて設定する</h3>
+<ol class="steps">
+  <li>左メニューの <b>記事 →「インポート」</b> をクリック</li>
+  <li><b>インポート元</b> を「<b>CSV形式</b>」に変更（設定項目が下に表示されます）</li>
+  <li>以下のとおり設定されていることを確認する</li>
+</ol>
+
+<div class="setting-box">
+  <b>設定内容（この4点を確認）</b><br>
+  ・インポート元：<b>CSV形式</b><br>
+  ・指定記事IDがある場合：<b>同一記事IDの記事を上書き</b><br>
+  ・指定記事IDがない場合：<b>新規作成</b> ←ここが「インポートしない」になっていたら変更する<br>
+  ・記事ID指定なしの処理：<b>新規作成</b>
+</div>
+
+<figure class="shot">
+  <img src="img/04-import-settings.jpg" alt="CSVインポートの設定画面">
+  <figcaption>インポート元を「CSV形式」にした状態。ラジオボタンが上記のとおりになっているか確認します</figcaption>
+</figure>
+
+<h3>3-3. ファイルを1つずつインポートする</h3>
+<ol class="steps">
+  <li>ページ下部の<b>「ファイルを選択」</b>で、②で展開した CSV の<b>1つ目（1of6 など）</b>を選択</li>
+  <li><b>「記事のインポート」</b>ボタンを押し、完了画面が出るまで待つ</li>
+  <li>完了したら再度インポート画面に戻り、<b>2つ目のファイル</b>で同じ操作を繰り返す</li>
+  <li>すべてのファイル（6分割なら6回）が終わるまで繰り返す</li>
+</ol>
+
+<figure class="shot">
+  <img src="img/05-import-upload.jpg" alt="ファイル選択とインポートボタン">
+  <figcaption>ファイルを選択して「記事のインポート」を押します。分割ファイルの数だけ繰り返します</figcaption>
+</figure>
+
+<div class="warn">
+  <span class="label">⚠️ 注意</span><br>
+  ・ファイルは<b>必ず1つずつ、番号順に</b>インポートしてください（まとめて選択はできません）。<br>
+  ・どこまで取り込んだか分からなくならないよう、終わったファイル名をメモしておくと安心です。
+</div>
+
+<h3>3-4. 取り込み件数を確認する</h3>
+<ol class="steps">
+  <li>左メニューの <b>記事 →「一覧」</b> を開く</li>
+  <li>右上の件数表示（例：<code>1 - 50 / 1447</code>）が、インポートした分だけ<b>増えている</b>ことを確認</li>
+</ol>
+
+<figure class="shot">
+  <img src="img/03-entry-list.jpg" alt="記事一覧画面">
+  <figcaption>記事一覧。右上の「1 - 50 / 1447」の総数がインポート前より増えていればOKです</figcaption>
+</figure>
+
+<h2>④ 公開する</h2>
+<p>インポートした直後の求人は<b>「非公開」の状態</b>です。以下の手順で公開します。</p>
+<ol class="steps">
+  <li>記事一覧で、今回インポートした求人（非公開のもの）の<b>チェックボックスにチェック</b>を入れる（タイトル行の一番上のチェックボックスで、表示中のページを一括選択できます）</li>
+  <li>一覧上部の<b>「公開」ボタン</b>を押す</li>
+</ol>
+
+<div class="warn">
+  <span class="label">⚠️ 注意（重要）</span><br>
+  ・公開処理はサーバーに負荷がかかり、<b>5〜15分程度</b>かかります。処理中はブラウザを閉じずに待ってください。<br>
+  ・<b>稼働時間の残りが30分未満のときは実施しない</b>でください。2時間以上余裕のあるタイミングで行ってください。<br>
+  ・エラーが表示された場合は、その画面のスクリーンショットを撮って須長へ連絡してください。
+</div>
+
+<h2>⑤ 表示確認</h2>
+<p>公開処理から<b>30分ほど時間をおいて</b>、以下の2点を確認します。</p>
+
+<h3>5-1. CMS側の確認</h3>
+<ol class="steps">
+  <li>記事一覧に戻り、公開した求人の中から<b>4〜5件</b>を開いて、タイトルや本文の内容が崩れていないか確認</li>
+</ol>
+
+<h3>5-2. サイト側の確認</h3>
+<ol class="steps">
+  <li><code>https://www.tensyokudodesyo.com/</code> を開き、日本地図から対象の都道府県をクリック</li>
+  <li>求人一覧ページが表示され、<b>件数が増えている</b>こと・新しい求人が表示されることを確認</li>
+</ol>
+
+<figure class="shot">
+  <img src="img/07-top-map.jpg" alt="トップページの日本地図">
+  <figcaption>トップページの日本地図から対象の都道府県をクリックします</figcaption>
+</figure>
+
+<figure class="shot">
+  <img src="img/06-osaka-page.jpg" alt="大阪府の求人一覧ページ">
+  <figcaption>都道府県の求人一覧ページ。「◯◯件の求人があります」の件数と、新しい求人カードの表示を確認します</figcaption>
+</figure>
+
+<h2>困ったときは</h2>
+<ul>
+  <li>手順の途中でエラーが出た・画面の様子がおかしい → <b>その画面のスクリーンショットを撮って須長へ連絡</b>してください。作業はいったん中断してかまいません。</li>
+  <li>アプリのダウンロードがいつまでも終わらない → 件数が多いと数分かかりますが、10分以上動きがない場合は連絡してください。</li>
+  <li>どのファイルまでインポートしたか分からなくなった → 無理に続けず、状況を添えて連絡してください（重複登録を防ぐため）。</li>
+</ul>
+
+<footer>
+  転職どうでしょう 求人公開運用マニュアル（2026-08-04作成）｜作成: 須長｜本マニュアルは社外秘です。関係者以外への共有はご遠慮ください。
+</footer>
+
+</div>
+</body>
+</html>
