@@ -1,6 +1,15 @@
 {
   "articles": [
     {
+      "id": 229,
+      "title": "化学業界の転職ガイド｜AI活用で業界研究",
+      "category": "kh04",
+      "excerpt": "化学業界は平均年収が高く世界シェア上位の隠れ優良企業が多い転職先です。職種・年収・将来性を整理し、半導体材料など成長分野の見極め方、ChatGPTのDeep ResearchやNotebookLMを使った業界研究・企業分析の具体的な手順を解説します。",
+      "image": "/assets/knowhow-229.webp",
+      "postDate": "2026-08-04",
+      "detailUrl": "/knowhow/detail/knowhow-229.html"
+    },
+    {
       "id": 228,
       "title": "ビッグファイブ性格診断を転職に活かす方法",
       "category": "kh03",
