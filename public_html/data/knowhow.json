@@ -1,6 +1,15 @@
 {
   "articles": [
     {
+      "id": 234,
+      "title": "エゴグラム診断を転職に活かす方法",
+      "category": "kh03",
+      "excerpt": "エゴグラムは交流分析をもとにした性格診断で、5つの自我状態から性格の癖を可視化できます。診断の受け方、パターン別の適職傾向、自己PRや面接での活かし方まで転職向けに解説します。",
+      "image": "/assets/knowhow-234.webp",
+      "postDate": "2026-08-13",
+      "detailUrl": "/knowhow/detail/knowhow-234.html"
+    },
+    {
       "id": 233,
       "title": "面接の合格フラグ・不合格フラグの見分け方",
       "category": "kh01",
