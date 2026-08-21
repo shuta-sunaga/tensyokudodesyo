@@ -1,6 +1,33 @@
 {
   "articles": [
     {
+      "id": 242,
+      "title": "AIで面接の自己紹介を磨く｜1分・3分の例文作成",
+      "category": "kh01",
+      "excerpt": "転職面接の自己紹介をAIで磨く手順を解説。たたき台の作り方、30秒・1分・3分への長さ変換、応募企業別のカスタマイズ、面接官視点の添削プロンプト、音読練習での仕上げ方まで、そのまま使える例文つきで紹介します。",
+      "image": "/assets/knowhow-242.webp",
+      "postDate": "2026-08-21",
+      "detailUrl": "/knowhow/detail/knowhow-242.html"
+    },
+    {
+      "id": 241,
+      "title": "AIで引き継ぎ資料を作る｜円満退職の準備術",
+      "category": "kh05",
+      "excerpt": "退職時の引き継ぎ資料をAIで効率よく作る手順を解説。業務の棚卸しプロンプト、職種別の目次テンプレート、手順書・FAQの自動生成、後任者の質問を先回りする方法、機密情報の扱い方まで、そのまま使える例つきで紹介します。",
+      "image": "/assets/knowhow-241.webp",
+      "postDate": "2026-08-21",
+      "detailUrl": "/knowhow/detail/knowhow-241.html"
+    },
+    {
+      "id": 240,
+      "title": "AIで短所・弱みを言語化する方法｜転職の自己分析",
+      "category": "kh03",
+      "excerpt": "「自分の短所がわからない」を解決するAI自己分析の手順を解説。ChatGPT・Claudeに渡す材料の集め方、短所を引き出す質問プロンプト、面接で使える言葉への変換法、やってはいけない使い方まで具体例つきで紹介します。",
+      "image": "/assets/knowhow-240.webp",
+      "postDate": "2026-08-21",
+      "detailUrl": "/knowhow/detail/knowhow-240.html"
+    },
+    {
       "id": 239,
       "title": "履歴書の通勤時間欄の書き方｜引っ越し予定の場合",
       "category": "kh02",
