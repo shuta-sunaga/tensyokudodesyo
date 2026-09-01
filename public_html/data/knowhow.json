@@ -1,6 +1,33 @@
 {
   "articles": [
     {
+      "id": 250,
+      "title": "通信業界の転職ガイド｜職種・年収・将来性",
+      "category": "kh04",
+      "excerpt": "通信キャリア・通信工事・ISPなど通信業界の構造と職種、年収相場、5G・IoT時代の将来性、未経験からの転職ルートまで業界研究に必要な情報を解説します。",
+      "image": "/assets/knowhow-250.webp",
+      "postDate": "2026-09-01",
+      "detailUrl": "/knowhow/detail/knowhow-250.html"
+    },
+    {
+      "id": 249,
+      "title": "マスコミ・エンタメ業界の転職ガイド｜職種・年収・将来性",
+      "category": "kh04",
+      "excerpt": "テレビ・出版・映像・音楽などマスコミ・エンタメ業界の職種と年収相場、動画配信シフトで変わる将来性、未経験からの転職ルートを具体的に解説します。",
+      "image": "/assets/knowhow-249.webp",
+      "postDate": "2026-09-01",
+      "detailUrl": "/knowhow/detail/knowhow-249.html"
+    },
+    {
+      "id": 248,
+      "title": "ホランド理論（RIASEC）で適職診断｜6タイプの活かし方",
+      "category": "kh03",
+      "excerpt": "ホランド理論（RIASEC）は6つの職業興味タイプから適職を導く自己分析の定番手法。各タイプの特徴と向いている仕事、無料診断の方法、転職活動への活かし方を解説します。",
+      "image": "/assets/knowhow-248.webp",
+      "postDate": "2026-09-01",
+      "detailUrl": "/knowhow/detail/knowhow-248.html"
+    },
+    {
       "id": 247,
       "title": "履歴書の健康状態欄の書き方｜持病・通院はどう書く？",
       "category": "kh02",
