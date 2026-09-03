@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="ChatGPT（チャッピー）で適職診断するコピペ用プロンプト5本を出力例つきで解説。職歴と好き嫌いから適職10個を出す、RIASEC判定、消去法、比較表、求人票の相性採点まで。結果の検証法と転職活動への落とし込み方も紹介します。">
+
+    <title>ChatGPT（チャッピー）適職診断プロンプト｜コピペ用5本 | 転職どうでしょう</title>
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://www.tensyokudodesyo.com/knowhow/detail/knowhow-256.html">
+
+    <!-- OGP -->
+    <meta property="og:title" content="ChatGPT（チャッピー）適職診断プロンプト｜コピペ用5本">
+    <meta property="og:description" content="ChatGPT（チャッピー）で適職診断するコピペ用プロンプト5本を出力例つきで解説。職歴と好き嫌いから適職10個を出す、RIASEC判定、消去法、比較表、求人票の相性採点まで。結果の検証法と転職活動への落とし込み方も紹介します。">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://www.tensyokudodesyo.com/knowhow/detail/knowhow-256.html">
+    <meta property="og:image" content="https://www.tensyokudodesyo.com/assets/knowhow-256.webp">
+    <meta property="og:site_name" content="転職どうでしょう">
+    <meta property="og:locale" content="ja_JP">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="ChatGPT（チャッピー）適職診断プロンプト｜コピペ用5本">
+    <meta name="twitter:description" content="ChatGPT（チャッピー）で適職診断するコピペ用プロンプト5本を出力例つきで解説。職歴と好き嫌いから適職10個を出す、RIASEC判定、消去法、比較表、求人票の相性採点まで。結果の検証法と転職活動への落とし込み方も紹介します。">
+    <meta name="twitter:image" content="https://www.tensyokudodesyo.com/assets/knowhow-256.webp">
+
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/article-detail.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GJSD6BRJ0T"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-GJSD6BRJ0T');
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "ホーム",
+                "item": "https://www.tensyokudodesyo.com/"
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "転職ノウハウ",
+                "item": "https://www.tensyokudodesyo.com/knowhow/"
+            },
+            {
+                "@type": "ListItem",
+                "position": 3,
+                "name": "ChatGPT（チャッピー）適職診断プロンプト｜コピペ用5本"
+            }
+        ]
+    }
+    </script>
+
+    <!-- JSON-LD: BlogPosting -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "ChatGPT（チャッピー）適職診断プロンプト｜コピペ用5本",
+        "description": "ChatGPT（チャッピー）で適職診断するコピペ用プロンプト5本を出力例つきで解説。職歴と好き嫌いから適職10個を出す、RIASEC判定、消去法、比較表、求人票の相性採点まで。結果の検証法と転職活動への落とし込み方も紹介します。",
+        "datePublished": "2026-09-03",
+        "dateModified": "2026-09-03",
+        "author": {
+            "@type": "Organization",
+            "name": "転職どうでしょう"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "転職どうでしょう",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://www.tensyokudodesyo.com/assets/logo.webp"
+            }
+        },
+        "image": "https://www.tensyokudodesyo.com/assets/knowhow-256.webp",
+        "mainEntityOfPage": "https://www.tensyokudodesyo.com/knowhow/detail/knowhow-256.html",
+        "articleSection": "自己分析"
+    }
+    </script>
+
+</head>
+<body>
+    <!-- Header -->
+    <div id="header-placeholder"></div>
+
+    <main class="article-detail">
+        <div class="container">
+            <!-- Breadcrumb -->
+            <nav class="breadcrumb">
+                <a href="/">ホーム</a>
+                <a href="/knowhow/">転職ノウハウ</a>
+                <span>ChatGPT（チャッピー）適職診断プロンプト｜コピペ用5本</span>
+            </nav>
+
+            <!-- Article Header -->
+            <header class="article-header">
+                <img src="https://www.tensyokudodesyo.com/assets/knowhow-256.webp" alt="ChatGPT（チャッピー）適職診断プロンプト｜コピペ用5本" class="article-thumbnail" loading="lazy">
+                <h1 class="article-title">ChatGPT（チャッピー）適職診断プロンプト｜コピペ用5本</h1>
+
+                <div class="article-meta">
+                    <span class="article-category">自己分析</span>
+                    <time class="article-date" datetime="2026-09-03">
+                        2026年09月03日
+                    </time>
+                </div>
+            </header>
+
+            <!-- Introduction -->
+            <div class="article-introduction">
+                「自分に向いている仕事が分からない」——転職を考え始めた人の多くが最初にぶつかる壁です。無料の適職診断サイトを試しても、「あなたは協調性が高いので事務職向き」のような結果が返ってくるだけで、次の一歩につながらなかった経験はないでしょうか。<br><br>そこで広がっているのが、<strong>チャッピー（ChatGPT）に自分の職歴と好き嫌いを渡して、対話しながら適職を絞り込む方法</strong>です。TikTokやXで「チャッピーに適職診断させたら当たりすぎた」という投稿が話題になり、コピペで使えるプロンプトを探す人が急増しました。<br><br>この記事では、適職診断に絞ったコピペ用プロンプト5本を、出力例と深掘り質問つきで紹介します。診断前に用意する材料、結果を信じすぎないための検証法、診断結果を求人検索や志望動機に落とし込む手順まで、この1本で適職診断が完結する構成にしました。
+            </div>
+
+            <!-- Table of Contents -->
+            <nav class="article-toc">
+                <h2 class="toc-title">目次</h2>
+                <ol class="toc-list" id="tocList">
+                    <!-- JavaScriptで動的生成 -->
+                </ol>
+            </nav>
+
+            <!-- Article Body -->
+            <div class="article-body" id="articleBody">
+                <h2>1. チャッピー適職診断とは｜無料の適職診断サイトと何が違うか</h2>
+
+                <p>　チャッピー（ChatGPT）を使った適職診断とは、自分の職歴・得意不得意・譲れない条件を文章で渡し、AIに「向いている職種」を根拠つきで提案してもらう方法です。質問に選択式で答える従来の適職診断サイトとは、仕組みが根本から違います。</p>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>比較項目</th>
+                            <th>無料の適職診断サイト</th>
+                            <th>チャッピー（ChatGPT）適職診断</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>入力</td>
+                            <td>選択式の質問20〜60問</td>
+                            <td>職歴・好き嫌い・条件を自由文で</td>
+                        </tr>
+                        <tr>
+                            <td>結果</td>
+                            <td>タイプ名と職種数個</td>
+                            <td>職種10個＋向いている理由＋懸念点</td>
+                        </tr>
+                        <tr>
+                            <td>深掘り</td>
+                            <td>できない</td>
+                            <td>「なぜ？」「他には？」と何度でも</td>
+                        </tr>
+                        <tr>
+                            <td>求人票との照合</td>
+                            <td>できない</td>
+                            <td>求人票を貼って相性を採点できる</td>
+                        </tr>
+                        <tr>
+                            <td>精度</td>
+                            <td>誰が受けても一定</td>
+                            <td>入力の質で大きく上下する</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p>　強みは<strong>対話で深掘りできること</strong>と<strong>根拠が出ること</strong>です。「なぜこの職種なのか」を聞けば理由が返り、「この求人はどうか」と貼れば照合してくれます。一方で弱みもはっきりしていて、入力が薄いと一般論しか返ってきません。「営業を5年やりました」だけでは、どの診断サイトより粗い結果になります。この記事のプロンプトは、その弱みを埋めるために<strong>渡す情報の型</strong>まで含めて設計しています。</p>
+
+                <p>　2026年時点のChatGPTの最新モデルはGPT-5.6で、無料プランでも回数制限つきで利用できます。ここで紹介するプロンプトは、ClaudeやGeminiにそのまま貼っても動作します。ツールごとの違いは<a href="/knowhow/detail/knowhow-207.html">転職のAI活用完全ガイド｜ChatGPT・Claude・Geminiの使い分け</a>で整理しています。</p>
+
+                <h2>2. 診断前に用意する3つの材料｜記入テンプレート</h2>
+
+                <p>　適職診断の精度は、プロンプトの出来より<strong>渡す材料の具体性</strong>で決まります。診断を始める前に、次の3つをメモ帳に書き出してください。所要時間は15分程度です。</p>
+
+                <h3>材料1：職歴を数字つきで</h3>
+
+                <p>　会社名は不要です。「業種・職種・年数・担当範囲・数字で言える実績」の5点を、経験した職場ごとに書きます。数字は売上・件数・人数・時間・率のどれかが入っていれば十分です。</p>
+
+                <h3>材料2：好きだった業務と嫌いだった業務</h3>
+
+                <p>　「得意」ではなく「好き・嫌い」で書くのがポイントです。適職は能力だけでなく、続けられるかどうかで決まります。それぞれ3つ以上、できれば「なぜ」まで添えてください。</p>
+
+                <h3>材料3：譲れない条件</h3>
+
+                <p>　年収の下限、勤務地、残業の上限、リモート可否、転勤の可否など、これを満たさないなら応募しない条件を書きます。多くても5つまでに絞ると、AIの提案がぶれません。</p>
+
+                <div class="prompt-box" style="background: #f5f5f0; border-left: 4px solid #5a9e6f; padding: 16px 20px; margin: 20px 0; border-radius: 4px;">
+                    <p style="font-weight: 700; margin-bottom: 8px;">材料の記入テンプレート（この記事のプロンプト全部で使い回します）</p>
+                    <p style="font-family: monospace; font-size: 14px; line-height: 1.8;">【職歴】<br>・小売業／店舗販売職／6年／レジ・接客・発注・新人教育／担当売場の売上を2年で前年比115%、新人8名を育成<br>・（2社目があれば同じ形式で）<br><br>【好きだった業務と理由】<br>・発注と在庫調整：数字を見て仮説を立てて当たると楽しい<br>・新人教育：相手ができるようになる過程を見るのが好き<br>・（3つ以上）<br><br>【嫌いだった業務と理由】<br>・クレーム対応：理不尽な要求に感情が消耗する<br>・土日出勤：家族と予定が合わない<br>・（3つ以上）<br><br>【譲れない条件】<br>・年収380万円以上／転勤なし／土日休み／残業月20時間以内</p>
+                </div>
+
+                <p>　このテンプレートを埋めたものを、以降のプロンプトの【材料】の部分に貼り付けます。一度作れば5本すべてで使い回せます。</p>
+
+                <h2>3. コピペ用プロンプト5本｜出力例と深掘り質問つき</h2>
+
+                <p>　ここからが本題です。5本は「広げる → 型で判定する → 消去法で削る → 比較する → 求人票で確かめる」の順に並んでいます。上から順に使うと、1時間ほどで候補職種が3つに絞れます。</p>
+
+                <h3>プロンプト1：職歴と好き嫌いから適職を10個出す</h3>
+
+                <div class="prompt-box" style="background: #f5f5f0; border-left: 4px solid #5a9e6f; padding: 16px 20px; margin: 20px 0; border-radius: 4px;">
+                    <p style="font-weight: 700; margin-bottom: 8px;">プロンプト1：適職10個の洗い出し</p>
+                    <p style="font-family: monospace; font-size: 14px; line-height: 1.8;">あなたは転職支援歴15年のキャリアコンサルタントです。以下の材料をもとに、私に向いている職種を10個提案してください。各職種について「向いている理由（材料のどこから判断したか）」「懸念点」「未経験からの転職難易度（5段階）」を表形式で示してください。今の職種と同じものは除外し、私が思いつかなさそうな職種を必ず3つ以上含めてください。<br><br>【材料】<br>（テンプレートを貼り付け）</p>
+                </div>
+
+                <p>　<strong>出力例（抜粋）</strong>：「①購買・バイヤー職：発注と在庫調整を『仮説が当たると楽しい』と表現している点から、数字を扱う判断業務への適性が高いと判断。懸念点は取引先との交渉でクレーム対応に近い場面があること。難易度3。②研修担当・人材育成職：新人8名の育成実績と『できるようになる過程が好き』という動機の一致。懸念点は未経験だと求人数が少ないこと。難易度4……」のように、根拠が材料の言葉に紐づいた形で返ってきます。</p>
+
+                <p>　<strong>深掘りの追加質問</strong>：「10個のうち、私の『嫌いだった業務』を最も避けられる順に並べ直してください」「各職種で、私の実績のどれが職務経歴書のアピールになりますか」。この2問を続けると、10個の中で本命が見えてきます。</p>
+
+                <h3>プロンプト2：ホランド6タイプ（RIASEC）で判定して職種を出す</h3>
+
+                <div class="prompt-box" style="background: #f5f5f0; border-left: 4px solid #5a9e6f; padding: 16px 20px; margin: 20px 0; border-radius: 4px;">
+                    <p style="font-weight: 700; margin-bottom: 8px;">プロンプト2：RIASEC判定</p>
+                    <p style="font-family: monospace; font-size: 14px; line-height: 1.8;">ホランドの職業興味理論（RIASEC：現実的・研究的・芸術的・社会的・企業的・慣習的）に基づいて、以下の材料から私のタイプを判定してください。6タイプそれぞれのスコアを10点満点で示し、上位3タイプの組み合わせ（3文字コード）を出してください。その組み合わせに合う職種を8個、「なぜその組み合わせに合うか」とセットで挙げてください。判断の根拠は必ず材料の記述を引用してください。<br><br>【材料】<br>（テンプレートを貼り付け）</p>
+                </div>
+
+                <p>　<strong>出力例（抜粋）</strong>：「S（社会的）8点：新人教育を好む記述。E（企業的）7点：売上115%達成と発注判断。C（慣習的）6点：在庫管理の正確さ。3文字コードはSEC。合う職種：人材コーディネーター、店舗開発、営業事務のリーダー職……」。理論の型に当てはめることで、プロンプト1とは違う角度の候補が出ます。両方に登場した職種は信頼度が高いと考えてください。</p>
+
+                <p>　<strong>深掘りの追加質問</strong>：「上位3タイプの中で、私が最も伸ばしやすいのはどれですか。理由も教えてください」。RIASECの各タイプの意味と活かし方は関連記事で詳しく解説しています。</p>
+
+                <p>　<strong>関連記事：</strong><a href="/knowhow/detail/knowhow-248.html">ホランド理論（RIASEC）で適職診断｜6タイプの活かし方</a></p>
+
+                <h3>プロンプト3：「やりたくないこと」から消去法で絞る</h3>
+
+                <div class="prompt-box" style="background: #f5f5f0; border-left: 4px solid #5a9e6f; padding: 16px 20px; margin: 20px 0; border-radius: 4px;">
+                    <p style="font-weight: 700; margin-bottom: 8px;">プロンプト3：消去法で候補を削る</p>
+                    <p style="font-family: monospace; font-size: 14px; line-height: 1.8;">これまでに挙がった候補職種（プロンプト1と2の結果を貼り付け）を、以下の基準で消去法にかけてください。<br>1. 私の「嫌いだった業務」が仕事の中心になる職種は除外<br>2. 「譲れない条件」を満たす求人が少ない職種は除外（理由を書く）<br>3. 残った職種を「続けられそうな順」に並べ、上位3つを選んでください<br>除外した職種についても、なぜ除外したかを1行ずつ示してください。<br><br>【候補職種】<br>（貼り付け）<br>【材料】<br>（テンプレートを貼り付け）</p>
+                </div>
+
+                <p>　適職診断でありがちな失敗は、「向いている職種」を増やすばかりで絞れないことです。このプロンプトは、増やすのではなく<strong>削る</strong>ための1本です。除外理由を明示させることで、「なんとなく違う」を言葉にできます。</p>
+
+                <p>　<strong>深掘りの追加質問</strong>：「除外した職種のうち、条件を1つ緩めれば復活するものはありますか」。年収や勤務地の条件をわずかに変えるだけで選択肢が広がることが分かります。</p>
+
+                <h3>プロンプト4：候補3つを年収・将来性・未経験可否で比較表にする</h3>
+
+                <div class="prompt-box" style="background: #f5f5f0; border-left: 4px solid #5a9e6f; padding: 16px 20px; margin: 20px 0; border-radius: 4px;">
+                    <p style="font-weight: 700; margin-bottom: 8px;">プロンプト4：比較表の作成</p>
+                    <p style="font-family: monospace; font-size: 14px; line-height: 1.8;">以下の3職種を比較表にしてください。項目は「平均年収の目安」「未経験からの転職可否と必要な準備」「5年後の需要（増える／横ばい／減る）と理由」「私の強みが活きる場面」「入社後に苦労しそうな点」「向いている企業規模」の6つです。年収は「一般的な目安であり地域や企業で差がある」と注記してください。最後に、私の譲れない条件との適合度を100点満点で採点してください。<br><br>【3職種】<br>（プロンプト3の上位3つ）<br>【材料】<br>（テンプレートを貼り付け）</p>
+                </div>
+
+                <p>　<strong>出力例（抜粋）</strong>：「購買職：年収目安400〜550万円、未経験可（小売の発注経験が評価される）、需要は横ばい、強みが活きるのは仕入れ交渉と在庫最適化、苦労しそうな点は取引先との価格交渉、適合度82点。人材コーディネーター：年収目安350〜500万円、未経験可、需要は増加、適合度74点……」。数字が並ぶことで、感覚ではなく比較で選べるようになります。</p>
+
+                <p>　<strong>深掘りの追加質問</strong>：「適合度の点差が生まれた最大の要因は何ですか」「3職種のうち、今の職歴からの転職ストーリーが最も自然なのはどれですか」。</p>
+
+                <h3>プロンプト5：気になる求人票を貼って相性を100点満点で採点する</h3>
+
+                <div class="prompt-box" style="background: #f5f5f0; border-left: 4px solid #5a9e6f; padding: 16px 20px; margin: 20px 0; border-radius: 4px;">
+                    <p style="font-weight: 700; margin-bottom: 8px;">プロンプト5：求人票との相性採点</p>
+                    <p style="font-family: monospace; font-size: 14px; line-height: 1.8;">以下の求人票と私の材料を照合し、相性を100点満点で採点してください。内訳は「仕事内容との適性（40点）」「譲れない条件の充足（30点）」「求める人物像との一致（20点）」「懸念点の少なさ（10点）」とし、各項目の根拠を求人票の文言を引用して示してください。最後に「応募するなら職務経歴書で最初に書くべき実績」と「面接で聞かれそうな懸念点への答え方」を1つずつ提案してください。<br><br>【求人票】<br>（求人票の本文を貼り付け。社名は伏せてよい）<br>【材料】<br>（テンプレートを貼り付け）</p>
+                </div>
+
+                <p>　適職診断の仕上げは、<strong>実在する求人票との照合</strong>です。職種名で「向いている」と言われても、実際の求人は会社ごとに仕事内容が違います。気になる求人を3件貼って採点すると、同じ職種でも点数が20点以上ばらつくことがあり、応募先の優先順位が自然に決まります。</p>
+
+                <p>　<strong>深掘りの追加質問</strong>：「30点未満だった項目を補うために、応募前にできる準備は何ですか」。点数が低くても、準備で埋められる差なのか、そもそも合わないのかが区別できます。</p>
+
+                <h2>4. 出力を信じすぎない｜3つの検証法</h2>
+
+                <p>　チャッピー（ChatGPT）の診断結果は、渡した材料からの推論です。材料に無いことは分かりませんし、年収や需要の数字はもっともらしく見えても古い場合があります。次の3つで必ず検証してください。</p>
+
+                <ol>
+                    <li><strong>診断結果を人に見せる</strong>：元同僚や家族に「この職種、向いてると思う？」と聞きます。当社が転職相談で診断結果を一緒に見る際、本人の自己認識と周囲の見立てがずれているケースは3件に1件ほどあります。ずれた部分こそ、材料に書き漏らしていた情報です。</li>
+                    <li><strong>求人票3件と照合する</strong>：プロンプト5を実在の求人3件で回します。職種名だけの適性は幻想で、求人票と照らして初めて現実になります。</li>
+                    <li><strong>公的な職業情報で確認する</strong>：厚生労働省の職業情報提供サイト（job tag）には、職種ごとの仕事内容・平均年収・必要スキルが掲載されています。AIが出した年収や将来性は、ここで裏を取ってください。</li>
+                </ol>
+
+                <p>　「AIが言ったから」で応募先を決めるのではなく、AIで候補を絞り、人と一次情報で確かめる。この順番を守れば、適職診断は転職の失敗を減らす道具になります。</p>
+
+                <h2>5. 診断結果を転職活動に落とし込む3ステップ</h2>
+
+                <p>　適職が3つに絞れたら、診断はもう目的ではありません。求人検索と志望動機に変換して、初めて役に立ちます。</p>
+
+                <h3>ステップ1：転職の軸を一文にする</h3>
+
+                <p>　プロンプト4の比較表と「好きだった業務」を合わせて、「私は○○な仕事で、△△を活かして働きたい」と一文にします。例：「私は数字をもとに判断する仕事で、小売で培った発注と在庫管理の経験を活かして働きたい」。この一文が、求人を見るときのフィルターになります。</p>
+
+                <h3>ステップ2：求人検索の条件に変換する</h3>
+
+                <p>　軸の一文から、求人サイトで使う検索語と条件を取り出します。例の場合、職種は「購買」「バイヤー」「在庫管理」、キーワードは「発注」「未経験歓迎」、条件は「転勤なし」「土日休み」です。チャッピー（ChatGPT）に「この軸で求人を探すときの検索語を10個出して」と頼むと、自分では思いつかない言い換えが出ます。</p>
+
+                <h3>ステップ3：志望動機の一文に変換する</h3>
+
+                <p>　適職診断で見つけた「向いている理由」は、そのまま志望動機の骨格になります。例：「販売職として担当売場の売上を2年で前年比115%にした経験から、数字をもとに仕入れを判断する仕事に自分の適性があると考え、購買職を志望しました」。診断の根拠を自分の言葉で言い直すだけで、説得力のある一文になります。</p>
+
+                <p>　適職診断の前段階である強み・価値観の整理から始めたい方は、コピペ用プロンプト10本をまとめた関連記事から取り組んでください。</p>
+
+                <p>　<strong>関連記事：</strong><a href="/knowhow/detail/knowhow-058.html">ChatGPT（チャッピー）自己分析プロンプト10選｜コピペOK</a></p>
+
+                <h2>6. 年代・状況別の使い方</h2>
+
+                <p>　同じプロンプトでも、状況によって重視する部分が変わります。材料の書き方と追加質問を少し変えるだけで、精度が上がります。</p>
+
+                <ul>
+                    <li><strong>20代・未経験職種へ</strong>：職歴の数字が少ない分、「好きだった業務」を厚く書きます。アルバイトや学生時代の役割も材料に入れ、プロンプト1で「未経験難易度2以下の職種を優先して」と加えてください。</li>
+                    <li><strong>30代・キャリアチェンジ</strong>：「今の職歴のどの実績が、候補職種で評価されるか」をプロンプト4で必ず聞きます。年収を一時的に下げる選択肢があるなら、譲れない条件の年収を2段階（理想と下限）で書いてください。</li>
+                    <li><strong>40代以上</strong>：マネジメント経験と専門性を分けて職歴に書き、プロンプト1に「年齢を考慮し、経験を直接活かせる職種を中心に」と加えます。未経験職種は難易度4以上が多くなるため、消去法の基準を厳しめにします。</li>
+                    <li><strong>子育て中・時間制約あり</strong>：譲れない条件に「勤務時間」「急な休みへの対応」を明記します。プロンプト5で求人票を採点するとき、「条件の充足」の配点を40点に上げると、現実的な優先順位が出ます。</li>
+                </ul>
+
+                <h2>7. よくある疑問Q&amp;A</h2>
+
+                <h3>Q1. チャッピーの適職診断は当たりますか？</h3>
+
+                <p>　材料の具体性しだいです。職歴を数字つきで、好き嫌いを理由つきで書いた場合、当社の相談者の体感では「納得できる候補が含まれていた」という声が大半です。逆に一行の職歴だけでは、無料診断サイトと変わらない一般論しか返りません。当たる・当たらないはAIの性能より、入力で決まります。</p>
+
+                <h3>Q2. 無料プランで足りますか？</h3>
+
+                <p>　足ります。5本のプロンプトと深掘り質問を合わせても、1時間ほどで完了する分量です。無料プランには回数制限がありますが、この記事の範囲なら1日で使い切ることはまずありません。制限に達したら翌日に続けるか、Claude・Geminiの無料プランに同じ材料を貼れば続きができます。</p>
+
+                <h3>Q3. MBTIや適性検査と併用したほうがいいですか？</h3>
+
+                <p>　併用をおすすめします。MBTIや適性検査は「性格や行動の傾向」を、この記事の診断は「職歴と好き嫌いからの適職」を見ています。角度が違うので、両方に出てきた職種は信頼度が高く、片方にしか出ない職種は「なぜ差が出たか」をチャッピー（ChatGPT）に聞くと理解が深まります。診断結果をそのまま材料に貼って「この結果も踏まえて」と頼めば統合できます。</p>
+
+                <h3>Q4. 職歴を入力して個人情報は大丈夫ですか？</h3>
+
+                <p>　社名・氏名・住所・取引先名は入力しないでください。「小売業／店舗販売職」のように業種と職種で書けば、診断の精度は落ちません。ChatGPTの設定でチャット履歴の学習利用をオフにしておくと、入力内容がモデルの学習に使われなくなります。求人票を貼るときも、社名は伏せて問題ありません。</p>
+
+                <h2>8. まとめ｜適職診断は「絞って、確かめて、変換する」</h2>
+
+                <p>　チャッピー（ChatGPT）を使った適職診断のポイントを整理します。</p>
+
+                <ul>
+                    <li>無料診断サイトとの違いは、<strong>対話で深掘りでき、根拠が出て、求人票と照合できる</strong>こと。精度は入力しだい</li>
+                    <li>診断前に<strong>職歴の数字・好き嫌いと理由・譲れない条件</strong>の3つを15分で書き出す</li>
+                    <li>5本のプロンプトは「広げる → RIASECで判定 → 消去法で削る → 比較表 → 求人票で採点」の順に使う</li>
+                    <li>結果は<strong>人に見せる・求人票3件と照合する・公的情報で裏を取る</strong>の3つで検証する</li>
+                    <li>絞れた適職は、転職の軸の一文 → 検索条件 → 志望動機の一文に変換して初めて役に立つ</li>
+                </ul>
+
+                <p>　まずはテンプレートの3つの材料を書き出し、プロンプト1を貼るところから始めてみてください。10個の候補が並んだ時点で、「向いている仕事が分からない」という状態からは抜け出せています。</p>
+
+                <p>　『転職どうでしょう』では、AIの診断結果を一緒に見ながら、地域の求人と照らして適職を考える相談を無料で受け付けています。「候補は出たけれど、どれが現実的か分からない」「診断結果に自信が持てない」という方は、お気軽に<a href="/contact/" target="_blank" rel="noopener">転職相談フォーム</a>からご相談ください。</p>
+            </div>
+
+            <!-- CTA -->
+            <section class="article-cta">
+                <h3>適職の悩み、専属アドバイザーが無料で一緒に考えます</h3>
+                <p>「AIの診断結果をどう活かせばいいか分からない」「候補職種の求人が地元にあるか知りたい」——診断結果の読み解きから求人の紹介まで、あなたの適職探しをサポートします。フォーム入力は約2分、面談予約まで一気通貫。</p>
+                <a href="/contact/" class="btn btn-primary btn-lg">
+                    無料で転職相談する
+                </a>
+            </section>
+
+            <!-- Related Articles (dynamically loaded) -->
+            <div id="relatedArticlesContainer"></div>
+
+            <!-- Back Link -->
+            <div class="article-back">
+                <a href="/knowhow/">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M19 12H5"></path>
+                        <path d="M12 19l-7-7 7-7"></path>
+                    </svg>
+                    転職ノウハウ一覧に戻る
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <div id="footer-placeholder"></div>
+
+    <script src="/js/includes.js"></script>
+    <script src="/js/categories.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/article-toc.js"></script>
+    <script src="/js/related-articles.js"></script>
+    <script src="/js/blog-ad.min.js" defer></script>
+</body>
+</html>

@@ -1,6 +1,33 @@
 {
   "articles": [
     {
+      "id": 255,
+      "title": "106万円の壁撤廃で損しない働き方｜パートから正社員転職",
+      "category": "kh05",
+      "excerpt": "2026年10月の106万円の壁撤廃と最低賃金1,176円への引き上げで、パート・非正規の働き方はどう変わるのか。手取りシミュレーション、働き控えをやめる判断基準、正社員転職の現実的なルートと準備を解説します。",
+      "image": "/assets/knowhow-255.webp",
+      "postDate": "2026-09-03",
+      "detailUrl": "/knowhow/detail/knowhow-255.html"
+    },
+    {
+      "id": 256,
+      "title": "ChatGPT（チャッピー）適職診断プロンプト｜コピペ用5本",
+      "category": "kh03",
+      "excerpt": "ChatGPT（チャッピー）で適職診断をするコピペ用プロンプト5本を出力例つきで紹介。職歴と好き嫌いからの候補出し、RIASEC判定、消去法、候補職種の比較表、求人票との相性採点まで、結果の検証法と活かし方も解説。",
+      "image": "/assets/knowhow-256.webp",
+      "postDate": "2026-09-03",
+      "detailUrl": "/knowhow/detail/knowhow-256.html"
+    },
+    {
+      "id": 257,
+      "title": "AI面接の合否はどう決まる？評価項目と2026年の対策",
+      "category": "kh01",
+      "excerpt": "企業のAI採用ツール導入率が5割に迫る2026年、AI面接の合否はどう決まるのか。録画型・対話型・適合度判定型の違い、AIが見ている評価項目、落ちる5パターンと通る回答の型、当日のチェックリストまで解説します。",
+      "image": "/assets/knowhow-257.webp",
+      "postDate": "2026-09-03",
+      "detailUrl": "/knowhow/detail/knowhow-257.html"
+    },
+    {
       "id": 252,
       "title": "履歴書のメールアドレス・電話番号の書き方｜NG例と注意点",
       "category": "kh02",
