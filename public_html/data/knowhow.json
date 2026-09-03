@@ -1,6 +1,33 @@
 {
   "articles": [
     {
+      "id": 252,
+      "title": "履歴書のメールアドレス・電話番号の書き方｜NG例と注意点",
+      "category": "kh02",
+      "excerpt": "履歴書のメールアドレス・電話番号欄の正しい書き方を解説。フリーメール可否、キャリアメールがNGな理由、避けるべきアドレス例と作り直し方、電話番号のハイフン・固定電話の扱い、連絡を取りこぼさない設定まで。",
+      "image": "/assets/knowhow-252.webp",
+      "postDate": "2026-09-03",
+      "detailUrl": "/knowhow/detail/knowhow-252.html"
+    },
+    {
+      "id": 253,
+      "title": "DiSC診断を転職に活かす方法｜4タイプ別の適職",
+      "category": "kh03",
+      "excerpt": "DiSC診断のD・I・S・C4タイプの特徴と向いている仕事、自己チェック20問、タイプ別の自己PR例文、上司・職場との相性、転職活動の各段階での使い方と注意点までまとめました。",
+      "image": "/assets/knowhow-253.webp",
+      "postDate": "2026-09-03",
+      "detailUrl": "/knowhow/detail/knowhow-253.html"
+    },
+    {
+      "id": 254,
+      "title": "履歴書を書き間違えた時の対処法｜修正液・訂正印はNG？",
+      "category": "kh02",
+      "excerpt": "履歴書を書き間違えた時は書き直しが原則。修正液・修正テープ・訂正印・二重線がNGな理由、間違えやすい箇所と対策、書き直しを減らす手順、PDF・Web応募での修正方法、提出前チェックリストまで解説します。",
+      "image": "/assets/knowhow-254.webp",
+      "postDate": "2026-09-03",
+      "detailUrl": "/knowhow/detail/knowhow-254.html"
+    },
+    {
       "id": 251,
       "title": "面接「あなたを採用するメリットは？」の答え方と例文",
       "category": "kh01",
