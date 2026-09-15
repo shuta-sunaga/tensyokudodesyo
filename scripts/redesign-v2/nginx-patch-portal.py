@@ -26,8 +26,10 @@ block = '''
     %s
     error_page 404 /404.html;
     location ^~ /data/ { expires 10m; }
-    location ~* \\.(?:css|js)$ { expires 1h; }
-    location ~* \\.(?:webp|png|jpg|jpeg|gif|svg|ico|woff2?)$ { expires 30d; }
+    # /mt/ 配下（MT 管理画面の mt-static）は対象外。正規表現 location は prefix より優先されるため、
+    # 除外しないと /mt/mt-static/*.css が root=/var/www/html で探されて 404 になり管理画面が崩れる（2026-09-15 発生）
+    location ~* ^/(?!mt/).+\\.(?:css|js)$ { expires 1h; }
+    location ~* ^/(?!mt/).+\\.(?:webp|png|jpg|jpeg|gif|svg|ico|woff2?)$ { expires 30d; }
 ''' % MARK
 
 # location / { ... } の直後に挿入（最初の server ブロック = 443）
