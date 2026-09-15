@@ -72,6 +72,13 @@
         return TAGS.filter(tag => tag.re.test(t));
     }
 
+    /** schema 2 では MT が "mikeiken,donichi," のようにカンマ区切りで出す。無ければ本文から判定 */
+    function tagIdsOf(job) {
+        if (typeof job.tags === 'string') return job.tags.split(',').map(s => s.trim()).filter(Boolean);
+        if (Array.isArray(job.tags)) return job.tags.slice();
+        return matchedTags(job).map(t => t.id);
+    }
+
     /** 給与文字列から万円の数値範囲を取り出す（"2,700,000~4,010,000" → {min:270,max:401}） */
     function salaryRange(salary) {
         const s = String(salary || '').replace(/,/g, '');
@@ -105,6 +112,6 @@
 
     global.JobTaxonomy = {
         BUCKETS, OTHER, TAGS, DISPLAY_ORDER,
-        classify, bucketById, orderedBuckets, fullText, matchedTags, salaryRange, salaryLabel
+        classify, bucketById, orderedBuckets, fullText, matchedTags, tagIdsOf, salaryRange, salaryLabel
     };
 })(window);

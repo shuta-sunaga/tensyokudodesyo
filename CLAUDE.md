@@ -158,7 +158,7 @@ tensyokudodesyo/
 }
 ```
 
-**注意**: `jobs.json`（グローバル）は `detail` フィールド付き完全版、`data/jobs/{prefecture}.json`（都道府県別）は `detail` なし軽量版。
+**注意（2026-09 schema 2）**: 本番の `data/jobs/{prefecture}.json` は MT 生成の**一覧用軽量版**（`"schema": 2`、上記から `detail` を除き `"tags": "mikeiken,donichi,"`（MT 側で判定したこだわり条件 ID のカンマ区切り）を追加。大阪 1,447 件で gzip 75KB）。キーワード検索用の本文抜粋は `data/jobs/{prefecture}.kw.json`（`{"<id>": "仕事内容300字 求める人材150字"}`）に分離し、`prefecture-page.js` がキーワード入力時にだけ取得する。ローカルの `data/jobs/*.json` は旧 schema 1 のサンプル（`prefecture-page.js` は両方に対応）。`jobs.json`（グローバル）は旧サンプルで未使用。
 
 ### カテゴリマスター
 

@@ -4,11 +4,18 @@
 
 use strict;
 use warnings;
+# MT_DIR は $0 の場所から推定されるため、/tmp 等から実行すると addons（カスタムフィールド）が読めない
+BEGIN { $ENV{MT_HOME} = '/var/www/mt'; }
 use lib '/var/www/mt/lib';
 use lib '/var/www/mt/extlib';
 
 use MT;
 my $mt = MT->new(Config => '/var/www/mt/mt-config.cgi') or die "MT init failed";
+# スタンドアロン実行ではカスタムフィールドのテンプレートタグ（EntryData* 等）が登録されないため明示的に登録する
+use lib '/var/www/mt/addons/Commercial.pack/lib';
+require CustomFields::Util;
+eval { CustomFields::Util::load_meta_fields(); CustomFields::Util::install_field_tags(); };
+warn "CustomFields init: $@" if $@;
 
 require MT::Blog;
 require MT::WeblogPublisher;

@@ -66,6 +66,48 @@ node scripts/redesign-v2/screenshot.mjs             # PC/スマホのフルペ�
 - **URL**: `/{pref}/?q=&city=&cat=&emp=&tag=&tag=&sort=&page=`。トップの検索パネルは `q` / `cat` / `tag` を都道府県ページへ引き継ぐ
 - **データ量**: 都道府県ページは従来どおり `data/jobs/{id}.json`（detail 付き、大阪 9MB）。トップと一覧ページの新着求人は `jobs-latest.json`（12KB）だけを読む。**従来は 47 都道府県分（100MB 超）を毎回取得していた**
 
+## 求人データの最適化（2026-09-15、MT 基盤で JSON 生成）
+
+| 項目 | 旧 | 新 |
+|---|---|---|
+| 都道府県ページの初期取得（大阪） | `data/jobs/osaka.json` 8.9MB（gzip 2.3MB、detail 付き） | 同ファイルを **schema 2** に: 一覧項目 + `tags` のみ、gzip **75KB** |
+| キーワード検索 | 上と同じ 9MB の中を検索 | `data/jobs/osaka.kw.json`（仕事内容300字+求める人材150字、gzip 295KB）を**キーワード入力時だけ**遅延取得 |
+| こだわり条件の判定 | クライアントで detail 全文に正規表現 | **MT テンプレ側で判定**（`<mt:If name="hay" like="/…/">`）し `"tags": "mikeiken,donichi,"` を出力。クライアントは split するだけ |
+| トップ・一覧ページの新着求人 | 47県 JSON 全取得（100MB 超） | `jobs-latest.json`（gzip 2KB） |
+| 会社紹介詳細の「この会社の求人」 | 47県 JSON 全取得 | `<meta name="client-prefecture">` の県の JSON だけ（所在地不明時のみ全県） |
+| キャッシュ | ヘッダなし（毎回再検証） | nginx `expires`: JSON 10分 / CSS・JS 1時間 / 画像 30日、gzip_vary |
+| 先読み | なし | `<link rel="preload" as="fetch">` で一覧 JSON・prefectures・summary・latest を HTML 解析時に取得開始 |
+
+### MT テンプレ（子ブログ・各47）
+
+- `mt-template/jobs-child-json.mtml` → `../data/jobs/{id}.json`（既存「求人JSON生成テンプレート」を差し替え、schema 2）
+- `mt-template/jobs-child-kw-json.mtml` → `../data/jobs/{id}.kw.json`（新規「求人キーワードJSON生成テンプレート」、保存時再構築）
+- どちらも本番 MT で一時テンプレを使って出力・JSON 妥当性を検証済み（`scripts/redesign-v2/mt-test-template.pl`）
+- 反映は `mt-apply-v2.sh --apply` に含めた（2b/2c）。**MT のフィールド・入力運用は変更なし**
+
+### 読み込み側
+
+- `prefecture-page.js`: `schema` を見て分岐。schema 2 では `tags` を使い、キーワード入力時に `kw.json` を取得して `_lc` に合成（読み込み中は件数横に注記）。schema 1（旧 JSON）でも従来どおり動く
+- `client-detail.js`: 所在都道府県の JSON だけ取得
+- `main.js`: 一覧ページの新着求人は `jobs-latest.json` を優先
+
+### Perl スクリプトの修正（重要）
+
+`/tmp` などから `MT->new` すると `MT_DIR` が `$0` の場所から推定されて **addons（カスタムフィールド）が読み込まれず、`EntryData*` タグを含むテンプレの再構築が失敗**していた。`BEGIN { $ENV{MT_HOME} = "/var/www/mt" }` と `CustomFields::Util::install_field_tags()` を `scripts/mt-rebuild-*.pl` と `scripts/redesign-v2/*.pl` に追加して解消。
+
+### 本番 nginx への追加（portal.conf、デプロイ時）
+
+```nginx
+    # キャッシュ（add_header ではなく expires を使う: add_header だとセキュリティヘッダの継承が切れる）
+    location ^~ /data/ { expires 10m; }
+    location ~* .(?:css|js)$ { expires 1h; }
+    location ~* .(?:webp|png|jpg|jpeg|gif|svg|ico|woff2?)$ { expires 30d; }
+    gzip_vary on;
+    gzip_comp_level 5;
+    gzip_min_length 1024;
+    error_page 404 /404.html;
+```
+
 ## プレビュー環境（社内確認用、2026-09-15 構築）
 
 - URL: https://www.tensyokudodesyo.com:8443/ （Basic 認証。ユーザー名・パスワードは須長が保持）
@@ -105,7 +147,6 @@ node scripts/redesign-v2/screenshot.mjs             # PC/スマホのフルペ�
 ## 残課題・提案
 
 - nginx の 404 設定（上記 3）
-- `data/jobs/{pref}.json` に detail を含めたままなので大阪は 9MB。MT の `jobs-child-json.mtml` から detail を外すと約 0.5MB になるが、こだわり条件の判定に detail を使っているため、外す場合は MT 側で条件フラグを出力する設計に変える必要がある
 - ヒーローの検索は「勤務地必須」。都道府県横断のキーワード検索は全 JSON 取得が必要になるため見送り
 - 写真は AI 生成。実写が用意でき次第 `assets/v2/` を差し替える（同名・1920×1080）
 - ヒーローコピー案（採用: 1）

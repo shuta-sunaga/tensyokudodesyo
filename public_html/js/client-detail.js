@@ -73,13 +73,17 @@
         const container = document.getElementById('clientJobsGrid');
         if (!container) return;
 
-        // 全都道府県リストを取得し、各 data/jobs/{id}.json を並列フェッチ（存在しない県は静かに無視）
+        // 会社の所在都道府県（<meta name="client-prefecture">）の JSON だけを取得する。
+        // 以前は 47 都道府県分（合計 100MB 超）を全部取得していた。所在地が不明・不一致の場合のみ全県を見る。
         const prefData = await fetchJSON('/data/prefectures.json');
-        const prefectures = (prefData && Array.isArray(prefData.prefectures)) ? prefData.prefectures : [];
+        let prefectures = (prefData && Array.isArray(prefData.prefectures)) ? prefData.prefectures : [];
         if (prefectures.length === 0) {
             container.innerHTML = '<div class="client-jobs-empty">求人情報を読み込めませんでした</div>';
             return;
         }
+        const clientPref = getMeta('client-prefecture');
+        const own = clientPref ? prefectures.filter(function (p) { return p.name === clientPref; }) : [];
+        if (own.length) prefectures = own;
 
         const jobArrays = await Promise.all(prefectures.map(function (pref) {
             return fetchJSONQuiet('/data/jobs/' + pref.id + '.json').then(function (data) {

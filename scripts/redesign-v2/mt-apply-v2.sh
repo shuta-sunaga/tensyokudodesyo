@@ -6,7 +6,7 @@
 #   bash scripts/redesign-v2/mt-apply-v2.sh --apply    # mt_template をバックアップ → 更新 → index 再構築
 #
 # 手順:
-#   1. mt-template/{index-html,prefecture-page,jobs-latest-json,jobs-summary-json}.mtml と
+#   1. mt-template/{index-html,prefecture-page,jobs-latest-json,jobs-summary-json,jobs-child-json,jobs-child-kw-json}.mtml と
 #      mt-apply-v2.pl を EC2 の /tmp/v2/ へ scp
 #   2. --apply 時は mt_template テーブルを mt_template_backup_YYYYMMDD_HHMMSS にコピー
 #   3. perl mt-apply-v2.pl [--apply --rebuild]
@@ -27,9 +27,14 @@ APPLY=false
 
 echo "=== upload templates to /tmp/v2 ==="
 $SSH "mkdir -p /tmp/v2"
-$SCP "$ROOT/mt-template/index-html.mtml" "$ROOT/mt-template/prefecture-page.mtml" \
-     "$ROOT/mt-template/jobs-latest-json.mtml" "$ROOT/mt-template/jobs-summary-json.mtml" \
-     "$ROOT/scripts/redesign-v2/mt-apply-v2.pl" "${REMOTE_USER}@${REMOTE_HOST}:/tmp/v2/"
+$SCP "$ROOT/mt-template/index-html.mtml" \
+     "$ROOT/mt-template/prefecture-page.mtml" \
+     "$ROOT/mt-template/jobs-latest-json.mtml" \
+     "$ROOT/mt-template/jobs-summary-json.mtml" \
+     "$ROOT/mt-template/jobs-child-json.mtml" \
+     "$ROOT/mt-template/jobs-child-kw-json.mtml" \
+     "$ROOT/scripts/redesign-v2/mt-apply-v2.pl" \
+     "${REMOTE_USER}@${REMOTE_HOST}:/tmp/v2/"
 
 if $APPLY; then
     TS=$(date +%Y%m%d_%H%M%S)

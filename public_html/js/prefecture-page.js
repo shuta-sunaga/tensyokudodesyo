@@ -65,17 +65,44 @@
         if (!postDate) return false;
         return (Date.now() - new Date(postDate).getTime()) / 86400000 <= NEW_DAYS;
     }
+    /**
+     * schema 2（MT 最適化版）: tags は MT 側で判定済みのカンマ区切り、本文は kw.json に分離。
+     * schema 1（旧・detail 付き）: クライアント側で本文からタグ判定する（後方互換）。
+     */
+    let schema = 1;
     function prepare(list) {
         const T = window.JobTaxonomy;
         list.forEach(j => {
-            j._text = T ? T.fullText(j) : [j.title, j.company, j.keywords, j.conditions].join(' ');
+            const base = [j.title, j.company, j.city, j.category, j.employmentType, j.conditions, j.keywords].filter(Boolean).join('\n');
+            j._text = (schema >= 2 || !T) ? base : T.fullText(j);
+            j._kw = '';
             j._lc = j._text.toLowerCase();
             j._bucket = T ? T.classify(j.category).id : 'other';
-            j._tags = T ? T.matchedTags(j, j._text).map(t => t.id) : [];
+            if (typeof j.tags === 'string') j._tags = j.tags.split(',').map(s => s.trim()).filter(Boolean);
+            else if (Array.isArray(j.tags)) j._tags = j.tags.slice();
+            else j._tags = T ? T.matchedTags(j, j._text).map(t => t.id) : [];
             j._sal = T ? T.salaryRange(j.salary) : null;
             j._city = normCity(j.city);
             j._emp = normEmp(j.employmentType);
             j._ts = Date.parse(j.postDate) || 0;
+        });
+    }
+
+    /* キーワード索引（本文抜粋）はキーワード入力時にだけ取得する */
+    let kwState = 'idle'; // idle | loading | ready | failed
+    function ensureKeywordIndex() {
+        if (schema < 2 || kwState !== 'idle') return;
+        kwState = 'loading';
+        fetchJSON(`/data/jobs/${config.id}.kw.json`).then(kw => {
+            jobs.forEach(j => {
+                const t = kw[String(j.id)] || '';
+                if (t) { j._kw = t; j._lc = (j._text + '\n' + t).toLowerCase(); }
+            });
+            kwState = 'ready';
+            if (state.q) apply();
+        }).catch(err => {
+            console.warn('keyword index not available', err);
+            kwState = 'failed';
         });
     }
 
@@ -193,6 +220,7 @@
     /* ---------- 絞り込み・並び替え ---------- */
     function apply() {
         const tokens = state.q.toLowerCase().split(/[\s　]+/).filter(Boolean);
+        if (tokens.length) ensureKeywordIndex();
         filtered = jobs.filter(j => {
             if (tokens.length && !tokens.every(t => j._lc.includes(t))) return false;
             if (state.city && j._city !== state.city) return false;
@@ -300,6 +328,8 @@
     function renderBar() {
         const n = filtered.length;
         const c1 = $('resultsCount'); if (c1) c1.textContent = n.toLocaleString();
+        const note = $('resultsNote');
+        if (note) note.textContent = (state.q && kwState === 'loading') ? '（本文の検索データを読み込み中…）' : '';
         const c2 = $('resultsCountTop'); if (c2) c2.textContent = jobs.length.toLocaleString();
         const wrap = $('activeFilters');
         if (!wrap) return;
@@ -378,6 +408,7 @@
             fetchJSON('/data/companies.json')
         ]);
         jobs = jobsRes.status === 'fulfilled' ? (jobsRes.value.jobs || []) : [];
+        schema = jobsRes.status === 'fulfilled' ? (Number(jobsRes.value.schema) || 1) : 1;
         prefectureInterviews = ivRes.status === 'fulfilled' ? (ivRes.value.interviews || []).filter(x => x.prefecture === config.name) : [];
         prefectureCompanies = coRes.status === 'fulfilled' ? (coRes.value.companies || []).filter(x => x.prefecture === config.name) : [];
         if (jobsRes.status !== 'fulfilled') console.error('Failed to load jobs:', jobsRes.reason);

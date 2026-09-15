@@ -1,0 +1,14 @@
+<mt:Ignore>
+============================================================
+求人キーワード検索用インデックス（子サイト用・schema 2 / 2026-09 最適化）
+出力ファイル: ../data/jobs/{prefecture_id}.kw.json
+テンプレート種類: インデックステンプレート（各子ブログ「求人キーワードJSON生成テンプレート」）
+
+- { "<EntryID>": "仕事内容の先頭300文字 + 求める人材の先頭150文字" } の辞書
+- 都道府県ページの prefecture-page.js がキーワード入力時にだけ取得してタイトル等と結合して検索する
+- 大阪 1,447 件で gzip 約 290KB
+============================================================
+</mt:Ignore><mt:SetVar name="prefecture_id" value="shizuoka">{
+<mt:Entries lastn="0" sort_by="authored_on" sort_order="descend">  "<mt:EntryID>": "<$mt:EntryDatadescription remove_html="1" trim_to="300" encode_json="1"$> <$mt:EntryDatarequirements remove_html="1" trim_to="150" encode_json="1"$>"<mt:Unless name="__last__">,</mt:Unless>
+</mt:Entries>
+}

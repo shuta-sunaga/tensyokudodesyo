@@ -43,6 +43,7 @@ scripts/redesign-v2/mt-apply-v2.pl が 47 ブログに一括反映する。
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/style.css?v=20260915">
+    <link rel="preload" href="/data/jobs/<mt:Var name="prefecture_id">.json" as="fetch" crossorigin>
 
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -154,7 +155,7 @@ scripts/redesign-v2/mt-apply-v2.pl が 47 ブログに一括反映する。
     <section class="jobs-results">
         <div class="container">
             <div class="jsr-bar">
-                <p class="jsr-count"><b id="resultsCount">0</b>件の求人</p>
+                <p class="jsr-count"><b id="resultsCount">0</b>件の求人<small id="resultsNote" style="color:var(--color-gray-light);font-size:.76rem"></small></p>
                 <div class="jsr-active" id="activeFilters" aria-live="polite"></div>
                 <div class="jsr-sort">
                     <label for="searchSort">並び順</label>
