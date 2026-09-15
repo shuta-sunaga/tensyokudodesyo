@@ -22,8 +22,9 @@ if (window._includesJsLoaded) {
         if (!placeholder.parentNode) return;
 
         const includesPath = '/includes/';
+        const INCLUDE_VERSION = '20260915'; // 旧キャッシュのヘッダー/フッターが残らないようにする
         try {
-            const response = await fetch(includesPath + includeFile);
+            const response = await fetch(includesPath + includeFile + '?v=' + INCLUDE_VERSION);
             if (!response.ok) throw new Error(`Failed to load ${includeFile}`);
             const html = await response.text();
             if (placeholder.parentNode) {
