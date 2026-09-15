@@ -40,6 +40,9 @@ out = out[:m.end()] + block + out[m.end():]
 if 'gzip_vary' not in out:
     out = out.replace('    gzip on;\n', '    gzip on;\n    gzip_vary on;\n    gzip_comp_level 5;\n    gzip_min_length 1024;\n', 1)
 
+# mt-static は prefix 優先（^~）にして確実に alias を使う
+out = out.replace("    location /mt/mt-static {", "    location ^~ /mt/mt-static {")
+
 if not APPLY:
     print('DRY-RUN diff:')
     import difflib
