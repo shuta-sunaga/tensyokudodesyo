@@ -397,6 +397,13 @@ regionIdMap = {
 - 写真: `scripts/redesign-v2/generate-photos.mjs`（Gemini、AIっぽさゼロが条件、生成後は目視必須）→ `assets/v2/`
 - 404: `public_html/404.html`（nginx `error_page 404 /404.html;` が必要）
 
+### CSS/JS を更新したときのキャッシュバスター（必須）
+
+本番 nginx は CSS/JS を 1 時間キャッシュする（2026-09-15〜）。`css/style.css` 等を変更したら参照 URL の `?v=YYYYMMDD` を上げる:
+1. `node scripts/redesign-v2/version-assets.mjs --version YYYYMMDD` → 出力されたファイルを deploy.sh
+2. `bash scripts/redesign-v2/mt-bump-asset-version.sh --apply YYYYMMDD`（MT テンプレ内）→ `scripts/mt-rebuild-all-force.pl` で再構築（/tmp に scp して `cd /var/www/mt && perl` で実行。MT_HOME とカスタムフィールド登録は修正済み）
+3. `includes.js` の `INCLUDE_VERSION` と、`mt-template/index-html.mtml` / `prefecture-page.mtml` 内の `?v=` も合わせる
+
 ### deploy.sh の追加ブロック
 
 `data/jobs-latest.json` / `data/jobs-summary.json` / `data/prefectures.json` は MT 生成のためデプロイ禁止。`PREFECTURE_DIRS` は47県すべて。

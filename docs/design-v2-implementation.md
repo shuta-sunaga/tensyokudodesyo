@@ -118,6 +118,14 @@ node scripts/redesign-v2/screenshot.mjs             # PC/スマホのフルペ�
 - 撤去: `/etc/nginx/conf.d/preview-v2.conf` と `/etc/nginx/.htpasswd-preview` を削除して reload、`/var/www/preview-v2` を削除、SG の 8443 を閉じる
 - 注意: contact フォームは Origin が本番と異なるため送信できない（想定どおり）
 
+## 本番反映の記録（2026-09-15）
+
+1. `deploy.sh` で CSS/JS/includes/404/写真（22 ファイル）→ 続けて `version-assets.mjs` で `?v=20260915` を付けた静的 HTML 265 ファイル
+2. `mt-apply-v2.sh --apply`: バックアップ `mt_template_backup_20260915_115718`、親トップ・47県トップ・47県求人JSON（schema 2）・47県 kw JSON・新着/件数 JSON を更新、index 144 テンプレ再構築 ok=144 ng=0
+3. `mt-bump-asset-version.sh --apply 20260915`: MT テンプレ内の css/js 参照 102 件に `?v=` 付与 → `mt-rebuild-all-force.pl` で全ページ強制再構築（求人詳細約 1.7 万件、サーバー上で nohup 実行、ログ `/tmp/v2/rebuild-all.log`）
+4. `nginx-patch-portal.py --apply`: portal.conf に expires / gzip / error_page 404（バックアップ `portal.conf.bak.20260915_025957`）
+5. 検証: トップ・大阪・求人詳細・インタビュー一覧/詳細・ノウハウ・contact・404 を 1400/390px でコンソールエラー 0、`data/jobs/osaka.json` gzip 77KB、`jobs-latest.json` 24 件、`jobs-summary.json` 17,078 件
+
 ## デプロイ手順
 
 1. `bash scripts/deploy.sh` で静的アセットを先に反映
@@ -141,8 +149,8 @@ node scripts/redesign-v2/screenshot.mjs             # PC/スマホのフルペ�
 | ヘッダー透明→白（ヒーロー直下）／ハンバーガー開閉 | OK |
 | 日本語見出しの途中割れ | `keep-all` + 明示 `<br>` で OK |
 | 都道府県ページの検索・絞り込み・並び替え・ページネーション・URL 同期 | OK（大阪 1,447 件） |
-| フォーム送信 | **未確認**（本番反映後に実施。プレビューは Lambda 直結のため送信していない） |
-| iPhone Safari 実機／LINE・X アプリ内ブラウザ | **未確認**（本番反映後） |
+| フォーム送信 | **本番で未確認**（フォームの HTML/JS は構造を変えていない。見た目のみ v2） |
+| iPhone Safari 実機／LINE・X アプリ内ブラウザ | **未確認**（本番 URL で確認可能） |
 
 ## 残課題・提案
 
