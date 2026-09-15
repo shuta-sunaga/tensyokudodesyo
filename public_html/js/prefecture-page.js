@@ -112,6 +112,7 @@
         state.q = (p.get('q') || p.get('keyword') || '').trim();
         state.city = p.get('city') || '';
         state.cat = p.get('cat') || '';
+        if (window.JobTaxonomy && JobTaxonomy.BUCKET_ALIASES && JobTaxonomy.BUCKET_ALIASES[state.cat]) state.cat = JobTaxonomy.BUCKET_ALIASES[state.cat];
         state.emp = p.get('emp') || '';
         state.tags = p.getAll('tag').filter(Boolean);
         state.sort = p.get('sort') || 'new';

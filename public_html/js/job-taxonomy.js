@@ -8,23 +8,27 @@
 (function (global) {
     'use strict';
 
-    // 評価順が重要（上から順に最初に一致したグループへ）
+    // 職種グループ: Lark Base「職種（大分類）」で多数を占めるラベル（マイナビ転職系の大分類）に名称と区切りを合わせる。
+    // MT の category はテキストのままなので、表記ゆれをここで吸収する。評価順が重要（上から順に最初に一致したグループへ）。
     const BUCKETS = [
-        { id: 'sales',         name: '営業',                         re: /営業/ },
-        { id: 'it',            name: 'IT・システム',                 re: /IT|ＩＴ|システム|Web|ＷＥＢ|ソフト|プログラ|インフラ|ネットワーク/ },
-        { id: 'construction',  name: '建築・土木・設備',             re: /建築|建設|土木|プラント|不動産|施工/ },
-        { id: 'transport',     name: '運輸・物流',                   re: /運輸|物流|配送|交通|倉庫|ドライバー|運転/ },
-        { id: 'manufacturing', name: '製造・技能工',                 re: /製造|生産|品質|技能|整備|モノづくり|ものづくり|工場|塗装|溶接|組立|期間工/ },
-        { id: 'tech',          name: '技術職（機械・電気・化学）',   re: /機械|電気|電子|半導体|化学|素材|食品|香料|飼料|研究|開発|メーカー|技術職|エンジニア/ },
-        { id: 'medical',       name: '医療・福祉・保育',             re: /医療|福祉|介護|保育|看護|メディカル|薬剤|医薬/ },
-        { id: 'office',        name: '事務・企画・管理',             re: /事務|管理部門|コーポレート|経営|企画|マーケ|人事|総務|経理|受付|秘書|翻訳|管理職|管理・|管理$/ },
-        { id: 'service',       name: '販売・サービス・飲食',         re: /販売|サービス|飲食|フード|外食|小売|店舗|接客|レジャー|美容|ブライダル|警備|清掃|アミューズメント|流通|ヘルスケア/ },
-        { id: 'specialist',    name: '専門職・コンサル・その他',     re: /専門職|コンサル|士業|教育|通訳|公務員|クリエイティブ|デザイナー|ディレクター|カスタマー|コールセンター|サポート|人材|金融/ },
+        { id: 'sales',         name: '営業職',                                 re: /営業/ },
+        { id: 'it',            name: 'ITエンジニア',                           re: /IT|ＩＴ|システム|Web|ＷＥＢ|ソフト|プログラ|インフラ|ネットワーク|ゲーム/ },
+        { id: 'service',       name: '販売・サービス職',                       re: /販売|サービス|飲食|フード|外食|小売|店舗|接客|レジャー|美容|ブライダル|ホテル|清掃|アミューズメント|流通|ヘルスケア/ },
+        { id: 'skilled',       name: '技能工・設備・配送・農林水産',           re: /技能工|運輸|交通|物流|配送|倉庫|ドライバー|運転|施設|警備|整備/ },
+        { id: 'manufacturing', name: '製造・生産・品質管理',                   re: /製造|生産|品質|技能|モノづくり|ものづくり|溶接|組立|期間工|SCM|購買/ },
+        { id: 'construction',  name: '技術職（建築・土木・プラント・設備）',   re: /建築|建設|土木|プラント|不動産|施工|工場/ },
+        { id: 'chem',          name: '技術職（医薬・化学・素材・食品）',       re: /医薬|化学|素材|食品|香料|飼料|化粧品|トイレタリー|バイオ/ },
+        { id: 'tech',          name: '技術職（電気・電子・機械・半導体）',     re: /機械|電気|電子|半導体|メーカー|技術職|技術系|エンジニア|制御|機構|設計|研究|開発/ },
+        { id: 'medical',       name: '医療・福祉・介護',                       re: /医療|福祉|介護|保育|看護|メディカル|薬剤/ },
+        { id: 'office',        name: '事務・管理部門職',                       re: /事務|管理部門|コーポレート|経営|企画|マーケ|人事|総務|経理|受付|秘書|翻訳|管理職|管理・|管理$|アシスタント/ },
+        { id: 'specialist',    name: '専門職・その他',                         re: /専門職|コンサル|士業|教育|教員|通訳|公務員|クリエイ|デザイナー|ディレクター|カスタマー|コールセンター|サポート|人材|金融|農林水産/ },
     ];
     const OTHER = { id: 'other', name: 'その他' };
+    // 旧 ID（URL の ?cat=）との互換
+    const BUCKET_ALIASES = { transport: 'skilled' };
 
     // UI での表示順（製造業を前面に）
-    const DISPLAY_ORDER = ['manufacturing', 'tech', 'construction', 'sales', 'office', 'it', 'transport', 'service', 'medical', 'specialist', 'other'];
+    const DISPLAY_ORDER = ['manufacturing', 'tech', 'chem', 'construction', 'skilled', 'sales', 'office', 'it', 'service', 'medical', 'specialist', 'other'];
 
     // こだわり条件（本文全体に対する正規表現）
     const TAGS = [
@@ -50,6 +54,7 @@
     }
 
     function bucketById(id) {
+        id = BUCKET_ALIASES[id] || id;
         return BUCKETS.find(b => b.id === id) || (id === 'other' ? OTHER : null);
     }
 
@@ -111,7 +116,7 @@
     }
 
     global.JobTaxonomy = {
-        BUCKETS, OTHER, TAGS, DISPLAY_ORDER,
+        BUCKETS, OTHER, TAGS, DISPLAY_ORDER, BUCKET_ALIASES,
         classify, bucketById, orderedBuckets, fullText, matchedTags, tagIdsOf, salaryRange, salaryLabel
     };
 })(window);
