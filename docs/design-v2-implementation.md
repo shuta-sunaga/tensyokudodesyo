@@ -29,6 +29,7 @@
 | `public_html/js/prefecture-page.js` | 書き直し。キーワード／市区町村／職種グループ／雇用形態／こだわり条件／並び順／URL 同期 |
 | `public_html/js/main.js` | 旧ヘッダー処理を v2 では無効化、一覧ページの新着求人を `jobs-latest.json` から取得、求人詳細の年収整形 |
 | `public_html/404.html` | **新規**。nginx に `error_page 404 /404.html;` が必要（未設定） |
+| `public_html/assets/ogp.png` | v2 の OGP 画像（1200×630、`scripts/redesign-v2/ogp.html` → `make-ogp.mjs` で生成、旧版は git 履歴） |
 | `public_html/assets/v2/*.webp` | 生成写真 8 枚（hero-main / tile-clients / tile-interview / tile-company / tile-knowhow / tile-jobs / photo-consult / photo-company） |
 
 ### MT 管理（`scripts/redesign-v2/mt-apply-v2.sh` で反映）

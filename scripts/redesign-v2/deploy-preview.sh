@@ -47,7 +47,7 @@ echo "=== upload v2 static files + generated pages ==="
 ( cd "$ROOT/public_html" && tar czf - css/style.css css/contact.css css/client-detail.css css/article-detail.css \
     includes/header.html includes/footer.html \
     js/includes.js js/main.js js/prefecture-page.js js/job-taxonomy.js js/home-v2.js js/data-cache.js js/categories.js js/related-articles.js js/clients-page.js js/client-detail.js js/contact.js js/article-toc.js \
-    assets/v2 404.html clients contact terms.html privacy.html ) | $SSH "tar xzf - -C ${PREVIEW}" 2>&1 | quiet
+    assets/v2 assets/ogp.png 404.html clients contact terms.html privacy.html ) | $SSH "tar xzf - -C ${PREVIEW}" 2>&1 | quiet
 ( cd "$BUILD" && tar czf - . ) | $SSH "tar xzf - -C ${PREVIEW}" 2>&1 | quiet
 
 echo "=== generate jobs-latest.json / jobs-summary.json on server ==="
