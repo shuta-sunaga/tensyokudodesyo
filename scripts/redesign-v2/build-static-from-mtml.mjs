@@ -14,7 +14,10 @@ import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..', '..');
-const PUB = path.join(ROOT, 'public_html');
+const args = process.argv.slice(2);
+const opt = (k, d) => { const i = args.indexOf(k); return i >= 0 && args[i + 1] ? args[i + 1] : d; };
+const ALL = args.includes('--all');
+const PUB = path.resolve(opt('--out', path.join(ROOT, 'public_html')));
 const TPL = path.join(ROOT, 'mt-template');
 const BLOG_URL = 'https://www.tensyokudodesyo.com/';
 const GA = `<!-- Google tag (gtag.js) -->
@@ -61,9 +64,15 @@ function build(tplName, outRel, vars) {
 }
 
 build('index-html.mtml', 'index.html', {});
-build('prefecture-page.mtml', 'shiga/index.html', { prefecture_id: 'shiga', prefecture_name: '滋賀県' });
-build('prefecture-page.mtml', 'shizuoka/index.html', { prefecture_id: 'shizuoka', prefecture_name: '静岡県' });
-// ローカルプレビュー用に本番相当のページも生成（deploy.sh でブロックされる / git には入れない想定）
-for (const [id, name] of [['osaka', '大阪府'], ['fukuoka', '福岡県'], ['aichi', '愛知県']]) {
-  build('prefecture-page.mtml', `${id}/index.html`, { prefecture_id: id, prefecture_name: name });
+if (ALL) {
+  // 47 都道府県すべて（プレビュー環境用）: prefectures.json のマスターから生成
+  const prefs = JSON.parse(fs.readFileSync(path.join(ROOT, 'public_html', 'data', 'prefectures.json'), 'utf8')).prefectures;
+  for (const p of prefs) build('prefecture-page.mtml', `${p.id}/index.html`, { prefecture_id: p.id, prefecture_name: p.name });
+} else {
+  build('prefecture-page.mtml', 'shiga/index.html', { prefecture_id: 'shiga', prefecture_name: '滋賀県' });
+  build('prefecture-page.mtml', 'shizuoka/index.html', { prefecture_id: 'shizuoka', prefecture_name: '静岡県' });
+  // ローカルプレビュー用に本番相当のページも生成（deploy.sh でブロックされる / git には入れない想定）
+  for (const [id, name] of [['osaka', '大阪府'], ['fukuoka', '福岡県'], ['aichi', '愛知県']]) {
+    build('prefecture-page.mtml', `${id}/index.html`, { prefecture_id: id, prefecture_name: name });
+  }
 }

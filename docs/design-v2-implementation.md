@@ -65,6 +65,16 @@ node scripts/redesign-v2/screenshot.mjs             # PC/スマホのフルペ�
 - **URL**: `/{pref}/?q=&city=&cat=&emp=&tag=&tag=&sort=&page=`。トップの検索パネルは `q` / `cat` / `tag` を都道府県ページへ引き継ぐ
 - **データ量**: 都道府県ページは従来どおり `data/jobs/{id}.json`（detail 付き、大阪 9MB）。トップと一覧ページの新着求人は `jobs-latest.json`（12KB）だけを読む。**従来は 47 都道府県分（100MB 超）を毎回取得していた**
 
+## プレビュー環境（社内確認用、2026-09-15 構築）
+
+- URL: https://www.tensyokudodesyo.com:8443/ （Basic 認証。ユーザー名・パスワードは須長が保持）
+- 実体: EC2 の `/var/www/preview-v2`（本番 `/var/www/html` のコピー＝**インタビュー・企業・ノウハウ・求人の本番データと MT 生成ページ**に、v2 の静的ファイルと MT テンプレから生成した index.html・47県 index.html、`make-feeds.py` で作った新着/件数 JSON を重ねたもの）。本番には触れない
+- nginx: `scripts/redesign-v2/preview-nginx.conf` → `/etc/nginx/conf.d/preview-v2.conf`（8443/ssl、本番と同じ証明書、`X-Robots-Tag: noindex`、GA タグを sub_filter で除去、左下に「PREVIEW／非公開」バッジ、`error_page 404`）
+- 更新: `bash scripts/redesign-v2/deploy-preview.sh`（v2 ファイルと生成ページを再アップ）／ `--sync-prod` で本番データを再同期 ／ `--setup USER PASS` は初回のみ
+- **EC2 セキュリティグループ `sg-0ac710d4926f635b5` に TCP 8443 の許可が必要**（Claude Code の自動モードでは実行不可。`aws ec2 authorize-security-group-ingress --region ap-northeast-1 --group-id sg-0ac710d4926f635b5 --protocol tcp --port 8443 --cidr 0.0.0.0/0`）
+- 撤去: `/etc/nginx/conf.d/preview-v2.conf` と `/etc/nginx/.htpasswd-preview` を削除して reload、`/var/www/preview-v2` を削除、SG の 8443 を閉じる
+- 注意: contact フォームは Origin が本番と異なるため送信できない（想定どおり）
+
 ## デプロイ手順
 
 1. `bash scripts/deploy.sh` で静的アセットを先に反映

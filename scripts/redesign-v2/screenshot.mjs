@@ -18,6 +18,8 @@ const BASE = opt('--base', 'http://localhost:8080');
 const OUT = path.resolve(opt('--out', path.join(__dirname, 'shots')));
 const ONLY = opt('--only', '').split(',').filter(Boolean);
 const WIDTHS = opt('--widths', '1400,390').split(',').map(Number);
+const AUTH = opt('--auth', ''); // user:pass（Basic 認証のプレビュー用）
+const EXTRA = opt('--pages', '').split(',').filter(Boolean).map(p => p.split('=')); // name=/path,...
 
 const PAGES = [
   ['index', '/'],
@@ -34,12 +36,14 @@ const PAGES = [
 ];
 
 fs.mkdirSync(OUT, { recursive: true });
-const browser = await puppeteer.launch({ headless: 'new', args: ['--no-sandbox'] });
+const browser = await puppeteer.launch({ headless: 'new', args: ['--no-sandbox', '--ignore-certificate-errors'] });
+if (EXTRA.length) PAGES.push(...EXTRA);
 try {
   for (const [name, url] of PAGES) {
     if (ONLY.length && !ONLY.includes(name)) continue;
     for (const width of WIDTHS) {
       const page = await browser.newPage();
+      if (AUTH) { const [username, password] = AUTH.split(':'); await page.authenticate({ username, password }); }
       await page.setViewport({ width, height: width < 600 ? 844 : 900, deviceScaleFactor: 1, isMobile: width < 600, hasTouch: width < 600 });
       const errors = [];
       page.on('pageerror', e => errors.push('pageerror: ' + e.message));
