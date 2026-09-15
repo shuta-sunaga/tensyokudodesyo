@@ -124,6 +124,7 @@ node scripts/redesign-v2/screenshot.mjs             # PC/スマホのフルペ�
 2. `mt-apply-v2.sh --apply`: バックアップ `mt_template_backup_20260915_115718`、親トップ・47県トップ・47県求人JSON（schema 2）・47県 kw JSON・新着/件数 JSON を更新、index 144 テンプレ再構築 ok=144 ng=0
 3. `mt-bump-asset-version.sh --apply 20260915`: MT テンプレ内の css/js 参照 102 件に `?v=` 付与 → `mt-rebuild-all-force.pl` で全ページ強制再構築（求人詳細約 1.7 万件、サーバー上で nohup 実行、ログ `/tmp/v2/rebuild-all.log`）
 4. `nginx-patch-portal.py --apply`: portal.conf に expires / gzip / error_page 404（バックアップ `portal.conf.bak.20260915_025957`）
+4b. 親サイト（website, blog_id=1）は `mt-rebuild-all-force.pl` の対象外（`MT::Blog->load()` が class=blog のみ）なので `scripts/mt-rebuild-website.pl 1` で index 15 件・コンテンツタイプ詳細 5 件を再構築（コンテンツデータは `MT::ContentPublisher->rebuild_content_data`）
 5. 検証: トップ・大阪・求人詳細・インタビュー一覧/詳細・ノウハウ・contact・404 を 1400/390px でコンソールエラー 0、`data/jobs/osaka.json` gzip 77KB、`jobs-latest.json` 24 件、`jobs-summary.json` 17,078 件
 
 ## デプロイ手順
