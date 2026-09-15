@@ -27,7 +27,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css?v=20260915">
+    <link rel="stylesheet" href="/css/style.css?v=20260915c">
     <link rel="preload" href="/data/jobs/shizuoka.json" as="fetch" crossorigin>
 
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
@@ -116,16 +116,16 @@
                         <select name="city" id="searchCity"><option value="">すべて</option></select>
                     </div>
                     <div class="jsr-field">
-                        <label for="searchJobType">職種</label>
-                        <select name="cat" id="searchJobType"><option value="">すべて</option></select>
-                    </div>
-                    <div class="jsr-field">
                         <label for="searchEmp">雇用形態</label>
                         <select name="emp" id="searchEmp"><option value="">すべて</option></select>
                     </div>
                     <button type="submit" class="btn btn-primary jsr-submit">絞り込む</button>
                 </div>
-                <div class="jsr-chips-wrap" id="searchTags" aria-label="こだわり条件">
+                <div class="jsr-chips-wrap jsr-cats" role="group" aria-label="職種">
+                    <span class="jsr-chips-label">職種</span>
+                    <div class="cat-chips" id="searchJobType"><button type="button" class="cat-chip is-on" data-cat="">すべて</button></div>
+                </div>
+                <div class="jsr-chips-wrap" id="searchTags" role="group" aria-label="こだわり条件">
                     <span class="jsr-chips-label">こだわり条件</span>
                 </div>
             </form>
@@ -214,8 +214,8 @@
     <script src="/js/data-cache.js?v=20260915"></script>
     <script src="/js/includes.js?v=20260915"></script>
     <script src="/js/categories.js?v=20260915"></script>
-    <script src="/js/job-taxonomy.js?v=20260915b"></script>
+    <script src="/js/job-taxonomy.js?v=20260915c"></script>
     <script src="/js/main.js?v=20260915"></script>
-    <script src="/js/prefecture-page.js?v=20260915b"></script>
+    <script src="/js/prefecture-page.js?v=20260915c"></script>
 </body>
 </html>

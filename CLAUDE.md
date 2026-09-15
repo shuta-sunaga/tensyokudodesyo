@@ -391,7 +391,7 @@ regionIdMap = {
 - ヘッダー/フッターは `includes/`、ハンバーガー・透明ヘッダー・`.page-header[data-en]` 付与は `js/includes.js`
 - トップページ: 日本地図は廃止（`japan-map.js/.css/.svg` は残置・未使用）。`js/home-v2.js` が検索パネル・都道府県一覧・新着求人・タイルを描画
 - 都道府県ページ: `js/prefecture-page.js` + `js/job-taxonomy.js`（職種グループ・こだわり条件・年収パースをクライアント側で判定。MT フィールドは不変）
-  - 職種グループ 11 種は **Lark Base「職種（大分類）」の主要ラベル（マイナビ転職系）に合わせた名称**: 製造・生産・品質管理 / 技術職（電気・電子・機械・半導体）/ 技術職（医薬・化学・素材・食品）/ 技術職（建築・土木・プラント・設備）/ 技能工・設備・配送・農林水産 / 営業職 / 事務・管理部門職 / ITエンジニア / 販売・サービス職 / 医療・福祉・介護 / 専門職・その他。Base 側は選択式ではなくテキストのため、正規表現で表記ゆれを吸収（`BUCKETS` の評価順が重要）
+  - 職種グループ 11 種は **Lark Base「職種（大分類）」の主要ラベル（マイナビ転職系）に合わせた名称**: 製造・生産・品質管理 / 技術職（電気・電子・機械・半導体）/ 技術職（医薬・化学・素材・食品）/ 技術職（建築・土木・プラント・設備）/ 技能工・設備・配送・農林水産 / 営業職 / 事務・管理部門職 / ITエンジニア / 販売・サービス職 / 医療・福祉・介護 / 専門職・その他。Base 側は選択式ではなくテキストのため、正規表現で表記ゆれを吸収（`BUCKETS` の評価順が重要）。UI はプルダウンではなく**チップ（`.cat-chip`、短い名称 `short` + 件数）**で単一選択
 - **MT 新規テンプレ**: `jobs-latest-json.mtml` → `data/jobs-latest.json`（全県横断の新着24件）、`jobs-summary-json.mtml` → `data/jobs-summary.json`（県別件数）。親サイトの index テンプレで公開設定「定期的に再構築」60分。トップ・一覧ページの新着求人はこれだけを読む（従来は47県JSON 100MB超を取得していた）
 - MT 反映: `bash scripts/redesign-v2/mt-apply-v2.sh [--apply]`（mt_template バックアップ → 親トップ・47子ブログトップ・新規JSONテンプレを更新 → index 再構築）
 - ローカル確認: `node scripts/redesign-v2/build-static-from-mtml.mjs` で MT テンプレから index.html 等を生成 → `npx http-server public_html -p 8080 -c-1 -P https://www.tensyokudodesyo.com`

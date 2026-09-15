@@ -106,32 +106,39 @@
         const kw = document.getElementById('tpKeyword');
         const activeTags = new Set();
 
-        // 職種セレクト（JobTaxonomy）
+        // 職種チップ（単一選択。プルダウンではなくタップで選ぶ）
+        let activeCat = '';
         if (cat && window.JobTaxonomy) {
             JobTaxonomy.orderedBuckets().forEach(b => {
                 if (b.id === 'other') return;
-                const o = document.createElement('option');
-                o.value = b.id; o.textContent = b.name;
-                cat.appendChild(o);
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = 'cat-chip';
+                btn.dataset.cat = b.id;
+                btn.title = b.name;
+                btn.textContent = b.short || b.name;
+                cat.appendChild(btn);
+            });
+            cat.addEventListener('click', e => {
+                const btn = e.target.closest('.cat-chip');
+                if (!btn) return;
+                const id = btn.dataset.cat || '';
+                activeCat = (id && activeCat === id) ? '' : id;
+                cat.querySelectorAll('.cat-chip').forEach(c => {
+                    const on = (c.dataset.cat || '') === activeCat;
+                    c.classList.toggle('is-on', on);
+                    c.setAttribute('aria-pressed', on ? 'true' : 'false');
+                });
             });
         }
 
-        form.querySelectorAll('.tp-chip').forEach(chip => {
+        form.querySelectorAll('.tp-chip[data-tag]').forEach(chip => {
             chip.addEventListener('click', () => {
                 const tag = chip.dataset.tag;
-                const bucket = chip.dataset.cat;
-                if (bucket && cat) {
-                    cat.value = cat.value === bucket ? '' : bucket;
-                    form.querySelectorAll('.tp-chip[data-cat]').forEach(c => c.classList.toggle('is-on', c.dataset.cat === cat.value));
-                }
-                if (tag) {
-                    if (activeTags.has(tag)) activeTags.delete(tag); else activeTags.add(tag);
-                    chip.classList.toggle('is-on', activeTags.has(tag));
-                }
+                if (activeTags.has(tag)) activeTags.delete(tag); else activeTags.add(tag);
+                chip.classList.toggle('is-on', activeTags.has(tag));
+                chip.setAttribute('aria-pressed', activeTags.has(tag) ? 'true' : 'false');
             });
-        });
-        if (cat) cat.addEventListener('change', () => {
-            form.querySelectorAll('.tp-chip[data-cat]').forEach(c => c.classList.toggle('is-on', c.dataset.cat === cat.value));
         });
 
         form.addEventListener('submit', e => {
@@ -145,7 +152,7 @@
             form.classList.remove('is-error');
             const params = new URLSearchParams();
             if (kw && kw.value.trim()) params.set('q', kw.value.trim());
-            if (cat && cat.value) params.set('cat', cat.value);
+            if (activeCat) params.set('cat', activeCat);
             activeTags.forEach(t => params.append('tag', t));
             const qs = params.toString();
             window.location.href = `/${id}/${qs ? '?' + qs : ''}`;

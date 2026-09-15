@@ -87,6 +87,8 @@ node scripts/redesign-v2/screenshot.mjs             # PC/スマホのフルペ�
 
 ### 読み込み側
 
+- **職種はプルダウンではなくチップ（`.cat-chip`）**（2026-09-15 須長要望「カジュアルに選択できる UI」）: トップの検索パネルと都道府県ページとも、短い名称（`BUCKETS[].short`）のチップを並べて単一選択。都道府県ページは件数付き。選択中は黒地、`aria-pressed` で状態を示す。`?cat=` の URL 同期は従来どおり
+
 - `prefecture-page.js`: `schema` を見て分岐。schema 2 では `tags` を使い、キーワード入力時に `kw.json` を取得して `_lc` に合成（読み込み中は件数横に注記）。schema 1（旧 JSON）でも従来どおり動く
 - `client-detail.js`: 所在都道府県の JSON だけ取得
 - `main.js`: 一覧ページの新着求人は `jobs-latest.json` を優先

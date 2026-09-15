@@ -31,7 +31,7 @@
     <link rel="preload" href="/data/jobs-summary.json" as="fetch" crossorigin>
     <link rel="preload" href="/data/jobs-latest.json" as="fetch" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css?v=20260915">
+    <link rel="stylesheet" href="/css/style.css?v=20260915c">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -69,22 +69,17 @@
                     </select>
                 </div>
                 <div class="tp-search-field">
-                    <label for="tpCat">職種</label>
-                    <select id="tpCat" name="cat">
-                        <option value="">すべての職種</option>
-                    </select>
-                </div>
-                <div class="tp-search-field">
                     <label for="tpKeyword">キーワード</label>
                     <input type="text" id="tpKeyword" name="q" placeholder="例: 溶接、CAD、品質管理、会社名" autocomplete="off">
                 </div>
                 <button type="submit" class="btn btn-primary tp-search-submit">求人を検索</button>
                 <p class="tp-search-hint">勤務地（都道府県）を選んでください。</p>
-                <div class="tp-search-chips" aria-label="よく使う条件">
-                    <span>よく使う条件</span>
-                    <button type="button" class="tp-chip" data-cat="manufacturing">製造・生産・品質管理</button>
-                    <button type="button" class="tp-chip" data-cat="tech">技術職（電気・電子・機械）</button>
-                    <button type="button" class="tp-chip" data-cat="skilled">技能工・設備・配送</button>
+                <div class="tp-search-chips tp-search-cats" role="group" aria-label="職種">
+                    <span>職種</span>
+                    <div class="cat-chips" id="tpCat"><button type="button" class="cat-chip is-on" data-cat="">すべて</button></div>
+                </div>
+                <div class="tp-search-chips" role="group" aria-label="こだわり条件">
+                    <span>こだわり</span>
                     <button type="button" class="tp-chip" data-tag="mikeiken">未経験歓迎</button>
                     <button type="button" class="tp-chip" data-tag="donichi">土日祝休み</button>
                     <button type="button" class="tp-chip" data-tag="nenkyu120">年間休日120日以上</button>
@@ -280,8 +275,8 @@
 
     <script src="/js/data-cache.js?v=20260915"></script>
     <script src="/js/includes.js?v=20260915"></script>
-    <script src="/js/job-taxonomy.js?v=20260915b"></script>
-    <script src="/js/home-v2.js?v=20260915b"></script>
+    <script src="/js/job-taxonomy.js?v=20260915c"></script>
+    <script src="/js/home-v2.js?v=20260915c"></script>
 
     <!-- 構造化データ (JSON-LD) -->
     <script type="application/ld+json">

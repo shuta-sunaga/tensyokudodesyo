@@ -160,10 +160,15 @@
             .map(([c, n]) => [c, `${c}（${n}）`]);
         fillSelect($('searchCity'), cities, state.city);
 
-        // 職種グループ（表示順固定、0 件は出さない）
+        // 職種グループ: タップで選ぶチップ（単一選択・件数付き・0 件は出さない）
         const bc = countBy(jobs, '_bucket');
-        const cats = (T ? T.orderedBuckets() : []).filter(b => bc.get(b.id)).map(b => [b.id, `${b.name}（${bc.get(b.id)}）`]);
-        fillSelect($('searchJobType'), cats, state.cat);
+        const catWrap = $('searchJobType');
+        if (catWrap) {
+            const cats = (T ? T.orderedBuckets() : []).filter(b => bc.get(b.id));
+            if (state.cat && !cats.some(b => b.id === state.cat)) state.cat = '';
+            catWrap.innerHTML = `<button type="button" class="cat-chip${state.cat ? '' : ' is-on'}" data-cat="" aria-pressed="${state.cat ? 'false' : 'true'}">すべて<b>${jobs.length}</b></button>` +
+                cats.map(b => `<button type="button" class="cat-chip${state.cat === b.id ? ' is-on' : ''}" data-cat="${b.id}" title="${esc(b.name)}" aria-pressed="${state.cat === b.id ? 'true' : 'false'}">${esc(b.short || b.name)}<b>${bc.get(b.id)}</b></button>`).join('');
+        }
 
         // 雇用形態
         const emps = Array.from(countBy(jobs, '_emp').entries()).sort((a, b) => b[1] - a[1]).map(([e, n]) => [e, `${e}（${n}）`]);
@@ -204,9 +209,19 @@
         if (form) form.addEventListener('submit', e => { e.preventDefault(); syncFromForm(); state.page = 1; apply(); });
         const kw = $('searchKeyword');
         if (kw) kw.addEventListener('input', debounce(() => { syncFromForm(); state.page = 1; apply(); }, 300));
-        ['searchCity', 'searchJobType', 'searchEmp'].forEach(id => {
+        ['searchCity', 'searchEmp'].forEach(id => {
             const el = $(id);
             if (el) el.addEventListener('change', () => { syncFromForm(); state.page = 1; apply(); });
+        });
+        const catWrap = $('searchJobType');
+        if (catWrap) catWrap.addEventListener('click', e => {
+            const btn = e.target.closest('.cat-chip');
+            if (!btn) return;
+            const id = btn.dataset.cat || '';
+            state.cat = (id && state.cat === id) ? '' : id;
+            setCatChips();
+            state.page = 1;
+            apply();
         });
         const sort = $('searchSort');
         if (sort) sort.addEventListener('change', () => { state.sort = sort.value; state.page = 1; apply(); });
@@ -214,8 +229,14 @@
     function syncFromForm() {
         state.q = ($('searchKeyword')?.value || '').trim();
         state.city = $('searchCity')?.value || '';
-        state.cat = $('searchJobType')?.value || '';
         state.emp = $('searchEmp')?.value || '';
+    }
+    function setCatChips() {
+        document.querySelectorAll('#searchJobType .cat-chip').forEach(c => {
+            const on = (c.dataset.cat || '') === state.cat;
+            c.classList.toggle('is-on', on);
+            c.setAttribute('aria-pressed', on ? 'true' : 'false');
+        });
     }
 
     /* ---------- 絞り込み・並び替え ---------- */
@@ -350,7 +371,7 @@
         if (key === '*') return clearAll();
         if (key === 'q') { state.q = ''; if ($('searchKeyword')) $('searchKeyword').value = ''; }
         else if (key === 'city') { state.city = ''; if ($('searchCity')) $('searchCity').value = ''; }
-        else if (key === 'cat') { state.cat = ''; if ($('searchJobType')) $('searchJobType').value = ''; }
+        else if (key === 'cat') { state.cat = ''; setCatChips(); }
         else if (key === 'emp') { state.emp = ''; if ($('searchEmp')) $('searchEmp').value = ''; }
         else if (key.startsWith('tag:')) {
             const t = key.slice(4);
@@ -363,8 +384,9 @@
     function clearAll() {
         state.q = ''; state.city = ''; state.cat = ''; state.emp = ''; state.tags = []; state.page = 1;
         ['searchKeyword'].forEach(id => { if ($(id)) $(id).value = ''; });
-        ['searchCity', 'searchJobType', 'searchEmp'].forEach(id => { if ($(id)) $(id).value = ''; });
+        ['searchCity', 'searchEmp'].forEach(id => { if ($(id)) $(id).value = ''; });
         document.querySelectorAll('.jsr-chip.is-on').forEach(c => c.classList.remove('is-on'));
+        setCatChips();
         apply();
     }
 

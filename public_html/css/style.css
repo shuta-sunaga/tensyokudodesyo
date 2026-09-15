@@ -5197,11 +5197,31 @@ body.menu-open { overflow: hidden; }
 .knowhow-skeleton-image, .knowhow-skeleton-line { border-radius: 0; }
 .knowhow-pagination .pagination-btn.active { background: var(--color-black); }
 
+/* ---------- 職種チップ（トップ・都道府県ページ共通。プルダウンの代わりにタップで選ぶ） ---------- */
+.cat-chips { display: flex; flex-wrap: wrap; gap: 6px; flex: 1 1 auto; min-width: 0; }
+.cat-chip {
+    display: inline-flex; align-items: center; gap: 7px; padding: 8px 12px; font-size: 0.82rem; font-family: var(--font-primary); line-height: 1.3;
+    color: var(--color-gray-dark); background: var(--color-white); border: 1px solid var(--color-gray-lighter); cursor: pointer; transition: all .15s ease;
+}
+.cat-chip b { font-family: var(--font-family-en); font-weight: 500; font-size: 0.72rem; color: var(--color-gray-light); }
+.cat-chip:hover { border-color: var(--color-black); color: var(--color-black); }
+.cat-chip.is-on { background: var(--color-black); border-color: var(--color-black); color: var(--color-white); font-weight: 700; }
+.cat-chip.is-on b { color: var(--color-primary); }
+.cat-chip:focus-visible { outline: 2px solid var(--color-primary-dark); outline-offset: 1px; }
+.jsr-cats { align-items: flex-start; }
+.jsr-cats .jsr-chips-label { padding-top: 9px; }
+.tp-search-cats { align-items: flex-start; }
+.tp-search-cats > span { padding-top: 9px; }
+@media (max-width: 600px) {
+    .cat-chip { padding: 7px 10px; font-size: 0.78rem; }
+    .jsr-cats .jsr-chips-label, .tp-search-cats > span { width: 100%; padding-top: 0; }
+}
+
 /* ---------- Prefecture page: 都道府県求人一覧 v2 ---------- */
 .jobs-search { background: var(--color-bg-gray); padding: 28px 0 24px; }
 .jobs-search .breadcrumb { display: none; }
 .jsr-panel { background: var(--color-white); border: 1px solid var(--color-gray-lighter); border-top: 3px solid var(--color-primary); padding: 20px 22px 22px; }
-.jsr-row { display: grid; grid-template-columns: minmax(0, 1.7fr) repeat(3, minmax(0, 1fr)) auto; gap: 10px 12px; align-items: end; }
+.jsr-row { display: grid; grid-template-columns: minmax(0, 1.8fr) repeat(2, minmax(0, 1fr)) auto; gap: 10px 12px; align-items: end; }
 .jsr-field { display: flex; flex-direction: column; gap: 5px; min-width: 0; }
 .jsr-field > label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.06em; color: var(--color-gray); }
 .jsr-field select, .jsr-field input[type="text"], .jsr-field input[type="search"] {
@@ -5327,7 +5347,7 @@ body.menu-open { overflow: hidden; }
 .tp-scroll-cue i { width: 1px; height: 36px; background: linear-gradient(var(--color-primary), transparent); display: block; }
 
 /* hero search panel */
-.tp-search { margin-top: clamp(28px, 4vh, 40px); max-width: 1000px; background: var(--color-white); color: var(--color-black); border-top: 4px solid var(--color-primary); padding: 18px 20px 18px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr) minmax(0, 1.4fr) auto; gap: 10px 12px; align-items: end; text-shadow: none; }
+.tp-search { margin-top: clamp(28px, 4vh, 40px); max-width: 1000px; background: var(--color-white); color: var(--color-black); border-top: 4px solid var(--color-primary); padding: 18px 20px 18px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr) auto; gap: 10px 12px; align-items: end; text-shadow: none; }
 .tp-search-field { display: flex; flex-direction: column; gap: 5px; min-width: 0; }
 .tp-search-field label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.06em; color: var(--color-gray); }
 .tp-search select, .tp-search input[type="text"], .tp-search input[type="search"] {
@@ -5452,7 +5472,6 @@ body.menu-open { overflow: hidden; }
 /* responsive (top) */
 @media (max-width: 1000px) {
     .tp-search { grid-template-columns: 1fr 1fr; }
-    .tp-search-field:nth-child(3) { grid-column: 1 / -1; }
     .tp-search-submit { grid-column: 1 / -1; width: 100%; }
     .tp-area-grid { grid-template-columns: 1fr; }
     .tp-opener-grid { grid-template-columns: 1fr; }
@@ -5475,7 +5494,6 @@ body.menu-open { overflow: hidden; }
     .tp-hero h1 { font-size: clamp(1.9rem, 9.5vw, 2.5rem); line-height: 1.3; max-width: none; }
     .tp-hero-lead { font-size: 0.9rem; line-height: 1.8; margin-top: 14px; max-width: none; }
     .tp-search { margin-top: 22px; grid-template-columns: 1fr; padding: 14px 14px 14px; gap: 8px; }
-    .tp-search-field:nth-child(3) { grid-column: auto; }
     .tp-search-chips { padding-top: 8px; }
     .tp-hero-strip { height: 4px; }
     .tp-scroll-cue { display: none; }
