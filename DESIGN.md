@@ -1,136 +1,114 @@
-# DESIGN.md — 転職どうでしょう
+# DESIGN.md — 転職どうでしょう（デザイン v2 / 2026-09）
+
+コーポレートサイト v2（https://www.sei-san-sei.com/ 2026-09-14 公開）と共通のデザイン言語。
+引き継ぎ要件書: `docs/design-v2-handoff-from-corporate.md`、実装メモ: `docs/design-v2-implementation.md`。
 
 ## Theme
 
-**Light**, warm cream background. Day-time reading mood; mobile-first.
+**Light**。白／ライトグレーの交互セクションに、ネイビーチャコールの帯（ヒーロー・下層ページヘッダー・CTA・フッター）。
+装飾を削り、**写真と余白と書体**で見せる。角丸なし、影はほぼ使わない、グラデ装飾なし。
 
-`bg: #ffffff / #faf8f0 (warm cream)` で陽の差し込むカフェのような印象を狙う。
+「あたたかさ」は UI の装飾ではなく、**写真（人の顔が見える現場写真）とコピー（敬体・言い切り）**で担保する。
 
 ## Color
 
-OKLCH thinking, but stored as hex for compatibility. Tinted neutrals (warm-leaning).
-
 | Role | Token | Value | Usage |
 |------|-------|-------|-------|
-| Primary | `--color-primary` | `#5a9e6f` | CTA・リンク・主要ボタン（緑） |
-| Primary (dark) | `--color-primary-dark` | `#4a8a5f` | hover・active |
-| Primary (light) | `--color-primary-light` | `#e8f5ec` | background tint |
-| Secondary | `--color-secondary` | `#e8a85a` | アクセント（オレンジ・限定使用） |
-| Accent | `--color-accent` | `#f0c674` | ハイライト |
-| Text | `--color-text` | `#3d3d3d` | 本文 |
-| Text light | `--color-text-light` | `#5a5a5a` | サブテキスト |
-| Text muted | `--color-text-muted` | `#7a7a7a` | キャプション |
-| BG | `--color-bg` | `#ffffff` | カード・フォーム背景 |
-| BG warm | `--color-bg-warm` | `#faf8f0` | ページ背景 |
-| BG cream | `--color-bg-cream` | `#f5f2e8` | セクション差別化 |
-| BG dark | `--color-bg-dark` | `#3d4a3f` | フッター |
-| Border | `--color-border` | `#e5e2d8` | フォーム枠 |
+| Primary | `--color-primary` | `#F5820D` | オレンジ。**ラベル・ボタン・下線・マーカーのみ**。面積を広く塗らない |
+| Primary (dark) | `--color-primary-dark` | `#D96D00` | 英字ラベル文字・hover |
+| Primary (text) | `--color-primary-text` | `#B85B00` | 本文中のリンク |
+| Black | `--color-black` | `#1B2430` | ネイビーチャコール。見出し・ヒーロー／CTA／ページヘッダー帯・主ボタン hover |
+| Text | `--color-gray-dark` / `--color-text` | `#3A4552` | 本文 |
+| Gray | `--color-gray` | `#5E6975` | サブテキスト |
+| Gray light | `--color-gray-light` | `#6B7683` | キャプション・日付 |
+| Border | `--color-gray-lighter` / `--color-border` | `#D8DCE0` | 罫線 |
+| BG | `--color-bg` | `#FFFFFF` | ページ・カード背景 |
+| BG gray | `--color-bg-gray` (`--color-bg-warm` / `-cream` も同値) | `#F5F6F6` | 交互セクションのライトグレー |
+| Footer | `--color-bg-dark` | `#111821` | フッター |
 
-**Color strategy**: Restrained — クリームベースに緑1色を主軸、オレンジは限定的アクセント。
+**Color strategy**: 白／グレー／ネイビーの3階調。オレンジはアクセント1色。緑（旧 `#5a9e6f`）とクリーム背景は廃止。
+ネイビーは「黒＋ネオン」ではなく紙面の墨色として使う。ロゴ（`assets/logo.webp`）の色は変えない（暗い背景では白抜き）。
 
 ## Typography
 
-- **Font**: `'Noto Sans JP', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif`
-- **Scale** (1.25 ratio):
-  - h1: 2rem (32px) / 700
-  - h2: 1.625rem (26px) / 700
-  - h3: 1.25rem (20px) / 600
-  - body: 1rem (16px) / 400
-  - small: 0.875rem (14px) / 400
-  - caption: 0.75rem (12px) / 400
-- **Line height**: 1.7 for body, 1.4 for headings
-- **Body line length**: max 65ch
-- **Letter-spacing**: 0.02em for headings (Japanese typography needs slight tracking)
+- **本文**: `"Noto Sans JP", "Hiragino Kaku Gothic ProN", "Hiragino Sans", sans-serif`（400 / 500 / 700。900 は使わない）
+- **英字ラベル・数字**: `"IBM Plex Sans", "Helvetica Neue", Arial, sans-serif`（400 / 500 / 600）。`letter-spacing: .14〜.18em`、大文字
+- Google Fonts: `family=IBM+Plex+Sans:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;700`
+- 本文 `line-height: 1.9`、見出し `letter-spacing: .02em; line-break: strict`
+- 長い日本語見出しは `word-break: keep-all; overflow-wrap: anywhere` ＋ 明示 `<br>`
+- Scale: h1 `clamp(2.1rem, 5.2vw, 4.2rem)`（ヒーロー）／ `clamp(2rem, 4.6vw, 3.6rem)`（下層帯）、h2 `clamp(1.5rem, 2.6vw, 2rem)`、h3 1.1〜1.4rem、本文 0.95〜1rem、キャプション 0.72〜0.8rem
 
-## Spacing
+## Spacing / Layout
 
-| Token | Value |
-|-------|-------|
-| `--spacing-xs` | 0.5rem (8px) |
-| `--spacing-sm` | 1rem (16px) |
-| `--spacing-md` | 1.5rem (24px) |
-| `--spacing-lg` | 2rem (32px) |
-| `--spacing-xl` | 3rem (48px) |
-| `--spacing-2xl` | 4rem (64px) |
-| `--spacing-3xl` | 6rem (96px) |
-
-Vary spacing for rhythm — not uniform padding everywhere.
+- コンテナ: `.container` 1280px、トップ `.tp-wrap` 1240px、左右 `clamp(20px, 4vw, 56px)`
+- セクション縦余白: `clamp(72px, 10vh, 120px)`（トップ）、`clamp(64px, 9vh, 100px)`（下層）。モバイルは 56px
+- ヘッダー高さ: 76px（PC）／ 64px（〜1024px）。透明→白の切替はヒーロー直下
+- ブレークポイント: 1240 / 1024（ナビ→ハンバーガー）/ 1000 / 900 / 768 / 600
+- 画像枠は **`padding-top` パターン**（`aspect-ratio` 単体禁止。旧 Safari・WebView で高さ 0 になる）
 
 ## Border Radius
 
-ソフトでフレンドリーな印象を狙う。
-- xs: 4px (input focus)
-- sm: 8px (badge, tag)
-- md: 12px (button, card-inner)
-- lg: 16px (form card)
-- xl: 24px (hero card)
-- full: 9999px (avatar, pill)
+**すべて 0**（`--radius-*: 0`）。ピル型・角丸カードは使わない。
 
 ## Shadows
 
-控えめで柔らかい。
-- `--shadow-sm`: `0 2px 4px rgba(0, 0, 0, 0.04)`
-- `--shadow-md`: `0 4px 12px rgba(0, 0, 0, 0.06)`
-- `--shadow-lg`: `0 8px 24px rgba(0, 0, 0, 0.08)`
-- `--shadow-xl`: `0 16px 32px rgba(0, 0, 0, 0.1)`
+- 通常: なし（`--shadow-*: none`）
+- hover のカードだけ `0 12px 32px rgba(27,36,48,.08)` ＋ 罫線を黒に
+- ヘッダー（スクロール後）: `0 2px 16px rgba(27,36,48,.06)`
 
 ## Motion
 
-- **transition-fast**: 0.15s ease (button color)
-- **transition-base**: 0.3s cubic-bezier(0.4, 0.4, 0, 1) (card hover, form focus)
-- **transition-slow**: 0.5s cubic-bezier(0.4, 0.4, 0, 1) (page section reveal)
-
-控えめ・上品。バウンス・派手な変形は避ける。
-
-## Layout
-
-- **Container max**: 1280px
-- **Header height**: 80px (sticky)
-- **Form card max**: 720px (1カラム読みやすさ優先)
-- **Mobile breakpoint**: 768px
-- **Desktop breakpoint**: 1024px
+- ボタン／リンク色: `.2s ease`。矢印（`::after "→"`）は hover で右へ 4px
+- 写真 hover: `scale: 1.04`（`.6s ease`）
+- セクションのフェードイン（`.tp-fade` → `.is-in`、`.6s`）程度は可。**sticky／スクロールテリング／スナップ系は使わない**（経営陣が嫌う）
+- `prefers-reduced-motion` ではフェードを無効化
 
 ## Components
 
-### Form
-- 1カラム縦並び（PCでも）
-- ラベル上、入力欄下
-- 必須印は ★ 緑色（赤バッジは威圧的なので使わない）
-- フォーカス時: ボーダーをprimary、背景にprimary-lightのうっすらグロウ
-- エラー時: ボーダーを `#d97757` (warm-red、警告ピンクではなく)、メッセージは下に小さく
-- 入力欄角丸: 12px
-- 内余白: 14px 16px
-- フォントサイズ: 16px (iOS自動ズーム回避)
+### Header
+固定。ロゴ左（40px）、ナビ右（5項目・下線オレンジ）、右端に「企業様はこちら」(`btn-outline`) と「求職者様はこちら」(`btn-primary`)。1240px 以下は outline を隠す。1024px 以下はハンバーガー（44px 角）→全画面白メニュー。`body.page-home` ではヒーロー上で透明（白文字・白ロゴ）、`.solid` で白。
 
-### Button
-- Primary: 緑グラデーション、白文字、角丸12px、shadow-sm、hover時に1px浮く
-- Secondary: ボーダー付き透明背景、hover時に淡い緑塗り
-- Disabled: 灰色、cursor: not-allowed
+### Buttons
+`.btn-primary`: オレンジ地・黒文字 → hover 黒地・白文字。`.btn-outline`: 黒線 → hover 黒地。トップ用 `.tp-btn`（黒地・→付き）／`.orange`／`.line`／`.ghost`。
 
-### Step Indicator (応募の流れ)
-- 横並びの番号付きステップ4-5個
-- 完了/現在/未来の3状態
-- アイコンは丸、線で接続
-- モバイルでは縦並び
+### 英字ラベル
+`.section-label` / `.tp-eyebrow`: 18×2px のオレンジ棒＋大文字英字。`.section-header[data-en]` でも出せる。
 
-### Privacy notice
-- 控えめな影付きカード
-- 鍵アイコン左上、「あなたの情報は丁寧に扱います」コピー
-- リンクは下線付き
+### 下層ページヘッダー
+`.page-header`: ネイビー帯。パンくず（白55%）→ 2カラム（英字ラベル＋h1 / リード）。右下に `data-en` の英字ウォーターマーク（`::after content: attr(data-en)`、白5%）。`data-en` が無い MT 生成ページは `includes.js` がパスから付与（INTERVIEW / COMPANY / KNOWHOW / JOB …）。パンくずだけの帯は `.is-crumb-only`（モバイルでは非表示）。
+
+### Cards
+`.article-card` / `.job-listing-card` / `.client-card`: 角丸 0、罫線 1px、hover で影＋黒罫。カテゴリチップは薄グレー地・オレンジ文字。NEW はオレンジ地・黒文字の英字。
+
+### 求人リスト（都道府県ページ `.job-row`）
+1行＝タグ行（NEW／雇用形態／職種グループ）＋タイトル＋会社＋メタ（勤務地・年収）＋こだわり条件チップ＋右に日付と「詳細を見る →」。行全体がリンク。
+
+### 検索パネル（`.tp-search` / `.jsr-panel`）
+白いパネル、上端にオレンジの太線。入力は高さ 48〜50px・角丸 0・フォント 16px（iOS ズーム防止）。チップは 1px 罫線、選択で黒地。
+
+### CTA 帯
+ネイビー地。左に英字ラベル＋h2＋本文、右に注記リスト（無料・勤務先に知られない…）＋オレンジのボタン。オレンジはボタンだけ。
+
+### フォーム（/contact/）
+構造は維持。入力 角丸 0、フォーカスは黒罫＋オレンジ 2px アウトライン。必須印 ★ はオレンジ。エラーは `#B03A2E`。
+
+## Photography
+
+- 実在感のある現場写真（製造業）。人の顔が見えるカットを入れる。
+- AI 生成時は `scripts/redesign-v2/generate-photos.mjs`（`STYLE` 定数が正本）。**AIっぽさゼロ**が条件: 弱いボケ・粒状感・混合光・生活感・自然な姿勢・カメラ目線なし・読める文字／ロゴなし。生成後は必ず目視、NG なら `--only` で再生成。
+- 素材: `public_html/assets/v2/*.webp`（1920×1080 q80）
 
 ## Accessibility
 
-- WCAG AA target
-- Focus visible: 2px solid primary outline + offset 2px
-- Color contrast: text vs bg ≥ 4.5:1, interactive ≥ 3:1
-- Form: `<label for>` 必須、aria-describedby でエラー紐付け
-- Touch target: 44×44px min on mobile
+- WCAG AA。フォーカスリング `2px solid #D96D00` offset 2px
+- 本文コントラスト ≥ 4.5:1（`#3A4552` on white = 9.3:1、`#B85B00` on white = 5.4:1）
+- タップ領域 44px 以上、`<label for>` 必須、`aria-live` で件数更新を通知
 
-## Anti-patterns to avoid (project-specific)
+## Anti-patterns
 
-- ❌ 紫・ピンクのグラデ
-- ❌ ネストカード（カードの中にカード）
-- ❌ 大量のスケルトンローディングバー
-- ❌ 過度なグロウ・ネオン
-- ❌ 「今すぐ送信！」のような威圧的なCTAコピー
-- ❌ アイコン+テキストの不揃いな垂直アライメント
+- ❌ 角丸・柔らかい影・クリーム背景・緑（v1 の意匠）
+- ❌ オレンジの面塗り（背景・大きな帯）。オレンジは線とボタンだけ
+- ❌ sticky／スクロールテリング／スナップ演出
+- ❌ 原色赤ボタン・「今すぐ送信！」コピー・虚飾ストック写真・作り笑いのカメラ目線
+- ❌ `aspect-ratio` 単体の画像枠、clean-css-cli での minify（メディアクエリが消える）
+- ❌ Noto Sans JP 900、紫・ピンクのグラデ、ネオン

@@ -1,0 +1,103 @@
+# デザイン v2 実装メモ（2026-09-15）
+
+引き継ぎ要件書 `docs/design-v2-handoff-from-corporate.md` を実装した記録。デザイン定義は `DESIGN.md`。
+
+## 決定事項（須長 2026-09-15）
+
+| 項目 | 決定 |
+|------|------|
+| ブランドカラー | (A) グループ共通のオレンジ `#F5820D`／ネイビー `#1B2430` に統一。ロゴは変えない |
+| 製造業寄せ | **振り切る**（コピー・写真とも製造業） |
+| ヒーロー | 日本地図は廃止。写真ヒーロー＋検索パネル。既存の転職プラットフォームを参考に **一覧性・検索性** を主軸に |
+| 検索機能 | MT の求人フィールドは変更しない。表記ゆれの吸収とこだわり条件はクライアント側で判定 |
+| 写真 | AI 生成（Gemini）。**AIっぽさゼロ** が条件 |
+| 英字ラベル | 使う（Manufacturing Career Support / Find Jobs by Area / Jobs in Osaka 等） |
+| 都道府県ウォーターマーク | 使う（`OSAKA` 等、`prefecture_id` を大文字化） |
+
+## ファイル構成
+
+### 静的アセット（`bash scripts/deploy.sh` でデプロイ可）
+
+| ファイル | 内容 |
+|---|---|
+| `public_html/css/style.css` | 末尾に `DESIGN V2 START〜END` ブロック（正本は `scripts/redesign-v2/v2-theme.css`）。先頭に IBM Plex Sans の `@import` |
+| `public_html/css/contact.css` / `client-detail.css` / `article-detail.css` | 同様に v2 ブロックを末尾追加（正本 `scripts/redesign-v2/v2-contact.css` 等） |
+| `public_html/includes/header.html` / `footer.html` | v2 構造（`.header` + `.nav-mobile`、4カラムフッター） |
+| `public_html/js/includes.js` | 書き直し。ハンバーガー（クラス切替）・透明→白ヘッダー・`.page-header` への `data-en` 付与・アクティブナビ |
+| `public_html/js/job-taxonomy.js` | **新規**。職種の表記ゆれ→10グループ、こだわり条件の正規表現、年収パース |
+| `public_html/js/home-v2.js` | **新規**。トップページ（検索・都道府県一覧・新着求人・タイルの最新3件・フェードイン） |
+| `public_html/js/prefecture-page.js` | 書き直し。キーワード／市区町村／職種グループ／雇用形態／こだわり条件／並び順／URL 同期 |
+| `public_html/js/main.js` | 旧ヘッダー処理を v2 では無効化、一覧ページの新着求人を `jobs-latest.json` から取得、求人詳細の年収整形 |
+| `public_html/404.html` | **新規**。nginx に `error_page 404 /404.html;` が必要（未設定） |
+| `public_html/assets/v2/*.webp` | 生成写真 8 枚（hero-main / tile-clients / tile-interview / tile-company / tile-knowhow / tile-jobs / photo-consult / photo-company） |
+
+### MT 管理（`scripts/redesign-v2/mt-apply-v2.sh` で反映）
+
+| テンプレート | 対象 | 出力 |
+|---|---|---|
+| `mt-template/index-html.mtml` | 親サイト「トップページ」 | `/index.html` |
+| `mt-template/prefecture-page.mtml` | 全47子ブログ「トップページ」（先頭の SetVar 2行はブログ毎に自動生成） | `/{pref}/index.html` |
+| `mt-template/jobs-latest-json.mtml` | 親サイト **新規** index テンプレ「新着求人JSON」 | `/data/jobs-latest.json` |
+| `mt-template/jobs-summary-json.mtml` | 親サイト **新規** index テンプレ「求人件数JSON」 | `/data/jobs-summary.json` |
+
+新規 2 テンプレは **公開設定「定期的に再構築」60 分**（`build_type=5`）で作成する。子ブログに求人をインポートしても親サイトを再構築しなくても、常駐の `mt-periodic-tasks` が更新する。
+
+一覧ページ（interviews / companies / knowhow）と詳細ページ（求人・インタビュー・企業・ノウハウ）は **テンプレート変更なし**。CSS の後勝ちと `includes.js` の `data-en` 付与だけで v2 になる。
+
+### ローカル確認
+
+```bash
+node scripts/redesign-v2/apply-css.mjs              # v2 CSS を style.css 等へ反映（冪等）
+node scripts/redesign-v2/build-static-from-mtml.mjs # index.html / shiga, shizuoka, osaka, fukuoka, aichi の index.html を生成
+npx http-server public_html -p 8080 -c-1 -P https://www.tensyokudodesyo.com   # ローカルに無いデータ・ページは本番へプロキシ
+node scripts/redesign-v2/screenshot.mjs             # PC/スマホのフルページ撮影（scripts/redesign-v2/shots/）
+```
+
+`osaka/` `fukuoka/` `aichi/` はプレビュー用（`.gitignore` 済・deploy.sh でブロック）。
+`data/jobs-latest.json` `data/jobs-summary.json` はローカルのサンプル（本番は MT が生成、deploy.sh でブロック）。
+
+## 検索の仕様（クライアント側）
+
+- **職種グループ**（`JobTaxonomy.BUCKETS`、評価順）: 営業 → IT・システム → 建築・土木・設備 → 運輸・物流 → 製造・技能工 → 技術職（機械・電気・化学）→ 医療・福祉・保育 → 事務・企画・管理 → 販売・サービス・飲食 → 専門職・コンサル・その他 → その他。UI の表示順は製造業を先頭に
+- **こだわり条件**（`JobTaxonomy.TAGS`）: 未経験歓迎／土日祝休み／年間休日120日以上／残業少なめ／転勤なし／資格取得支援／研修充実／社宅・寮あり／車通勤可／リモート可／U・Iターン歓迎／学歴不問。title + conditions + keywords + detail（仕事内容・休日・待遇・給与詳細・おすすめポイント等）の結合テキストに正規表現
+- **市区町村**: `city` から県名を除き `〜市／区／郡／町／村` までを採用。「要相談」「その他」は末尾
+- **年収**: `"2,700,000~4,010,000"` → `{min:270,max:401}` → 「270万〜401万円」。並び替え「年収が高い順／低い順」に使用
+- **URL**: `/{pref}/?q=&city=&cat=&emp=&tag=&tag=&sort=&page=`。トップの検索パネルは `q` / `cat` / `tag` を都道府県ページへ引き継ぐ
+- **データ量**: 都道府県ページは従来どおり `data/jobs/{id}.json`（detail 付き、大阪 9MB）。トップと一覧ページの新着求人は `jobs-latest.json`（12KB）だけを読む。**従来は 47 都道府県分（100MB 超）を毎回取得していた**
+
+## デプロイ手順
+
+1. `bash scripts/deploy.sh` で静的アセットを先に反映
+   ```
+   public_html/css/style.css public_html/css/contact.css public_html/css/client-detail.css public_html/css/article-detail.css
+   public_html/includes/header.html public_html/includes/footer.html
+   public_html/js/includes.js public_html/js/main.js public_html/js/prefecture-page.js public_html/js/job-taxonomy.js public_html/js/home-v2.js
+   public_html/404.html public_html/assets/v2/*.webp
+   ```
+2. `bash scripts/redesign-v2/mt-apply-v2.sh`（DRY-RUN）→ `--apply`（mt_template をバックアップ → テンプレ更新 → index 再構築）
+3. nginx: `error_page 404 /404.html;` を HTTPS server ブロックに追加して reload（`docs/nginx-security-headers.md` の手順に倣う）
+4. 本番でスマホ表示・検索・フォーム送信を再確認
+5. 元に戻す場合: `mt_template_backup_YYYYMMDD_HHMMSS` から復元 → `scripts/mt-rebuild-all-force.pl`、静的アセットは git の前コミットを deploy.sh
+
+## QA 結果（ローカル、2026-09-15）
+
+| 項目 | 結果 |
+|---|---|
+| PC Chrome 1400px: トップ／大阪／求人詳細／インタビュー一覧／ノウハウ一覧／会社紹介一覧・詳細／ノウハウ詳細／contact／terms／404 | OK（コンソールエラー 0） |
+| 390px（puppeteer）: 同上 | OK（横はみ出し 0） |
+| ヘッダー透明→白（ヒーロー直下）／ハンバーガー開閉 | OK |
+| 日本語見出しの途中割れ | `keep-all` + 明示 `<br>` で OK |
+| 都道府県ページの検索・絞り込み・並び替え・ページネーション・URL 同期 | OK（大阪 1,447 件） |
+| フォーム送信 | **未確認**（本番反映後に実施。プレビューは Lambda 直結のため送信していない） |
+| iPhone Safari 実機／LINE・X アプリ内ブラウザ | **未確認**（本番反映後） |
+
+## 残課題・提案
+
+- nginx の 404 設定（上記 3）
+- `data/jobs/{pref}.json` に detail を含めたままなので大阪は 9MB。MT の `jobs-child-json.mtml` から detail を外すと約 0.5MB になるが、こだわり条件の判定に detail を使っているため、外す場合は MT 側で条件フラグを出力する設計に変える必要がある
+- ヒーローの検索は「勤務地必須」。都道府県横断のキーワード検索は全 JSON 取得が必要になるため見送り
+- 写真は AI 生成。実写が用意でき次第 `assets/v2/` を差し替える（同名・1920×1080）
+- ヒーローコピー案（採用: 1）
+  1. 地元で、ものづくりの仕事を。
+  2. 条件だけでなく、想いで選ぶ転職を。
+  3. 現場を知る人が、地元の工場につなぐ。

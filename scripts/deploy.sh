@@ -21,7 +21,7 @@ SCP_OPTS="-i $KEY_FILE -o StrictHostKeyChecking=no"
 # --- MT管理ファイルのブロックリスト（正規表現パターン） ---
 # これらのパスに一致するファイルはデプロイ禁止
 # 都道府県を新規追加するときは PREFECTURE_DIRS に追記すること
-PREFECTURE_DIRS="(shiga|shizuoka|fukuoka)"
+PREFECTURE_DIRS="(hokkaido|aomori|iwate|miyagi|akita|yamagata|fukushima|ibaraki|tochigi|gunma|saitama|chiba|tokyo|kanagawa|niigata|toyama|ishikawa|fukui|yamanashi|nagano|gifu|shizuoka|aichi|mie|shiga|kyoto|osaka|hyogo|nara|wakayama|tottori|shimane|okayama|hiroshima|yamaguchi|tokushima|kagawa|ehime|kochi|fukuoka|saga|nagasaki|kumamoto|oita|miyazaki|kagoshima|okinawa)"
 BLOCKED_PATTERNS=(
     # 都道府県ページ（MT再構築で生成）
     "public_html/${PREFECTURE_DIRS}/index\.html"

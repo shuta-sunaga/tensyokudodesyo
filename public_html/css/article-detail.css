@@ -579,3 +579,45 @@
         gap: 0.5rem;
     }
 }
+
+/* ===== DESIGN V2 START (generated from scripts/redesign-v2 — do not edit below by hand) ===== */
+/* v2: 記事詳細（ノウハウ・インタビュー・企業） */
+.article-detail { padding-top: calc(var(--header-height) + 24px); background: var(--color-white); }
+.article-detail .breadcrumb { margin-bottom: 28px; }
+.article-thumbnail { border-radius: 0; }
+.article-title { color: var(--color-black); font-size: clamp(1.5rem, 2.8vw, 2.1rem); line-height: 1.45; }
+.article-category { border-radius: 0; background: var(--color-primary); color: var(--color-black); font-weight: 700; font-size: 0.72rem; letter-spacing: 0.04em; }
+.article-date, .article-area { color: var(--color-gray-light); font-family: var(--font-family-en); }
+.article-header { padding-bottom: 24px; border-bottom: 1px solid var(--color-black); }
+.article-introduction { border-radius: 0; background: var(--color-bg-gray); border-left: 4px solid var(--color-primary); }
+.article-toc { border-radius: 0; background: var(--color-bg-gray); border-top: 2px solid var(--color-black); }
+.toc-title { color: var(--color-black); }
+.toc-link { color: var(--color-gray-dark); }
+.toc-link:hover { color: var(--color-primary-dark); }
+.article-body h2 { color: var(--color-black); font-weight: 700; border-bottom: 2px solid var(--color-black); }
+.article-body h3 { color: var(--color-black); border-left: 3px solid var(--color-primary); }
+.article-body a { color: var(--color-primary-text); text-decoration: underline; text-decoration-color: rgba(184, 91, 0, 0.4); }
+.article-body a:hover { color: var(--color-primary-dark); }
+.article-body blockquote { border-radius: 0; background: var(--color-bg-gray); border-left: 3px solid var(--color-gray-lighter); }
+.article-body img { border-radius: 0; }
+.article-body table th { background: var(--color-bg-gray); color: var(--color-black); }
+.article-body pre, .article-body code { border-radius: 0; }
+.article-series-box { border-radius: 0; background: var(--color-bg-gray); border: 0; border-top: 2px solid var(--color-black); }
+.article-company-info { border-radius: 0; background: var(--color-bg-gray); }
+.company-info-label { color: var(--color-gray); }
+.company-info-value { color: var(--color-black); }
+.article-cta { border-radius: 0; background: var(--color-black); color: var(--color-white); }
+.article-cta h3, .article-cta h2 { color: var(--color-white); }
+.article-cta p { color: #D5DAE0; }
+.article-cta .btn, .article-cta .btn-primary { background: var(--color-primary); color: var(--color-black); border-color: var(--color-primary); }
+.article-cta .btn:hover, .article-cta .btn-primary:hover { background: var(--color-white); color: var(--color-black); border-color: var(--color-white); }
+.article-back { border-top: 1px solid var(--color-gray-lighter); }
+.article-back a { color: var(--color-black); font-weight: 700; }
+.article-back a:hover { color: var(--color-primary-dark); }
+.related-articles h2 { color: var(--color-black); }
+@media (max-width: 768px) {
+    .article-detail { padding-top: calc(var(--header-height-mobile) + 16px); }
+    .article-detail .breadcrumb { display: flex; }
+}
+/* ===== DESIGN V2 END ===== */
+

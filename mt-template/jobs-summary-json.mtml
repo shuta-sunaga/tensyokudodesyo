@@ -1,0 +1,19 @@
+<mt:Ignore>
+============================================================
+都道府県別の求人件数JSON（デザイン v2 / 2026-09）
+出力ファイル: data/jobs-summary.json
+テンプレート種類: インデックステンプレート（親サイト id=1）
+公開設定: 「定期的に再構築」（60分間隔）を推奨
+
+トップページの「都道府県から探す」と勤務地セレクトの件数表示に使う。
+prefecture id は url の最初のパス（例 https://www.tensyokudodesyo.com/osaka/ → osaka）から
+クライアント側で取り出す。
+============================================================
+</mt:Ignore>{
+  "generated": "<mt:Date format="%Y-%m-%dT%H:%M:%S">",
+  "prefectures": [
+<mt:Blogs include_blogs="children">
+    { "name": "<mt:BlogName encode_json="1">", "url": "<mt:BlogURL>", "count": <mt:BlogEntryCount> }<mt:Unless name="__last__">,</mt:Unless>
+</mt:Blogs>
+  ]
+}

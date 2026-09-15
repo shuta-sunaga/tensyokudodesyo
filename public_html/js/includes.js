@@ -1,6 +1,7 @@
 /**
- * Header/Footer Include System
- * Loads header.html and footer.html and inserts them into placeholder elements
+ * Header/Footer Include System (v2)
+ * includes/header.html と footer.html を読み込んで差し込み、
+ * ヘッダーの挙動（ハンバーガー・透明→白の切替・下層ページ帯の英字ラベル）を初期化する。
  */
 
 // Guard against double execution
@@ -14,164 +15,100 @@ if (window._includesJsLoaded) {
 
     /**
      * Load and insert an include file
-     * @param {string} includeFile - Filename (e.g., 'header.html')
-     * @param {string} placeholderId - ID of placeholder element
      */
     async function loadInclude(includeFile, placeholderId) {
         const placeholder = document.getElementById(placeholderId);
         if (!placeholder) return;
+        if (!placeholder.parentNode) return;
 
-        // Guard: Check if element still has a parent (not already replaced)
-        if (!placeholder.parentNode) {
-            console.warn(`Placeholder ${placeholderId} has no parent, skipping`);
-            return;
-        }
-
-        // Use absolute path for includes - works from any page depth
         const includesPath = '/includes/';
-
         try {
             const response = await fetch(includesPath + includeFile);
-            if (!response.ok) {
-                throw new Error(`Failed to load ${includeFile}`);
-            }
-
+            if (!response.ok) throw new Error(`Failed to load ${includeFile}`);
             const html = await response.text();
-
-            // Double-check element still has parent before replacing
             if (placeholder.parentNode) {
                 placeholder.outerHTML = html;
             }
-
-            // Dispatch event for other scripts to know include is loaded
-            document.dispatchEvent(new CustomEvent('includeLoaded', {
-                detail: { file: includeFile }
-            }));
-
+            document.dispatchEvent(new CustomEvent('includeLoaded', { detail: { file: includeFile } }));
         } catch (error) {
             console.error(`Error loading include ${includeFile}:`, error);
         }
     }
 
     /**
-     * Initialize mobile menu after header is loaded
+     * ハンバーガー → 全画面白メニュー（クラス切替のみ。インラインスタイルは使わない）
      */
-    function initMobileMenuAfterLoad() {
-        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-        const nav = document.querySelector('.nav');
+    function initMobileNav() {
+        const header = document.querySelector('.header');
+        const btn = document.querySelector('.hamburger');
+        const nav = document.querySelector('.nav-mobile');
+        if (!header || !btn || !nav) return;
 
-        if (mobileMenuBtn && nav) {
-            // Toggle menu function
-            function toggleMenu(e) {
-                e.preventDefault();
-                e.stopPropagation();
-
-                mobileMenuBtn.classList.toggle('active');
-                nav.classList.toggle('active');
-                document.body.classList.toggle('menu-open');
-
-                // Hamburger to X animation
-                const spans = mobileMenuBtn.querySelectorAll('span');
-                const isOpen = nav.classList.contains('active');
-
-                if (isOpen) {
-                    spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
-                    spans[1].style.opacity = '0';
-                    spans[2].style.transform = 'rotate(-45deg) translate(7px, -6px)';
-
-                    // Apply nav styles with animation and semi-transparent background
-                    nav.style.cssText = 'display: flex; position: fixed; top: 70px; left: 0; right: 0; height: calc(100dvh - 70px); background: rgba(255, 255, 255, 0.97); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); flex-direction: column; padding: 1.5rem; z-index: 9999; overflow-y: auto; box-shadow: 0 4px 20px rgba(0,0,0,0.15); animation: slideInMenu 0.3s ease-out;';
-
-                    // Style nav-list
-                    const navList = nav.querySelector('.nav-list');
-                    if (navList) {
-                        navList.style.cssText = 'display: flex; flex-direction: column; width: 100%; gap: 0;';
-                    }
-
-                    // Style nav items
-                    nav.querySelectorAll('.nav-list li').forEach(li => {
-                        li.style.cssText = 'display: block; width: 100%;';
-                    });
-
-                    // Style nav links (no hover animation)
-                    nav.querySelectorAll('.nav-list a').forEach(a => {
-                        a.style.cssText = 'display: block; padding: 1rem 0; font-size: 1.125rem; color: #333; border-bottom: 1px solid #eee; text-decoration: none; position: relative;';
-                        // Remove any ::after pseudo-element effect by setting the link to have no relative positioning issues
-                        a.classList.add('no-underline-effect');
-                    });
-
-                    // Style mobile-menu-actions (positioned right after nav-list)
-                    const menuActions = nav.querySelector('.mobile-menu-actions');
-                    if (menuActions) {
-                        menuActions.style.cssText = 'display: flex; flex-direction: column; gap: 0.75rem; margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid #eee;';
-
-                        // Style buttons
-                        menuActions.querySelectorAll('.btn').forEach(btn => {
-                            btn.style.cssText = 'display: flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 1rem; font-size: 1rem; text-decoration: none; border-radius: 8px; width: 100%;';
-                        });
-
-                        const outlineBtn = menuActions.querySelector('.btn-outline');
-                        if (outlineBtn) {
-                            outlineBtn.style.cssText += 'background: transparent; color: #2d8a39; border: 2px solid #2d8a39;';
-                        }
-                    }
-                } else {
-                    spans[0].style.transform = '';
-                    spans[1].style.opacity = '';
-                    spans[2].style.transform = '';
-
-                    // Close animation
-                    nav.style.animation = 'slideOutMenu 0.25s ease-in forwards';
-
-                    // Reset all styles after animation completes
-                    setTimeout(() => {
-                        nav.style.cssText = '';
-                        const navList = nav.querySelector('.nav-list');
-                        if (navList) navList.style.cssText = '';
-                        nav.querySelectorAll('.nav-list li').forEach(li => li.style.cssText = '');
-                        nav.querySelectorAll('.nav-list a').forEach(a => {
-                            a.style.cssText = '';
-                            a.classList.remove('no-underline-effect');
-                        });
-                        const menuActions = nav.querySelector('.mobile-menu-actions');
-                        if (menuActions) {
-                            menuActions.style.cssText = '';
-                            menuActions.querySelectorAll('.btn').forEach(btn => btn.style.cssText = '');
-                        }
-                    }, 250);
-                }
-            }
-
-            // Prevent double-firing on touch devices
-            let touchHandled = false;
-
-            mobileMenuBtn.addEventListener('touchend', function(e) {
-                e.preventDefault();
-                touchHandled = true;
-                toggleMenu(e);
-                setTimeout(() => { touchHandled = false; }, 300);
-            });
-
-            mobileMenuBtn.addEventListener('click', function(e) {
-                if (touchHandled) return;
-                toggleMenu(e);
-            });
-
-            // Close menu when clicking on nav links
-            const navLinks = nav.querySelectorAll('a');
-            navLinks.forEach(link => {
-                link.addEventListener('click', function() {
-                    nav.classList.remove('active');
-                    mobileMenuBtn.classList.remove('active');
-                    document.body.classList.remove('menu-open');
-
-                    const spans = mobileMenuBtn.querySelectorAll('span');
-                    spans[0].style.transform = '';
-                    spans[1].style.opacity = '';
-                    spans[2].style.transform = '';
-                });
-            });
+        function setOpen(open) {
+            btn.classList.toggle('active', open);
+            btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+            btn.setAttribute('aria-label', open ? 'メニューを閉じる' : 'メニューを開く');
+            nav.classList.toggle('active', open);
+            header.classList.toggle('menu-open', open);
+            document.body.classList.toggle('menu-open', open);
         }
+
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            setOpen(!nav.classList.contains('active'));
+        });
+        nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setOpen(false)));
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') setOpen(false); });
+        window.addEventListener('resize', () => { if (window.innerWidth > 1024) setOpen(false); }, { passive: true });
+    }
+
+    /**
+     * 透明ヘッダー → ヒーローを抜けたら白（.solid）。それ以外のページは影だけ付ける。
+     */
+    function initHeaderScroll() {
+        const header = document.querySelector('.header');
+        if (!header) return;
+        const body = document.body;
+        const transparent = body.classList.contains('page-home') || body.classList.contains('page-sub');
+        const hero = document.querySelector('.tp-hero, .bz-hero');
+
+        function update() {
+            const y = window.scrollY || document.documentElement.scrollTop;
+            header.classList.toggle('scrolled', y > 10);
+            if (transparent) {
+                const limit = hero ? Math.max(hero.offsetHeight - 80, 80) : 80;
+                header.classList.toggle('solid', y > limit);
+            }
+        }
+        window.addEventListener('scroll', update, { passive: true });
+        window.addEventListener('resize', update, { passive: true });
+        update();
+    }
+
+    /**
+     * 下層ページのネイビー帯: 英字ウォーターマーク（data-en）とパンくずのみの帯を判定
+     */
+    function initPageHeaderMeta() {
+        const path = window.location.pathname;
+        const map = [
+            [/^\/interviews\//, 'INTERVIEW'],
+            [/^\/companies\//, 'COMPANY'],
+            [/^\/clients\//, 'CLIENTS'],
+            [/^\/knowhow\//, 'KNOWHOW'],
+            [/^\/contact\//, 'CONTACT'],
+            [/^\/terms\.html$/, 'TERMS'],
+            [/^\/privacy\.html$/, 'PRIVACY'],
+            [/^\/[a-z]+\/jobs\//, 'JOB'],
+            [/^\/[a-z]+\/?$/, ''],
+        ];
+        document.querySelectorAll('.page-header').forEach(ph => {
+            if (!ph.hasAttribute('data-en')) {
+                const hit = map.find(([re]) => re.test(path));
+                if (hit && hit[1]) ph.setAttribute('data-en', hit[1]);
+            }
+            const hasTitle = ph.querySelector('h1, .page-title');
+            if (!hasTitle) ph.classList.add('is-crumb-only');
+        });
     }
 
     /**
@@ -179,43 +116,33 @@ if (window._includesJsLoaded) {
      */
     function setActiveNavLink() {
         const currentPath = window.location.pathname;
-        const navLinks = document.querySelectorAll('.nav-list a');
-
-        navLinks.forEach(link => {
+        document.querySelectorAll('.nav-list a, .nav-mobile-link').forEach(link => {
             const href = link.getAttribute('href');
-
-            // Root path: only match exact root
+            if (!href) return;
             if (href === '/') {
-                if (currentPath === '/' || currentPath === '/index.html') {
-                    link.classList.add('active');
-                }
-            }
-            // Subpaths: match if current path starts with href
-            else if (href.startsWith('/') && currentPath.startsWith(href)) {
+                if (currentPath === '/' || currentPath === '/index.html') link.classList.add('active');
+            } else if (href.startsWith('/') && currentPath.startsWith(href)) {
                 link.classList.add('active');
             }
         });
     }
 
-    /**
-     * Initialize includes system
-     */
     async function init() {
-        // Load header and footer in parallel
         await Promise.all([
             loadInclude('header.html', 'header-placeholder'),
             loadInclude('footer.html', 'footer-placeholder')
         ]);
 
-        // Initialize features that depend on header/footer
-        initMobileMenuAfterLoad();
+        initMobileNav();
+        initHeaderScroll();
+        initPageHeaderMeta();
         setActiveNavLink();
 
-        // Dispatch event when all includes are loaded
+        // main.js 側の旧ヘッダー処理をスキップさせるフラグ
+        window.__v2HeaderReady = true;
         document.dispatchEvent(new CustomEvent('includesReady'));
     }
 
-    // Run when DOM is ready
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', init);
     } else {

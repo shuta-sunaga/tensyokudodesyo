@@ -1,0 +1,60 @@
+/* v2: 転職相談フォーム（構造は維持・見た目のみ） */
+.contact-page { background: var(--color-white); }
+.contact-hero {
+    position: relative; overflow: hidden; isolation: isolate;
+    background: var(--color-black); color: var(--color-white);
+    padding: calc(var(--header-height) + clamp(48px, 8vh, 96px)) 0 clamp(44px, 7vh, 72px);
+}
+.contact-hero::after {
+    content: "CONTACT"; position: absolute; right: -0.03em; bottom: -0.16em; z-index: -1;
+    font-family: var(--font-family-en); font-weight: 700; font-size: clamp(5rem, 13vw, 12.5rem); line-height: 1;
+    letter-spacing: -0.03em; white-space: nowrap; color: rgba(255, 255, 255, 0.05); pointer-events: none; user-select: none;
+}
+.contact-hero__inner { max-width: 760px; }
+.contact-hero__eyebrow { display: inline-flex; align-items: center; gap: 10px; color: var(--color-primary); font-family: var(--font-family-en); font-size: 0.76rem; font-weight: 600; letter-spacing: 0.18em; }
+.contact-hero__eyebrow::before { content: ""; width: 18px; height: 2px; background: var(--color-primary); }
+.contact-hero__title { color: var(--color-white); font-size: clamp(1.9rem, 4.2vw, 3rem); line-height: 1.25; }
+.contact-hero__lead { color: #C9CED3; }
+.contact-hero__assurance { background: transparent; border: 1px solid rgba(255, 255, 255, 0.25); border-radius: 0; color: #D5DAE0; }
+.contact-hero__assurance svg { color: var(--color-primary); }
+.contact-flow { background: var(--color-bg-gray); padding: clamp(40px, 6vh, 64px) 0; }
+.contact-flow .section-title { font-size: clamp(1.3rem, 2.2vw, 1.7rem); }
+.contact-flow .section-lead { color: var(--color-gray); }
+.flow-step { border-radius: 0; background: var(--color-white); border: 1px solid var(--color-gray-lighter); box-shadow: none; }
+.flow-step.is-current { border-color: var(--color-black); border-top: 3px solid var(--color-primary); }
+.flow-step__num { border-radius: 0; background: var(--color-bg-gray); color: var(--color-gray); font-family: var(--font-family-en); font-weight: 600; }
+.flow-step.is-current .flow-step__num { background: var(--color-primary); color: var(--color-black); }
+.flow-step__title { color: var(--color-black); }
+.contact-form-section { background: var(--color-bg-gray); padding-bottom: clamp(48px, 7vh, 80px); }
+.form-card { border-radius: 0; box-shadow: none; border: 1px solid var(--color-gray-lighter); background: var(--color-white); }
+.form-card__head .section-title { color: var(--color-black); }
+.form-label { color: var(--color-black); font-weight: 700; }
+.form-label__hint { color: var(--color-gray-light); }
+.required-mark { color: var(--color-primary-dark); }
+.form-input, .form-select, .form-textarea { border-radius: 0; border: 1px solid var(--color-gray-lighter); box-shadow: none; }
+.form-input:focus, .form-select:focus, .form-textarea:focus { border-color: var(--color-black); box-shadow: none; outline: 2px solid var(--color-primary-dark); outline-offset: 0; }
+.form-input[aria-invalid="true"], .form-select[aria-invalid="true"], .form-textarea[aria-invalid="true"] { border-color: #C0392B; }
+.form-error { color: #B03A2E; }
+.form-helper { color: var(--color-gray-light); }
+.radio-option, .checkbox-option { border-radius: 0; border-color: var(--color-gray-lighter); }
+.radio-option:hover, .checkbox-option:hover { border-color: var(--color-black); }
+.radio-option.is-checked, .checkbox-option.is-checked, .radio-option:has(input:checked), .checkbox-option:has(input:checked) { border-color: var(--color-black); background: var(--color-bg-gray); }
+.checkbox-option__box { border-radius: 0; }
+.consent-item { border-radius: 0; }
+#submit-btn, .form-submit .btn { border-radius: 0; background: var(--color-primary); color: var(--color-black); border: 1px solid var(--color-primary); box-shadow: none; font-weight: 700; }
+#submit-btn:hover, .form-submit .btn:hover { background: var(--color-black); color: var(--color-white); border-color: var(--color-black); transform: none; box-shadow: none; }
+#submit-btn:disabled { background: var(--color-gray-lighter); border-color: var(--color-gray-lighter); color: var(--color-gray); }
+.form-submit__note { color: var(--color-gray-light); }
+.turnstile-wrap { border-radius: 0; }
+.success-panel__icon { color: var(--color-primary-dark); }
+.success-panel__title { color: var(--color-black); }
+.privacy-note { background: var(--color-white); }
+.privacy-card { border-radius: 0; box-shadow: none; border: 1px solid var(--color-gray-lighter); }
+.privacy-card__icon { color: var(--color-primary-dark); }
+.privacy-card__title { color: var(--color-black); }
+.privacy-card__list a { color: var(--color-primary-text); text-decoration: underline; }
+@media (max-width: 768px) {
+    .contact-hero { padding: calc(var(--header-height-mobile) + 40px) 0 36px; }
+    .contact-hero::after { font-size: 4.6rem; }
+    .contact-hero__title { font-size: clamp(1.6rem, 7vw, 2.2rem); }
+}

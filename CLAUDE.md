@@ -9,12 +9,12 @@
 - **ホスティング**: AWS
 - **CMS**: Movable Type 9.0.5（詳細ページ・JSONデータの自動生成に使用）
 - **フロントエンド**: バニラHTML/CSS/JS（フレームワーク不使用の静的サイト）
-- **展開方針**: 段階的に全国展開予定（現在は滋賀県・静岡県の2県のみ公開中）
+- **展開方針**: 47都道府県すべて公開済（2026-08）。製造業に特化したコピー・写真（2026-09 デザイン v2）
 
 ### サイトの特徴
-- 日本地図から都道府県を選択して求人を検索できるUI
+- 写真ヒーロー＋検索パネル（勤務地→都道府県ページ）と都道府県一覧から求人を探す UI（2026-09 v2。旧・日本地図UIは廃止）
 - 転職者インタビュー・企業インタビュー・転職ノウハウの3種コンテンツ
-- LINE相談への導線（CTA）がサイト全体に配置
+- 転職相談フォーム（/contact/）への導線（CTA）がサイト全体に配置
 - `prefectures.json` の `active` フラグで都道府県の公開状態を制御
 
 ---
@@ -128,17 +128,12 @@ tensyokudodesyo/
 
 ## 現在の公開状態
 
-| 都道府県 | active | 求人数 | エリア |
-|---------|--------|-------|--------|
-| 滋賀県 (`shiga`) | **true** | 7件 | 近畿 |
-| 静岡県 (`shizuoka`) | **true** | 13件 | 中部 |
-| その他45都道府県 | false | - | - |
+**47都道府県すべて active**（2026-08 に全国展開済。本番 `prefectures.json` は MT 生成）。求人数は本番 `data/jobs-summary.json` を参照（2026-09-15 時点 約17,000件。大阪1,447件・神奈川1,633件・愛知1,443件・埼玉1,373件）。
 
-新しい都道府県を追加する場合:
-1. `prefectures.json` の該当都道府県を `active: true` に変更
-2. `data/jobs/{id}.json` に求人データを追加
-3. `{prefecture}/index.html` を作成（`index-child-template.html`をベースに）
-4. `{prefecture}/jobs/job-{N}.html` に求人詳細ページを作成
+新しい都道府県を追加する場合（MT で子ブログ作成後）:
+1. 子ブログの「トップページ」index テンプレートに `mt-template/prefecture-page.mtml` を設定（先頭の SetVar 2行をブログに合わせる。`scripts/redesign-v2/mt-apply-v2.sh` が全ブログ一括で行う）
+2. 子ブログに `jobs-child-json.mtml`（出力 `../data/jobs/{id}.json`）を設定
+3. `scripts/deploy.sh` の `PREFECTURE_DIRS` に id を追加
 
 ---
 
@@ -383,6 +378,28 @@ regionIdMap = {
 
 ### プロジェクト概要・仕様・ルールの管理
 - **CLAUDE.mdに追記する** - プロジェクト概要、仕様、ルールの変更は必ずこのファイルに反映する
+
+---
+
+## デザイン v2（2026-09、コーポレートサイトと共通）
+
+コーポレートサイト v2 のデザイン言語（オレンジ `#F5820D`／ネイビー `#1B2430`、角丸0、写真ヒーロー、英字ラベル、ネイビー帯）を全ページに展開。製造業に振り切ったコピーと写真。詳細は `DESIGN.md` と `docs/design-v2-implementation.md`、要件は `docs/design-v2-handoff-from-corporate.md`。
+
+### 仕組み
+
+- CSS は **後勝ち上書き**: 正本 `scripts/redesign-v2/v2-theme.css`（+ v2-contact / v2-client / v2-article）→ `node scripts/redesign-v2/apply-css.mjs` で各 CSS 末尾の `DESIGN V2 START〜END` ブロックに反映。**style.css の v2 ブロックを直接編集しない**
+- ヘッダー/フッターは `includes/`、ハンバーガー・透明ヘッダー・`.page-header[data-en]` 付与は `js/includes.js`
+- トップページ: 日本地図は廃止（`japan-map.js/.css/.svg` は残置・未使用）。`js/home-v2.js` が検索パネル・都道府県一覧・新着求人・タイルを描画
+- 都道府県ページ: `js/prefecture-page.js` + `js/job-taxonomy.js`（職種グループ・こだわり条件・年収パースをクライアント側で判定。MT フィールドは不変）
+- **MT 新規テンプレ**: `jobs-latest-json.mtml` → `data/jobs-latest.json`（全県横断の新着24件）、`jobs-summary-json.mtml` → `data/jobs-summary.json`（県別件数）。親サイトの index テンプレで公開設定「定期的に再構築」60分。トップ・一覧ページの新着求人はこれだけを読む（従来は47県JSON 100MB超を取得していた）
+- MT 反映: `bash scripts/redesign-v2/mt-apply-v2.sh [--apply]`（mt_template バックアップ → 親トップ・47子ブログトップ・新規JSONテンプレを更新 → index 再構築）
+- ローカル確認: `node scripts/redesign-v2/build-static-from-mtml.mjs` で MT テンプレから index.html 等を生成 → `npx http-server public_html -p 8080 -c-1 -P https://www.tensyokudodesyo.com`
+- 写真: `scripts/redesign-v2/generate-photos.mjs`（Gemini、AIっぽさゼロが条件、生成後は目視必須）→ `assets/v2/`
+- 404: `public_html/404.html`（nginx `error_page 404 /404.html;` が必要）
+
+### deploy.sh の追加ブロック
+
+`data/jobs-latest.json` / `data/jobs-summary.json` / `data/prefectures.json` は MT 生成のためデプロイ禁止。`PREFECTURE_DIRS` は47県すべて。
 
 ---
 

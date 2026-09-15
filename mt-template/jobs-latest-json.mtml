@@ -1,0 +1,31 @@
+<mt:Ignore>
+============================================================
+全都道府県横断の新着求人JSON（デザイン v2 / 2026-09）
+出力ファイル: data/jobs-latest.json
+テンプレート種類: インデックステンプレート（親サイト id=1）
+公開設定: 「定期的に再構築」（60分間隔）を推奨 — 子ブログへの求人インポート後、
+          親サイトを手動再構築しなくても run-periodic-tasks が更新する
+
+トップページ・一覧ページの「新着求人」はこのファイルだけを読む
+（従来は 47 都道府県の求人JSON（合計 100MB 超）を全部取得していた）。
+============================================================
+</mt:Ignore>{
+  "generated": "<mt:Date format="%Y-%m-%dT%H:%M:%S">",
+  "jobs": [
+<mt:Entries include_blogs="children" lastn="24" sort_by="authored_on" sort_order="descend">
+    {
+      "id": <mt:EntryID>,
+      "title": "<mt:EntryTitle encode_json="1">",
+      "postDate": "<mt:EntryDate format="%Y-%m-%d">",
+      "company": "<$mt:EntryDatacompany encode_json="1"$>",
+      "prefecture": "<mt:BlogName encode_json="1">",
+      "city": "<$mt:EntryDatacity encode_json="1"$>",
+      "salary": "<$mt:EntryDatasalary encode_json="1"$>",
+      "category": "<$mt:EntryDatacategory encode_json="1"$>",
+      "employmentType": "<$mt:EntryDataemploymentType encode_json="1"$>",
+      "conditions": "<$mt:EntryDataconditions encode_json="1"$>",
+      "detailUrl": "<mt:BlogURL>jobs/<mt:EntryBasename>.html"
+    }<mt:Unless name="__last__">,</mt:Unless>
+</mt:Entries>
+  ]
+}

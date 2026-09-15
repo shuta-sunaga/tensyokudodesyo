@@ -20,3 +20,10 @@ docs/【ARU】転職どうでしょう企業ページ案.docx
 docs/会社紹介_ARU様.jpg
 
 .vercel
+# design v2: ローカルプレビュー用に生成する MT 管理ページ（本番は MT が生成）
+public_html/osaka/
+public_html/fukuoka/
+public_html/aichi/
+# design v2: 写真生成の元 PNG / 確認用 JPG
+scripts/redesign-v2/raw/
+scripts/redesign-v2/shots/

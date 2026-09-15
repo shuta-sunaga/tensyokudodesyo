@@ -32,6 +32,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initFormValidation();
     initStatsCounter();
     initJobSearch();
+    initJobDetailPolish();
 
     // Wait for includes to load before initializing header-dependent modules
     document.addEventListener('includesReady', function() {
@@ -124,6 +125,8 @@ function refreshFilterSelects() {
  * Mobile Menu Toggle
  */
 function initMobileMenu() {
+    // v2: ハンバーガー/モバイルナビは includes.js が担当する
+    if (window.__v2HeaderReady || document.querySelector('.hamburger')) return;
     const menuBtn = document.querySelector('.mobile-menu-btn');
     const nav = document.querySelector('.nav');
     const body = document.body;
@@ -162,6 +165,18 @@ function initMobileMenu() {
             spans[2].style.transform = '';
         });
     });
+}
+
+/**
+ * v2: MT 生成の求人詳細ページで年収表記を「年収: 270万〜401万円」に整形する
+ */
+function initJobDetailPolish() {
+    const el = document.querySelector('.job-detail-salary');
+    if (!el) return;
+    const raw = el.textContent.trim();
+    if (!raw || typeof formatSalary !== 'function') return;
+    const formatted = formatSalary(raw);
+    if (formatted) el.innerHTML = formatted;
 }
 
 /**
@@ -228,6 +243,8 @@ function initScrollAnimations() {
 function initHeaderScroll() {
     const header = document.querySelector('.header');
     if (!header) return;
+    // v2: 透明→白の切替とスクロール影は includes.js が担当する
+    if (window.__v2HeaderReady) return;
 
     let lastScrollY = window.scrollY;
     let ticking = false;
@@ -507,6 +524,24 @@ async function loadJobs() {
     const jobListContainer = document.getElementById('jobListContainer');
     const newJobsContainer = document.getElementById('newJobsContainer');
     const jobDetailContent = document.getElementById('jobDetailContent');
+
+    // v2: 「新着求人」だけのページ（一覧ページ等）は全都道府県横断の軽量フィードを使う。
+    // 47 都道府県の求人 JSON（合計 100MB 超）を取りに行かない。フィードが無い場合は従来処理へ。
+    if (newJobsContainer && !jobListContainer && !jobDetailContent) {
+        try {
+            const latest = typeof DataCache !== 'undefined'
+                ? await DataCache.fetchJSON('/data/jobs-latest.json')
+                : await fetch('/data/jobs-latest.json').then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); });
+            if (latest && Array.isArray(latest.jobs) && latest.jobs.length) {
+                allJobs = latest.jobs.map(job => ({ ...job, prefecture: job.prefecture || '' }));
+                allJobs.sort((a, b) => new Date(b.postDate) - new Date(a.postDate));
+                renderNewJobs();
+                return;
+            }
+        } catch (e) {
+            console.warn('jobs-latest.json not available, falling back:', e);
+        }
+    }
 
     try {
         // First, load prefectures.json to get active prefectures
@@ -879,7 +914,7 @@ function renderNewJobs() {
  */
 function createJobCardHTML(job) {
     const isNew = isNewJob(job.postDate);
-    const conditions = job.conditions.split(',').map(c => c.trim());
+    const conditions = String(job.conditions || '').split(',').map(c => c.trim()).filter(Boolean);
     const conditionValues = conditions.map(c => mapConditionValue(c));
 
     // Build detailUrl from prefecture_id and job id

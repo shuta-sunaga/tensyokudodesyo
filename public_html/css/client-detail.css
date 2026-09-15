@@ -1133,3 +1133,83 @@
         font-size: 0.8125rem;
     }
 }
+
+/* ===== DESIGN V2 START (generated from scripts/redesign-v2 — do not edit below by hand) ===== */
+/* v2: 会社紹介（一覧 + 詳細） */
+.client-list-hero {
+    position: relative; overflow: hidden; isolation: isolate;
+    background: var(--color-black); color: var(--color-white);
+    padding: calc(var(--header-height) + clamp(48px, 8vh, 96px)) 0 clamp(44px, 7vh, 80px);
+}
+.client-list-hero::after {
+    content: "CLIENTS"; position: absolute; right: -0.03em; bottom: -0.16em; z-index: -1;
+    font-family: var(--font-family-en); font-weight: 700; font-size: clamp(5rem, 13vw, 12.5rem); line-height: 1;
+    letter-spacing: -0.03em; white-space: nowrap; color: rgba(255, 255, 255, 0.05); pointer-events: none; user-select: none;
+}
+.client-list-hero .breadcrumb { margin-bottom: clamp(28px, 5vh, 56px); color: rgba(255, 255, 255, 0.55); }
+.client-list-hero .breadcrumb a { color: rgba(255, 255, 255, 0.7); }
+.client-list-hero .breadcrumb a::after { color: rgba(255, 255, 255, 0.3); }
+.client-list-hero .breadcrumb span { color: rgba(255, 255, 255, 0.55); }
+.client-list-hero-title { color: var(--color-white); font-size: clamp(2rem, 4.6vw, 3.6rem); font-weight: 700; line-height: 1.18; }
+.client-list-hero-lead { color: #C9CED3; max-width: 44em; }
+.client-list-filter { top: var(--header-height); box-shadow: none; border-bottom: 1px solid var(--color-gray-lighter); }
+.cdrop-trigger { border-radius: 0; border: 1px solid var(--color-gray-lighter); background: var(--color-white); color: var(--color-black); }
+.cdrop-trigger:hover, .cdrop--open .cdrop-trigger { border-color: var(--color-black); box-shadow: none; }
+.cdrop-list { border-radius: 0; border: 1px solid var(--color-black); box-shadow: 0 12px 32px rgba(27, 36, 48, 0.08); }
+.cdrop-option { border-radius: 0; }
+.cdrop-option--active, .cdrop-option:hover { background: var(--color-bg-gray); color: var(--color-black); }
+.client-list-section { background: var(--color-bg-gray); }
+.client-card { border-radius: 0; border: 1px solid var(--color-gray-lighter); box-shadow: none; transition: border-color .2s ease, box-shadow .2s ease; }
+.client-card:hover { transform: none; box-shadow: 0 12px 32px rgba(27, 36, 48, 0.08); border-color: var(--color-black); }
+.client-card-image { aspect-ratio: auto; height: 0; padding-top: 62.5%; background: var(--color-bg-gray); }
+.client-card-image img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; }
+.client-card-tag { border-radius: 0; backdrop-filter: none; -webkit-backdrop-filter: none; background: var(--color-white); color: var(--color-black); }
+.client-card-tag--industry { background: var(--color-primary); color: var(--color-black); }
+.client-card-name { color: var(--color-black); }
+.client-card-tagline { color: var(--color-gray); }
+.client-card-cta { color: var(--color-black); border-bottom: 2px solid var(--color-primary); }
+.client-card-cta::after { color: var(--color-primary); }
+.client-list-empty { border-radius: 0; }
+
+/* 詳細 */
+.client-detail .breadcrumb { padding-top: calc(var(--header-height) + 18px); }
+.client-hero-image-wrap { border-radius: 0; }
+.client-hero-tag { border-radius: 0; background: var(--color-primary); color: var(--color-black); backdrop-filter: none; }
+.client-hero-tag--area { background: rgba(255, 255, 255, 0.92); color: var(--color-black); }
+.client-hero-name { text-shadow: 0 2px 24px rgba(0,0,0,.4); }
+.client-quickfacts { border-radius: 0; border: 0; border-top: 1px solid var(--color-black); border-bottom: 1px solid var(--color-gray-lighter); }
+.client-quickfact { border-color: var(--color-gray-lighter); }
+.client-quickfact-label { font-family: var(--font-family-en); letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-gray-light); font-size: 0.68rem; }
+.client-quickfact-value { color: var(--color-black); }
+.client-section-heading { color: var(--color-primary-dark); font-family: var(--font-family-en); letter-spacing: 0.18em; font-size: 0.76rem; }
+.client-section-heading::before { background: var(--color-primary); }
+.client-section-title { color: var(--color-black); }
+.client-lead { color: var(--color-gray-dark); }
+.client-feature { border-radius: 0; background: var(--color-bg-gray); border: 0; border-top: 2px solid var(--color-black); }
+.client-feature-title { color: var(--color-black); }
+.client-editorial--message { border-radius: 0; background: var(--color-bg-gray); border-left: 4px solid var(--color-primary); }
+.client-overview-row { border-bottom-color: var(--color-gray-lighter); }
+.client-overview-label { color: var(--color-gray); }
+.client-overview-value { color: var(--color-black); }
+.client-job-card { border-radius: 0; border: 1px solid var(--color-gray-lighter); box-shadow: none; }
+.client-job-card:hover { border-color: var(--color-black); box-shadow: 0 12px 32px rgba(27, 36, 48, 0.08); transform: none; }
+.client-job-card-title { color: var(--color-black); }
+.client-job-card-salary { color: var(--color-black); }
+.client-job-card-tag { border-radius: 0; background: var(--color-bg-gray); color: var(--color-gray-dark); }
+.client-job-card-link { color: var(--color-black); border-bottom: 2px solid var(--color-primary); }
+.client-jobs-empty { border-radius: 0; background: var(--color-bg-gray); }
+.client-cta { border-radius: 0; background: var(--color-black); box-shadow: none; }
+.client-cta-title { color: var(--color-white); }
+.client-cta-description { color: #D5DAE0; }
+.client-cta .btn-white, .client-cta .btn-primary { background: var(--color-primary); color: var(--color-black); border-color: var(--color-primary); }
+.client-cta .btn-white:hover, .client-cta .btn-primary:hover { background: var(--color-white); color: var(--color-black); border-color: var(--color-white); }
+.client-back a { color: var(--color-black); }
+@media (max-width: 768px) {
+    .client-list-hero { padding: calc(var(--header-height-mobile) + 40px) 0 36px; }
+    .client-list-hero::after { font-size: 4.6rem; }
+    .client-list-hero-title { font-size: clamp(1.7rem, 7.5vw, 2.3rem); }
+    .client-list-filter { top: var(--header-height-mobile); }
+    .client-detail .breadcrumb { padding-top: calc(var(--header-height-mobile) + 16px); display: flex; }
+}
+/* ===== DESIGN V2 END ===== */
+
