@@ -1,6 +1,15 @@
 {
   "articles": [
     {
+      "id": 266,
+      "title": "品質管理への転職ガイド｜仕事内容・年収・資格",
+      "category": "kh04",
+      "excerpt": "品質管理（QC）と品質保証（QA）の違い、1日の仕事内容、業界別の特徴、年収の目安とキャリアパス、QC検定などの資格を解説。製造現場や未経験から品質管理に転職するルートと、書類・面接で使える例文も紹介します。",
+      "image": "/assets/knowhow-266.webp",
+      "postDate": "2026-09-18",
+      "detailUrl": "/knowhow/detail/knowhow-266.html"
+    },
+    {
       "id": 265,
       "title": "ChatGPT（チャッピー）職務経歴書プロンプト10選｜コピペ用",
       "category": "kh02",
