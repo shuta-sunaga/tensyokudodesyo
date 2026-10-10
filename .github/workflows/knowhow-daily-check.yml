@@ -1,0 +1,74 @@
+name: Knowhow Daily Publish Check
+
+# 毎朝9時（JST）のノウハウ記事自動生成が本番に公開されたかを外部から確認する。
+# Mac がスリープ/電源断で自動生成が動かなかった場合も、このジョブが失敗して
+# GitHub（メール・モバイルアプリ）から通知が届く。secrets.LARK_WEBHOOK_URL があれば Lark にも送る。
+on:
+  schedule:
+    - cron: '47 2 * * *'  # 毎日 11:47 JST
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check today's article on production
+        id: check
+        run: |
+          TODAY=$(TZ=Asia/Tokyo date +%Y-%m-%d)
+          echo "today=$TODAY" >> "$GITHUB_OUTPUT"
+          if ! JSON=$(curl -fsS --retry 3 --max-time 30 "https://www.tensyokudodesyo.com/data/knowhow.json?t=$(date +%s)"); then
+            echo "reason=本番の knowhow.json を取得できません（サイト障害の可能性）" >> "$GITHUB_OUTPUT"
+            exit 1
+          fi
+          LATEST=$(echo "$JSON" | jq -r '.articles | sort_by(.postDate) | last | "\(.postDate) knowhow-\(.id) \(.title)"')
+          echo "最新記事: $LATEST"
+          ARTICLE=$(echo "$JSON" | jq -c --arg d "$TODAY" '[.articles[] | select(.postDate == $d)][0] // empty')
+          if [ -z "$ARTICLE" ]; then
+            echo "reason=本日($TODAY)の記事が公開されていません。最新: $LATEST" >> "$GITHUB_OUTPUT"
+            exit 1
+          fi
+          URL="https://www.tensyokudodesyo.com$(echo "$ARTICLE" | jq -r .detailUrl)"
+          CODE=$(curl -s -o /dev/null -w '%{http_code}' --retry 3 "$URL")
+          if [ "$CODE" != "200" ]; then
+            echo "reason=本日の記事は一覧にありますが詳細ページが $CODE です: $URL" >> "$GITHUB_OUTPUT"
+            exit 1
+          fi
+          echo "article=$(echo "$ARTICLE" | jq -r '"knowhow-\(.id) \(.title)"')" >> "$GITHUB_OUTPUT"
+          echo "url=$URL" >> "$GITHUB_OUTPUT"
+
+      - name: Notify Lark (success / failure)
+        if: always()
+        env:
+          LARK_WEBHOOK_URL: ${{ secrets.LARK_WEBHOOK_URL }}
+          LARK_SECRET: ${{ secrets.LARK_SECRET }}
+          STATUS: ${{ steps.check.outcome }}
+          REASON: ${{ steps.check.outputs.reason }}
+          ARTICLE: ${{ steps.check.outputs.article }}
+          URL: ${{ steps.check.outputs.url }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          [ -z "$LARK_WEBHOOK_URL" ] && { echo "LARK_WEBHOOK_URL 未設定のため Lark 通知はスキップ"; exit 0; }
+          if [ "$STATUS" = "success" ]; then
+            COLOR=green; TITLE="✅ ノウハウ記事公開確認OK"; TEXT="$ARTICLE"$'\n'"$URL"
+          else
+            COLOR=red; TITLE="🚨 ノウハウ記事未公開（GitHub監視）"
+            TEXT="${REASON:-チェック処理が失敗しました}"$'\n'"Macのスリープ・Claude Codeセッション停止・パイプライン失敗・デプロイ失敗のいずれかの可能性があります。"
+          fi
+          BODY=$(jq -n --arg c "$COLOR" --arg h "$TITLE" --arg t "$TEXT" --arg u "$RUN_URL" '{
+            msg_type: "interactive",
+            card: {
+              config: {wide_screen_mode: true},
+              header: {template: $c, title: {tag: "plain_text", content: $h}},
+              elements: [
+                {tag: "div", text: {tag: "lark_md", content: $t}},
+                {tag: "note", elements: [{tag: "plain_text", content: ("tensyokudodesyo ・ " + $u)}]}
+              ]
+            }
+          }')
+          if [ -n "$LARK_SECRET" ]; then
+            TS=$(date +%s)
+            SIGN=$(printf '' | openssl dgst -sha256 -hmac "$(printf '%s\n%s' "$TS" "$LARK_SECRET")" -binary | base64)
+            BODY=$(echo "$BODY" | jq --arg t "$TS" --arg s "$SIGN" '. + {timestamp: $t, sign: $s}')
+          fi
+          curl -fsS -X POST -H 'Content-Type: application/json' -d "$BODY" "$LARK_WEBHOOK_URL"
