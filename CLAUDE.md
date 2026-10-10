@@ -535,6 +535,21 @@ Stage 7: デプロイ（SCP → AWS EC2）
 - 画像命名: `knowhow-{NNN}.webp`（3桁ゼロ埋め）
 - 画像生成プロンプトに「テキストを一切含めない」指示をハードコード（Geminiの文字化け対策）
 
+### 毎朝9時の無人定時実行（2026-10-10〜）
+
+seisansei-website と同じ4層方式（手順書: `~/.config/lark-notify/scheduled-pipeline-guide.md`）。
+
+| 層 | 実体 |
+|---|---|
+| 1. 実行 | Claude Code セッション内 cron `0 9 * * *` → `~/Library/Application Support/tensyokudodesyo-knowhow-cron/runbook.md`（Stage 1 は最推奨テーマを自動採用。末尾でジョブを自己再作成し7日失効を回避）。11:07 に監視ジョブ |
+| 2. 起床 | `pmset repeat wakepoweron 08:54`（設定済み）＋ launchd `com.tensyokudodesyo.knowhow-cron-keepawake`（8:55〜 caffeinate 3h） |
+| 3. ローカル監視 | launchd `com.tensyokudodesyo.knowhow-cron-watchdog`（11:00/14:00）。状態は `~/Library/Logs/tensyokudodesyo-knowhow-cron/last-{start,success,failure}` |
+| 4. 外部監視 | `.github/workflows/knowhow-daily-check.yml`（11:47 JST、本番 knowhow.json に当日記事が無ければ失敗→GitHub通知、`LARK_WEBHOOK_URL` があれば Lark） |
+
+- 通知は `~/.local/bin/lark-notify -p tensyokudodesyo`（Lark 未設定時は macOS 通知）
+- デプロイ（Stage 7）・GSC 送信（Stage 8）は `.github/workflows/deploy-knowhow.yml` が push を契機に実行（Secrets `EC2_SSH_KEY` / `GSC_SA_JSON` 未登録の間はスキップ）
+- 停止: CronDelete ＋ `launchctl bootout gui/$(id -u)/com.tensyokudodesyo.knowhow-cron-{watchdog,keepawake}`
+
 ### 技術スタック
 
 - **画像生成**: Gemini API（Imagen）、`GEMINI_API_KEY` で認証
