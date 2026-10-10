@@ -1,0 +1,93 @@
+# ノウハウ記事（パイプライン生成分）の push を検知して本番デプロイ → GSC sitemap 送信
+# 必要な Secrets: EC2_SSH_KEY, GSC_SA_JSON
+name: Deploy knowhow
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - 'public_html/knowhow/detail/knowhow-*.html'
+      - 'public_html/assets/knowhow-*.webp'
+      - 'public_html/data/knowhow.json'
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-knowhow
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check secrets
+        id: secrets
+        env:
+          EC2_SSH_KEY: ${{ secrets.EC2_SSH_KEY }}
+        run: |
+          if [ -n "$EC2_SSH_KEY" ]; then
+            echo "ok=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "::warning::EC2_SSH_KEY が未登録のためデプロイをスキップします"
+            echo "ok=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Collect changed files
+        id: files
+        env:
+          BEFORE: ${{ github.event.before }}
+        run: |
+          if [ "${{ github.event_name }}" = "push" ] && git cat-file -e "$BEFORE" 2>/dev/null; then
+            base="$BEFORE"
+          else
+            base="HEAD~1"
+          fi
+          git diff --name-only --diff-filter=AM "$base" HEAD \
+            | grep -E '^public_html/(knowhow/detail/knowhow-[0-9]+\.html|assets/knowhow-[0-9]+\.webp|data/knowhow\.json|sitemap\.xml)$' \
+            > changed.txt || true
+          cat changed.txt
+          ids=$(git diff --name-only --diff-filter=A "$base" HEAD \
+            | sed -nE 's#^public_html/knowhow/detail/knowhow-0*([0-9]+)\.html$#\1#p' | tr '\n' ' ')
+          echo "ids=$ids" >> "$GITHUB_OUTPUT"
+          echo "count=$(wc -l < changed.txt | tr -d ' ')" >> "$GITHUB_OUTPUT"
+
+      - name: Deploy via SCP
+        if: steps.secrets.outputs.ok == 'true' && steps.files.outputs.count != '0'
+        env:
+          EC2_SSH_KEY: ${{ secrets.EC2_SSH_KEY }}
+        run: |
+          key="$RUNNER_TEMP/deploy.pem"
+          printf '%s\n' "$EC2_SSH_KEY" > "$key"
+          chmod 600 "$key"
+          DEPLOY_KEY_FILE="$key" bash scripts/deploy.sh $(cat changed.txt)
+          rm -f "$key"
+
+      - name: Verify production
+        if: steps.secrets.outputs.ok == 'true' && steps.files.outputs.ids != ''
+        run: |
+          for id in ${{ steps.files.outputs.ids }}; do
+            url="https://www.tensyokudodesyo.com/knowhow/detail/knowhow-$(printf '%03d' "$id").html"
+            code=$(curl -s -o /dev/null -w '%{http_code}' "$url")
+            echo "$url -> $code"
+            [ "$code" = "200" ] || exit 1
+          done
+
+      - uses: actions/setup-node@v4
+        if: steps.secrets.outputs.ok == 'true' && steps.files.outputs.count != '0'
+        with:
+          node-version: 20
+
+      - name: Submit sitemap to GSC
+        if: steps.secrets.outputs.ok == 'true' && steps.files.outputs.count != '0'
+        env:
+          GSC_SA_JSON: ${{ secrets.GSC_SA_JSON }}
+        run: |
+          npm install --no-save --no-package-lock googleapis
+          export GSC_KEY_FILE="$RUNNER_TEMP/gsc.json"
+          printf '%s' "$GSC_SA_JSON" > "$GSC_KEY_FILE"
+          node scripts/gsc-submit-sitemap.mjs
+          rm -f "$GSC_KEY_FILE"

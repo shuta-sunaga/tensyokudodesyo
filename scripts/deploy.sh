@@ -15,7 +15,7 @@ set -euo pipefail
 REMOTE_USER="ec2-user"
 REMOTE_HOST="13.230.204.170"
 REMOTE_PATH="/var/www/html/"
-KEY_FILE="$HOME/.ssh/tensyoku-portal.pem"
+KEY_FILE="${DEPLOY_KEY_FILE:-$HOME/.ssh/tensyoku-portal.pem}"
 SCP_OPTS="-i $KEY_FILE -o StrictHostKeyChecking=no"
 
 # --- MT管理ファイルのブロックリスト（正規表現パターン） ---

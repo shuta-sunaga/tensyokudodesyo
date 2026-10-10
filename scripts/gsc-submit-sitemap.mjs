@@ -1,7 +1,7 @@
 import { google } from 'googleapis';
 
 const auth = new google.auth.GoogleAuth({
-    keyFile: 'docs/tensyokudodesyo-1dcb1b08e015.json',
+    keyFile: process.env.GSC_KEY_FILE || 'docs/tensyokudodesyo-1dcb1b08e015.json',
     scopes: ['https://www.googleapis.com/auth/webmasters']
 });
 
