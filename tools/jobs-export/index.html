@@ -125,6 +125,15 @@
         ? `✅ ${count} 件を ${fileCount} ファイルに分割し、ZIPでダウンロードしました（MTアップロード上限対策・各ファイル容量/件数で自動分割）（${fileName}）`
         : `✅ ${count} 件をダウンロードしました（${fileName}）`;
       if (unmapped) okMsg += `<br><small>⚠ Shift_JIS変換不能文字を「?」に置換: ${decodeURIComponent(unmapped)}</small>`;
+      const exCount = parseInt(res.headers.get('X-Excluded-Count') || '0', 10);
+      if (exCount) {
+        let list = [];
+        try { list = JSON.parse(decodeURIComponent(res.headers.get('X-Excluded') || '[]')); } catch (_) {}
+        const escHtml = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+        okMsg += `<br><br>⚠ <b>${exCount} 件は掲載不可のため CSV から除外しました</b>（媒体掲載NG・求人名が社内向けラベル）。Lark Base の求人名を確認してください。`
+          + '<br><small>' + list.map((x) => `${escHtml(x.id)}：${x.code === 'media_ng' ? '媒体掲載NG' : '社内向けの求人名'}（${escHtml(x.title)}…）`).join('<br>')
+          + (exCount > list.length ? `<br>…ほか ${exCount - list.length} 件` : '') + '</small>';
+      }
       show(okMsg, 'ok');
     } catch (err) {
       show('通信エラー: ' + err.message, 'err');

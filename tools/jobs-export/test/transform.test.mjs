@@ -4,11 +4,44 @@
  */
 import assert from 'node:assert';
 import iconv from 'iconv-lite';
-import { buildRows, rowsToCsvString, extractCity, prefectureCore, matchesPrefectureCore } from '../transform.mjs';
+import { buildRows, rowsToCsvString, extractCity, prefectureCore, matchesPrefectureCore, titleIssue, screenRecords } from '../transform.mjs';
 import { encodeShiftJIS } from '../csv-shiftjis.mjs';
 
 let pass = 0;
 const t = (name, fn) => { fn(); console.log('  ✓ ' + name); pass++; };
+
+// titleIssue / screenRecords（公開してはいけない求人名の除外）
+t('titleIssue: 媒体掲載NG を検出', () => {
+  assert.equal(titleIssue('★媒体掲載NG★ＵＴエージェント株式会社/WYF1/福岡県宮若市/製造').code, 'media_ng');
+  assert.equal(titleIssue('★媒体掲載ＮＧ★求人ＵＴエイム株式会社/apu1/広島県三原市').code, 'media_ng');
+});
+t('titleIssue: 管理番号で始まる求人名を検出', () => {
+  assert.equal(titleIssue('2608_13786-01★（8月入社のみの報酬金額になります。）').code, 'internal_label');
+  assert.equal(titleIssue('2608_13470-01★').code, 'internal_label');
+});
+t('titleIssue: 報酬金額の注記を検出', () => {
+  assert.equal(titleIssue('株式会社ワールドインテック/★46043-01/岡山県浅口市※…企業様へ紹介が完了した時点の報酬金額が適用されます。').code, 'internal_label');
+});
+t('titleIssue: 通常の求人名は通す', () => {
+  for (const ok of [
+    '【大阪】年間休日125日・土日祝休！データで配車を磨く運行企画管理',
+    '【熊本】未経験歓迎！月収26万円以上＆土日祝休みの半導体装置テスト業務',
+    '27卒総合職（建物管理の提案営業）★建物管理の提案営業をお任せします！★【新卒】',
+    '【京都】PLCの知識を活かす包装機械のフィールドエンジニア',
+    '2交替勤務の製造オペレーター',
+    '装置の動作テスト',
+    '',
+  ]) assert.equal(titleIssue(ok), null, ok);
+});
+t('screenRecords: 該当行だけ除外し求人票IDと理由を返す', () => {
+  const { ok, excluded } = screenRecords([
+    { 求人票ID: 'SJ1', 求人名: '【大阪】法人営業' },
+    { 求人票ID: 'SJ2', 求人名: '★媒体掲載NG★ＵＴエージェント株式会社/WYF1' },
+    { 求人票ID: 'SJ3', 求人名: '2609_8917-01★（9月入社のみの報酬金額になります）' },
+  ]);
+  assert.deepEqual(ok.map((r) => r.求人票ID), ['SJ1']);
+  assert.deepEqual(excluded.map((x) => [x.id, x.code]), [['SJ2', 'media_ng'], ['SJ3', 'internal_label']]);
+});
 
 // extractCity
 t('extractCity: 括弧内住所から県+市を抽出', () => {

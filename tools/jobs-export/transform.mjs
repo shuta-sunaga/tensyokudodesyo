@@ -275,6 +275,40 @@ export function rowToCsvLine(row) {
 }
 
 /**
+ * 求人名が「サイトに公開してはいけない社内向けラベル」かどうかを判定する。
+ *   - media_ng       : 「媒体掲載NG」など掲載不可の指定がある
+ *   - internal_label : 管理番号で始まる（例: 2608_13786-01★）/ 紹介報酬の注記が入っている
+ * 該当しなければ null。該当行は CSV に出力しない（api/export.mjs で除外して画面に一覧表示）。
+ * 2026-11 に「★媒体掲載NG★…」「2608_13786-01★（…報酬金額…）」がそのまま公開された事故の再発防止。
+ */
+export function titleIssue(title) {
+  const t = String(title == null ? '' : title).trim();
+  if (/掲載\s*(NG|ＮＧ|不可|禁止)/i.test(t)) return { code: 'media_ng', reason: '媒体掲載NGの指定あり' };
+  if (/^\d{3,}[_＿]\d+/.test(t)) return { code: 'internal_label', reason: '求人名が管理番号で始まっている' };
+  if (/報酬金額/.test(t)) return { code: 'internal_label', reason: '求人名に報酬金額の注記が入っている' };
+  return null;
+}
+
+/**
+ * 正規化済みレコードを「出力する / 除外する」に振り分ける。
+ * 戻り値: { ok: record[], excluded: [{ id, title, code, reason }] }
+ */
+export function screenRecords(records) {
+  const ok = [];
+  const excluded = [];
+  for (const rec of records) {
+    const title = rec[SRC_FIELDS.求人名];
+    const issue = titleIssue(title);
+    if (issue) {
+      excluded.push({ id: String(rec[SRC_FIELDS.求人票ID] ?? '').trim(), title: String(title ?? '').trim(), ...issue });
+    } else {
+      ok.push(rec);
+    }
+  }
+  return { ok, excluded };
+}
+
+/**
  * 行オブジェクト配列を CSV 文字列 (UTF-8 内部表現) に変換する。
  * Shift_JIS への実エンコードは csv-shiftjis.mjs 側で行う。
  */

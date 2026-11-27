@@ -16,7 +16,7 @@ import JSZip from 'jszip';
 import {
   getTenantAccessToken, listFields, searchRecords, normalizeRecord, flattenFieldValue,
 } from '../lark.mjs';
-import { buildRows, csvHeaderLine, rowToCsvLine, prefectureCore, matchesPrefectureCore, SRC_FIELDS } from '../transform.mjs';
+import { buildRows, csvHeaderLine, rowToCsvLine, prefectureCore, matchesPrefectureCore, screenRecords, SRC_FIELDS } from '../transform.mjs';
 import { encodeShiftJIS } from '../csv-shiftjis.mjs';
 
 // 1ファイルあたりの最大データ件数(ヘッダー込み499行)。バイト上限と併用し早い方で分割。
@@ -111,7 +111,20 @@ export default async function handler(req, res) {
       return res.status(200).json({ error: 'no_records', message: '条件に一致する求人がありませんでした。' });
     }
 
-    const records = filtered.map((r) => normalizeRecord(r.fields));
+    // 求人名が社内向けラベル（媒体掲載NG・管理番号・報酬金額の注記）の行は出力しない
+    const { ok: records, excluded } = screenRecords(filtered.map((r) => normalizeRecord(r.fields)));
+    // ヘッダーに載せる除外一覧（ヘッダー肥大化防止で先頭20件・理由はコード・求人名は20字まで。約5KB以内）
+    const excludedHeader = encodeURIComponent(JSON.stringify(
+      excluded.slice(0, 20).map((x) => ({ id: x.id, code: x.code, title: x.title.slice(0, 20) })),
+    ));
+
+    if (records.length === 0) {
+      return res.status(200).json({
+        error: 'no_records',
+        message: `条件に一致した ${excluded.length} 件はすべて掲載不可（媒体掲載NG・社内向けの求人名）のため、出力する求人がありません。`,
+        excluded,
+      });
+    }
 
     // ── 整形 → 各行を Shift_JIS エンコード ──
     const rows = buildRows(records, jstExecTime());
@@ -151,7 +164,11 @@ export default async function handler(req, res) {
       return Buffer.concat(parts);
     };
 
-    res.setHeader('X-Record-Count', String(filtered.length));
+    res.setHeader('X-Record-Count', String(records.length));
+    if (excluded.length) {
+      res.setHeader('X-Excluded-Count', String(excluded.length));
+      res.setHeader('X-Excluded', excludedHeader);
+    }
     res.setHeader('X-File-Count', String(chunks.length));
     if (allUnmapped.size) res.setHeader('X-Unmapped-Chars', encodeURIComponent([...allUnmapped].join('')));
 
