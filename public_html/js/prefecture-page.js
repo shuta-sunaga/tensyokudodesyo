@@ -297,7 +297,6 @@
             const bucket = T ? T.bucketById(job._bucket) : null;
             const points = (T ? T.TAGS.filter(t => job._tags.includes(t.id)) : []).slice(0, 4);
             const sal = T ? T.salaryLabel(job.salary) : esc(job.salary || '');
-            const date = String(job.postDate || '').replace(/-/g, '.');
             const url = jobUrl(job);
             return `<article class="job-row">
                 <a class="job-row-cover" href="${esc(url)}" aria-label="${esc(job.title)}"></a>
@@ -316,7 +315,6 @@
                     ${points.length ? `<div class="job-row-points">${points.map(p => `<span class="job-row-point">${esc(p.name)}</span>`).join('')}</div>` : ''}
                 </div>
                 <div class="job-row-side">
-                    <span class="job-row-date">${esc(date)}</span>
                     <span class="job-row-link">詳細を見る</span>
                 </div>
             </article>`;

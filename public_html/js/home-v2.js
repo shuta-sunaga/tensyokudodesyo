@@ -186,12 +186,10 @@
             if (cm) city = cm[1]; else if (/要相談|応相談/.test(city)) city = '勤務地は要相談'; else if (city.length > 12) city = city.slice(0, 12) + '…';
             const sub = [job.company, city].filter(Boolean).join('　');
             const sal = window.JobTaxonomy ? JobTaxonomy.salaryLabel(job.salary) : esc(job.salary || '');
-            const date = String(job.postDate || '').replace(/-/g, '.');
             return `<a class="tp-jrow${isNew(job.postDate) ? ' is-new' : ''}" href="${esc(url)}">
                 <span class="tp-jpref">${esc(pref)}</span>
                 <span class="tp-jmain"><span class="tp-jttl">${esc(job.title)}</span><span class="tp-jsub">${esc(sub)}</span></span>
                 <span class="tp-jsal"><small>年収</small>${esc(sal)}</span>
-                <span class="tp-jdate">${esc(date)}</span>
             </a>`;
         }).join('');
     }
