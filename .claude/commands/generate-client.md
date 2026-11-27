@@ -14,7 +14,7 @@ Word(.docx) 形式のインタビュー原稿から「会社紹介」ページ (
 ## 設定ファイル / 参照先
 
 - **データ**: `public_html/data/clients.json`
-- **テンプレート**: `public_html/clients/detail/aru.html`（**必ず Read してから流用**。class名・id・DOM構造を勝手に変更しない）
+- **テンプレート**: `public_html/clients/detail/sei-san-sei.html`（**必ず Read してから流用**。class名・id・DOM構造を勝手に変更しない）
 - **CSS**: `public_html/css/client-detail.css`（共通）
 - **動的JS**: `public_html/js/client-detail.js`（共通）
 - **業界マスター**: `public_html/data/categories/company-industries.json`（in01-in09）
@@ -61,7 +61,7 @@ Word(.docx) 形式のインタビュー原稿から「会社紹介」ページ (
 
 ## Stage 2: 詳細ページHTML生成（承認後、自動実行）
 
-1. **テンプレート読込**: `public_html/clients/detail/aru.html` を Read
+1. **テンプレート読込**: `public_html/clients/detail/sei-san-sei.html` を Read
 2. **新規HTML生成**: `public_html/clients/detail/{companyKey}.html` に出力
 3. **置換ポイント**（テンプレート内の固定値をすべて差し替え）:
    - title / description / OGP / Twitter Card / canonical URL

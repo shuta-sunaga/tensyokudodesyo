@@ -28,7 +28,7 @@ const PAGES = [
   ['interviews', '/interviews/'],
   ['knowhow', '/knowhow/'],
   ['clients', '/clients/'],
-  ['client-detail', '/clients/detail/aru.html'],
+  ['client-detail', '/clients/detail/sei-san-sei.html'],
   ['knowhow-detail', '/knowhow/detail/knowhow-264.html'],
   ['contact', '/contact/'],
   ['terms', '/terms.html'],
