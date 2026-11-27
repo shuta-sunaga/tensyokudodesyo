@@ -160,14 +160,18 @@
             .map(([c, n]) => [c, `${c}（${n}）`]);
         fillSelect($('searchCity'), cities, state.city);
 
-        // 職種グループ: タップで選ぶチップ（単一選択・件数付き・0 件は出さない）
+        // 職種グループ: タップで選ぶチップ（単一選択・件数付き）。トップの検索パネルと同じ並びで常に全職種を出し、
+        // 0 件の職種は押せない状態で表示する（「その他」だけは該当求人がある県でのみ表示）
         const bc = countBy(jobs, '_bucket');
         const catWrap = $('searchJobType');
         if (catWrap) {
-            const cats = (T ? T.orderedBuckets() : []).filter(b => bc.get(b.id));
-            if (state.cat && !cats.some(b => b.id === state.cat)) state.cat = '';
+            const cats = (T ? T.orderedBuckets() : []).filter(b => b.id !== 'other' || bc.get(b.id));
+            if (state.cat && !bc.get(state.cat)) state.cat = '';
             catWrap.innerHTML = `<button type="button" class="cat-chip${state.cat ? '' : ' is-on'}" data-cat="" aria-pressed="${state.cat ? 'false' : 'true'}">すべて<b>${jobs.length}</b></button>` +
-                cats.map(b => `<button type="button" class="cat-chip${state.cat === b.id ? ' is-on' : ''}" data-cat="${b.id}" title="${esc(b.name)}" aria-pressed="${state.cat === b.id ? 'true' : 'false'}">${esc(b.short || b.name)}<b>${bc.get(b.id)}</b></button>`).join('');
+                cats.map(b => {
+                    const n = bc.get(b.id) || 0;
+                    return `<button type="button" class="cat-chip${state.cat === b.id ? ' is-on' : ''}${n ? '' : ' is-empty'}" data-cat="${b.id}" title="${esc(b.name)}${n ? '' : '（現在この都道府県に求人はありません）'}" aria-pressed="${state.cat === b.id ? 'true' : 'false'}"${n ? '' : ' disabled'}>${esc(b.short || b.name)}<b>${n}</b></button>`;
+                }).join('');
         }
 
         // 雇用形態
@@ -216,7 +220,7 @@
         const catWrap = $('searchJobType');
         if (catWrap) catWrap.addEventListener('click', e => {
             const btn = e.target.closest('.cat-chip');
-            if (!btn) return;
+            if (!btn || btn.disabled) return;
             const id = btn.dataset.cat || '';
             state.cat = (id && state.cat === id) ? '' : id;
             setCatChips();

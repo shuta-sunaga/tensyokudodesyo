@@ -5207,6 +5207,9 @@ body.menu-open { overflow: hidden; }
 .cat-chip:hover { border-color: var(--color-black); color: var(--color-black); }
 .cat-chip.is-on { background: var(--color-black); border-color: var(--color-black); color: var(--color-white); font-weight: 700; }
 .cat-chip.is-on b { color: var(--color-primary); }
+.cat-chip:disabled, .cat-chip.is-empty { background: var(--color-bg-gray); border-color: var(--color-gray-lighter); color: #A7AEB6; cursor: not-allowed; }
+.cat-chip:disabled:hover, .cat-chip.is-empty:hover { border-color: var(--color-gray-lighter); color: #A7AEB6; }
+.cat-chip:disabled b, .cat-chip.is-empty b { color: #A7AEB6; }
 .cat-chip:focus-visible { outline: 2px solid var(--color-primary-dark); outline-offset: 1px; }
 .jsr-cats { align-items: flex-start; }
 .jsr-cats .jsr-chips-label { padding-top: 9px; }
